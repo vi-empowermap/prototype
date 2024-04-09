@@ -1,9 +1,18 @@
 "use client"
+
+import { useEffect } from "react";
+import LeafletMap from "./map";
+import { useRecoilValue } from "recoil";
+import { nameState } from "@/app/utils/state";
+
 /* CSR: NO SSR */
 
 
-
 const Wrapper = () => {
+    const value = useRecoilValue(nameState)
+    useEffect(() => {
+        console.log(value)
+    },[])
   return (
     <main className="flex w-screen h-screen bg-slate-300">
       <div className="flex flex-col flex-1 bg-red-400 h-full">
@@ -20,8 +29,8 @@ const Wrapper = () => {
             </div>
           </div>
         </nav>
-        <div className="flex-1 bg-violet-500 flex justify-center items-center">
-          <div>Map</div>
+        <div className="flex-1 bg-violet-500 flex justify-center items-center overflow-hidden">
+          <LeafletMap />
         </div>
       </div>
       <div className="w-[calc(350px+4vw)] h-full border-l-2 border-black">
