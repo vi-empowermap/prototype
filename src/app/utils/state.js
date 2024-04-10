@@ -20,3 +20,10 @@ export const clickedItemsListAtom = atom({
   key: "clickedItemsListAtom",
   default: [1,4,5]
 })
+
+
+/* Animation */
+export const readyAniAtom = atom({
+  key: "readyAniAtom",
+  default: false
+})
