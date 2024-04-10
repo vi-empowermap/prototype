@@ -13,8 +13,8 @@ const ListContainer = ({ getData, clickedItemsList }) => {
             {value.visible && (
               <>
                 <div onClick={() => clickedItemsListset([value.id])} className="w-full border-b-2 border-black py-2 px-2 cursor-pointer">
-                  <div>{value.name}</div>
-                  {clickedItemsList.some((v) => v === value.id) && <div>{value.description}</div>}
+                  <div>{value.organame}</div>
+                  {clickedItemsList.some((v) => v === value.id) && <div>{value.aboutorga}</div>}
                   {clickedItemsList.some((v) => v === value.id) && <div>Category: {value.categories[0]}</div>}
                 </div>
               </>

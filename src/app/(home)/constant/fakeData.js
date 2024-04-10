@@ -7,45 +7,37 @@ export const fakeData = async () => {
         {
             id: 0,
             name: "orga1",
-            pos: {
-                lat: 52.5429,
-                lng: 13.3593
+            organame: "visvis",
+            location : {
+                lat: parseFloat("52.5429"),
+                lon: parseFloat("13.3593"),
+                city: "Berlin",
+                country: "daf",
+                countryCode: "de",
+                osm: "23123"
+
             },
             visible: true,
-            description: "Hi! I'm Dain Orga", 
-            categories: [category[Math.floor(Math.random() * category.length)]]
+            aboutorga: "Hi! I'm Dain Orga", 
+            categories: []
         },
-        {
-            id: 1,
-            name: "orga2",
-            pos: {
-                lat: 52.6429,
-                lng: 13.4593
-            },
-            visible: false,
-            description: "Hi! I'm Dain Orga",
-            categories: [category[Math.floor(Math.random() * category.length)]]
-        },
-        {
-            id: 2,
-            name: "orga3",
-            pos: {
-                lat: 52.2429,
-                lng: 13.2593
-            },
-            visible: false,
-            description: "Hi! I'm Dain Orga",
-            categories: [category[Math.floor(Math.random() * category.length)]]
-        },
+       
     ]
-    for (let i = 0; i < 50; i++){
+    for (let i = 0; i < 10; i++){
         const data = {
-            id: i + 3,
-            name: "orga" + (i + 4),
-            pos: {
+            id: i + 1 ,
+            name: "orga user" + (i + 1),
+            organame: "orga" + (i + 1),
+            location : {
                 lat: 52.5429 + ((Math.random() - 0.5) * Math.random()),
-                lng: 13.3593 + ((Math.random() - 0.5) * Math.random())
+                lon: 13.3593 + ((Math.random() - 0.5) * Math.random()),
+                city: "Berlin",
+                country: "daf",
+                countryCode: "de",
+                osm: "23123"
+
             },
+          
             visible: false,
             description: "Hi! I'm Sein Orga" + ((Math.random() > 0.5) ? " Vis" : " Udk"),
             categories: [category[Math.floor(Math.random() * category.length)]]

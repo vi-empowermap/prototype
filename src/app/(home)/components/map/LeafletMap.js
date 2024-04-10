@@ -44,7 +44,7 @@ const LeafletMap = ({ data, setData, getDataForMarker }) => {
         <MapController setViewAtomValue={setViewAtomValue} />
         {getDataForMarker.map((value, index) => {
           return (
-            <CustomMarker key={index} getData={data} setData={setData} id={value.id}  customIcon={customIcon} position={value.pos} />
+            <CustomMarker key={index} getData={data} setData={setData} id={value.id}  customIcon={customIcon} position={value.location} />
           );
         })}
       </MapContainer>
