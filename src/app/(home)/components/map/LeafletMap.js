@@ -27,7 +27,7 @@ const MapController = ({ setViewAtomValue }) => {
     return null;
   };
 
-const LeafletMap = ({ data, setData }) => {
+const LeafletMap = ({ data, setData, getDataForMarker }) => {
     const setViewAtomValue = useRecoilValue(setViewAtom)
     // const [getData, setData] = useRecoilState(dataAtom);
   // Define your custom icon
@@ -42,7 +42,7 @@ const LeafletMap = ({ data, setData }) => {
       <MapContainer className="w-full h-full" center={setViewAtomValue.pos} zoom={13} scrollWheelZoom={true} dragging={true} zoomControl={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <MapController setViewAtomValue={setViewAtomValue} />
-        {data.map((value, index) => {
+        {getDataForMarker.map((value, index) => {
           return (
             <CustomMarker key={index} getData={data} setData={setData} id={value.id}  customIcon={customIcon} position={value.pos} />
           );
