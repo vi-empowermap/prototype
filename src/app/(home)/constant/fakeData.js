@@ -23,7 +23,7 @@ export const fakeData = async () => {
         },
        
     ]
-    for (let i = 0; i < 10; i++){
+    for (let i = 0; i < 50; i++){
         const data = {
             id: i + 1 ,
             name: "orga user" + (i + 1),
@@ -39,7 +39,7 @@ export const fakeData = async () => {
             },
           
             visible: false,
-            description: "Hi! I'm Sein Orga" + ((Math.random() > 0.5) ? " Vis" : " Udk"),
+            aboutorga: "Hi! I'm Sein Orga" + ((Math.random() > 0.5) ? " Vis" : " Udk"),
             categories: [category[Math.floor(Math.random() * category.length)]]
         }
         dataList.push(data)

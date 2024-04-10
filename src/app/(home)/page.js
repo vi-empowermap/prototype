@@ -36,6 +36,7 @@ export default async function Home() {
   // Loading page testing
   // await new Promise((resolve) => setTimeout(resolve, 1000))
   const data = await fakeData();
+  let categories = [];
   const kqlData = await getKirbyData();
   const kqlDataResult = kqlData.result.map((value) => {
     const a = value.location.replaceAll("\n", ",").split(",");
@@ -51,11 +52,10 @@ export default async function Home() {
     value.location = newLocation;
     value.visible = true
     value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.trim()), ...value.tagpool.split(",").map((v) => v.trim())])).filter((v) => v !== "")
-    
+    categories = Array.from(new Set([...value.categories, ...categories]))
     return value;
   });
 
-  const categories = category;
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
