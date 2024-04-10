@@ -40,16 +40,17 @@ export default async function Home() {
   const kqlData = await getKirbyData();
   const kqlDataResult = kqlData.result.map((value) => {
     const a = value.location.replaceAll("\n", ",").split(",");
-
+    console.log(a)
     const newLocation = {
       lat: parseFloat(a[0].split(":")[1].trim()),
       lon: parseFloat(a[1].split(":")[1].trim()),
-      city: a[2].split(":")[1].trim(),
-      country: a[3].split(":")[1].trim(),
-      countryCode: a[4].split(":")[1].trim(),
-      osm: a[5].split(":")[1].trim(),
+      // ...(a[2] && {city: a[2].split(":")[1].trim()}),
+      // ...(a[3] && {country: a[3].split(":")[1].trim()}),
+      // ...(a[4] && {countryCode: a[4].split(":")[1].trim()}),
+      // ...(a[5] && {osm: a[5].split(":")[1].trim()}),
     };
     value.location = newLocation;
+    
     value.visible = true
     value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.trim()), ...value.tagpool.split(",").map((v) => v.trim())])).filter((v) => v !== "")
     categories = Array.from(new Set([...value.categories, ...categories]))
