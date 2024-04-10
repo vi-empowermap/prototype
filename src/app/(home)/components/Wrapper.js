@@ -11,13 +11,14 @@ import Filtern from "./Filtern";
 
 /* CSR: NO SSR */
 
-const Wrapper = ({data, categories}) => {
+const Wrapper = ({data, categories, kqlDataResult}) => {
   const value = useRecoilValue(nameState);
-  const [getData, setData] = useState(data)
-  const [getDataForMarker, setDataForMarker] = useState(data)
+  const [getData, setData] = useState([...kqlDataResult,...data])
+  const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult,...data])
   const clickedItemsList = useRecoilValue(clickedItemsListAtom)
   useEffect(() => {
-    console.log(data)
+    console.log(kqlDataResult)
+   
    
   }, []);
   return (

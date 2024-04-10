@@ -13,7 +13,7 @@ const Search = ({getData}) => {
 
     const foundIdList = [];
     for (let i = 0; i < getData.length; i++) {
-      const matches = String(getData[i].description + " " + getData[i].name).match(pattern);
+      const matches = String(getData[i].aboutorga + " " + getData[i].organame).match(pattern);
       if (matches) {
         foundIdList.push(getData[i].id);
       } else {
