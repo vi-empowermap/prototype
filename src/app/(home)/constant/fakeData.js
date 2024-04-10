@@ -1,3 +1,6 @@
+
+export const category = ["car", "bike", "bus", "train"]
+
 export const fakeData = async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000))
     const dataList = [
@@ -9,7 +12,8 @@ export const fakeData = async () => {
                 lng: 13.3593
             },
             visible: true,
-            description: "Hi! I'm Dain Orga"
+            description: "Hi! I'm Dain Orga", 
+            categories: [category[Math.floor(Math.random() * category.length)]]
         },
         {
             id: 1,
@@ -19,7 +23,8 @@ export const fakeData = async () => {
                 lng: 13.4593
             },
             visible: false,
-            description: "Hi! I'm Dain Orga"
+            description: "Hi! I'm Dain Orga",
+            categories: [category[Math.floor(Math.random() * category.length)]]
         },
         {
             id: 2,
@@ -29,7 +34,8 @@ export const fakeData = async () => {
                 lng: 13.2593
             },
             visible: false,
-            description: "Hi! I'm Dain Orga"
+            description: "Hi! I'm Dain Orga",
+            categories: [category[Math.floor(Math.random() * category.length)]]
         },
     ]
     for (let i = 0; i < 50; i++){
@@ -41,7 +47,8 @@ export const fakeData = async () => {
                 lng: 13.3593 + ((Math.random() - 0.5) * Math.random())
             },
             visible: false,
-            description: "Hi! I'm Sein Orga" + ((Math.random() > 0.5) ? " Vis" : " Udk")
+            description: "Hi! I'm Sein Orga" + ((Math.random() > 0.5) ? " Vis" : " Udk"),
+            categories: [category[Math.floor(Math.random() * category.length)]]
         }
         dataList.push(data)
     }

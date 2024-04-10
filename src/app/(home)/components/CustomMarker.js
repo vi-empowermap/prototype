@@ -4,7 +4,7 @@ import { Marker, Popup, useMap } from "react-leaflet";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 const CustomMarker = ({ id, getData, setData, customIcon, position }) => {
-    const setclickedItemsList = useSetRecoilState(clickedItemsListAtom)
+  const setclickedItemsList = useSetRecoilState(clickedItemsListAtom);
   const markerRef = useRef(null);
   const map = useMap();
 
@@ -20,9 +20,9 @@ const CustomMarker = ({ id, getData, setData, customIcon, position }) => {
       } else {
         map.removeLayer(markerRef.current);
 
-        const data = [...getData]
+        const data = [...getData];
         data.find((e) => e.id === id).visible = false;
-        setData(data)
+        setData(data);
       }
     }
   };
@@ -35,16 +35,22 @@ const CustomMarker = ({ id, getData, setData, customIcon, position }) => {
   }, []);
   return (
     <>
-      <Marker ref={markerRef} icon={customIcon} position={position}
+      <Marker
+        ref={markerRef}
+        icon={customIcon}
+        position={position}
         eventHandlers={{
-            click: (e) => {
-                setclickedItemsList([id])
-            }
+          click: (e) => {
+            const data = [...getData];
+            const index = data.findIndex((e) => e.id === id);
+            const item = data.splice(index, 1)[0];
+            data.splice(0, 0, item)
+            setData(data);
+            setclickedItemsList([id]);
+          },
         }}
       >
-        <Popup>
-         Orga: {id}
-        </Popup>
+        <Popup>Orga: {id + 1}</Popup>
       </Marker>
     </>
   );
