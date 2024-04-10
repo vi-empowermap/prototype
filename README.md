@@ -8,3 +8,7 @@
 ### Repo
 
 - Dev :
+
+### Memo
+
+<https://gsap.com/resources/React/>

@@ -6,7 +6,7 @@ const ListContainer = ({ getData, clickedItemsList }) => {
 
 
   return (
-    <div className="w-[calc(350px+4vw)] h-full border-l-2 border-black overflow-scroll">
+    <div id="listContainer" className="w-[calc(350px+4vw)] h-full border-l-2 border-black overflow-scroll translate-y-full">
       {getData.map((value, index) => {
         return (
           <div key={index}>

@@ -2,7 +2,7 @@
 export const category = ["car", "bike", "bus", "train"]
 
 export const fakeData = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // await new Promise((resolve) => setTimeout(resolve, 1000))
     const dataList = [
         {
             id: 0,
