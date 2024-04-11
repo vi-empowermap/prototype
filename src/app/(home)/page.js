@@ -37,19 +37,24 @@ export default async function Home() {
   // await new Promise((resolve) => setTimeout(resolve, 1000))
   const data = await fakeData();
   let categories = [];
+
+  /* KQL Data: Users */
   const kqlData = await getKirbyData();
   const kqlDataResult = kqlData.result.map((value) => {
-    const a = value.location.replaceAll("\n", ",").split(",");
+    const a = value.location.replaceAll("\n", ",")
+    const toObj = Object.fromEntries(a.split(',').map(i => i.split(':')));
 
-    const newLocation = {
-      lat: parseFloat(a[0].split(":")[1].trim()),
-      lon: parseFloat(a[1].split(":")[1].trim()),
-      city: a[2].split(":")[1].trim(),
-      country: a[3].split(":")[1].trim(),
-      countryCode: a[4].split(":")[1].trim(),
-      osm: a[5].split(":")[1].trim(),
-    };
-    value.location = newLocation;
+    const keys = Object.keys(toObj);
+    for(let i = 0; i < keys.length; i++){
+      toObj[keys[i]] = toObj[keys[i]].trim().replaceAll('"', "")
+      toObj[keys[i]] = toObj[keys[i]].trim().replaceAll("'", "")
+    }
+   
+    toObj["lat"] = parseFloat(String(toObj["lat"]))
+    toObj["lon"] = parseFloat(String(toObj["lon"]))
+
+    const newLocation = toObj
+    value.location = newLocation;    
     value.visible = true
     value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.trim()), ...value.tagpool.split(",").map((v) => v.trim())])).filter((v) => v !== "")
     categories = Array.from(new Set([...value.categories, ...categories]))

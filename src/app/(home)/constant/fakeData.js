@@ -23,7 +23,7 @@ export const fakeData = async () => {
         },
        
     ]
-    for (let i = 0; i < 50; i++){
+    for (let i = 0; i < 10; i++){
         const data = {
             id: i + 1 ,
             name: "orga user" + (i + 1),
