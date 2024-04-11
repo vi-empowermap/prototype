@@ -12,7 +12,7 @@ const ListContainer = ({ getData, clickedItemsList }) => {
   }
 
   return (
-    <div id="listContainer" className="w-[calc(350px+4vw)] h-full border-l-2 border-black overflow-scroll translate-y-full">
+    <div id="listContainer" className="w-[calc(350px+4vw)] h-full border-l-2 border-black overflow-scroll ">
       {getData.map((value, index) => {
         return (
           <div key={index}>
