@@ -44,8 +44,8 @@ const Wrapper = ({data, categories, kqlDataResult}) => {
   
   })
   useEffect(() => {
-    console.log(search)
-    console.log(kqlDataResult)
+    // console.log(search)
+    // console.log(kqlDataResult)
   
    
   }, []);
@@ -54,11 +54,11 @@ const Wrapper = ({data, categories, kqlDataResult}) => {
       
       <div onClick={onClickReady} className={`fixed bottom-10 left-1/2 -translate-x-1/2 font-semibold cursor-pointer z-[1000] ${Boolean(search) ? "opacity-0 pointer-events-none" : "opacity-100"}`}>Zur Karte</div>
       <div className="flex flex-col flex-1 bg-white h-full">
-        <nav id="navContainer" className="w-full bg-white h-36 flex border-b-2 border-white">
-          <h1 className="bg-white text-4xl md:text-6xl lg:text-7xl font-bold flex items-center px-4 ">
+        <nav id="navContainer" className={`w-full bg-white h-36 flex border-b-2  ${!Boolean(search) ? "border-white" : "border-black"}`}>
+          <h1 className="bg-white text-4xl md:text-6xl lg:text-7xl font-bold flex items-center px-4">
             <span>EMPOWER MAP</span>
           </h1>
-          <div id="filterContainer" className="flex flex-col text-2xl font-semibold bg-white flex-grow opacity-0 border-l-2 border-black">
+          <div id="filterContainer" className={`flex flex-col text-2xl font-semibold bg-white flex-grow border-l-2 border-black ${!Boolean(search) ? "opacity-0" : "opacity-100"}`}>
             <Search getData={getData} />
             <Filtern getData={getData} categories={categories} />
           </div>

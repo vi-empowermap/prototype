@@ -3,7 +3,7 @@
 /* Kirby Headless + custom API */
 export const fetchDataOriginAPI = async ({url, userInfo, method, bodyData}) => {
     try {
-        await new Promise((resolve) => setTimeout(resolve, 2000))
+        // await new Promise((resolve) => setTimeout(resolve, 2000))
       const encodedAuthString = Buffer.from(`${userInfo.authEmail}:${userInfo.authPassword}`).toString("base64");
       const headerAuthString = `Basic ${encodedAuthString}`;
 
