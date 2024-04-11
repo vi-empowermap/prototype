@@ -22,9 +22,11 @@ const Wrapper = ({ data, categories, kqlDataResult }) => {
   const [getData, setData] = useState([...kqlDataResult, ...data]);
   const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const clickedItemsList = useRecoilValue(clickedItemsListAtom);
+  
 
   const searchParams = useSearchParams();
   const search = searchParams.get("organisation");
+
 
   const { contextSafe } = useGSAP({ scope: container });
 
@@ -72,7 +74,7 @@ const Wrapper = ({ data, categories, kqlDataResult }) => {
       
       <ListContainer getData={getData} clickedItemsList={clickedItemsList} />
       
-      <OrgaPage />
+      <OrgaPage getData={getData} />
     
     </main>
   );

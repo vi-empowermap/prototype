@@ -1,17 +1,23 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const OrgaPage = () => {
+
+const OrgaPage = ({getData}) => {
   const [open, setOpen] = useState(false);
   const searchParams = useSearchParams();
   const search = searchParams.get("organisation");
-  const router = useRouter()
+  const router = useRouter();
+  const [orgaInfo, setOrgaInfo] = useState({})
+
   useEffect(() => {
-    
+
     if (Boolean(search)) {
       setOpen(true);
+      const idx = getData.findIndex((value) => String(value.id) === search)
+      setOrgaInfo(getData[idx])
+    //   console.log(f)
     }else {
-        setOpen(false)
+      setOpen(false)
     }
   }, [search]);
 
@@ -26,7 +32,7 @@ const OrgaPage = () => {
   return (
     <div className={`fixed top-0 right-0 bg-white w-2/3 h-screen z-[1200] p-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"}`}>
       <div className="w-full h-full border-2 border-black rounded-3xl">
-        <nav className="flex gap-4 justify-end p-4">
+        <nav className="flex gap-4 justify-end p-4 mb-4">
           <div onClick={onCopyText} className="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-9 h-9">
               <path
@@ -42,6 +48,9 @@ const OrgaPage = () => {
             </svg>
           </div>
         </nav>
+        <div className="px-6">
+            <h1 className="text-4xl font-bold">{orgaInfo.organame}</h1>
+        </div>
       </div>
     </div>
   );
