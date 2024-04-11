@@ -22,6 +22,7 @@ export const clickedItemsListAtom = atom({
 })
 
 
+
 /* Animation */
 export const readyAniAtom = atom({
   key: "readyAniAtom",

@@ -7,7 +7,7 @@ const ListContainer = ({ getData, clickedItemsList }) => {
   const router = useRouter()
   const onClick = (value) => {
     clickedItemsListset([value.id])
-    router.push(`?organisation=${value.organame}`)
+    router.push(`?organisation=${value.id}`)
   
   }
 
@@ -23,7 +23,7 @@ const ListContainer = ({ getData, clickedItemsList }) => {
 
                   </div>
                   <div className="font-bold text-3xl mb-8">{value.organame}</div>
-                  <div className="text-lg">{value.aboutorga}</div>
+                  <div className="text-lg">{value.email}</div>
                   {clickedItemsList.some((v) => v === value.id) && <div>{value.aboutorga}</div>}
                   {clickedItemsList.some((v) => v === value.id) && <div>Category: {value.categories[0]}</div>}
                 </div>
