@@ -27,7 +27,14 @@ const getKirbyData = async () => {
   /* kql */
   const kirbyApiDraft = `${kirbyOriginAPI}`;
   const data = await fetchDataOriginAPI({ url: kirbyApiDraft, userInfo: { authEmail, authPassword }, method: "POST", bodyData });
-  data.result = data.result.filter((value) => value.role_title === "Orga");
+
+  // here you should bring only the users who are ready
+  data.result = data.result.filter((value) => {
+    if(value.role_title === "Orga" && value.location !== ''){
+      return value
+    }
+  });
+  
 
   return data;
 };
@@ -36,10 +43,12 @@ export default async function Home() {
   // Loading page testing
   // await new Promise((resolve) => setTimeout(resolve, 1000))
   const data = await fakeData();
+
   let categories = [];
 
   /* KQL Data: Users */
   const kqlData = await getKirbyData();
+  console.log(kqlData)
   const kqlDataResult = kqlData.result.map((value) => {
     const a = value.location.replaceAll("\n", ",")
     const toObj = Object.fromEntries(a.split(',').map(i => i.split(':')));
@@ -54,7 +63,7 @@ export default async function Home() {
     toObj["lon"] = parseFloat(String(toObj["lon"]))
 
     const newLocation = toObj
-    value.location = newLocation;    
+    value.location = newLocation;   
     value.visible = true
     value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.trim()), ...value.tagpool.split(",").map((v) => v.trim())])).filter((v) => v !== "")
     categories = Array.from(new Set([...value.categories, ...categories]))
