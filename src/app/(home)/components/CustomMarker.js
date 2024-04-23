@@ -1,12 +1,16 @@
-import { clickedItemsListAtom, dataAtom } from "@/app/utils/state";
-import { useEffect, useRef } from "react";
+import { clickedItemsListAtom, dataAtom, setViewAtom } from "@/app/utils/state";
+import { useEffect, useRef, useState } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 const CustomMarker = ({ id, getData, setData, customIcon, position }) => {
   const setclickedItemsList = useSetRecoilState(clickedItemsListAtom);
+  const getSetViewAtom = useRecoilValue(setViewAtom);
   const markerRef = useRef(null);
   const map = useMap();
+  const [clicked, setClicked] = useState({
+    id: ""
+  });
 
   const dragEndEvent = () => {
     if (markerRef.current) {
@@ -28,11 +32,24 @@ const CustomMarker = ({ id, getData, setData, customIcon, position }) => {
   };
 
   useEffect(() => {
+    // console.log(position)
+  
     map.on("dragend", dragEndEvent);
     map.on("zoomend", dragEndEvent);
     // start
     dragEndEvent();
   }, []);
+
+  useEffect(() => {
+    if(clicked.id === id){
+      map.setView(clicked.pos, map.getZoom())
+    }
+  },[clicked])
+    useEffect(() => {
+    if(getSetViewAtom.name !== "berlin"){
+      map.setView(getSetViewAtom.pos, 12);
+    }
+  },[getSetViewAtom])
   return (
     <>
       <Marker
@@ -44,9 +61,13 @@ const CustomMarker = ({ id, getData, setData, customIcon, position }) => {
             const data = [...getData];
             const index = data.findIndex((e) => e.id === id);
             const item = data.splice(index, 1)[0];
-            data.splice(0, 0, item)
+            data.splice(0, 0, item);
             setData(data);
             setclickedItemsList([id]);
+            setClicked({
+              id: item.id,
+              pos: [item.location.lat, item.location.lon],
+              })
           },
         }}
       >

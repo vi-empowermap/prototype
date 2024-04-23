@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import LeafletMap from "./map";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { clickedItemsListAtom, clikedGoogleAtom, readyAniAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedGoogleAtom, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import DynamicMiniMap from "./minimap";
 import ListContainer from "./ListContainer";
 import Search from "./Search";
@@ -26,6 +26,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
   const clickedItemsList = useRecoilValue(clickedItemsListAtom);
   const [doubleScreenTouched, setDoubleScreenTouched] = useState(false);
   const getOrgaLocation = useRecoilValue(clikedGoogleAtom)
+  const getSetViewAtom = useRecoilValue(setViewAtom)
   /* Double touch */
   const [lastTap, setLastTap] = useState(null);
   const doubleTapDelay = 300; // milliseconds
@@ -90,6 +91,8 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
       setFindMobile(false);
     }
   }, []);
+
+
 
   const onDoubleTouch = () => {
     if (window.innerWidth < 1024 && !findMobile) {
