@@ -15,23 +15,23 @@ import OrgaPage from "./OrgaPage";
 
 /* CSR: NO SSR */
 
-const Wrapper = ({ data, categories, kqlDataResult }) => {
+const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) => {
   gsap.registerPlugin(useGSAP);
   const container = useRef();
   const [ready, setReady] = useRecoilState(readyAniAtom);
   const [getData, setData] = useState([...kqlDataResult, ...data]);
+  const [turnOnMap, setTurnOnMap] = useState(true);
   const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const clickedItemsList = useRecoilValue(clickedItemsListAtom);
-  
 
+  /* If u open this website by url with params then don't need an Animation */
   const searchParams = useSearchParams();
   const search = searchParams.get("organisation");
-
 
   const { contextSafe } = useGSAP({ scope: container });
 
   const onClickReady = contextSafe(() => {
-    if (!ready && !Boolean(search)) {
+    if (!ready && !Boolean(search) && turnOnMap) {
       gsap.to("#filterContainer", { opacity: 1, duration: 0.7 });
       gsap.to("#mapCotainer", { opacity: 1, duration: 0.7 });
       gsap.to("#listContainer", { transform: "translateY(0)", duration: 0.7 });
@@ -41,13 +41,24 @@ const Wrapper = ({ data, categories, kqlDataResult }) => {
       setReady(true);
     }, 1000);
   });
+
   useEffect(() => {
+    if (!turnOnMap) {
+      setData([...kqlDataResultNoLocation]);
+      setDataForMarker([...kqlDataResultNoLocation]);
+    } else {
+      setData([...kqlDataResult, ...data]);
+      setDataForMarker([...kqlDataResult, ...data]);
+    }
+  }, [turnOnMap]);
+
+  useEffect(() => {
+    console.log(kqlDataResultNoLocation);
     if (Boolean(search)) {
       setReady(true);
     }
-    // console.log(search)
-    // console.log(kqlDataResult)
   }, []);
+
   return (
     <main ref={container} className="flex w-screen h-screen bg-white overflow-hidden relative">
       <div onClick={onClickReady} className={`fixed bottom-10 left-1/2 -translate-x-1/2 font-semibold cursor-pointer z-[1000] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
@@ -65,17 +76,30 @@ const Wrapper = ({ data, categories, kqlDataResult }) => {
           </div>
         </nav>
         <div id="mapCotainer" className={`flex-1 bg-white flex justify-center items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
-          <LeafletMap data={getData} getDataForMarker={getDataForMarker} setData={setData} />
-          <div className="absolute bottom-4 left-4 w-80 aspect-square bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden">
-            <DynamicMiniMap />
+          <div onClick={() => setTurnOnMap((pre) => !pre)} className={`absolute top-4 right-4 z-[1000] cursor-pointer bg-black text-white p-1 rounded-lg ${turnOnMap ? "opacity-100": "opacity-50"}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-8 h-8">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z"
+              />
+            </svg>
           </div>
+          {turnOnMap && (
+            <div className="w-full h-full">
+              <LeafletMap data={getData} getDataForMarker={getDataForMarker} setData={setData} />
+              <div className="absolute bottom-4 left-4 w-80 aspect-square bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden">
+                <DynamicMiniMap />
+              </div>
+            </div>
+          )}
+          {!turnOnMap && <div>{getData[0].organame}</div>}
         </div>
       </div>
-      
+
       <ListContainer getData={getData} clickedItemsList={clickedItemsList} />
-      
+
       <OrgaPage getData={getData} />
-    
     </main>
   );
 };

@@ -20,21 +20,22 @@ const getKirbyData = async () => {
       organame: true,
       aboutorga: true,
       tags: true,
-      tagpool: true
+      tagpool: true,
+      publicbtn: true,
+      lokalorga: true,
     },
   };
 
   /* kql */
   const kirbyApiDraft = `${kirbyOriginAPI}`;
   const data = await fetchDataOriginAPI({ url: kirbyApiDraft, userInfo: { authEmail, authPassword }, method: "POST", bodyData });
-
-  // here you should bring only the users who are ready
+  console.log(data)
+  // here you should bring only the users who are ready and have location information
   data.result = data.result.filter((value) => {
-    if(value.role_title === "Orga" && value.location !== ''){
-      return value
+    if (value.role_title === "Orga" && value.publicbtn === "true") {
+      return value;
     }
   });
-  
 
   return data;
 };
@@ -48,32 +49,45 @@ export default async function Home() {
 
   /* KQL Data: Users */
   const kqlData = await getKirbyData();
-  console.log(kqlData)
-  const kqlDataResult = kqlData.result.map((value) => {
-    const a = value.location.replaceAll("\n", ",")
-    const toObj = Object.fromEntries(a.split(',').map(i => i.split(':')));
+  const kqlDataResultNoLocation = kqlData.result
+    .filter((value) => {
+      if (value.lokalorga === "true") {
+        return value;
+      }
+    })
+    .map((value) => {
+      return value;
+    });
+  const kqlDataResult = kqlData.result
+    .filter((value) => {
+      if (value.location !== "" && value.lokalorga === "false") {
+        return value;
+      }
+    })
+    .map((value) => {
+      const a = value.location.replaceAll("\n", ",");
+      const toObj = Object.fromEntries(a.split(",").map((i) => i.split(":")));
 
-    const keys = Object.keys(toObj);
-    for(let i = 0; i < keys.length; i++){
-      toObj[keys[i]] = toObj[keys[i]].trim().replaceAll('"', "")
-      toObj[keys[i]] = toObj[keys[i]].trim().replaceAll("'", "")
-    }
-   
-    toObj["lat"] = parseFloat(String(toObj["lat"]))
-    toObj["lon"] = parseFloat(String(toObj["lon"]))
+      const keys = Object.keys(toObj);
+      for (let i = 0; i < keys.length; i++) {
+        toObj[keys[i]] = toObj[keys[i]].trim().replaceAll('"', "");
+        toObj[keys[i]] = toObj[keys[i]].trim().replaceAll("'", "");
+      }
 
-    const newLocation = toObj
-    value.location = newLocation;   
-    value.visible = true
-    value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.trim()), ...value.tagpool.split(",").map((v) => v.trim())])).filter((v) => v !== "")
-    categories = Array.from(new Set([...value.categories, ...categories]))
-    return value;
-  });
+      toObj["lat"] = parseFloat(String(toObj["lat"]));
+      toObj["lon"] = parseFloat(String(toObj["lon"]));
 
+      const newLocation = toObj;
+      value.location = newLocation;
+      value.visible = true;
+      value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.trim()), ...value.tagpool.split(",").map((v) => v.trim())])).filter((v) => v !== "");
+      categories = Array.from(new Set([...value.categories, ...categories]));
+      return value;
+    });
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Wrapper data={data} categories={categories} kqlDataResult={kqlDataResult} />
+      <Wrapper data={data} categories={categories} kqlDataResult={kqlDataResult} kqlDataResultNoLocation={kqlDataResultNoLocation} />
     </Suspense>
   );
 }
