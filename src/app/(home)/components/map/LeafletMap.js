@@ -39,7 +39,7 @@ const LeafletMap = ({ data, setData, getDataForMarker }) => {
   });
   return (
     <>
-      <MapContainer className="w-full h-full" center={setViewAtomValue.pos} zoom={13} scrollWheelZoom={true} dragging={true} zoomControl={false}>
+      <MapContainer className="w-full h-full" center={setViewAtomValue.pos} zoom={13} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <MapController setViewAtomValue={setViewAtomValue} />
         {getDataForMarker.map((value, index) => {

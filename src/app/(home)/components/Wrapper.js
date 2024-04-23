@@ -22,7 +22,29 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
   const [getData, setData] = useState([...kqlDataResult, ...data]);
   const [turnOnMap, setTurnOnMap] = useState(true);
   const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
+  const [findMobile, setFindMobile] = useState(false);
   const clickedItemsList = useRecoilValue(clickedItemsListAtom);
+  const [doubleScreenTouched, setDoubleScreenTouched] = useState(false);
+
+  /* Double touch */
+  const [lastTap, setLastTap] = useState(null);
+  const doubleTapDelay = 300; // milliseconds
+
+  const handleDoubleTap = (event) => {
+
+    if (findMobile) {
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTap;
+      if (lastTap && tapLength < doubleTapDelay && tapLength > 0) {
+        console.log("mobile");
+        setDoubleScreenTouched((pre) => !pre)
+        
+      }
+      setLastTap(currentTime);
+    } else {
+      console.log("desktop");
+    }
+  };
 
   /* If u open this website by url with params then don't need an Animation */
   const searchParams = useSearchParams();
@@ -59,13 +81,33 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
     }
   }, []);
 
+  useEffect(() => {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // true for mobile device
+      setFindMobile(true);
+      console.log("find mobile");
+    } else {
+      // false for not mobile device
+      setFindMobile(false);
+      console.log("");
+    }
+  }, []);
+
+  // const onDoubleTouch = () => {
+  //   if(findMobile){
+  //     console.log("mobile")
+  //   }else{
+  //     console.log("desktop")
+  //   }
+  // }
+
   return (
-    <main ref={container} className="flex w-screen h-screen bg-white overflow-hidden relative">
+    <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
       <div onClick={onClickReady} className={`fixed bottom-10 left-1/2 -translate-x-1/2 font-semibold cursor-pointer z-[1000] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         Zur Karte
       </div>
 
-      <div className="flex flex-col w-[calc(100vw-(450px+4vw))] bg-white h-full">
+      <div className="flex flex-col w-full h-full lg:w-[calc(100vw-(450px+4vw))] bg-white ">
         <nav id="navContainer" className={`w-full bg-white h-36 flex border-b-2  ${!ready ? "border-white" : "border-black"}`}>
           <h1 className="bg-white text-4xl md:text-6xl lg:text-7xl font-bold flex items-center px-4">
             <span>EMPOWER MAP</span>
@@ -76,7 +118,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
           </div>
         </nav>
         <div id="mapCotainer" className={`flex-1 bg-white flex justify-center items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
-          <div onClick={() => setTurnOnMap((pre) => !pre)} className={`absolute top-4 right-4 z-[1000] cursor-pointer bg-black text-white p-1 rounded-lg ${turnOnMap ? "opacity-100": "opacity-50"}`}>
+          <div onClick={() => setTurnOnMap((pre) => !pre)} className={`absolute top-4 right-4 z-[1000] cursor-pointer bg-black text-white p-1 rounded-lg ${turnOnMap ? "opacity-100" : "opacity-50"}`}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-8 h-8">
               <path
                 strokeLinecap="round"
@@ -86,18 +128,27 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
             </svg>
           </div>
           {turnOnMap && (
-            <div className="w-full h-full">
+            <div key={doubleScreenTouched} onTouchEnd={handleDoubleTap} className="w-full h-full">
               <LeafletMap data={getData} getDataForMarker={getDataForMarker} setData={setData} />
               <div className="absolute bottom-4 left-4 w-80 aspect-square bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden">
                 <DynamicMiniMap />
               </div>
             </div>
           )}
-          {!turnOnMap && <div>{getData[0].organame}</div>}
+          {!turnOnMap && (
+            <>
+              {getData.length > 0 && <div className="w-full h-full grid grid-cols-4"></div>}
+              {getData.length === 0 && (
+                <div className="w-full h-full flex justify-center items-center">
+                  <div>no Data</div>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
 
-      <ListContainer getData={getData} clickedItemsList={clickedItemsList} />
+      <ListContainer doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
 
       <OrgaPage getData={getData} />
     </main>
