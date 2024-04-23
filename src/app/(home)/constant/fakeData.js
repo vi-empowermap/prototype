@@ -19,7 +19,8 @@ export const fakeData = async () => {
             },
             visible: true,
             aboutorga: "Hi! I'm Dain Orga", 
-            categories: []
+            categories: [],
+            artderorganisation: "xx"
         },
        
     ]
@@ -40,7 +41,8 @@ export const fakeData = async () => {
           
             visible: false,
             aboutorga: "Hi! I'm Sein Orga" + ((Math.random() > 0.5) ? " Vis" : " Udk"),
-            categories: [category[Math.floor(Math.random() * category.length)]]
+            categories: [category[Math.floor(Math.random() * category.length)]],
+            artderorganisation: Math.floor(Math.random() * 3) === 0 ? "xx" : Math.floor(Math.random() * 3) === 1 ? "yy" : "zz"
         }
         dataList.push(data)
     }

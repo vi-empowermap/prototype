@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 
-const ListContainer = ({ getData, clickedItemsList }) => {
+const ListContainer = ({doubleScreenTouched, getData, clickedItemsList }) => {
   const clickedItemsListset = useSetRecoilState(clickedItemsListAtom)
   const router = useRouter()
   const onClick = (value) => {
@@ -15,7 +15,7 @@ const ListContainer = ({ getData, clickedItemsList }) => {
     console.log(getData)
   },[getData])
   return (
-    <div id="listContainer" className="w-[calc(550px+4vw)] h-screen border-l-2 border-black py-8 pt-16 relative overflow-y-scroll pl-24">
+    <div id="listContainer" className={`w-full lg:w-[calc(550px+4vw)] ${!doubleScreenTouched ? "h-full" : "h-[200px]" } lg:h-screen border-l-2 border-black py-8 pt-16 relative overflow-y-scroll pl-24`}>
       {getData.map((value, index) => {
         return (
           <div key={index} className={`w-full relative px-8 z-[${index}] `}>

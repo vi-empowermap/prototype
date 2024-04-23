@@ -12,3 +12,9 @@
 ### Memo
 
 <https://gsap.com/resources/React/>
+
+```bash
+
+https://www.google.com/maps/search/?api=1&query=<lat>,<lng>
+
+```

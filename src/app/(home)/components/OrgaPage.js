@@ -1,5 +1,7 @@
+import { clikedGoogleAtom, setViewAtom } from "@/app/utils/state";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
 
 
 const OrgaPage = ({getData}) => {
@@ -8,14 +10,22 @@ const OrgaPage = ({getData}) => {
   const search = searchParams.get("organisation");
   const router = useRouter();
   const [orgaInfo, setOrgaInfo] = useState({})
-
+  const setOrgaLocation = useSetRecoilState(clikedGoogleAtom)
+  const setSetViewAtom = useSetRecoilState(setViewAtom)
+  
   useEffect(() => {
 
     if (Boolean(search)) {
       setOpen(true);
       const idx = getData.findIndex((value) => String(value.id) === search)
+      
       setOrgaInfo(getData[idx])
-    //   console.log(f)
+      setOrgaLocation([getData[idx].location.lat, getData[idx].location.lon])
+      setSetViewAtom({
+        pos: [getData[idx].location.lat, getData[idx].location.lon],
+        name: getData[idx].name
+      })
+     
     }else {
       setOpen(false)
     }
@@ -30,7 +40,7 @@ const OrgaPage = ({getData}) => {
     alert("Copied the Url: " + `${window.location.href}`);
   }
   return (
-    <div className={`fixed top-0 right-0 bg-white w-2/3 h-screen z-[1200] p-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"}`}>
+    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[1200] p-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"}`}>
       <div className="w-full h-full border-2 border-black rounded-3xl">
         <nav className="flex gap-4 justify-end p-4 mb-4">
           <div onClick={onCopyText} className="cursor-pointer">
