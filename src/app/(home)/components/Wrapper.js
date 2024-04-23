@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import LeafletMap from "./map";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { clickedItemsListAtom, readyAniAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedGoogleAtom, readyAniAtom } from "@/app/utils/state";
 import DynamicMiniMap from "./minimap";
 import ListContainer from "./ListContainer";
 import Search from "./Search";
@@ -25,22 +25,20 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
   const [findMobile, setFindMobile] = useState(false);
   const clickedItemsList = useRecoilValue(clickedItemsListAtom);
   const [doubleScreenTouched, setDoubleScreenTouched] = useState(false);
-
+  const getOrgaLocation = useRecoilValue(clikedGoogleAtom)
   /* Double touch */
   const [lastTap, setLastTap] = useState(null);
   const doubleTapDelay = 300; // milliseconds
 
   const handleDoubleTap = (event) => {
-
     if (window.innerWidth < 1024 && findMobile) {
       const currentTime = new Date().getTime();
       const tapLength = currentTime - lastTap;
       if (lastTap && tapLength < doubleTapDelay && tapLength > 0) {
         console.log("mobile");
-        
-        console.log("dd")
-        setDoubleScreenTouched((pre) => !pre)
-        
+
+        console.log("dd");
+        setDoubleScreenTouched((pre) => !pre);
       }
       setLastTap(currentTime);
     } else {
@@ -90,17 +88,16 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
     } else {
       // false for not mobile device
       setFindMobile(false);
-      
     }
   }, []);
 
   const onDoubleTouch = () => {
     if (window.innerWidth < 1024 && !findMobile) {
-        setDoubleScreenTouched((pre) => !pre)
-      }else {
+      setDoubleScreenTouched((pre) => !pre);
+    } else {
       console.log("desktop");
     }
-  }
+  };
 
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
@@ -118,7 +115,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
             <Filtern getData={getData} categories={categories} />
           </div>
         </nav>
-        <div id="mapCotainer" className={`flex-1 bg-white flex justify-center items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
+        <div id="mapCotainer" className={`flex-1 bg-white flex justify-start items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
           <div onClick={() => setTurnOnMap((pre) => !pre)} className={`absolute top-4 right-4 z-[1000] cursor-pointer bg-black text-white p-1 rounded-lg ${turnOnMap ? "opacity-100" : "opacity-50"}`}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-8 h-8">
               <path
@@ -129,11 +126,25 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
             </svg>
           </div>
           {turnOnMap && (
-            <div key={doubleScreenTouched} onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full">
+            <div key={doubleScreenTouched + Boolean(search)} onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full flex justify-start">
               <LeafletMap data={getData} getDataForMarker={getDataForMarker} setData={setData} />
-              <div className="absolute hidden lg:block bottom-4 left-4 w-80 aspect-square bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden">
-                <DynamicMiniMap />
-              </div>
+              {!Boolean(search) && (
+                <div className="absolute hidden lg:block bottom-4 left-4 w-80 aspect-square bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden">
+                  <DynamicMiniMap />
+                </div>
+              )}
+              {Boolean(search) && (
+                <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${getOrgaLocation[0]},${getOrgaLocation[1]}`} className="absolute hidden lg:flex lg:items-center lg:gap-2 bottom-4 left-4 bg-slate-100 rounded-lg px-3 py-1 border-2 border-black z-[1000] cursor-pointer">
+                  <span>Open in Google Maps</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"
+                    />
+                  </svg>
+                </a>
+              )}
             </div>
           )}
           {!turnOnMap && (

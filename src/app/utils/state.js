@@ -21,6 +21,11 @@ export const clickedItemsListAtom = atom({
   default: [1,4,5]
 })
 
+export const clikedGoogleAtom = atom({
+  key: "clikedGoogle",
+  default: []
+})
+
 
 
 /* Animation */

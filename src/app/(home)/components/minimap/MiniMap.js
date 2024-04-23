@@ -18,7 +18,7 @@ const LeafletMap = () => {
 
   return (
     <>
-      <MapContainer className="w-full h-full" center={setViewAtomValue.pos} zoom={9} doubleClickZoom={false} scrollWheelZoom={false} dragging={false} zoomControl={false}>
+      <MapContainer className="w-full h-full" center={[52.5200, 13.4050]} zoom={9} doubleClickZoom={false} scrollWheelZoom={false} dragging={false} zoomControl={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <GeoJSON
           attribution="&copy; credits due..."
