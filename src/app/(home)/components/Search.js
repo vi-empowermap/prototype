@@ -31,7 +31,7 @@ const Search = ({getData}) => {
   }
 
   return (
-    <div className="flex-1 w-full flex items-center border-b-2 border-black px-4">
+    <div className="flex-1 w-full flex items-center lg:border-b-2 border-black px-4">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <input type="text" {...register("search")} placeholder="write search query" className="bg-white w-full border-black rounded-xl focus:outline-none" />
       </form>

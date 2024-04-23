@@ -32,11 +32,13 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
 
   const handleDoubleTap = (event) => {
 
-    if (findMobile) {
+    if (window.innerWidth < 1024 && findMobile) {
       const currentTime = new Date().getTime();
       const tapLength = currentTime - lastTap;
       if (lastTap && tapLength < doubleTapDelay && tapLength > 0) {
         console.log("mobile");
+        
+        console.log("dd")
         setDoubleScreenTouched((pre) => !pre)
         
       }
@@ -85,21 +87,20 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       // true for mobile device
       setFindMobile(true);
-      console.log("find mobile");
     } else {
       // false for not mobile device
       setFindMobile(false);
-      console.log("");
+      
     }
   }, []);
 
-  // const onDoubleTouch = () => {
-  //   if(findMobile){
-  //     console.log("mobile")
-  //   }else{
-  //     console.log("desktop")
-  //   }
-  // }
+  const onDoubleTouch = () => {
+    if (window.innerWidth < 1024 && !findMobile) {
+        setDoubleScreenTouched((pre) => !pre)
+      }else {
+      console.log("desktop");
+    }
+  }
 
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
@@ -112,7 +113,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
           <h1 className="bg-white text-4xl md:text-6xl lg:text-7xl font-bold flex items-center px-4">
             <span>EMPOWER MAP</span>
           </h1>
-          <div id="filterContainer" className={`flex flex-col text-2xl font-semibold bg-white flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
+          <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
             <Search getData={getData} />
             <Filtern getData={getData} categories={categories} />
           </div>
@@ -128,9 +129,9 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
             </svg>
           </div>
           {turnOnMap && (
-            <div key={doubleScreenTouched} onTouchEnd={handleDoubleTap} className="w-full h-full">
+            <div key={doubleScreenTouched} onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full">
               <LeafletMap data={getData} getDataForMarker={getDataForMarker} setData={setData} />
-              <div className="absolute bottom-4 left-4 w-80 aspect-square bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden">
+              <div className="absolute hidden lg:block bottom-4 left-4 w-80 aspect-square bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden">
                 <DynamicMiniMap />
               </div>
             </div>

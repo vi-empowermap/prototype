@@ -23,6 +23,7 @@ const getKirbyData = async () => {
       tagpool: true,
       publicbtn: true,
       lokalorga: true,
+      artderorganisation: true,
     },
   };
 
