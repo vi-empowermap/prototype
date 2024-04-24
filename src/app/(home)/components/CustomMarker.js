@@ -31,9 +31,7 @@ const CustomMarker = ({ id, getData, setData, customIcon, position }) => {
     }
   };
 
-  useEffect(() => {
-    // console.log(position)
-  
+  useEffect(() => {  
     map.on("dragend", dragEndEvent);
     map.on("zoomend", dragEndEvent);
     // start
