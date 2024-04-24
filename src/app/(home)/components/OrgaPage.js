@@ -22,6 +22,7 @@ const OrgaPage = ({getData}) => {
       setOrgaInfo(getData[idx])
       setOrgaLocation([getData[idx].location.lat, getData[idx].location.lon])
       setSetViewAtom({
+        id: getData[idx].id,
         pos: [getData[idx].location.lat, getData[idx].location.lon],
         name: getData[idx].name
       })

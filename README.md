@@ -13,6 +13,8 @@
 
 <https://gsap.com/resources/React/>
 
+#### Google MAP API
+
 ```bash
 
 https://www.google.com/maps/search/?api=1&query=<lat>,<lng>
