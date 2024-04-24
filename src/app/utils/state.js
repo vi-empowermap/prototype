@@ -26,6 +26,12 @@ export const clikedGoogleAtom = atom({
   default: []
 })
 
+/* current clicked marker ID */
+export const clikedMarkerAtom = atom({
+  key: "clikedMarkerAtom",
+  default: -1
+})
+
 
 
 /* Animation */

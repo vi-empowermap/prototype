@@ -30,7 +30,7 @@ const getKirbyData = async () => {
   /* kql */
   const kirbyApiDraft = `${kirbyOriginAPI}`;
   const data = await fetchDataOriginAPI({ url: kirbyApiDraft, userInfo: { authEmail, authPassword }, method: "POST", bodyData });
-  console.log(data)
+ 
   // here you should bring only the users who are ready and have location information
   data.result = data.result.filter((value) => {
     if (value.role_title === "Orga" && value.publicbtn === "true") {
@@ -42,6 +42,7 @@ const getKirbyData = async () => {
 };
 
 export default async function Home() {
+  const randomColorList = ["#8C0B23", "#D971AA", "#5D5ABF", "#0468BF", "#A66A21"]
   // Loading page testing
   // await new Promise((resolve) => setTimeout(resolve, 1000))
   const data = await fakeData();
@@ -53,10 +54,12 @@ export default async function Home() {
   const kqlDataResultNoLocation = kqlData.result
     .filter((value) => {
       if (value.lokalorga === "true") {
+        
         return value;
       }
     })
     .map((value) => {
+      value.bgColor = randomColorList[Math.floor(Math.random() * randomColorList.length)]
       return value;
     });
   const kqlDataResult = kqlData.result
@@ -79,12 +82,15 @@ export default async function Home() {
       toObj["lon"] = parseFloat(String(toObj["lon"]));
 
       const newLocation = toObj;
+      value.bgColor = randomColorList[Math.floor(Math.random() * randomColorList.length)]
       value.location = newLocation;
       value.visible = true;
       value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.trim()), ...value.tagpool.split(",").map((v) => v.trim())])).filter((v) => v !== "");
       categories = Array.from(new Set([...value.categories, ...categories]));
       return value;
     });
+
+    console.log(kqlDataResult)
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

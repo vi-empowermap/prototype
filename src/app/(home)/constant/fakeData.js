@@ -1,5 +1,6 @@
 
 export const category = ["car", "bike", "bus", "train"]
+const randomColorList = ["#8C0B23", "#D971AA", "#5D5ABF", "#0468BF", "#A66A21"]
 
 export const fakeData = async () => {
     // await new Promise((resolve) => setTimeout(resolve, 1000))
@@ -20,7 +21,8 @@ export const fakeData = async () => {
             visible: true,
             aboutorga: "Hi! I'm Dain Orga", 
             categories: [],
-            artderorganisation: "xx"
+            artderorganisation: "xx",
+            bgColor: randomColorList[Math.floor(Math.random() * randomColorList.length)]
         },
        
     ]
@@ -38,7 +40,7 @@ export const fakeData = async () => {
                 osm: "23123"
 
             },
-          
+            bgColor: randomColorList[Math.floor(Math.random() * randomColorList.length)],
             visible: false,
             aboutorga: "Hi! I'm Sein Orga" + ((Math.random() > 0.5) ? " Vis" : " Udk"),
             categories: [category[Math.floor(Math.random() * category.length)]],
