@@ -18,7 +18,7 @@ const LeafletMap = () => {
 
   return (
     <>
-      <MapContainer className="w-full h-full" center={[52.5200, 13.4050]} zoom={9} doubleClickZoom={false} scrollWheelZoom={false} dragging={false} zoomControl={false}>
+      <MapContainer className="w-full h-full" center={[51.1657, 10.4515]} zoom={5} doubleClickZoom={false} scrollWheelZoom={false} dragging={false} zoomControl={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <GeoJSON
           attribution="&copy; credits due..."
@@ -44,13 +44,12 @@ const LeafletMap = () => {
               layer.bringToFront();
             },
             click: (e) => {     
-              // console.log(e) 
               const latlng = e.latlng;
-              const bezirk = e["layer"].feature.properties.spatial_alias;
-  
+              const bundesland = e["layer"].feature.properties.name;
+              console.log(bundesland)
               setViewAtomSet({
                 pos: [latlng.lat, latlng.lng],
-                name: bezirk
+                name: bundesland
               })
             },
           }}

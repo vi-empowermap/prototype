@@ -1,6 +1,7 @@
+import { RANDOMCOLOR_LIST } from "./colors"
 
 export const category = ["car", "bike", "bus", "train"]
-const randomColorList = ["#8C0B23", "#D971AA", "#5D5ABF", "#0468BF", "#A66A21"]
+const randomColorList = RANDOMCOLOR_LIST
 
 export const fakeData = async () => {
     // await new Promise((resolve) => setTimeout(resolve, 1000))

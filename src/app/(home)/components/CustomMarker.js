@@ -102,17 +102,17 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
   const customIcon1 = L.divIcon({
     className: "marker",
     html: currentIcon, // Path to your icon image
-    iconSize: [35, 35], // Size of the icon
-    iconAnchor: [17, 35], // Point of the icon which will correspond to marker's location
-    popupAnchor: [0, -35], // Point from which the popup should open relative to the iconAnchor
+    iconSize: [35/1.4, 35/1.4], // Size of the icon
+    iconAnchor: [17/1.4, 35/1.4], // Point of the icon which will correspond to marker's location
+    popupAnchor: [0, -35/1.4], // Point from which the popup should open relative to the iconAnchor
   });
 
   const customIcon2 = L.divIcon({
     className: "marker",
     html: acurrentIcon, // Path to your icon image
-    iconSize: [50, 50], // Size of the icon
-    iconAnchor: [25, 40], // Point of the icon which will correspond to marker's location
-    popupAnchor: [0, -50], // Point from which the popup should open relative to the iconAnchor
+    iconSize: [35, 35], // Size of the icon
+    iconAnchor: [17, 35], // Point of the icon which will correspond to marker's location
+    popupAnchor: [0, -35], // Point from which the popup should open relative to the iconAnchor
   });
 
   const dragEndEvent = () => {
@@ -156,7 +156,7 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
     }
   }, [clicked]);
   useEffect(() => {
-    if (getSetViewAtom.name !== "berlin") {
+    if (getSetViewAtom.name !== "start") {
       map.setView(getSetViewAtom.pos, 12);
       if(getSetViewAtom.id === id){
         setClickedMarkerAtom(id);
