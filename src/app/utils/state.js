@@ -33,7 +33,11 @@ export const clikedMarkerAtom = atom({
   default: -1
 })
 
-
+/* current Bundesland of MouseOver on MiniMap */
+export const currentBundesLand = atom({
+  key: "currentBundesLand",
+  default: ""
+})
 
 /* Animation */
 export const readyAniAtom = atom({

@@ -1,56 +1,60 @@
 import { TileLayer, MapContainer, GeoJSON } from "react-leaflet";
-import 'leaflet/dist/leaflet.css';
-import seg from "/public/assets/berlin.json"
-import { useRecoilState, useRecoilValue } from "recoil";
-import { setViewAtom } from "@/app/utils/state";
+import "leaflet/dist/leaflet.css";
+import seg from "/public/assets/berlin.json";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { currentBundesLand, setViewAtom } from "@/app/utils/state";
+import { MAPTILELAYER } from "../../constant/mapInfo";
+
 const LeafletMap = () => {
-  const [setViewAtomValue, setViewAtomSet] = useRecoilState(setViewAtom)
-  const setColor = ({ properties }) => {
+  const [setViewAtomValue, setViewAtomSet] = useRecoilState(setViewAtom);
+  const [getCurrentBundesLand,setCurrentBundesLand] = useRecoilState(currentBundesLand);
+  
+  const setColor = ({properties}) => {
     return {
-      weight: 3,
-      fillColor: "black",
+      weight: 2,
+      fillColor: getCurrentBundesLand === properties.name.toLowerCase() ? "black" :"white",
       opacity: 1,
       color: "black",
-      dashArray: "3",
-      fillOpacity: 0.5,
+      // dashArray: "0",
     };
   };
 
   return (
     <>
-      <MapContainer className="w-full h-full" center={[51.1657, 10.4515]} zoom={5} doubleClickZoom={false} scrollWheelZoom={false} dragging={false} zoomControl={false}>
-        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <MapContainer className="w-full h-full bg-red-400" center={[51.1657, 10.4515]} zoom={5} doubleClickZoom={false} scrollWheelZoom={false} dragging={false} zoomControl={false}>
+        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={MAPTILELAYER.exMini02} />
         <GeoJSON
           attribution="&copy; credits due..."
           data={seg}
           style={setColor}
           eventHandlers={{
             mouseover: (e) => {
-              // console.log(e);
               let layer = e.layer;
-              layer.setStyle({
-                fillColor: "black",
-                fillOpacity: 1,
-              });
+              const bundesland = layer.feature.properties.name;
+              setCurrentBundesLand(bundesland.toLowerCase());
+        
               layer.bringToFront();
+            
             },
             mouseout: (e) => {
-              // console.log(e);
               let layer = e.layer;
               layer.setStyle({
-                fillColor: "black",
-                fillOpacity: 0.5,
+                fillColor: "white",
               });
-              layer.bringToFront();
+              // layer.bringToFront();
+
+              setCurrentBundesLand("");
             },
-            click: (e) => {     
+            click: (e) => {
               const latlng = e.latlng;
               const bundesland = e["layer"].feature.properties.name;
-              console.log(bundesland)
+              console.log(bundesland);
+
               setViewAtomSet({
                 pos: [latlng.lat, latlng.lng],
-                name: bundesland
-              })
+                name: bundesland,
+                type: "mini",
+              });
             },
           }}
         />

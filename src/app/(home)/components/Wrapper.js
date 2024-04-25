@@ -4,7 +4,7 @@
 import { useEffect, useRef, useState } from "react"
 import LeafletMap from "./map"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { clickedItemsListAtom, clikedGoogleAtom, readyAniAtom, setViewAtom } from "@/app/utils/state"
+import { clickedItemsListAtom, clikedGoogleAtom, currentBundesLand, readyAniAtom, setViewAtom } from "@/app/utils/state"
 import DynamicMiniMap from "./minimap"
 import ListContainer from "./ListContainer"
 import Search from "./Search"
@@ -16,7 +16,7 @@ import OrgaPage from "./OrgaPage"
 import Logo from "./Logo"
 import GoogleMapTag from "./GoogleMap"
 
-const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) => {
+const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation, panelData: {result : {content: panelDatas}}, totalCountOfBundesland }) => {
   gsap.registerPlugin(useGSAP)
   const container = useRef()
   const [ready, setReady] = useRecoilState(readyAniAtom)
@@ -27,7 +27,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
   const clickedItemsList = useRecoilValue(clickedItemsListAtom)
   const [doubleScreenTouched, setDoubleScreenTouched] = useState(false)
   const getOrgaLocation = useRecoilValue(clikedGoogleAtom)
-  const getSetViewAtom = useRecoilValue(setViewAtom)
+  const getCurrentBundesLand = useRecoilValue(currentBundesLand)
 
   /* Double touch map for Mobile */
   const [lastTap, setLastTap] = useState(null)
@@ -127,7 +127,9 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
             <div key={doubleScreenTouched + Boolean(search)} onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full flex justify-start">
               <LeafletMap data={getData} getDataForMarker={getDataForMarker} setData={setData} />
               {!Boolean(search) && (
-                <div className="absolute hidden lg:block bottom-4 left-4 w-80 aspect-square bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden">
+                <div id="leaflet_minimap_container" className="absolute pt-10 hidden lg:block bottom-8 left-8 w-[calc(3vw+310px)] aspect-square bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden">
+                  <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.minimaptitle}</div>
+                 {getCurrentBundesLand !== "" && <div className="absolute flex justify-center items-center w-10 h-10 rounded-full top-4 right-3 z-[1000] text-2xl leading-5 font-semibold bg-black text-white">{totalCountOfBundesland[getCurrentBundesLand]}</div>}
                   <DynamicMiniMap />
                 </div>
               )}
@@ -152,7 +154,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
 
       <ListContainer doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
-      <OrgaPage getData={getData} />
+      <OrgaPage getData={getData} turnOnMap={turnOnMap} />
     </main>
   )
 }

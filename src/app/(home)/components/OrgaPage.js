@@ -1,14 +1,14 @@
-import { clikedGoogleAtom, setViewAtom } from "@/app/utils/state";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { clikedGoogleAtom, setViewAtom } from "@/app/utils/state"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
+import { useSetRecoilState } from "recoil"
 
 
-const OrgaPage = ({getData}) => {
-  const [open, setOpen] = useState(false);
-  const searchParams = useSearchParams();
-  const search = searchParams.get("organisation");
-  const router = useRouter();
+const OrgaPage = ({getData, turnOnMap}) => {
+  const [open, setOpen] = useState(false)
+  const searchParams = useSearchParams()
+  const search = searchParams.get("organisation")
+  const router = useRouter()
   const [orgaInfo, setOrgaInfo] = useState({})
   const setOrgaLocation = useSetRecoilState(clikedGoogleAtom)
   const setSetViewAtom = useSetRecoilState(setViewAtom)
@@ -16,29 +16,32 @@ const OrgaPage = ({getData}) => {
   useEffect(() => {
 
     if (Boolean(search)) {
-      setOpen(true);
+      setOpen(true)
       const idx = getData.findIndex((value) => String(value.id) === search)
-      
       setOrgaInfo(getData[idx])
-      setOrgaLocation([getData[idx].location.lat, getData[idx].location.lon])
-      setSetViewAtom({
-        id: getData[idx].id,
-        pos: [getData[idx].location.lat, getData[idx].location.lon],
-        name: getData[idx].name
-      })
+      if(turnOnMap){
+        setOrgaLocation([getData[idx].location.lat, getData[idx].location.lon])
+        setSetViewAtom({
+          id: getData[idx].id,
+          pos: [getData[idx].location.lat, getData[idx].location.lon],
+          name: getData[idx].name,
+          type: "list"
+        })
+      }
+     
      
     }else {
       setOpen(false)
     }
-  }, [search]);
+  }, [search])
 
   const onClose = () => {
     router.push("/")
   }
 
   const onCopyText = () => {
-    navigator.clipboard.writeText(`${window.location.href}`);
-    alert("Copied the Url: " + `${window.location.href}`);
+    navigator.clipboard.writeText(`${window.location.href}`)
+    alert("Copied the Url: " + `${window.location.href}`)
   }
   return (
     <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[1200] p-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"}`}>
@@ -64,7 +67,7 @@ const OrgaPage = ({getData}) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OrgaPage;
+export default OrgaPage
