@@ -1,13 +1,11 @@
 import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import * as L from "leaflet";
-import custom1 from "/public/assets/rect.svg";
-import custom2 from "/public/assets/circle.svg";
-import custom3 from "/public/assets/triangle.svg";
 import CustomMarker from "../CustomMarker";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { clikedMarkerAtom, setViewAtom } from "@/app/utils/state";
 import { useEffect } from "react";
+import { MAPTILELAYER } from "../../constant/mapInfo";
 
 /* Event: if cancel selection of marker */
 const LocationFinderDummy = () => {
@@ -28,12 +26,12 @@ const MapController = ({ setViewAtomValue }) => {
    
     useEffect(() => {
       // console.log(custom);
-      if (setViewAtomValue.name !== "berlin") {
+      if (setViewAtomValue.name !== "start") {
         map.setView(setViewAtomValue.pos);
-        map.setZoom(15);
+        map.setZoom(9);
       }else{
-        map.setView([52.5200, 13.4050]);
-        map.setZoom(10);
+        map.setView([51.1657, 10.4515]);
+        map.setZoom(7);
       }
       
     }, [setViewAtomValue]);
@@ -44,28 +42,11 @@ const MapController = ({ setViewAtomValue }) => {
 
 const LeafletMap = ({ data, setData, getDataForMarker }) => {
     const setViewAtomValue = useRecoilValue(setViewAtom)
-    // const [getData, setData] = useRecoilState(dataAtom);
-  // Define your custom icon
-  
-  // const customIcon1 = L.divIcon({
-  //   className: "marker",
-  //   html: svgUrl, // Path to your icon image
-  //   iconSize: [35, 35], // Size of the icon
-  //   iconAnchor: [17, 35], // Point of the icon which will correspond to marker's location
-  //   popupAnchor: [0, -35], // Point from which the popup should open relative to the iconAnchor
-  // });
-  // const customIcon1 = L.divIcon({
-  //   iconUrl: custom1.src, // Path to your icon image
-  //   iconSize: [35, 35], // Size of the icon
-  //   iconAnchor: [17, 35], // Point of the icon which will correspond to marker's location
-  //   popupAnchor: [0, -35], // Point from which the popup should open relative to the iconAnchor
-  // });
- 
  
   return (
     <>
-      <MapContainer className="w-full h-full" center={setViewAtomValue.pos} zoom={13} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
-        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <MapContainer className="w-full h-full" center={setViewAtomValue.pos} zoom={7} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
+        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={`${MAPTILELAYER.ex01}`} />
         <LocationFinderDummy />
         <MapController setViewAtomValue={setViewAtomValue} />
         {getDataForMarker.map((value, index) => {

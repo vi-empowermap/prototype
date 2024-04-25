@@ -96,7 +96,6 @@ export default async function Home() {
       value.visible = true
       value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.trim().replace(/ +/g, "").toLowerCase()), ...value.tagpool.split(",").map((v) => v.trim().replace(/ +/g, "").toLowerCase())])).filter((v) => v !== "")
       categories = Array.from(new Set([...value.categories, ...categories])).sort()
-      console.log(categories)
       return value
     })
 

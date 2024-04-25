@@ -1,104 +1,100 @@
-"use client";
+"use client"
 /* CSR: NO SSR */
 
-import { useEffect, useRef, useState } from "react";
-import LeafletMap from "./map";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { clickedItemsListAtom, clikedGoogleAtom, readyAniAtom, setViewAtom } from "@/app/utils/state";
-import DynamicMiniMap from "./minimap";
-import ListContainer from "./ListContainer";
-import Search from "./Search";
-import Filtern from "./Filtern";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { useSearchParams } from "next/navigation";
-import OrgaPage from "./OrgaPage";
-import Logo from "./Logo";
+import { useEffect, useRef, useState } from "react"
+import LeafletMap from "./map"
+import { useRecoilState, useRecoilValue } from "recoil"
+import { clickedItemsListAtom, clikedGoogleAtom, readyAniAtom, setViewAtom } from "@/app/utils/state"
+import DynamicMiniMap from "./minimap"
+import ListContainer from "./ListContainer"
+import Search from "./Search"
+import Filtern from "./Filtern"
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
+import { useSearchParams } from "next/navigation"
+import OrgaPage from "./OrgaPage"
+import Logo from "./Logo"
+import GoogleMapTag from "./GoogleMap"
 
 const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) => {
-  gsap.registerPlugin(useGSAP);
-  const container = useRef();
-  const [ready, setReady] = useRecoilState(readyAniAtom);
-  const [getData, setData] = useState([...kqlDataResult, ...data]);
-  const [turnOnMap, setTurnOnMap] = useState(true);
-  const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
-  const [findMobile, setFindMobile] = useState(false);
-  const clickedItemsList = useRecoilValue(clickedItemsListAtom);
-  const [doubleScreenTouched, setDoubleScreenTouched] = useState(false);
+  gsap.registerPlugin(useGSAP)
+  const container = useRef()
+  const [ready, setReady] = useRecoilState(readyAniAtom)
+  const [getData, setData] = useState([...kqlDataResult, ...data])
+  const [turnOnMap, setTurnOnMap] = useState(true)
+  const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data])
+  const [findMobile, setFindMobile] = useState(false)
+  const clickedItemsList = useRecoilValue(clickedItemsListAtom)
+  const [doubleScreenTouched, setDoubleScreenTouched] = useState(false)
   const getOrgaLocation = useRecoilValue(clikedGoogleAtom)
   const getSetViewAtom = useRecoilValue(setViewAtom)
 
   /* Double touch map for Mobile */
-  const [lastTap, setLastTap] = useState(null);
-  const doubleTapDelay = 300; // milliseconds
+  const [lastTap, setLastTap] = useState(null)
+  const doubleTapDelay = 300 // milliseconds
   // Double Tap Event
   const handleDoubleTap = (event) => {
     if (window.innerWidth < 1024 && findMobile) {
-      const currentTime = new Date().getTime();
-      const tapLength = currentTime - lastTap;
+      const currentTime = new Date().getTime()
+      const tapLength = currentTime - lastTap
       if (lastTap && tapLength < doubleTapDelay && tapLength > 0) {
-        setDoubleScreenTouched((pre) => !pre);
+        setDoubleScreenTouched((pre) => !pre)
       }
-      setLastTap(currentTime);
-    } else {
-      console.log("desktop");
-    }
-  };
-
-  /* If u open this website by url with params then don't need an Animation */
-  const searchParams = useSearchParams();
-  const search = searchParams.get("organisation");
-
-  const { contextSafe } = useGSAP({ scope: container });
-
-  const onClickReady = contextSafe(() => {
-    if (!ready && !Boolean(search) && turnOnMap) {
-      gsap.to("#filterContainer", { opacity: 1, duration: 0.7 });
-      gsap.to("#mapCotainer", { opacity: 1, duration: 0.7 });
-      gsap.to("#listContainer", { transform: "translateY(0)", duration: 0.7 });
-      gsap.to("#navContainer", { css: { "border-bottom": "2px solid black" }, duration: 0.7 });
-    }
-    setTimeout(() => {
-      setReady(true);
-    }, 1000);
-  });
-
-  useEffect(() => {
-    if (!turnOnMap) {
-      setData([...kqlDataResultNoLocation]);
-      setDataForMarker([...kqlDataResultNoLocation]);
-    } else {
-      setData([...kqlDataResult, ...data]);
-      setDataForMarker([...kqlDataResult, ...data]);
-    }
-  }, [turnOnMap]);
-
-  useEffect(() => {
-    console.log(kqlDataResultNoLocation);
-    if (Boolean(search)) {
-      setReady(true);
-    }
-  }, []);
-
-  useEffect(() => {
+      setLastTap(currentTime)
+    } 
+  }
+   /* Detection Mobile Device and Tablet */
+   useEffect(() => {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       // true for mobile device
-      setFindMobile(true);
+      setFindMobile(true)
     } else {
       // false for not mobile device
-      setFindMobile(false);
+      setFindMobile(false)
     }
-  }, []);
-
-
-
+  }, [])
+  /* Mobile Size event but it works also on Desktop */
   const onDoubleTouch = () => {
-    if (window.innerWidth < 1024 && !findMobile) {
-      setDoubleScreenTouched((pre) => !pre);
-    } else {
-      console.log("desktop");
+    if (window.innerWidth < 1025 && !findMobile) {
+      setDoubleScreenTouched((pre) => !pre)
     }
-  };
+  }
+
+  /* If u open this website by url with params then don't need to activate the Animation */
+  const searchParams = useSearchParams()
+  const search = searchParams.get("organisation")
+
+  useEffect(() => {
+    /* If the user comes on this website by url?query then turn off the animation */
+    if (Boolean(search)) {
+      setReady(true)
+    }
+  }, [])
+
+  const { contextSafe } = useGSAP({ scope: container })
+  const onClickReady = contextSafe(() => {
+    if (!ready && !Boolean(search) && turnOnMap) {
+      gsap.to("#filterContainer", { opacity: 1, duration: 0.7 })
+      gsap.to("#mapCotainer", { opacity: 1, duration: 0.7 })
+      gsap.to("#listContainer", { transform: "translateY(0)", duration: 0.7 })
+      gsap.to("#navContainer", { css: { "border-bottom": "2px solid black" }, duration: 0.7 })
+    }
+    setTimeout(() => {
+      setReady(true)
+    }, 1000)
+  })
+
+
+  /* Switch Orga types */
+  useEffect(() => {
+    if (!turnOnMap) {
+      setData([...kqlDataResultNoLocation])
+      setDataForMarker([...kqlDataResultNoLocation])
+    } else {
+      setData([...kqlDataResult, ...data])
+      setDataForMarker([...kqlDataResult, ...data])
+    }
+  }, [turnOnMap])
 
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
@@ -136,16 +132,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
                 </div>
               )}
               {Boolean(search) && (
-                <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${getOrgaLocation[0]},${getOrgaLocation[1]}`} className="absolute hidden lg:flex lg:items-center lg:gap-2 bottom-4 left-4 bg-slate-100 rounded-lg px-3 py-1 border-2 border-black z-[1000] cursor-pointer">
-                  <span>Open in Google Maps</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"
-                    />
-                  </svg>
-                </a>
+                <GoogleMapTag lat={getOrgaLocation[0]} long={getOrgaLocation[1]} />
               )}
             </div>
           )}
@@ -167,7 +154,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
       {/* Orga page */}
       <OrgaPage getData={getData} />
     </main>
-  );
-};
+  )
+}
 
-export default Wrapper;
+export default Wrapper

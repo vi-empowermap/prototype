@@ -7,11 +7,12 @@ export const nameState = atom({
   });
 
 
+/* Click Event to change SetView: in MiniMap, CustomMarker, ItemList */
 export const setViewAtom = atom({
   key: "setViewAtom",
   default: {
-    pos: [52.5200, 13.4050],
-    name: "berlin"
+    pos: [51.1657, 10.4515],
+    name: "start"
   }
 });
 
