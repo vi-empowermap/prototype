@@ -1,16 +1,15 @@
-import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import * as L from "leaflet";
-import CustomMarker from "../CustomMarker";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { clikedMarkerAtom, setViewAtom } from "@/app/utils/state";
-import { useEffect } from "react";
-import { MAPTILELAYER } from "../../constant/mapInfo";
+import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet"
+import "leaflet/dist/leaflet.css"
+import CustomMarker from "../CustomMarker"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import { clikedMarkerAtom, setViewAtom } from "@/app/utils/state"
+import { useEffect } from "react"
+import { MAPTILELAYER } from "../../constant/mapInfo"
 
 /* Event: if cancel selection of marker */
 const LocationFinderDummy = () => {
   const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom)
-  const map = useMapEvent({ });
+  const map = useMapEvent({ })
   useEffect(() => {
     map.on("popupclose", () => setClickedMarkerAtom(-1))
 
@@ -19,26 +18,31 @@ const LocationFinderDummy = () => {
     }
   },[map])
 
-  return null;
-};
+  return null
+}
 const MapController = ({ setViewAtomValue }) => {
-    const map = useMap();
+    const map = useMap()
    
     useEffect(() => {
-      // console.log(custom);
+      // console.log(custom)
       if (setViewAtomValue.name !== "start") {
-        map.setView(setViewAtomValue.pos);
-        map.setZoom(9);
+        if(setViewAtomValue.type === "mini"){
+          map.setView(setViewAtomValue.pos)
+          map.setZoom(9)
+        }else{
+          map.setView(setViewAtomValue.pos)
+          map.setZoom(13)
+        }
       }else{
-        map.setView([51.1657, 10.4515]);
-        map.setZoom(7);
+        map.setView([51.1657, 10.4515])
+        map.setZoom(7)
       }
       
-    }, [setViewAtomValue]);
+    }, [setViewAtomValue])
   
   
-    return null;
-  };
+    return null
+  }
 
 const LeafletMap = ({ data, setData, getDataForMarker }) => {
     const setViewAtomValue = useRecoilValue(setViewAtom)
@@ -51,12 +55,12 @@ const LeafletMap = ({ data, setData, getDataForMarker }) => {
         <MapController setViewAtomValue={setViewAtomValue} />
         {getDataForMarker.map((value, index) => {
           return (
-            <CustomMarker key={index} getData={data} setData={setData} id={value.id} artderorganisation={value.artderorganisation} position={value.location} activeColor={value.bgColor} />
-          );
+            <CustomMarker key={index} getData={data} setData={setData} id={value.id} artderorganisation={value.artderorganisation} position={value.location} activeColor={value.bgColor} archivoraktiv={value.archivoraktiv} />
+          )
         })}
       </MapContainer>
     </>
-  );
-};
+  )
+}
 
-export default LeafletMap;
+export default LeafletMap

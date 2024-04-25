@@ -7,3 +7,11 @@
 .leaflet-popup-close-button{
     /* display: none; */
 }
+
+/* Minimap Control Attribution */
+#leaflet_minimap_container .leaflet-control-attribution {
+    display: none;
+}
+#leaflet_minimap_container .leaflet-container {
+    background-color: white;
+}

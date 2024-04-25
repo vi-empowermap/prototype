@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-const CustomMarker = ({ id, getData, setData, artderorganisation, position, activeColor }) => {
-  const [getClickedMarkerAtom,setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
+const CustomMarker = ({ id, getData, setData, artderorganisation, position, activeColor, archivoraktiv }) => {
+  const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   const setclickedItemsList = useSetRecoilState(clickedItemsListAtom);
   const getSetViewAtom = useRecoilValue(setViewAtom);
   const markerRef = useRef(null);
@@ -13,37 +13,39 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
     id: "",
   });
 
+// Circle
   const svgUrl1 = `
-  
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
   <defs>
     <style>
       .a${id}1 {
-        fill: black;
+        fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
         stroke-width: 0px;
       }
     </style>
   </defs>
-  <rect class="${id}1" x="0" y="0" width="800" height="800" rx="400" ry="400"/>
+  <rect class="a${id}1" x="0" y="0" width="800" height="800" rx="400" ry="400"/>
 </svg>`;
-  const svgUrl2 = `
+// rect
+const svgUrl2 = `
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
     <defs>
       <style>
         .a${id}2 {
-          fill: black;
+          fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
           stroke-width: 0px;
         }
       </style>
     </defs>
     <rect class="a${id}2" x="0" y="0" width="800" height="800"/>
   </svg>`;
+// Triangle
   const svgUrl3 = `
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
     <defs>
       <style>
         .a${id}3 {
-          fill: black;
+          fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
           stroke-width: 0px;
         }
       </style>
@@ -102,17 +104,17 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
   const customIcon1 = L.divIcon({
     className: "marker",
     html: currentIcon, // Path to your icon image
-    iconSize: [35/1.4, 35/1.4], // Size of the icon
-    iconAnchor: [17/1.4, 35/1.4], // Point of the icon which will correspond to marker's location
-    popupAnchor: [0, -35/1.4], // Point from which the popup should open relative to the iconAnchor
+    iconSize: [35 / 1.4, 35 / 1.4], // Size of the icon
+    iconAnchor: [17 / 1.4, 35 / 1.4], // Point of the icon which will correspond to marker's location
+    popupAnchor: [0, -35 / 1.4], // Point from which the popup should open relative to the iconAnchor
   });
 
   const customIcon2 = L.divIcon({
     className: "marker",
-    html: acurrentIcon, // Path to your icon image
-    iconSize: [35, 35], // Size of the icon
-    iconAnchor: [17, 35], // Point of the icon which will correspond to marker's location
-    popupAnchor: [0, -35], // Point from which the popup should open relative to the iconAnchor
+    html: acurrentIcon, 
+    iconSize: [35, 35], 
+    iconAnchor: [17, 35],
+    popupAnchor: [0, -35], 
   });
 
   const dragEndEvent = () => {
@@ -144,21 +146,20 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
   /* Click Marker */
   useEffect(() => {
     if (clicked.id === id) {
-      map.setView(clicked.pos, map.getZoom(), {animate: true, duration: 0.3});
+      map.setView(clicked.pos, map.getZoom(), { animate: true, duration: 0.3 });
       setTimeout(() => {
         setClickedMarkerAtom(id);
-
-      },300)
+      }, 300);
       // if(clicked.id !== getClickedMarkerAtom){
       //   setClicked({id: ""})
       // }
-      console.log(activeColor);
+     
     }
   }, [clicked]);
   useEffect(() => {
     if (getSetViewAtom.name !== "start") {
       map.setView(getSetViewAtom.pos, 12);
-      if(getSetViewAtom.id === id){
+      if (getSetViewAtom.id === id) {
         setClickedMarkerAtom(id);
       }
     }
