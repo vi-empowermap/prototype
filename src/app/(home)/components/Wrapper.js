@@ -1,6 +1,7 @@
 "use client";
+/* CSR: NO SSR */
 
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LeafletMap from "./map";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { clickedItemsListAtom, clikedGoogleAtom, readyAniAtom, setViewAtom } from "@/app/utils/state";
@@ -12,8 +13,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useSearchParams } from "next/navigation";
 import OrgaPage from "./OrgaPage";
-
-/* CSR: NO SSR */
+import Logo from "./Logo";
 
 const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) => {
   gsap.registerPlugin(useGSAP);
@@ -27,18 +27,16 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
   const [doubleScreenTouched, setDoubleScreenTouched] = useState(false);
   const getOrgaLocation = useRecoilValue(clikedGoogleAtom)
   const getSetViewAtom = useRecoilValue(setViewAtom)
-  /* Double touch */
+
+  /* Double touch map for Mobile */
   const [lastTap, setLastTap] = useState(null);
   const doubleTapDelay = 300; // milliseconds
-
+  // Double Tap Event
   const handleDoubleTap = (event) => {
     if (window.innerWidth < 1024 && findMobile) {
       const currentTime = new Date().getTime();
       const tapLength = currentTime - lastTap;
       if (lastTap && tapLength < doubleTapDelay && tapLength > 0) {
-        console.log("mobile");
-
-        console.log("dd");
         setDoubleScreenTouched((pre) => !pre);
       }
       setLastTap(currentTime);
@@ -104,15 +102,15 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
 
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
+      {/* Animation Button */}
       <div onClick={onClickReady} className={`fixed bottom-10 left-1/2 -translate-x-1/2 font-semibold cursor-pointer z-[1000] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         Zur Karte
       </div>
 
       <div className="flex flex-col w-full h-full lg:w-[calc(100vw-(450px+4vw))] bg-white ">
+        {/* Navigation BAR */}
         <nav id="navContainer" className={`w-full bg-white h-36 flex border-b-2  ${!ready ? "border-white" : "border-black"}`}>
-          <h1 className="bg-white text-4xl md:text-6xl lg:text-7xl font-bold flex items-center px-4">
-            <span>EMPOWER MAP</span>
-          </h1>
+          <Logo />
           <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
             <Search getData={getData} />
             <Filtern getData={getData} categories={categories} />
@@ -128,6 +126,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
               />
             </svg>
           </div>
+          {/* Orga who has location info */}
           {turnOnMap && (
             <div key={doubleScreenTouched + Boolean(search)} onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full flex justify-start">
               <LeafletMap data={getData} getDataForMarker={getDataForMarker} setData={setData} />
@@ -150,6 +149,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
               )}
             </div>
           )}
+          {/* Orga who doesn't have location info */}
           {!turnOnMap && (
             <>
               {getData.length > 0 && <div className="w-full h-full grid grid-cols-4"></div>}
@@ -164,7 +164,7 @@ const Wrapper = ({ data, categories, kqlDataResult, kqlDataResultNoLocation }) =
       </div>
 
       <ListContainer doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
-
+      {/* Orga page */}
       <OrgaPage getData={getData} />
     </main>
   );
