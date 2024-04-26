@@ -1,3 +1,4 @@
+import { useMarkerIcon } from "@/app/utils/hooks/useMarkerIcon";
 import { clickedItemsListAtom, dataAtom, setViewAtom, clikedMarkerAtom } from "@/app/utils/state";
 import { useEffect, useRef, useState } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
@@ -12,95 +13,11 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
   const [clicked, setClicked] = useState({
     id: "",
   });
-
-// Circle
-  const svgUrl1 = `
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
-  <defs>
-    <style>
-      .a${id}1 {
-        fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
-        stroke-width: 0px;
-      }
-    </style>
-  </defs>
-  <rect class="a${id}1" x="0" y="0" width="800" height="800" rx="400" ry="400"/>
-</svg>`;
-// rect
-const svgUrl2 = `
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
-    <defs>
-      <style>
-        .a${id}2 {
-          fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
-          stroke-width: 0px;
-        }
-      </style>
-    </defs>
-    <rect class="a${id}2" x="0" y="0" width="800" height="800"/>
-  </svg>`;
-// Triangle
-  const svgUrl3 = `
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
-    <defs>
-      <style>
-        .a${id}3 {
-          fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
-          stroke-width: 0px;
-        }
-      </style>
-    </defs>
-    <polygon class="a${id}3" points="400 42.6 .7 734.2 799.3 734.2 400 42.6"/>
-  </svg>`;
-  const asvgUrl1 = `
-  
-  <svg  xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
-  <defs>
-    <style>
-      .a${id}4 {
-        fill: ${activeColor};
-        stroke-width: 0px;
-      }
-    </style>
-  </defs>
-  
-  <rect class="a${id}4" x="0" y="0" width="800" height="800" rx="400" ry="400"/>
-</svg>`;
-  const asvgUrl2 = `
-  <svg  xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
-    <defs>
-      <style>
-        .a${id}5 {
-          fill: ${activeColor};
-          stroke-width: 0px;
-        }
-      </style>
-    </defs>
-    <rect class="a${id}5" x="0" y="0" width="800" height="800"/>
-  </svg>`;
-  const asvgUrl3 = `
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1200 1200">
-  <defs>
-    <style>
-      .a${id}6 {
-        fill: ${activeColor};
-        stroke-width: 0px;
-      }
-
-      .a${id}62 {
-        fill: none;
-        stroke: ${activeColor};
-        stroke-miterlimit: 10;
-        stroke-width: 21px;
-      }
-    </style>
-  </defs>
-  <polygon class="a${id}6" points="600 158.6 200.7 850.2 999.3 850.2 600 158.6"/>
-  <circle class="a${id}62" cx="600" cy="600" r="520.1"/>
-</svg>
- `;
-  const currentIcon = artderorganisation === "xx" ? svgUrl1 : artderorganisation === "yy" ? svgUrl3 : svgUrl2;
-  const acurrentIcon = artderorganisation === "xx" ? asvgUrl1 : artderorganisation === "yy" ? asvgUrl3 : asvgUrl2;
+  useEffect(() => {
+    console.log(activeColor)
+  },[])
+  const currentIcon = useMarkerIcon({id:id, archivoraktiv: archivoraktiv, activeColor: activeColor, artderorganisation:artderorganisation, selection: false});
+  const acurrentIcon = useMarkerIcon({id:id, archivoraktiv: archivoraktiv, activeColor: activeColor, artderorganisation:artderorganisation, selection: true});
   const customIcon1 = L.divIcon({
     className: "marker",
     html: currentIcon, // Path to your icon image

@@ -3,10 +3,13 @@ import Wrapper from "./components/Wrapper";
 import { fakeData } from "./constant/fakeData";
 import { fetchDataOriginAPI } from "../utils/hooks/useFetchData";
 import { RANDOMCOLOR_LIST } from "./constant/colors";
+import { angeboteBP, artderorganisationBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "./constant/blueprintOptionData";
 
 const authEmail = process.env.KB_USER;
 const authPassword = process.env.KB_PASS;
 const kirbyOriginAPI = process.env.KB_API_ORIGIN;
+
+let categories = [];
 const getKirbyPanelData = async () => {
   /* KQL Selection BODY */
   const bodyData = {
@@ -24,11 +27,11 @@ const getKirbyPanelData = async () => {
   const kirbyApiDraft = `${kirbyOriginAPI}`;
   const data = await fetchDataOriginAPI({ url: kirbyApiDraft, userInfo: { authEmail, authPassword }, method: "POST", bodyData });
 
- 
-  console.log(data);
   return data;
 };
 const getKirbyData = async () => {
+  /* Random Color List */
+  const randomColorList = RANDOMCOLOR_LIST;
   /* KQL Selection BODY */
   const bodyData = {
     query: "kirby.users",
@@ -44,9 +47,14 @@ const getKirbyData = async () => {
       tagpool: true,
       publicbtn: true,
       lokalorga: true,
+      themenschwerpunkt: true,
       artderorganisation: true,
+      zielgruppe: true,
+      onlineresourcen: true,
+      sprachunterstutzung: true,
+      angebote:true,
       archivoraktiv: true,
-      bundesland:true
+      bundesland: true,
     },
   };
 
@@ -60,7 +68,24 @@ const getKirbyData = async () => {
       return value;
     }
   });
-  console.log(data);
+
+  data.result.map((value) => {
+    // That is for dragging event for CustomMarker
+    value.visible = true;
+    // Get a Random Color
+     value.bgColor = randomColorList[Math.floor(Math.random() * randomColorList.length)];
+     value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.replace(/\s+/g, ' ').trim().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase()), ...value.tagpool.split(",").map((v) => v.replace(/\s+/g, ' ').trim().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase())])).filter((v) => v !== "");
+     categories = Array.from(new Set([...value.categories, ...categories])).sort();
+
+     /* Filteroptionen Mapping */
+     value.themenschwerpunkt = themenschwerpunktBP[value.themenschwerpunkt]
+     value.zielgruppe = zielgruppeBP[value.zielgruppe]
+     value.sprachunterstutzung = sprachunterstutzungBP[value.sprachunterstutzung]
+     value.angebote = angeboteBP[value.angebote]
+    
+     return value
+  })
+  console.log(data)
   return data;
 };
 
@@ -69,8 +94,7 @@ export default async function Home() {
 const panelData = await getKirbyPanelData();
 
 
-  /* Random Color List */
-  const randomColorList = RANDOMCOLOR_LIST;
+  
 
   // Loading page testing
   // await new Promise((resolve) => setTimeout(resolve, 1000))
@@ -80,7 +104,7 @@ const panelData = await getKirbyPanelData();
 
   /* Organisations have some categories. To make Categories List you need to collect here the categoires */
 
-  let categories = [];
+ 
   let totalCountOfBundesland = {}
 
   /* --- KQL Data: Organisation only --- */
@@ -94,9 +118,7 @@ const panelData = await getKirbyPanelData();
       }
     })
     .map((value) => {
-      // Get a Random Color
-      value.visible = true;
-      value.bgColor = randomColorList[Math.floor(Math.random() * randomColorList.length)];
+      
       return value;
     });
   // ORGA1: has a Location Info
@@ -118,13 +140,9 @@ const panelData = await getKirbyPanelData();
 
       toObj["lat"] = parseFloat(String(toObj["lat"]));
       toObj["lon"] = parseFloat(String(toObj["lon"]));
-
-      value.bgColor = randomColorList[Math.floor(Math.random() * randomColorList.length)];
       value.location = toObj;
-      // That is for dragging event for CustomMarker
-      value.visible = true;
-      value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.trim().replace(/ +/g, "").toLowerCase()), ...value.tagpool.split(",").map((v) => v.trim().replace(/ +/g, "").toLowerCase())])).filter((v) => v !== "");
-      categories = Array.from(new Set([...value.categories, ...categories])).sort();
+      
+     
       // Count Bundesland
       if(totalCountOfBundesland[value.bundesland.toLowerCase()]){
         totalCountOfBundesland[value.bundesland.toLowerCase()] += 1
@@ -135,7 +153,7 @@ const panelData = await getKirbyPanelData();
       }
       return value;
     });
-    console.log(totalCountOfBundesland)
+    console.log(categories)
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
