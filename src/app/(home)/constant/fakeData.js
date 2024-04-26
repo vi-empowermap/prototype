@@ -28,14 +28,14 @@ export const fakeData = async () => {
         },
        
     ]
-    for (let i = 0; i < 10; i++){
+    for (let i = 0; i < 100; i++){
         const data = {
             id: i + 1 ,
             name: "orga user" + (i + 1),
             organame: "orga" + (i + 1),
             location : {
-                lat: 52.5429 + ((Math.random() - 0.5) * Math.random()),
-                lon: 13.3593 + ((Math.random() - 0.5) * Math.random()),
+                lat: 51.1657 + ((Math.random() - 0.5) * (Math.random() * 8)),
+                lon: 10.4515 + ((Math.random() - 0.5) * (Math.random() * 8)),
                 city: "Berlin",
                 country: "daf",
                 countryCode: "de",
