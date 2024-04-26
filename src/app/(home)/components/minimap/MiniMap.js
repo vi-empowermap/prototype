@@ -1,9 +1,10 @@
 import { TileLayer, MapContainer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import seg from "/public/assets/berlin.json";
+import seg from "/public/assets/bundesland.json";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { currentBundesLand, setViewAtom } from "@/app/utils/state";
 import { MAPTILELAYER } from "../../constant/mapInfo";
+import { RANDOMCOLOR_LIST } from "../../constant/colors";
 
 const LeafletMap = () => {
   const [setViewAtomValue, setViewAtomSet] = useRecoilState(setViewAtom);
@@ -12,9 +13,10 @@ const LeafletMap = () => {
   const setColor = ({properties}) => {
     return {
       weight: 2,
-      fillColor: getCurrentBundesLand === properties.name.toLowerCase() ? "black" :"white",
+      fillColor: getCurrentBundesLand === properties.name.toLowerCase() ? RANDOMCOLOR_LIST[2] :"white",
       opacity: 1,
       color: "black",
+      fillOpacity: 1
       // dashArray: "0",
     };
   };

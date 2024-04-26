@@ -10,13 +10,13 @@ const Filtern = ({getData, categories}) => {
 
   useEffect(() => {
     const foundIdList = [];
-    console.log(watchFilter)
+
     for (let i = 0; i < getData.length; i++) {
       
       if (getData[i].categories.some((v) => v === watchFilter)) {
         foundIdList.push(getData[i].id);
       } else {
-        console.log("No words found.");
+        // console.log("No words found.");
       }
     }
     clickedItemsList([...foundIdList]);

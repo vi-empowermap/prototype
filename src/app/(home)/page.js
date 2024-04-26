@@ -17,7 +17,9 @@ const getKirbyPanelData = async () => {
     select: {
       content:{
         select: {
-          minimaptitle: true
+          minimaptitle: true,
+          verortungbtntext: true,
+          centerbtntext: true
         }
       }
     },
@@ -143,7 +145,7 @@ const panelData = await getKirbyPanelData();
       value.location = toObj;
       
      
-      // Count Bundesland
+      // Counting Bundesland
       if(totalCountOfBundesland[value.bundesland.toLowerCase()]){
         totalCountOfBundesland[value.bundesland.toLowerCase()] += 1
       }else {
@@ -153,7 +155,7 @@ const panelData = await getKirbyPanelData();
       }
       return value;
     });
-    console.log(categories)
+    console.log(totalCountOfBundesland)
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

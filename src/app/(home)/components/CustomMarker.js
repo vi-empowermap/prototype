@@ -13,9 +13,7 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
   const [clicked, setClicked] = useState({
     id: "",
   });
-  useEffect(() => {
-    console.log(activeColor)
-  },[])
+ 
   const currentIcon = useMarkerIcon({id:id, archivoraktiv: archivoraktiv, activeColor: activeColor, artderorganisation:artderorganisation, selection: false});
   const acurrentIcon = useMarkerIcon({id:id, archivoraktiv: archivoraktiv, activeColor: activeColor, artderorganisation:artderorganisation, selection: true});
   const customIcon1 = L.divIcon({

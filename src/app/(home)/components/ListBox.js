@@ -14,7 +14,7 @@ const ListBox = ({index, value}) => {
     <div className={`w-full relative px-8 z-[${index}]`}>
       {value.visible && (
         <>
-          <div onClick={() => onClick(value)} style={{ color: `${value.bgColor}` }} className=" min-h-52 border-2 border-black cursor-pointer p-2 rounded-r-3xl bg-white -mt-8 relative">
+          <div onClick={() => onClick(value)} style={{ color: `${value.bgColor}` }} className="w-full min-h-52 border-2 border-black cursor-pointer p-2 rounded-r-3xl bg-white -mt-8 relative">
             <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor: "white"}` }} className="absolute top-0 left-0 w-24 h-24 border-2 border-black rounded-l-3xl -translate-x-full"></div>
             <div className="font-bold text-3xl mb-8">{value.organame}</div>
             <div className="text-lg">{value.email}</div>
