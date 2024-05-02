@@ -34,8 +34,9 @@ const MapController = ({ setViewAtomValue }) => {
        
         }
       }else{
-        map.setView([51.1657, 10.4515])
-        map.setZoom(7)
+        // center reset
+        map.setView([51.1657, 10.4515],7)
+       
       }
       
     }, [setViewAtomValue])

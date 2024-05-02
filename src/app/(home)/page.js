@@ -70,7 +70,7 @@ const getKirbyData = async () => {
       return value;
     }
   });
-
+  // console.log(data)
   data.result.map((value) => {
     // That is for dragging event for CustomMarker
     value.visible = true;
@@ -80,14 +80,15 @@ const getKirbyData = async () => {
      categories = Array.from(new Set([...value.categories, ...categories])).sort();
 
      /* Filteroptionen Mapping */
-     value.themenschwerpunkt = themenschwerpunktBP[value.themenschwerpunkt]
+    
+     value.themenschwerpunkt = value.themenschwerpunkt.split(",").map((val2) => val2.trim())  
      value.zielgruppe = zielgruppeBP[value.zielgruppe]
      value.sprachunterstutzung = sprachunterstutzungBP[value.sprachunterstutzung]
      value.angebote = angeboteBP[value.angebote]
-    
+   
      return value
   })
-  console.log(data)
+  // console.log(data)
   return data;
 };
 
@@ -155,7 +156,7 @@ const panelData = await getKirbyPanelData();
       }
       return value;
     });
-    console.log(totalCountOfBundesland)
+    // console.log(totalCountOfBundesland)
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

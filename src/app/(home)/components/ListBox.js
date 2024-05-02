@@ -1,6 +1,8 @@
 import { clickedItemsListAtom, clikedMarkerAtom } from "@/app/utils/state";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import ListBoxIcon from "./ListBoxIcon";
 
 const ListBox = ({ index, value }) => {
   const clickedItemsListset = useSetRecoilState(clickedItemsListAtom);
@@ -10,11 +12,18 @@ const ListBox = ({ index, value }) => {
     clickedItemsListset([value.id]);
     router.push(`?organisation=${value.id}`);
   };
+ 
   return (
     <div className={`w-full relative z-[${index}] flex items-start justify-start`}>
       {value.visible && (
         <>
-          <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }} className="w-24 h-40 border-2 border-r-0 rounded-l-3xl -mt-14 "></div>
+          <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }} className="w-24 h-40 flex flex-col gap-4 justify-center items-center border-2 border-r-0 rounded-l-3xl -mt-14">
+            {value.themenschwerpunkt && value.themenschwerpunkt.slice(0,3).map((val2,idx) => {
+              return (
+                <ListBoxIcon key={idx} thema={val2} />
+              );
+            })}
+          </div>
           <div onClick={() => onClick(value)} style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }} className="flex-1 min-h-64 border-2 cursor-pointer p-2 rounded-r-3xl rounded-b-3xl bg-white -mt-14 relative">
             {/* <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}` }} className="absolute top-0 left-0 w-24 h-24 border-2 border-black rounded-l-3xl -translate-x-full"></div> */}
             <div className="font-bold text-3xl mb-8">{value.organame}</div>
