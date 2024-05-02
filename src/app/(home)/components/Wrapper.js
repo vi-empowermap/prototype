@@ -37,9 +37,9 @@ const Wrapper = ({
   const [doubleScreenTouched, setDoubleScreenTouched] = useState(false);
   const getOrgaLocation = useRecoilValue(clikedGoogleAtom);
   const getCurrentBundesLand = useRecoilValue(currentBundesLand);
-  const [openMiniMap, setOpenMiniMap] = useState(true);
-  const [openVerotung, setOpenVerortung] = useState(true);
-  const [openCenter, setOpenCenter] = useState(true);
+  const [openMiniMap, setOpenMiniMap] = useState(false);
+  const [openVerotung, setOpenVerortung] = useState(false);
+  const [openCenter, setOpenCenter] = useState(false);
   const setSetViewAtom = useSetRecoilState(setViewAtom);
 
   /* Double touch map for Mobile */
@@ -115,94 +115,93 @@ const Wrapper = ({
         Zur Karte
       </div>
 
-      <div className="flex flex-col w-full h-full lg:w-[calc(100vw-(450px+4vw))] bg-white ">
+      <div className="flex flex-col w-full h-full bg-white">
         {/* Navigation BAR */}
-        <nav id="navContainer" className={`w-full bg-white h-36 flex border-b-2  ${!ready ? "border-white" : "border-black"}`}>
+        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white" : "border-black"}`}>
           <Logo />
-          <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
+          <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
             <Search getData={getData} />
             <Filtern getData={getData} categories={categories} />
           </div>
         </nav>
         <div id="mapCotainer" className={`flex-1 bg-white flex justify-start items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
-          <div onClick={() => setTurnOnMap((pre) => !pre)} className={`absolute top-4 right-4 z-[1000] cursor-pointer bg-black text-white p-1 rounded-lg ${turnOnMap ? "opacity-100" : "opacity-50"}`}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-8 h-8">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z"
-              />
-            </svg>
-          </div>
           {/* Orga who has location info */}
           {turnOnMap && (
-            <div key={doubleScreenTouched + Boolean(search)} onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full flex justify-start">
+            <div key={doubleScreenTouched + Boolean(search)} onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b-2 border-black">
               <LeafletMap data={getData} getDataForMarker={getDataForMarker} setData={setData} />
               {!Boolean(search) && (
-                <div id="leaflet_minimap_container" className={`absolute pt-10 hidden lg:block bottom-8 left-8 w-[calc(3vw+310px)] ${openMiniMap ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
-                  {openMiniMap && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.minimaptitle}</div>}
-                  {getCurrentBundesLand !== "" && (
-                    <div className="absolute flex justify-center items-center w-10 h-10 rounded-full top-4 right-3 z-[1000] text-2xl leading-5 font-semibold bg-black text-white">{Boolean(totalCountOfBundesland[getCurrentBundesLand]) ? totalCountOfBundesland[getCurrentBundesLand] : 0}</div>
-                  )}
-                  {openMiniMap && <DynamicMiniMap />}
-                  <div onClick={() => setOpenMiniMap((prev) => !prev)} className="cursor-pointer absolute w-fit bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold">
-                    {openMiniMap && (
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                        <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
-                      </svg>
+                <div className="absolute bottom-2 left-2 flex items-end">
+                  <div id="leaflet_minimap_container" className={`relative pt-10 hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
+                    {openMiniMap && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.minimaptitle}</div>}
+                    {getCurrentBundesLand !== "" && (
+                      <div className="absolute flex justify-center items-center w-10 h-10 rounded-full top-4 right-3 z-[1000] text-2xl leading-5 font-semibold bg-black text-white">{Boolean(totalCountOfBundesland[getCurrentBundesLand]) ? totalCountOfBundesland[getCurrentBundesLand] : 0}</div>
                     )}
-                    {!openMiniMap && (
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
-                        <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
-                      </svg>
-                    )}
-                  </div>
-                </div>
-              )}
-              {!Boolean(search) && (
-                <div className={`absolute justify-center items-center hidden pt-10 lg:flex bottom-8 left-[calc(3vw+270px+2rem)] w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
-                  {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
-                  {openVerotung && <div onClick={() => setTurnOnMap((pre) => !pre)} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
-
-                  <div onClick={() => setOpenVerortung((prev) => !prev)} className="cursor-pointer absolute w-fit bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold">
-                    {openVerotung && (
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                        <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
-                      </svg>
-                    )}
-                    {!openVerotung && (
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
-                        <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
-                      </svg>
-                    )}
-                  </div>
-                </div>
-              )}
-              {!Boolean(search) && (
-                <div className={`absolute justify-center items-center hidden pt-7 pb-3 lg:flex bottom-8 left-[calc(3vw+270px+2rem+(3vw+100px))] w-[calc(3vw+70px)] ${openCenter ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
-                  {openCenter && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.centerbtntext}</div>}
-                  {openCenter && (
-                    <div onClick={() => setSetViewAtom({pos: [51.1657, 10.4515], name: "start"})} className="cursor-pointer w-1/3 aspect-square flex justify-center items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
-                      </svg>
+                    {openMiniMap && <DynamicMiniMap />}
+                    <div onClick={() => setOpenMiniMap((prev) => !prev)} className={`cursor-pointer absolute ${openMiniMap ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
+                      {openMiniMap && (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                          <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                      {!openMiniMap && (
+                        <span className="flex items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
+                            <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
+                          </svg>
+                          <div className="text-xs">{panelDatas.minimaptitle}</div>
+                        </span>
+                      )}
                     </div>
-                  )}
+                  </div>
+                  <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden -ml-10`}>
+                    {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
+                    {openVerotung && <div onClick={() => setTurnOnMap((pre) => !pre)} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
 
-                  <div onClick={() => setOpenCenter((prev) => !prev)} className="cursor-pointer absolute w-fit bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold">
+                    <div onClick={() => setOpenVerortung((prev) => !prev)} className={`cursor-pointer absolute ${openVerotung ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
+                      {openVerotung && (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                          <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                      {!openVerotung && (
+                        <span className="flex items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
+                            <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
+                          </svg>
+                          <div className="text-xs">{panelDatas.verortungbtntext}</div>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className={`relative justify-center items-center hidden pt-7 pb-3 lg:flex w-[calc(3vw+70px)] ${openCenter ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden -ml-8`}>
+                    {openCenter && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.centerbtntext}</div>}
                     {openCenter && (
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                        <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
-                      </svg>
+                      <div onClick={() => setSetViewAtom({ pos: [51.1657, 10.4515], name: "start" })} className="cursor-pointer w-1/3 aspect-square flex justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
+                        </svg>
+                      </div>
                     )}
-                    {!openCenter && (
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
-                        <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
-                      </svg>
-                    )}
+
+                    <div onClick={() => setOpenCenter((prev) => !prev)} className={`cursor-pointer absolute ${openCenter ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
+                      {openCenter && (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                          <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                      {!openCenter && (
+                        <span className="flex items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
+                            <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
+                          </svg>
+                          <div className="text-xs">{panelDatas.centerbtntext}</div>
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
+
               {Boolean(search) && <GoogleMapTag lat={getOrgaLocation[0]} long={getOrgaLocation[1]} />}
             </div>
           )}
@@ -212,21 +211,26 @@ const Wrapper = ({
               <div className="w-full h-full grid grid-cols-4 relative">
                 {getData.length === 0 && <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">no Data</div>}
                 {!Boolean(search) && (
-                  <div className={`absolute justify-center items-center hidden pt-10 lg:flex bottom-8 left-8 w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
-                    {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
-                    {openVerotung && <div onClick={() => setTurnOnMap((pre) => !pre)} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
+                  <div className="absolute bottom-2 left-2 flex items-end">
+                    <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
+                      {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
+                      {openVerotung && <div onClick={() => setTurnOnMap((pre) => !pre)} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
 
-                    <div onClick={() => setOpenVerortung((prev) => !prev)} className="cursor-pointer absolute w-fit bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold">
-                      {openVerotung && (
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                          <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
-                        </svg>
-                      )}
-                      {!openVerotung && (
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
-                          <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
-                        </svg>
-                      )}
+                      <div onClick={() => setOpenVerortung((prev) => !prev)} className={`cursor-pointer absolute ${openVerotung ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
+                        {openVerotung && (
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                            <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
+                          </svg>
+                        )}
+                        {!openVerotung && (
+                          <span className="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
+                              <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
+                            </svg>
+                            <div className="text-xs">{panelDatas.verortungbtntext}</div>
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 )}

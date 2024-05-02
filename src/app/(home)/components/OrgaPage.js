@@ -44,7 +44,7 @@ const OrgaPage = ({getData, turnOnMap}) => {
     alert("Copied the Url: " + `${window.location.href}`)
   }
   return (
-    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[1200] p-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"}`}>
+    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[1400] p-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"}`}>
       <div className="w-full h-full border-2 border-black rounded-3xl">
         <nav className="flex gap-4 justify-end p-4 mb-4">
           <div onClick={onCopyText} className="cursor-pointer">

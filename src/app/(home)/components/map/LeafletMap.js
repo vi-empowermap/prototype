@@ -27,11 +27,11 @@ const MapController = ({ setViewAtomValue }) => {
       // console.log(custom)
       if (setViewAtomValue.name !== "start") {
         if(setViewAtomValue.type === "mini"){
-          map.setView(setViewAtomValue.pos)
-          map.setZoom(9)
+          map.setView(setViewAtomValue.pos, 13, {animate: false})
+         
         }else{
-          map.setView(setViewAtomValue.pos)
-          map.setZoom(13)
+          map.setView(setViewAtomValue.pos, 13)
+       
         }
       }else{
         map.setView([51.1657, 10.4515])
