@@ -45,12 +45,12 @@ export const onlineresourcenBP = {
 }
 
 export const sprachunterstutzungBP = {
-    a: "Deutsch",
-    b: "Englisch",
-    c: "Französisch",
-    d: "Swahili",
-    e: "Portugiesisch",
-    f: "Hausa",
+    a: "DE",
+    b: "EN",
+    c: "FR",
+    d: "SW",
+    e: "PT",
+    f: "HA",
 }
 
 export const angeboteBP = {
@@ -69,4 +69,13 @@ export const angeboteBP = {
     m: "Aus- und Weiterbildungen",
     o: "Inputs und Vorträge",
     p: "Networking",
+}
+export const socialMediaBP = {
+    a: "Facebook",
+    b: "YouTube",
+    c: "WhatsApp",
+    d: "Instagram",
+    e: "LinkedIn",
+    f: "Telegram",
+    g: "X(Twitter)",
 }

@@ -1,3 +1,4 @@
+import { themenschwerpunktBP } from "./blueprintOptionData"
 import { RANDOMCOLOR_LIST } from "./colors"
 
 export const category = ["car", "bike", "bus", "train"]
@@ -24,6 +25,7 @@ export const fakeData = async () => {
             categories: [],
             artderorganisation: "a",
             archivoraktiv: "aktiv",
+            themenschwerpunkt:["a", "b"],
             bgColor: randomColorList[Math.floor(Math.random() * randomColorList.length)]
         },
        
@@ -48,6 +50,7 @@ export const fakeData = async () => {
             categories: [category[Math.floor(Math.random() * category.length)]],
             artderorganisation: ["a", "b", "c", "d", "e", "f"][Math.floor(Math.random() * 6)],
             archivoraktiv: Math.random() > 0.5 ? "aktiv" : "archiv",
+            themenschwerpunkt: [Object.keys(themenschwerpunktBP)[Math.floor(Math.random() * Object.keys(themenschwerpunktBP).length)]],
         }
         dataList.push(data)
     }

@@ -4,7 +4,7 @@ import { fakeData } from "./constant/fakeData";
 import { fetchDataOriginAPI } from "../utils/hooks/useFetchData";
 import { RANDOMCOLOR_LIST } from "./constant/colors";
 import { angeboteBP, artderorganisationBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "./constant/blueprintOptionData";
-
+import yaml from "js-yaml";
 const authEmail = process.env.KB_USER;
 const authPassword = process.env.KB_PASS;
 const kirbyOriginAPI = process.env.KB_API_ORIGIN;
@@ -42,6 +42,12 @@ const getKirbyData = async () => {
       name: true,
       email: true,
       location: true,
+      city: true,
+      street: true,
+      zip: true,
+      contactnummber: true,
+      website: true,
+      social: true,
       role_title: "user.role.title",
       organame: true,
       aboutorga: true,
@@ -80,15 +86,16 @@ const getKirbyData = async () => {
      categories = Array.from(new Set([...value.categories, ...categories])).sort();
 
      /* Filteroptionen Mapping */
-    
+     value.social = yaml.load(value.social)
      value.themenschwerpunkt = value.themenschwerpunkt.split(",").map((val2) => val2.trim())  
      value.zielgruppe = zielgruppeBP[value.zielgruppe]
-     value.sprachunterstutzung = sprachunterstutzungBP[value.sprachunterstutzung]
-     value.angebote = angeboteBP[value.angebote]
+    //  value.sprachunterstutzung = sprachunterstutzungBP[value.sprachunterstutzung]
+     value.sprachunterstutzung = value.sprachunterstutzung.split(",").map((val2) => val2.trim()) 
+     value.angebote = value.angebote.split(",").map((val2) => val2.trim()) 
    
      return value
   })
-  // console.log(data)
+  console.log(data)
   return data;
 };
 

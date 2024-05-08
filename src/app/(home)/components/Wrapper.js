@@ -40,7 +40,10 @@ const Wrapper = ({
   const [openMiniMap, setOpenMiniMap] = useState(false);
   const [openVerotung, setOpenVerortung] = useState(false);
   const [openCenter, setOpenCenter] = useState(false);
+  const [orgaMapSize, setOrgaMapSize] = useState(0);
   const setSetViewAtom = useSetRecoilState(setViewAtom);
+
+  
 
   /* Double touch map for Mobile */
   const [lastTap, setLastTap] = useState(null);
@@ -76,6 +79,13 @@ const Wrapper = ({
   /* If u open this website by url with params then don't need to activate the Animation */
   const searchParams = useSearchParams();
   const search = searchParams.get("organisation");
+  useEffect(() => {
+    if(Boolean(search)){
+      console.log(window.innerWidth);
+      setOrgaMapSize(window.innerWidth/3);
+    }
+  },[search])
+
 
   useEffect(() => {
     /* If the user comes on this website by url?query then turn off the animation */
@@ -124,7 +134,7 @@ const Wrapper = ({
             <Filtern getData={getData} categories={categories} />
           </div>
         </nav>
-        <div id="mapCotainer" className={`flex-1 bg-white flex justify-start items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
+        <div id="mapCotainer" style={{width: Boolean(search) ? `${orgaMapSize}px` : "100%"}} className={`flex-1 bg-white flex justify-start items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
           {/* Orga who has location info */}
           {turnOnMap && (
             <div key={doubleScreenTouched + Boolean(search)} onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b-2 border-black">
