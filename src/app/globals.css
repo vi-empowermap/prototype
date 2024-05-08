@@ -16,6 +16,15 @@
     background-color: white;
 }
 
+@layer components{
+    .orga_icon_text{
+        @apply font-semibold text-xl
+    }
+    .orga_sub_title{
+        @apply font-semibold
+    }
+}
+
 
 @layer utilities {
       /* Hide scrollbar for Chrome, Safari and Opera */

@@ -36,13 +36,13 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
     if (markerRef.current) {
       const boundsFirst = map.getBounds();
       if (boundsFirst.contains(markerRef.current.getLatLng())) {
-        map.addLayer(markerRef.current);
+        // map.addLayer(markerRef.current);
         const data = [...getData];
         data.find((e) => e.id === id).visible = true;
 
         setData(data);
       } else {
-        map.removeLayer(markerRef.current);
+        // map.removeLayer(markerRef.current);
 
         const data = [...getData];
         data.find((e) => e.id === id).visible = false;

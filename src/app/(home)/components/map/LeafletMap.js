@@ -5,11 +5,18 @@ import { useRecoilValue, useSetRecoilState } from "recoil"
 import { clikedMarkerAtom, setViewAtom } from "@/app/utils/state"
 import { useEffect } from "react"
 import { MAPTILELAYER } from "../../constant/mapInfo"
+import { useSearchParams } from "next/navigation"
 
 /* Event: if cancel selection of marker */
 const LocationFinderDummy = () => {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("organisation");
   const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom)
-  const map = useMapEvent({ })
+  const map = useMapEvent({
+      click() {
+        setClickedMarkerAtom(-1)
+      }
+   })
   useEffect(() => {
     map.on("popupclose", () => setClickedMarkerAtom(-1))
 
@@ -17,6 +24,14 @@ const LocationFinderDummy = () => {
       map.off("popupclose", () => setClickedMarkerAtom(-1))
     }
   },[map])
+
+  useEffect(() => {
+    if(Boolean(search)){
+      setTimeout(() => {
+        map.invalidateSize()
+      },500)
+    }
+  },[search])
 
   return null
 }
