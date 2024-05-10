@@ -4,7 +4,7 @@
 import { useEffect, useRef, useState } from "react";
 import LeafletMap from "./map";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { clickedItemsListAtom, clikedGoogleAtom, currentBundesLand, readyAniAtom, setViewAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedGoogleAtom, clikedMarkerAtom, currentBundesLand, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import DynamicMiniMap from "./minimap";
 import ListContainer from "./ListContainer";
 import Search from "./Search";
@@ -33,7 +33,7 @@ const Wrapper = ({
   const [turnOnMap, setTurnOnMap] = useState(true);
   const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const [findMobile, setFindMobile] = useState(false);
-  const clickedItemsList = useRecoilValue(clickedItemsListAtom);
+  const [clickedItemsList, setClickedItemsList] = useRecoilState(clickedItemsListAtom);
   const [doubleScreenTouched, setDoubleScreenTouched] = useState(false);
   const getOrgaLocation = useRecoilValue(clikedGoogleAtom);
   const getCurrentBundesLand = useRecoilValue(currentBundesLand);
@@ -41,7 +41,8 @@ const Wrapper = ({
   const [openVerotung, setOpenVerortung] = useState(false);
   const [openCenter, setOpenCenter] = useState(false);
   const [orgaMapSize, setOrgaMapSize] = useState(0);
-  const setSetViewAtom = useSetRecoilState(setViewAtom);
+  const setSetViewAtom = useSetRecoilState(setViewAtom)
+  const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom)
 
   /* Double touch map for Mobile */
   const [lastTap, setLastTap] = useState(null);
@@ -98,9 +99,19 @@ const Wrapper = ({
       gsap.to("#filterContainer", { delay: 1.5, opacity: 1, duration: aniDuration });
       gsap.to("#mapCotainer", { delay: 1.5, opacity: 1, duration: aniDuration });
       gsap.to("#listContainer", { delay: 1.5, opacity: 1, duration: aniDuration });
-      gsap.to("#listContainer2", { delay: 1.5, opacity: 1, transform: "translateX(0px)", duration: aniDuration });
+      // gsap.to("#listContainer2", { delay: 1.5, opacity: 1, transform: "translateX(0px)", duration: aniDuration });
+      gsap.to(".listbox", {
+        delay: 1.5,
+        opacity: 1,
+        stagger: {
+          each: 0.1,
+          from: 0,
+        },
+        transform: "translateY(0px)",
+      });
       gsap.to("#navContainer", { delay: 1.5, css: { "border-bottom": "2px solid black", opacity: 1 }, duration: aniDuration });
     }
+
     setTimeout(() => {
       setReady(true);
     }, 2500);
@@ -116,6 +127,17 @@ const Wrapper = ({
       setDataForMarker([...kqlDataResult, ...data]);
     }
   }, [turnOnMap]);
+
+  const onTurOnMap = () => {
+    setTurnOnMap((pre) => !pre)
+    setClickedMarkerAtom(-1)
+    setClickedItemsList([])
+    console.log("dd")
+    setSetViewAtom({
+      pos: [51.1657, 10.4515],
+      name: "start"
+    })
+  }
 
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
@@ -180,7 +202,7 @@ const Wrapper = ({
                   </div>
                   <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden -ml-10`}>
                     {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
-                    {openVerotung && <div onClick={() => setTurnOnMap((pre) => !pre)} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
+                    {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
 
                     <div onClick={() => setOpenVerortung((prev) => !prev)} className={`cursor-pointer absolute ${openVerotung ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
                       {openVerotung && (
@@ -239,7 +261,7 @@ const Wrapper = ({
                   <div className="absolute bottom-2 left-2 flex items-end">
                     <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
                       {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
-                      {openVerotung && <div onClick={() => setTurnOnMap((pre) => !pre)} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
+                      {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
 
                       <div onClick={() => setOpenVerortung((prev) => !prev)} className={`cursor-pointer absolute ${openVerotung ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
                         {openVerotung && (
@@ -265,7 +287,7 @@ const Wrapper = ({
         </div>
       </div>
 
-      <ListContainer ready={ready} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
+      <ListContainer doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
       <OrgaPage getData={getData} turnOnMap={turnOnMap} />
     </main>

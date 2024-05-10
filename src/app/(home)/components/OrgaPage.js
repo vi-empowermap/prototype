@@ -1,4 +1,4 @@
-import { clikedGoogleAtom, closeOrgaAtom, setViewAtom } from "@/app/utils/state";
+import { clikedGoogleAtom, closeOrgaAtom, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -14,8 +14,10 @@ const OrgaPage = ({ getData, turnOnMap }) => {
   const setOrgaLocation = useSetRecoilState(clikedGoogleAtom);
   const setSetViewAtom = useSetRecoilState(setViewAtom);
   const setCloseOrgaAtom = useSetRecoilState(closeOrgaAtom);
+  const setReady = useSetRecoilState(readyAniAtom)
   useEffect(() => {
     if (Boolean(search)) {
+      setReady(true)
       setCloseOrgaAtom(false)
       setOpen(true);
       const idx = getData.findIndex((value) => String(value.id) === search);

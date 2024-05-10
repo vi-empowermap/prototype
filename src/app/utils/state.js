@@ -19,7 +19,7 @@ export const setViewAtom = atom({
 
 export const clickedItemsListAtom = atom({
   key: "clickedItemsListAtom",
-  default: [1,4,5]
+  default: []
 })
 
 export const clikedGoogleAtom = atom({
