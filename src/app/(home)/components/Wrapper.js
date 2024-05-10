@@ -43,8 +43,6 @@ const Wrapper = ({
   const [orgaMapSize, setOrgaMapSize] = useState(0);
   const setSetViewAtom = useSetRecoilState(setViewAtom);
 
-  
-
   /* Double touch map for Mobile */
   const [lastTap, setLastTap] = useState(null);
   const doubleTapDelay = 300; // milliseconds
@@ -80,12 +78,10 @@ const Wrapper = ({
   const searchParams = useSearchParams();
   const search = searchParams.get("organisation");
   useEffect(() => {
-    if(Boolean(search)){
-      console.log(window.innerWidth);
-      setOrgaMapSize(window.innerWidth/3);
+    if (Boolean(search)) {
+      setOrgaMapSize(window.innerWidth / 3);
     }
-  },[search])
-
+  }, [search]);
 
   useEffect(() => {
     /* If the user comes on this website by url?query then turn off the animation */
@@ -93,18 +89,21 @@ const Wrapper = ({
       setReady(true);
     }
   }, []);
-
+  const aniDuration = 1;
   const { contextSafe } = useGSAP({ scope: container });
   const onClickReady = contextSafe(() => {
     if (!ready && !Boolean(search) && turnOnMap) {
-      gsap.to("#filterContainer", { opacity: 1, duration: 0.7 });
-      gsap.to("#mapCotainer", { opacity: 1, duration: 0.7 });
-      gsap.to("#listContainer", { transform: "translateY(0)", duration: 0.7 });
-      gsap.to("#navContainer", { css: { "border-bottom": "2px solid black" }, duration: 0.7 });
+      gsap.to("#anibtn", { opacity: 0, duration: aniDuration });
+      gsap.to("#anitext", { opacity: 0, duration: aniDuration });
+      gsap.to("#filterContainer", { delay: 1.5, opacity: 1, duration: aniDuration });
+      gsap.to("#mapCotainer", { delay: 1.5, opacity: 1, duration: aniDuration });
+      gsap.to("#listContainer", { delay: 1.5, opacity: 1, duration: aniDuration });
+      gsap.to("#listContainer2", { delay: 1.5, opacity: 1, transform: "translateX(0px)", duration: aniDuration });
+      gsap.to("#navContainer", { delay: 1.5, css: { "border-bottom": "2px solid black", opacity: 1 }, duration: aniDuration });
     }
     setTimeout(() => {
       setReady(true);
-    }, 1000);
+    }, 2500);
   });
 
   /* Switch Orga types */
@@ -121,24 +120,40 @@ const Wrapper = ({
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
       {/* Animation Button */}
-      <div onClick={onClickReady} className={`fixed bottom-10 left-1/2 -translate-x-1/2 font-semibold cursor-pointer z-[1000] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-        Zur Karte
+
+      <div id="anitext" className={`px-8 fixed top-0 left-0 font-semibold cursor-pointer w-screen h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col`}>
+        <div className="py-8">
+          <Logo />
+        </div>
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-10 w-full h-full mb-8">
+          <div className="w-full h-full border-2 border-black overflow-hidden flex justify-center items-center">
+            <div className=" border-2 border-black rounded-full flex justify-center items-center"> Map Image</div>
+          </div>
+          <div className="w-full lg:text-4xl font-medium lg:leading-10">
+            Dieses Projekt zeigt hier steht eine kurze Erklärung zum Projekt lorem ipsum Illabo. In exceptate eosam volore, qui simusamus. Ed quae dolupta simporro mod qui omnimet liquuntius, officid magnimus dolupit et pre ni to bernatia volutatures dene ve- nient experci tet vel
+          </div>
+        </div>
+        <div className="flex justify-center mb-4">
+          <div id="anibtn" onClick={onClickReady} className={`relative font-semibold cursor-pointer ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+            Zur Karte
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-col w-full h-full bg-white">
         {/* Navigation BAR */}
-        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white" : "border-black"}`}>
+        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white opacity-0" : "border-black opacity-100"}`}>
           <Logo />
           <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
             <Search getData={getData} />
             <Filtern getData={getData} categories={categories} />
           </div>
         </nav>
-        <div id="mapCotainer" style={{width: Boolean(search) ? `${orgaMapSize}px` : "100%"}} className={`flex-1 bg-white flex justify-start items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
+        <div id="mapCotainer" style={{ width: Boolean(search) ? `${orgaMapSize}px` : "100%" }} className={` flex-1 bg-white flex justify-start items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
           {/* Orga who has location info */}
           {turnOnMap && (
-            <div key={doubleScreenTouched + Boolean(search)} onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b-2 border-black">
-              <LeafletMap data={getData} getDataForMarker={getDataForMarker} setData={setData} />
+            <div onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b-2 border-black">
+              <LeafletMap doubleScreenTouched={doubleScreenTouched} data={getData} getDataForMarker={getDataForMarker} setData={setData} />
               {!Boolean(search) && (
                 <div className="absolute bottom-2 left-2 flex items-end">
                   <div id="leaflet_minimap_container" className={`relative pt-10 hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
@@ -250,7 +265,7 @@ const Wrapper = ({
         </div>
       </div>
 
-      <ListContainer doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
+      <ListContainer ready={ready} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
       <OrgaPage getData={getData} turnOnMap={turnOnMap} />
     </main>

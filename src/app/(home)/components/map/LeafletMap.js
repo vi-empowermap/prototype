@@ -2,15 +2,16 @@ import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import CustomMarker from "../CustomMarker"
 import { useRecoilValue, useSetRecoilState } from "recoil"
-import { clikedMarkerAtom, setViewAtom } from "@/app/utils/state"
+import { clikedMarkerAtom, closeOrgaAtom, setViewAtom } from "@/app/utils/state"
 import { useEffect } from "react"
 import { MAPTILELAYER } from "../../constant/mapInfo"
 import { useSearchParams } from "next/navigation"
 
 /* Event: if cancel selection of marker */
-const LocationFinderDummy = () => {
+const LocationFinderDummy = ({doubleScreenTouched}) => {
   const searchParams = useSearchParams();
   const search = searchParams.get("organisation");
+  const getCloseOrgaAtom = useRecoilValue(closeOrgaAtom)
   const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom)
   const map = useMapEvent({
       click() {
@@ -24,14 +25,41 @@ const LocationFinderDummy = () => {
       map.off("popupclose", () => setClickedMarkerAtom(-1))
     }
   },[map])
+/* Orga page Resizing Map */
+  useEffect(() => {
+    setTimeout(() => {
+      map.invalidateSize()
+    },300)
 
+  },[getCloseOrgaAtom])
   useEffect(() => {
     if(Boolean(search)){
       setTimeout(() => {
         map.invalidateSize()
-      },500)
+      },300)
     }
   },[search])
+  /* Double tap resizing map */
+  useEffect(() => {
+    
+      setTimeout(() => {
+        map.invalidateSize()
+      },300)
+    
+  },[doubleScreenTouched])
+
+  useEffect(() => {
+    const resizeEvent = () => {
+      setTimeout(() => {
+        map.invalidateSize()
+      },300)
+    }
+    window.addEventListener('resize', resizeEvent);
+
+    return () => {
+      window.removeEventListener('resize', resizeEvent)
+    }
+  },[])
 
   return null
 }
@@ -42,10 +70,12 @@ const MapController = ({ setViewAtomValue }) => {
       // console.log(custom)
       if (setViewAtomValue.name !== "start") {
         if(setViewAtomValue.type === "mini"){
-          map.setView(setViewAtomValue.pos, 13, {animate: false})
+          map.setView(setViewAtomValue.pos, 18, {animate: false})
          
         }else{
+          map.closePopup()
           map.setView(setViewAtomValue.pos, 13)
+          
        
         }
       }else{
@@ -60,14 +90,14 @@ const MapController = ({ setViewAtomValue }) => {
     return null
   }
 
-const LeafletMap = ({ data, setData, getDataForMarker }) => {
+const LeafletMap = ({doubleScreenTouched, data, setData, getDataForMarker }) => {
     const setViewAtomValue = useRecoilValue(setViewAtom)
  
   return (
     <>
-      <MapContainer className="w-full h-full" center={setViewAtomValue.pos} zoom={7} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
+      <MapContainer className="w-full h-full" center={setViewAtomValue.pos} zoom={7} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={`${MAPTILELAYER.ex01}`} />
-        <LocationFinderDummy />
+        <LocationFinderDummy doubleScreenTouched={doubleScreenTouched} />
         <MapController setViewAtomValue={setViewAtomValue} />
         {getDataForMarker.map((value, index) => {
           return (

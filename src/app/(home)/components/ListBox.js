@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import ListBoxIcon from "./ListBoxIcon";
+import gsap from "gsap";
 
 const ListBox = ({ index, value }) => {
   const clickedItemsListset = useSetRecoilState(clickedItemsListAtom);
@@ -11,6 +12,7 @@ const ListBox = ({ index, value }) => {
   const onClick = (value) => {
     clickedItemsListset([value.id]);
     router.push(`?organisation=${value.id}`);
+  
   };
  
   return (

@@ -44,3 +44,9 @@ export const readyAniAtom = atom({
   key: "readyAniAtom",
   default: false
 })
+
+/* Orgapage Close for map resizing update */
+export const closeOrgaAtom = atom({
+  key: "closeOrgaAtom",
+  default: true
+})
