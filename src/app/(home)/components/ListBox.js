@@ -1,20 +1,24 @@
-import { clickedItemsListAtom, clikedMarkerAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedMarkerAtom, readyAniAtom } from "@/app/utils/state";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import ListBoxIcon from "./ListBoxIcon";
+import gsap from "gsap";
 
 const ListBox = ({ index, value }) => {
   const clickedItemsListset = useSetRecoilState(clickedItemsListAtom);
   const router = useRouter();
+  const ready = useRecoilValue(readyAniAtom)
   const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
   const onClick = (value) => {
     clickedItemsListset([value.id]);
     router.push(`?organisation=${value.id}`);
+  
   };
+
  
   return (
-    <div className={`w-full relative z-[${index}] flex items-start justify-start`}>
+    <div className={`listbox w-full relative z-[${index}] flex items-start justify-start ${ready ? "translate-y-0 opacity-100 " : "translate-y-[150%] opacity-0"}`}>
       {value.visible && (
         <>
           <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }} className="w-24 h-40 flex flex-col gap-4 justify-center items-center border-2 border-r-0 rounded-l-3xl -mt-14">

@@ -19,7 +19,7 @@ export const setViewAtom = atom({
 
 export const clickedItemsListAtom = atom({
   key: "clickedItemsListAtom",
-  default: [1,4,5]
+  default: []
 })
 
 export const clikedGoogleAtom = atom({
@@ -43,4 +43,10 @@ export const currentBundesLand = atom({
 export const readyAniAtom = atom({
   key: "readyAniAtom",
   default: false
+})
+
+/* Orgapage Close for map resizing update */
+export const closeOrgaAtom = atom({
+  key: "closeOrgaAtom",
+  default: true
 })

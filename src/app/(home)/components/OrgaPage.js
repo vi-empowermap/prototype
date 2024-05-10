@@ -1,4 +1,4 @@
-import { clikedGoogleAtom, setViewAtom } from "@/app/utils/state";
+import { clikedGoogleAtom, closeOrgaAtom, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -13,9 +13,12 @@ const OrgaPage = ({ getData, turnOnMap }) => {
   const [orgaInfo, setOrgaInfo] = useState({});
   const setOrgaLocation = useSetRecoilState(clikedGoogleAtom);
   const setSetViewAtom = useSetRecoilState(setViewAtom);
-
+  const setCloseOrgaAtom = useSetRecoilState(closeOrgaAtom);
+  const setReady = useSetRecoilState(readyAniAtom)
   useEffect(() => {
     if (Boolean(search)) {
+      setReady(true)
+      setCloseOrgaAtom(false)
       setOpen(true);
       const idx = getData.findIndex((value) => String(value.id) === search);
       console.log(getData[idx]);
@@ -36,6 +39,7 @@ const OrgaPage = ({ getData, turnOnMap }) => {
 
   const onClose = () => {
     router.push("/");
+    setCloseOrgaAtom(true)
   };
 
   const onCopyText = () => {
@@ -43,8 +47,8 @@ const OrgaPage = ({ getData, turnOnMap }) => {
     alert("Copied the Url: " + `${window.location.href}`);
   };
   return (
-    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[1400] px-6 pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"}`}>
-      <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-full border-x-2 border-t-2 border-black rounded-tl-3xl rounded-tr-3xl">
+    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[1400] lg:px-6 lg:pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500`}>
+      <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-full lg:border-x-2 lg:border-t-2 border-black lg:rounded-tl-3xl lg:rounded-tr-3xl">
         <nav className="flex gap-4 justify-end p-4 mb-4">
           <div onClick={onCopyText} className="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-9 h-9">
@@ -76,8 +80,8 @@ const OrgaPage = ({ getData, turnOnMap }) => {
                 );
               })}
           </div>
-          <div className="flex-grow flex justify-between border-r">
-            <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="flex-1 flex flex-col border-r-2 pr-4">
+          <div className="flex-grow flex flex-col lg:flex-row justify-between overflow-y-scroll">
+            <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="flex-1 flex flex-col border-b-2 lg:border-b-0 lg:border-r-2 lg:pr-4">
               <div className="text-base font-base">{orgaInfo.aboutorga}</div>
               <div className="mt-4">
                 <div className="orga_sub_title">Sprachunterstützung:</div>
@@ -112,7 +116,7 @@ const OrgaPage = ({ getData, turnOnMap }) => {
                 <div className="flex flex-wrap">{orgaInfo.categories && <div>{orgaInfo.categories.join(", ")}</div>}</div>
               </div>
             </div>
-            <div className="flex-1 pl-4">
+            <div className="flex-1 pt-4 lg:pt-0 lg:pl-4">
               <div>
                 <div className="orga_sub_title">Location</div>
                 <div>
