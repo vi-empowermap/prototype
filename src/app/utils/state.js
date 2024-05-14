@@ -12,7 +12,7 @@ export const setViewAtom = atom({
   key: "setViewAtom",
   default: {
     pos: [51.1657, 10.4515],
-    name: "start"
+    name: "start" // start, mini, list
   }
 });
 

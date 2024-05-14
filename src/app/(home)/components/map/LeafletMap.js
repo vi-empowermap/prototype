@@ -2,7 +2,7 @@ import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import CustomMarker from "../CustomMarker"
 import { useRecoilValue, useSetRecoilState } from "recoil"
-import { clikedMarkerAtom, closeOrgaAtom, setViewAtom } from "@/app/utils/state"
+import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, setViewAtom } from "@/app/utils/state"
 import { useEffect } from "react"
 import { MAPTILELAYER } from "../../constant/mapInfo"
 import { useSearchParams } from "next/navigation"
@@ -13,16 +13,22 @@ const LocationFinderDummy = ({doubleScreenTouched}) => {
   const search = searchParams.get("organisation");
   const getCloseOrgaAtom = useRecoilValue(closeOrgaAtom)
   const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom)
+  const setClickedItemsList = useSetRecoilState(clickedItemsListAtom);
   const map = useMapEvent({
       click() {
         setClickedMarkerAtom(-1)
+       
       }
    })
   useEffect(() => {
-    map.on("popupclose", () => setClickedMarkerAtom(-1))
+    const closeEvent = () => {
+      setClickedMarkerAtom(-1)
+      setClickedItemsList([])
+    }
+    map.on("popupclose", closeEvent)
 
     return () => {
-      map.off("popupclose", () => setClickedMarkerAtom(-1))
+      map.off("popupclose", closeEvent)
     }
   },[map])
 /* Orga page Resizing Map */
@@ -100,9 +106,12 @@ const LeafletMap = ({doubleScreenTouched, data, setData, getDataForMarker }) => 
         <LocationFinderDummy doubleScreenTouched={doubleScreenTouched} />
         <MapController setViewAtomValue={setViewAtomValue} />
         {getDataForMarker.map((value, index) => {
-          return (
+          if(value.filterVisible){
+            return (
             <CustomMarker key={index} getData={data} setData={setData} id={value.id} artderorganisation={value.artderorganisation} position={value.location} activeColor={value.bgColor} archivoraktiv={value.archivoraktiv} />
           )
+          }
+          
         })}
       </MapContainer>
     </>

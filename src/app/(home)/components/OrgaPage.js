@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import ListBoxIcon from "./ListBoxIcon";
 import { angeboteBP, socialMediaBP, sprachunterstutzungBP, themenschwerpunktBP } from "../constant/blueprintOptionData";
+import useKirbyText from "@/app/utils/hooks/useKirbyText";
 
-const OrgaPage = ({ getData, turnOnMap }) => {
+const OrgaPage = ({ getData, turnOnMap, panelDatas }) => {
   const [open, setOpen] = useState(false);
   const searchParams = useSearchParams();
   const search = searchParams.get("organisation");
@@ -18,10 +19,13 @@ const OrgaPage = ({ getData, turnOnMap }) => {
   useEffect(() => {
     if (Boolean(search)) {
       setReady(true)
-      setCloseOrgaAtom(false)
+      setTimeout(() => {
+        setCloseOrgaAtom(false)
+
+      },400)
       setOpen(true);
       const idx = getData.findIndex((value) => String(value.id) === search);
-      console.log(getData[idx]);
+     
       setOrgaInfo(getData[idx]);
       if (turnOnMap) {
         setOrgaLocation([getData[idx].location.lat, getData[idx].location.lon]);
@@ -84,7 +88,7 @@ const OrgaPage = ({ getData, turnOnMap }) => {
             <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="flex-1 flex flex-col border-b-2 lg:border-b-0 lg:border-r-2 lg:pr-4">
               <div className="text-base font-base">{orgaInfo.aboutorga}</div>
               <div className="mt-4">
-                <div className="orga_sub_title">Sprachunterstützung:</div>
+                <div className="orga_sub_title">{useKirbyText({text:panelDatas.languagesupporttext})}</div>
                 <div className="flex flex-wrap">
                   {orgaInfo.sprachunterstutzung && (
                     <div>
@@ -98,7 +102,7 @@ const OrgaPage = ({ getData, turnOnMap }) => {
                 </div>
               </div>
               <div className="mt-4">
-                <div className="orga_sub_title">Angebote:</div>
+                <div className="orga_sub_title">{useKirbyText({text:panelDatas.angebotetext})}</div>
                 <div className="flex flex-wrap">
                   {orgaInfo.angebote && (
                     <div>
@@ -112,19 +116,19 @@ const OrgaPage = ({ getData, turnOnMap }) => {
                 </div>
               </div>
               <div className="mt-4">
-                <div className="orga_sub_title">Tags:</div>
+                <div className="orga_sub_title">{useKirbyText({text:panelDatas.tagstext})}</div>
                 <div className="flex flex-wrap">{orgaInfo.categories && <div>{orgaInfo.categories.join(", ")}</div>}</div>
               </div>
             </div>
             <div className="flex-1 pt-4 lg:pt-0 lg:pl-4">
               <div>
-                <div className="orga_sub_title">Location</div>
+                <div className="orga_sub_title">{useKirbyText({text:panelDatas.locationtext})}</div>
                 <div>
-                  Bundesland: {String(orgaInfo.bundesland).slice(0, 1).toUpperCase()}
+                {useKirbyText({text:panelDatas.bundeslabeltext})}: {String(orgaInfo.bundesland).slice(0, 1).toUpperCase()}
                   {String(orgaInfo.bundesland).slice(1)}
                 </div>
                 <div>
-                  Stadt: {String(orgaInfo.city).slice(0, 1).toUpperCase()}
+                {useKirbyText({text:panelDatas.stadtlabeltext})}: {String(orgaInfo.city).slice(0, 1).toUpperCase()}
                   {String(orgaInfo.city).slice(1).toLocaleLowerCase()}
                 </div>
                 <div className="flex flex-wrap mt-4">
@@ -136,13 +140,13 @@ const OrgaPage = ({ getData, turnOnMap }) => {
                 </div>
               </div>
               <div className="mt-4">
-                <div className="orga_sub_title">Kontakt</div>
+                <div className="orga_sub_title">{useKirbyText({text:panelDatas.kontakttext})}</div>
                 <div>{String(orgaInfo.email)}</div>
                 <div>{String(orgaInfo.contactnummber)}</div>
                 <div className="mt-4">{String(orgaInfo.website)}</div>
               </div>
               <div className="mt-4">
-                <div className="orga_sub_title">Social Media</div>
+                <div className="orga_sub_title">{useKirbyText({text:panelDatas.socialmediatext})}</div>
                 <div>
                   {orgaInfo.social &&
                     orgaInfo.social.map((value, idx) => {
