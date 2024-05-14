@@ -1,11 +1,14 @@
-import { clickedItemsListAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, onSearchFilterAtom } from "@/app/utils/state";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
-const Search = ({ getData, setData, setDataForMarker, placeholdertext }) => {
+const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext }) => {
   const { register, handleSubmit, setValue, getValues } = useForm();
   const clickedItemsList = useSetRecoilState(clickedItemsListAtom);
-
+  const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom)
+  const [getFoundIdList, setFoundList] = useState(0)
+  // const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
   const onResetFilter = () => {
     const data = [...getData];
     for (let i = 0; i < data.length; i++) {
@@ -16,11 +19,21 @@ const Search = ({ getData, setData, setDataForMarker, placeholdertext }) => {
     setData(data);
     setDataForMarker(data);
     setValue("search", "");
+    setOnSearchFilter(false)
+    setFoundList(0)
   }
+  useEffect(() => {
+    onResetFilter()
+   
+  },[turnOnMap])
   const onSearchRegex = () => {
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
     const value = getValues("search");
 
-    const pattern = new RegExp(value, "gi");
+
+    const pattern = new RegExp(escapeRegExp(value), "gi");
 
     const foundIdList = [];
 
@@ -39,6 +52,8 @@ const Search = ({ getData, setData, setDataForMarker, placeholdertext }) => {
     setData(data);
     setDataForMarker(data);
     console.log(foundIdList);
+    setFoundList(foundIdList.length)
+    setOnSearchFilter(true)
     // clickedItemsList([...foundIdList]);
 
     // done
@@ -52,10 +67,13 @@ const Search = ({ getData, setData, setDataForMarker, placeholdertext }) => {
   return (
     <div className="lg:flex-1 aspect-square h-full lg:aspect-auto lg:w-full flex items-center lg:border-b-2 border-black lg:pl-4">
       <div className="w-full h-full hidden lg:flex items-center">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center border-r-2 border-black">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center ">
           <input type="text" {...register("search")} placeholder={placeholdertext} className="bg-white w-full border-black rounded-xl focus:outline-none " />
         </form>
-        <div onClick={onResetFilter} className="cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all">reset</div>
+        {getOnSearchFilter && <div className="px-8">
+          <div className="bg-black text-white w-fit min-w-10 aspect-square flex items-center justify-center rounded-full">{getFoundIdList}</div>
+        </div>}
+        {getOnSearchFilter && <button onClick={onResetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l-2 border-black`}>reset</button>}
       </div>
       <div className="flex-1 flex h-full lg:hidden justify-center items-center cursor-pointer active:bg-black active:text-white">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">

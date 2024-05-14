@@ -171,7 +171,7 @@ const Wrapper = ({
         <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white opacity-0" : "border-black opacity-100"}`}>
           <Logo text={panelDatas.webtitle} />
           <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
-            <Search getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} />
+            <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} />
             <Filtern getData={getData} categories={categories} />
           </div>
         </nav>
@@ -293,7 +293,7 @@ const Wrapper = ({
 
       <ListContainer bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
-      <OrgaPage getData={getData} turnOnMap={turnOnMap} panelDatas={panelDatas} />
+      <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
     </main>
   );
 };

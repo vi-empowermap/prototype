@@ -13,15 +13,15 @@ const ListBoxOhneL = ({ index, value }) => {
   };
 
   return (
-    <div style={{ borderColor: `${value.bgColor}` }} onClick={() => onClick(value)} className={`flex flex-col py-2 px-2 gap-6 w-full aspect-square border-2 border-black cursor-pointer rounded-2xl`}>
+    <div style={{ borderColor: `${value.bgColor}` }} onClick={() => onClick(value)} className={`flex flex-col py-2 px-2 gap-4 w-full aspect-square border-2 border-black cursor-pointer rounded-2xl`}>
       <div className="flex flex-wrap gap-2 justify-center items-center">
         <div style={{ backgroundColor: `${value.bgColor}` }} className="w-8 h-8 bg-red-400"></div>
         <div style={{ color: `${value.bgColor}` }} className="text-2xl font-semibold">{value.organame}</div>
       </div>
-      <div className="flex justify-center gap-4">
+      <div className="flex flex-grow items-center justify-center gap-4">
         {value.themenschwerpunkt &&
           value.themenschwerpunkt.slice(0, 3).map((val2, idx) => {
-            return <ListBoxIcon key={idx} thema={val2} />;
+            return <ListBoxIcon key={idx} thema={val2} size={"big"} />;
           })}
       </div>
     </div>

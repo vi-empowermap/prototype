@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-
-const ListBoxIcon = ({ thema }) => {
+// size : small , big
+const ListBoxIcon = ({ thema, size="small" }) => {
  
   return (
     <>
       {thema === "a" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -17,7 +17,7 @@ const ListBoxIcon = ({ thema }) => {
       )}
       {thema === "b" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -28,7 +28,7 @@ const ListBoxIcon = ({ thema }) => {
       )}
       {thema === "c" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -39,14 +39,14 @@ const ListBoxIcon = ({ thema }) => {
       )}
       {thema === "d" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M4.5 10.5H18V15H4.5v-4.5ZM3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
           </svg>
         </div>
       )}
       {thema === "e" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -57,14 +57,14 @@ const ListBoxIcon = ({ thema }) => {
       )}
       {thema === "f" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
           </svg>
         </div>
       )}
       {thema === "g" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -75,7 +75,7 @@ const ListBoxIcon = ({ thema }) => {
       )}
       {thema === "h" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -86,7 +86,7 @@ const ListBoxIcon = ({ thema }) => {
       )}
       {thema === "i" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -97,7 +97,7 @@ const ListBoxIcon = ({ thema }) => {
       )}
       {thema === "j" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -108,7 +108,7 @@ const ListBoxIcon = ({ thema }) => {
       )}
       {thema === "k" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -119,14 +119,14 @@ const ListBoxIcon = ({ thema }) => {
       )}
       {thema === "l" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
           </svg>
         </div>
       )}
       {thema === "m" && (
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
