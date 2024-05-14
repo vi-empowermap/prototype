@@ -20,7 +20,9 @@ export const fakeData = async () => {
                 osm: "23123"
 
             },
+            lokalorga: "false",
             visible: true,
+            filterVisible: true,
             aboutorga: "Hi! I'm Dain Orga", 
             categories: [],
             artderorganisation: "a",
@@ -44,6 +46,8 @@ export const fakeData = async () => {
                 osm: "23123"
 
             },
+            filterVisible: true,
+            lokalorga: Math.random() > 0.4 ? "false" : "true",
             bgColor: randomColorList[Math.floor(Math.random() * randomColorList.length)],
             visible: false,
             aboutorga: "Hi! I'm Sein Orga" + ((Math.random() > 0.5) ? " Vis" : " Udk"),

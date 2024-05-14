@@ -17,9 +17,27 @@ const getKirbyPanelData = async () => {
     select: {
       content:{
         select: {
+          webtitle: true,
+          introtext: true,
+          introbtn: true,
+          opengooglemap: true,
+          placeholdersearch: true,
+          placeholderfilter: true,
+          // list info
+          bundeslandinfo: true,
+          // minimap navigation info
           minimaptitle: true,
           verortungbtntext: true,
-          centerbtntext: true
+          centerbtntext: true,
+          // orga page
+          languagesupporttext: true,
+          angebotetext: true,
+          tagstext: true,
+          locationtext: true,
+          kontakttext: true,
+          socialmediatext: true,
+          bundeslabeltext: true,
+          stadtlabeltext: true,
         }
       }
     },
@@ -80,6 +98,7 @@ const getKirbyData = async () => {
   data.result.map((value) => {
     // That is for dragging event for CustomMarker
     value.visible = true;
+    value.filterVisible = true;
     // Get a Random Color
      value.bgColor = randomColorList[Math.floor(Math.random() * randomColorList.length)];
      value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.replace(/\s+/g, ' ').trim().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase()), ...value.tagpool.split(",").map((v) => v.replace(/\s+/g, ' ').trim().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase())])).filter((v) => v !== "");
@@ -112,6 +131,17 @@ const panelData = await getKirbyPanelData();
   /* That Code is just for Development. It is fake Data for Production you don't need have it */
   const data = await fakeData();
 
+  const dataNoL = data.filter((v) => {
+    if(v.lokalorga === "true"){
+      return v
+    }
+  })
+  const dataL = data.filter((v) => {
+    if(v.lokalorga === "false"){
+      return v
+    }
+  })
+
   /* Organisations have some categories. To make Categories List you need to collect here the categoires */
 
  
@@ -127,10 +157,7 @@ const panelData = await getKirbyPanelData();
         return value;
       }
     })
-    .map((value) => {
-      
-      return value;
-    });
+    
   // ORGA1: has a Location Info
   const kqlDataResult = kqlData.result
     .filter((value) => {
@@ -167,7 +194,7 @@ const panelData = await getKirbyPanelData();
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Wrapper data={data} categories={categories} kqlDataResult={kqlDataResult} kqlDataResultNoLocation={kqlDataResultNoLocation} panelData={panelData} totalCountOfBundesland={totalCountOfBundesland} />
+      <Wrapper data={dataL} dataN={dataNoL} categories={categories} kqlDataResult={kqlDataResult} kqlDataResultNoLocation={kqlDataResultNoLocation} panelData={panelData} totalCountOfBundesland={totalCountOfBundesland} />
     </Suspense>
   );
 }

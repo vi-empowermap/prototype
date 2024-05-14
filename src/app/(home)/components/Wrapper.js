@@ -4,7 +4,7 @@
 import { useEffect, useRef, useState } from "react";
 import LeafletMap from "./map";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { clickedItemsListAtom, clikedGoogleAtom, clikedMarkerAtom, currentBundesLand, readyAniAtom, setViewAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, currentBundesLand, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import DynamicMiniMap from "./minimap";
 import ListContainer from "./ListContainer";
 import Search from "./Search";
@@ -15,9 +15,11 @@ import { useSearchParams } from "next/navigation";
 import OrgaPage from "./OrgaPage";
 import Logo from "./Logo";
 import GoogleMapTag from "./GoogleMap";
+import ListContainerOhneL from "./ListContainerOhneL";
 
 const Wrapper = ({
   data,
+  dataN,
   categories,
   kqlDataResult,
   kqlDataResultNoLocation,
@@ -41,8 +43,9 @@ const Wrapper = ({
   const [openVerotung, setOpenVerortung] = useState(false);
   const [openCenter, setOpenCenter] = useState(false);
   const [orgaMapSize, setOrgaMapSize] = useState(0);
-  const setSetViewAtom = useSetRecoilState(setViewAtom)
-  const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom)
+  const setSetViewAtom = useSetRecoilState(setViewAtom);
+  const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom);
+  const getCloseOrgaAtom = useRecoilValue(closeOrgaAtom);
 
   /* Double touch map for Mobile */
   const [lastTap, setLastTap] = useState(null);
@@ -79,10 +82,13 @@ const Wrapper = ({
   const searchParams = useSearchParams();
   const search = searchParams.get("organisation");
   useEffect(() => {
-    if (Boolean(search)) {
+    // setOrgaMapSize(window.innerWidth / 3);
+    if (!getCloseOrgaAtom) {
       setOrgaMapSize(window.innerWidth / 3);
+    } else {
+      setOrgaMapSize("100%");
     }
-  }, [search]);
+  }, [getCloseOrgaAtom]);
 
   useEffect(() => {
     /* If the user comes on this website by url?query then turn off the animation */
@@ -120,8 +126,8 @@ const Wrapper = ({
   /* Switch Orga types */
   useEffect(() => {
     if (!turnOnMap) {
-      setData([...kqlDataResultNoLocation]);
-      setDataForMarker([...kqlDataResultNoLocation]);
+      setData([...kqlDataResultNoLocation, ...dataN]);
+      setDataForMarker([...kqlDataResultNoLocation, ...dataN]);
     } else {
       setData([...kqlDataResult, ...data]);
       setDataForMarker([...kqlDataResult, ...data]);
@@ -129,15 +135,15 @@ const Wrapper = ({
   }, [turnOnMap]);
 
   const onTurOnMap = () => {
-    setTurnOnMap((pre) => !pre)
-    setClickedMarkerAtom(-1)
-    setClickedItemsList([])
-    console.log("dd")
+    console.log("reset all");
+    setTurnOnMap((pre) => !pre);
+    setClickedMarkerAtom(-1);
+    setClickedItemsList([]);
     setSetViewAtom({
       pos: [51.1657, 10.4515],
-      name: "start"
-    })
-  }
+      name: "start",
+    });
+  };
 
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
@@ -145,19 +151,17 @@ const Wrapper = ({
 
       <div id="anitext" className={`px-8 fixed top-0 left-0 font-semibold cursor-pointer w-screen h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col`}>
         <div className="py-8">
-          <Logo />
+          <Logo text={panelDatas.webtitle} />
         </div>
         <div className="flex flex-col lg:flex-row justify-center items-center gap-10 w-full h-full mb-8">
           <div className="w-full h-full border-2 border-black overflow-hidden flex justify-center items-center">
             <div className=" border-2 border-black rounded-full flex justify-center items-center"> Map Image</div>
           </div>
-          <div className="w-full lg:text-4xl font-medium lg:leading-10">
-            Dieses Projekt zeigt hier steht eine kurze Erklärung zum Projekt lorem ipsum Illabo. In exceptate eosam volore, qui simusamus. Ed quae dolupta simporro mod qui omnimet liquuntius, officid magnimus dolupit et pre ni to bernatia volutatures dene ve- nient experci tet vel
-          </div>
+          <div className="w-full lg:text-4xl font-medium lg:leading-10">{panelDatas.introtext}</div>
         </div>
         <div className="flex justify-center mb-4">
           <div id="anibtn" onClick={onClickReady} className={`relative font-semibold cursor-pointer ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-            Zur Karte
+          {panelDatas.introbtn} 
           </div>
         </div>
       </div>
@@ -165,13 +169,13 @@ const Wrapper = ({
       <div className="flex flex-col w-full h-full bg-white">
         {/* Navigation BAR */}
         <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white opacity-0" : "border-black opacity-100"}`}>
-          <Logo />
+          <Logo text={panelDatas.webtitle} />
           <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
-            <Search getData={getData} />
+            <Search getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} />
             <Filtern getData={getData} categories={categories} />
           </div>
         </nav>
-        <div id="mapCotainer" style={{ width: Boolean(search) ? `${orgaMapSize}px` : "100%" }} className={` flex-1 bg-white flex justify-start items-center overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
+        <div id="mapCotainer" style={{ width: Boolean(search) ? (turnOnMap ? `${orgaMapSize}px` : "100%") : "100%" }} className={`flex-1 bg-white flex overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>
           {/* Orga who has location info */}
           {turnOnMap && (
             <div onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b-2 border-black">
@@ -249,16 +253,16 @@ const Wrapper = ({
                 </div>
               )}
 
-              {Boolean(search) && <GoogleMapTag lat={getOrgaLocation[0]} long={getOrgaLocation[1]} />}
+              {Boolean(search) && <GoogleMapTag lat={getOrgaLocation[0]} long={getOrgaLocation[1]} text={panelDatas.opengooglemap} />}
             </div>
           )}
           {/* Orga who doesn't have location info */}
           {!turnOnMap && (
             <>
-              <div className="w-full h-full grid grid-cols-4 relative">
-                {getData.length === 0 && <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">no Data</div>}
+              <div className="w-full h-full overflow-y-scroll relative">
+                {!turnOnMap && <ListContainerOhneL getData={getData} />}
                 {!Boolean(search) && (
-                  <div className="absolute bottom-2 left-2 flex items-end">
+                  <div className="fixed bottom-2 left-2 flex items-end">
                     <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
                       {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
                       {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
@@ -287,9 +291,9 @@ const Wrapper = ({
         </div>
       </div>
 
-      <ListContainer doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
+      <ListContainer bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
-      <OrgaPage getData={getData} turnOnMap={turnOnMap} />
+      <OrgaPage getData={getData} turnOnMap={turnOnMap} panelDatas={panelDatas} />
     </main>
   );
 };
