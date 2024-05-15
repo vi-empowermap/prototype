@@ -37,3 +37,107 @@
           scrollbar-width: none;  /* Firefox */
     }
   }
+/* Logo */
+@font-face {
+    font-family: "BespokeStencil";
+    src: url("/assets/fonts/BespokeStencil-Variable.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+/* List */
+@font-face {
+    font-family: "Aktura";
+    src: url("/assets/fonts/Aktura-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "AlfaSlabOne";
+    src: url("/assets/fonts/AlfaSlabOne-Regular.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "BespokeStencilItalic";
+    src: url("/assets/fonts/BespokeStencil-VariableItalic.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Britney";
+    src: url("/assets/fonts/Britney-Variable.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "CourierBold";
+    src: url("/assets/fonts/Courier-New-Bold.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Courier";
+    src: url("/assets/fonts/Courier-New.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "JetBrainsMonoMedium";
+    src: url("/assets/fonts/JetBrainsMono-Medium.ttf");
+    /* font-weight: 700;
+    font-style: normal; */
+}
+@font-face {
+    font-family: "JetBrainsMonoLight";
+    src: url("/assets/fonts/JetBrainsMono-Light.ttf");
+    /* font-weight: 700;
+    font-style: normal; */
+}
+@font-face {
+    font-family: "JetBrainsMonoExtraBold";
+    src: url("/assets/fonts/JetBrainsMono-ExtraBold.ttf");
+    /* font-weight: 700;
+    font-style: normal; */
+}
+@font-face {
+    font-family: "Kihim";
+    src: url("/assets/fonts/Kihim-Regular.ttf");
+}
+/* @font-face {
+    font-family: "minionPro";
+    src: url("/public/assets/fonts/MinionPro-Regular.otf");
+} */
+@font-face {
+    font-family: "Panchang";
+    src: url("/assets/fonts/Panchang-Variable.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "PramukhRoundedExtraboldItalic";
+    src: url("/assets/fonts/PramukhRounded-ExtraboldItalic.ttf");
+}
+@font-face {
+    font-family: "Sharpie";
+    src: url("/assets/fonts/Sharpie-Variable.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Telma";
+    src: url("/assets/fonts/Telma-Variable.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "TheFutureMono";
+    src: url("/assets/fonts/TheFutureMono-Regular.ttf");
+    font-weight: 700;
+    font-style: normal;
+} 
+@font-face {
+    font-family: "TheFutureMonoBold";
+    src: url("/assets/fonts/TheFutureMono-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+} 

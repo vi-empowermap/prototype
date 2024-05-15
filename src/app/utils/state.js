@@ -12,7 +12,8 @@ export const setViewAtom = atom({
   key: "setViewAtom",
   default: {
     pos: [51.1657, 10.4515],
-    name: "start" // start, mini, list
+    name: "start", // start, mini, list
+    type: "start"
   }
 });
 
@@ -49,4 +50,11 @@ export const readyAniAtom = atom({
 export const closeOrgaAtom = atom({
   key: "closeOrgaAtom",
   default: true
+})
+
+
+/* Filter */
+export const onSearchFilterAtom = atom({
+  key: "onSearchFilterAtom",
+  default: false
 })

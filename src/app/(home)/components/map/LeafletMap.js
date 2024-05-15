@@ -87,6 +87,7 @@ const MapController = ({ setViewAtomValue }) => {
       }else{
         // center reset
         map.setView([51.1657, 10.4515],7)
+      
        
       }
       

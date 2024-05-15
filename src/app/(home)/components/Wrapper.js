@@ -16,6 +16,7 @@ import OrgaPage from "./OrgaPage";
 import Logo from "./Logo";
 import GoogleMapTag from "./GoogleMap";
 import ListContainerOhneL from "./ListContainerOhneL";
+import Menu from "./Menu";
 
 const Wrapper = ({
   data,
@@ -149,7 +150,8 @@ const Wrapper = ({
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
       {/* Animation Button */}
 
-      <div id="anitext" className={`px-8 fixed top-0 left-0 font-semibold cursor-pointer w-screen h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col`}>
+      <div id="anitext" className={`px-8 fixed top-0 left-0 font-semibold w-screen h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
+        
         <div className="py-8">
           <Logo text={panelDatas.webtitle} />
         </div>
@@ -168,10 +170,11 @@ const Wrapper = ({
 
       <div className="flex flex-col w-full h-full bg-white">
         {/* Navigation BAR */}
-        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white opacity-0" : "border-black opacity-100"}`}>
+        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white opacity-0" : "border-black opacity-100"} overflow-y-visible`}>
+          <Menu />
           <Logo text={panelDatas.webtitle} />
           <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
-            <Search getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} />
+            <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} />
             <Filtern getData={getData} categories={categories} />
           </div>
         </nav>
@@ -293,7 +296,7 @@ const Wrapper = ({
 
       <ListContainer bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
-      <OrgaPage getData={getData} turnOnMap={turnOnMap} panelDatas={panelDatas} />
+      <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
     </main>
   );
 };

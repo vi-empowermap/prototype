@@ -5,6 +5,7 @@ import { fetchDataOriginAPI } from "../utils/hooks/useFetchData";
 import { RANDOMCOLOR_LIST } from "./constant/colors";
 import { angeboteBP, artderorganisationBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "./constant/blueprintOptionData";
 import yaml from "js-yaml";
+import { RANDOM_FONT_LIST } from "./constant/fontList";
 const authEmail = process.env.KB_USER;
 const authPassword = process.env.KB_PASS;
 const kirbyOriginAPI = process.env.KB_API_ORIGIN;
@@ -94,13 +95,14 @@ const getKirbyData = async () => {
       return value;
     }
   });
-  // console.log(data)
+  
   data.result.map((value) => {
     // That is for dragging event for CustomMarker
     value.visible = true;
     value.filterVisible = true;
     // Get a Random Color
      value.bgColor = randomColorList[Math.floor(Math.random() * randomColorList.length)];
+     value.font = RANDOM_FONT_LIST[Math.floor(Math.random() * RANDOM_FONT_LIST.length)];
      value.categories = Array.from(new Set([...value.tags.split(",").map((v) => v.replace(/\s+/g, ' ').trim().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase()), ...value.tagpool.split(",").map((v) => v.replace(/\s+/g, ' ').trim().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase())])).filter((v) => v !== "");
      categories = Array.from(new Set([...value.categories, ...categories])).sort();
 
@@ -108,6 +110,7 @@ const getKirbyData = async () => {
      value.social = yaml.load(value.social)
      value.themenschwerpunkt = value.themenschwerpunkt.split(",").map((val2) => val2.trim())  
      value.zielgruppe = zielgruppeBP[value.zielgruppe]
+
     //  value.sprachunterstutzung = sprachunterstutzungBP[value.sprachunterstutzung]
      value.sprachunterstutzung = value.sprachunterstutzung.split(",").map((val2) => val2.trim()) 
      value.angebote = value.angebote.split(",").map((val2) => val2.trim()) 

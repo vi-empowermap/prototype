@@ -71,14 +71,14 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
      
     }
   }, [clicked]);
-  useEffect(() => {
-    if (getSetViewAtom.name !== "start") {
-      map.setView(getSetViewAtom.pos, 12);
-      if (getSetViewAtom.id === id) {
-        setClickedMarkerAtom(id);
-      }
-    }
-  }, [getSetViewAtom]);
+  // useEffect(() => {
+  //   if (getSetViewAtom.name !== "start") {
+  //     // map.setView(getSetViewAtom.pos, 12);
+  //     // if (getSetViewAtom.id === id) {
+  //     //   setClickedMarkerAtom(id);
+  //     // }
+  //   }
+  // }, [getSetViewAtom]);
   return (
     <>
       <Marker
