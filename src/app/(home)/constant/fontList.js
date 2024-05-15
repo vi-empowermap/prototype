@@ -1,7 +1,7 @@
 export const RANDOM_FONT_LIST = [
   "font-aktura",
   "font-alfaSlabOne",
-  "font-bespokeStencil",
+  "font-bespokeStencilItalic",
   "font-britney",
   "font-courier",
   "font-courierBold",

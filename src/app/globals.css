@@ -37,7 +37,14 @@
           scrollbar-width: none;  /* Firefox */
     }
   }
-
+/* Logo */
+@font-face {
+    font-family: "BespokeStencil";
+    src: url("/assets/fonts/BespokeStencil-Variable.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+/* List */
 @font-face {
     font-family: "Aktura";
     src: url("/assets/fonts/Aktura-Regular.ttf");
@@ -51,7 +58,7 @@
     font-style: normal;
 }
 @font-face {
-    font-family: "BespokeStencil";
+    font-family: "BespokeStencilItalic";
     src: url("/assets/fonts/BespokeStencil-VariableItalic.ttf");
     font-weight: 700;
     font-style: normal;

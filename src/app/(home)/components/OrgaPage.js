@@ -90,7 +90,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           </div>
         </nav>
         <div className="px-6 flex h-full flex-col">
-          <h1 style={{ color: `${orgaInfo.bgColor}` }} className={`text-4xl font-bold mb-8 ${orgaInfo.font}`}>
+          <h1 style={{ color: `${orgaInfo.bgColor}` }} className={`text-8xl font-bold mb-8 ${orgaInfo.font}`}>
             {orgaInfo.organame}
           </h1>
           <div className="flex flex-wrap items-center gap-x-10 gap-y-4 mb-8">

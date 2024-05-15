@@ -31,7 +31,7 @@ const ListBox = ({ index, value, bundeslandtext }) => {
           </div>
           <div onClick={() => onClick(value)} style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }} className="flex-1 min-h-64 border-2 cursor-pointer p-2 rounded-r-3xl rounded-b-3xl bg-white -mt-14 relative group-hover:-translate-y-6 transition-all">
             {/* <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}` }} className="absolute top-0 left-0 w-24 h-24 border-2 border-black rounded-l-3xl -translate-x-full"></div> */}
-            <div className={`text-3xl mb-8 ${value.font}`}>{value.organame}</div>
+            <div className={`text-5xl mb-8 ${value.font}`}>{value.organame}</div>
             {/* <div className="text-lg">{value.email}</div> */}
             {!getOnSearchFilter && <div className="text-stone-950 font-semibold text-sm">
               {String(bundeslandtext).slice(0, 1).toUpperCase()}

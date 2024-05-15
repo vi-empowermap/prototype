@@ -21,6 +21,7 @@ module.exports = {
         aktura: ["Aktura"],
         alfaSlabOne: ["AlfaSlabOne"],
         bespokeStencil: ["BespokeStencil"],
+        bespokeStencilItalic: ["BespokeStencilItalic"],
         britney: ["Britney"],
         courier: ["Courier"],
         courierBold: ["CourierBold"],
