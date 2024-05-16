@@ -2,7 +2,7 @@ import { themenschwerpunktBP } from "./blueprintOptionData"
 import { RANDOMCOLOR_LIST } from "./colors"
 import { RANDOM_FONT_LIST } from "./fontList"
 
-export const category = ["car", "bike", "bus", "train"]
+export const category = ['banana', 'blabal', 'car', 'daon', 'df', 'xasdflj']
 const randomColorList = RANDOMCOLOR_LIST
 
 export const fakeData = async () => {
@@ -21,15 +21,18 @@ export const fakeData = async () => {
                 osm: "23123"
 
             },
+            zielgruppe: 'Afrikanische/Schwarze Kinder & Jugendliche',
             font:RANDOM_FONT_LIST[Math.floor(Math.random() * RANDOM_FONT_LIST.length)],
             lokalorga: "false",
             visible: true,
             filterVisible: true,
             aboutorga: "Hi! I'm Dain Orga", 
-            categories: [],
-            artderorganisation: "a",
-            archivoraktiv: "aktiv",
+            categories: ["car"],
+            artderorganisation: ["a"],
+            archivoraktiv: "aktive",
             themenschwerpunkt:["a", "b"],
+            angebote:["a"],
+            sprachunterstutzung:["a"],
             bgColor: randomColorList[Math.floor(Math.random() * randomColorList.length)]
         },
        
@@ -48,6 +51,9 @@ export const fakeData = async () => {
                 osm: "23123"
 
             },
+            angebote:["a"],
+            zielgruppe: 'Afrikanische/Schwarze Kinder & Jugendliche',
+            sprachunterstutzung: ["a"],
             font:RANDOM_FONT_LIST[Math.floor(Math.random() * RANDOM_FONT_LIST.length)],
             filterVisible: true,
             lokalorga: Math.random() > 0.4 ? "false" : "true",
@@ -56,7 +62,7 @@ export const fakeData = async () => {
             aboutorga: "Hi! I'm Sein Orga" + ((Math.random() > 0.5) ? " Vis" : " Udk"),
             categories: [category[Math.floor(Math.random() * category.length)]],
             artderorganisation: ["a", "b", "c", "d", "e", "f"][Math.floor(Math.random() * 6)],
-            archivoraktiv: Math.random() > 0.5 ? "aktiv" : "archiv",
+            archivoraktiv: Math.random() > 0.5 ? "aktive" : "archiv",
             themenschwerpunkt: [Object.keys(themenschwerpunktBP)[Math.floor(Math.random() * Object.keys(themenschwerpunktBP).length)]],
         }
         dataList.push(data)
