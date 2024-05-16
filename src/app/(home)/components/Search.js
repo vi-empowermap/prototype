@@ -6,46 +6,46 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext }) => {
   const { register, handleSubmit, setValue, getValues } = useForm();
   const clickedItemsList = useSetRecoilState(clickedItemsListAtom);
-  const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom)
-  const [getOrgaFilter, setOrgaFilter] = useRecoilState(onOrgaFilterAtom)
-  const [getFoundIdList, setFoundList] = useState(0)
+  const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
+  const [getOrgaFilter, setOrgaFilter] = useRecoilState(onOrgaFilterAtom);
+  const [getFoundIdList, setFoundList] = useState(0);
   // const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
   const onResetFilter = () => {
     const data = [...getData];
     for (let i = 0; i < data.length; i++) {
-      
-        data[i].filterVisible = true;
-     
+      data[i].filterVisible = true;
     }
     setData(data);
     setDataForMarker(data);
     setValue("search", "");
-    setOnSearchFilter(false)
-    setFoundList(0)
-    
-  }
+    setOnSearchFilter(false);
+    setFoundList(0);
+  };
   /* Reset: if click Verortung Btn, Reset Button and Filtern Btn */
   useEffect(() => {
-    onResetFilter()
-   
-  },[turnOnMap])
+    onResetFilter();
+  }, [turnOnMap]);
   useEffect(() => {
-    if(getOrgaFilter){
-      onResetFilter()
+    if (getOrgaFilter) {
+      setValue("search", "");
+      setOnSearchFilter(false);
+      setFoundList(0);
     }
-  },[getOrgaFilter])
+  }, [getOrgaFilter]);
   const onSearchRegex = () => {
     function escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     }
     const value = getValues("search");
-
 
     const pattern = new RegExp(escapeRegExp(value), "gi");
 
     const foundIdList = [];
 
     const data = [...getData];
+    for (let i = 0; i < data.length; i++) {
+      data[i].filterVisible = true;
+    }
     for (let i = 0; i < data.length; i++) {
       const matches = String(data[i].aboutorga + " " + data[i].organame).match(pattern);
       if (matches) {
@@ -56,13 +56,13 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
         console.log("No words found.");
       }
     }
- 
+
     setData(data);
     setDataForMarker(data);
     console.log(foundIdList);
-    setFoundList(foundIdList.length)
-    setOnSearchFilter(true)
-    setOrgaFilter(false)
+    setFoundList(foundIdList.length);
+    setOnSearchFilter(true);
+    setOrgaFilter(false);
     // clickedItemsList([...foundIdList]);
 
     // done
@@ -79,10 +79,16 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
         <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center ">
           <input type="text" {...register("search")} placeholder={placeholdertext} className="bg-white w-full border-black rounded-xl focus:outline-none " />
         </form>
-        {getOnSearchFilter && <div className="px-8">
-          <div className="bg-black text-white w-fit min-w-10 aspect-square flex items-center justify-center rounded-full">{getFoundIdList}</div>
-        </div>}
-        {getOnSearchFilter && <button onClick={onResetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l-2 border-black`}>reset</button>}
+        {getOnSearchFilter && (
+          <div className="px-8">
+            <div className="bg-black text-white w-fit min-w-10 aspect-square flex items-center justify-center rounded-full">{getFoundIdList}</div>
+          </div>
+        )}
+        {getOnSearchFilter && (
+          <button onClick={onResetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l-2 border-black`}>
+            reset
+          </button>
+        )}
       </div>
       <div className="flex-1 flex h-full lg:hidden justify-center items-center cursor-pointer active:bg-black active:text-white">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">

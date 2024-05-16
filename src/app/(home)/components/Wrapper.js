@@ -175,7 +175,7 @@ const Wrapper = ({
           <Logo text={panelDatas.webtitle} />
           <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
             <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} />
-            <Filtern turnOnMap={turnOnMap} getData={getData} categories={categories} placeholdertext={panelDatas.placeholderfilter} />
+            <Filtern turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} />
           </div>
         </nav>
         <div id="mapCotainer" style={{ width: Boolean(search) ? (turnOnMap ? `${orgaMapSize}px` : "100%") : "100%" }} className={`flex-1 bg-white flex overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"}`}>

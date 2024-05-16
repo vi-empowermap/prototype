@@ -5,7 +5,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   <defs>
     <style>
       .a${id}1 {
-        fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
+        fill: ${archivoraktiv === "aktive" ? "black" : "gray"};
         stroke-width: 0px;
       }
     </style>
@@ -18,7 +18,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
     <defs>
       <style>
         .a${id}2 {
-          fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
+          fill: ${archivoraktiv === "aktive" ? "black" : "gray"};
           stroke-width: 0px;
         }
       </style>
@@ -31,7 +31,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
     <defs>
       <style>
         .a${id}3 {
-          fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
+          fill: ${archivoraktiv === "aktive" ? "black" : "gray"};
           stroke-width: 0px;
         }
       </style>
@@ -44,7 +44,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   <defs>
     <style>
       .a${id}4 {
-        fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
+        fill: ${archivoraktiv === "aktive" ? "black" : "gray"};
         stroke-width: 0px;
       }
     </style>
@@ -57,7 +57,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   <defs>
     <style>
       .a${id}5 {
-        fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
+        fill: ${archivoraktiv === "aktive" ? "black" : "gray"};
         stroke-width: 0px;
       }
     </style>
@@ -71,7 +71,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   <defs>
     <style>
       .a${id}6 {
-        fill: ${archivoraktiv === "aktiv" ? "black" : "gray"};
+        fill: ${archivoraktiv === "aktive" ? "black" : "gray"};
         stroke-width: 0px;
       }
     </style>
