@@ -58,3 +58,7 @@ export const onSearchFilterAtom = atom({
   key: "onSearchFilterAtom",
   default: false
 })
+export const onOrgaFilterAtom = atom({
+  key: "onOrgaFilterAtom",
+  default: false
+})

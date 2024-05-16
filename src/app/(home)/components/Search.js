@@ -1,12 +1,13 @@
-import { clickedItemsListAtom, onSearchFilterAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, onOrgaFilterAtom, onSearchFilterAtom } from "@/app/utils/state";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext }) => {
   const { register, handleSubmit, setValue, getValues } = useForm();
   const clickedItemsList = useSetRecoilState(clickedItemsListAtom);
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom)
+  const [getOrgaFilter, setOrgaFilter] = useRecoilState(onOrgaFilterAtom)
   const [getFoundIdList, setFoundList] = useState(0)
   // const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
   const onResetFilter = () => {
@@ -21,11 +22,18 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
     setValue("search", "");
     setOnSearchFilter(false)
     setFoundList(0)
+    
   }
+  /* Reset: if click Verortung Btn, Reset Button and Filtern Btn */
   useEffect(() => {
     onResetFilter()
    
   },[turnOnMap])
+  useEffect(() => {
+    if(getOrgaFilter){
+      onResetFilter()
+    }
+  },[getOrgaFilter])
   const onSearchRegex = () => {
     function escapeRegExp(string) {
       return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -54,6 +62,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
     console.log(foundIdList);
     setFoundList(foundIdList.length)
     setOnSearchFilter(true)
+    setOrgaFilter(false)
     // clickedItemsList([...foundIdList]);
 
     // done

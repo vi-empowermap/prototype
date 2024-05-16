@@ -1,44 +1,125 @@
-import { clickedItemsListAtom } from "@/app/utils/state";
-import { useEffect } from "react";
+import { clickedItemsListAtom, onOrgaFilterAtom, onSearchFilterAtom } from "@/app/utils/state";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { themenschwerpunktBP } from "../constant/blueprintOptionData";
 
-const Filtern = ({ getData, categories }) => {
+const Filtern = ({ turnOnMap, getData, categories, placeholdertext }) => {
   const { register, handleSubmit, watch, setValue, getValues } = useForm();
-  const clickedItemsList = useSetRecoilState(clickedItemsListAtom);
-  const watchFilter = watch("myFilter");
+  const [openFilter, setOpenFilter] = useState(false);
+  const filterContainer = useRef(null);
+  const [fHeight, setFHeight] = useState(0);
+  const [getOrgaFilter, setOrgaFilter] = useRecoilState(onOrgaFilterAtom);
+  const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
+
+  const onClick = () => {
+    if (!getOrgaFilter) {
+      setOrgaFilter(true);
+      if (filterContainer.current) {
+        setFHeight(filterContainer.current.clientHeight * 2);
+      }
+    } else {
+      setOrgaFilter(false);
+    }
+  };
+  /* Get Height */
+  useEffect(() => {}, []);
+
+  /* Reset */
+  useEffect(() => {
+    //reset
+  }, [turnOnMap]);
 
   useEffect(() => {
-    const foundIdList = [];
-
-    for (let i = 0; i < getData.length; i++) {
-      if (getData[i].categories.some((v) => v === watchFilter)) {
-        foundIdList.push(getData[i].id);
-      } else {
-        // console.log("No words found.");
-      }
+    if (getOnSearchFilter) {
+      //reset
     }
-    clickedItemsList([...foundIdList]);
-  }, [watchFilter]);
-
+  }, [getOnSearchFilter]);
   return (
-    <div className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center lg:px-4 border-l-2 border-black lg:border-l-0">
-      <select defaultValue={"none"} {...register("myFilter")} className="bg-white w-full border-black rounded-xl focus:outline-none hidden lg:block ">
-        <option value={"none"}>None</option>
-        {categories.map((value, index) => {
-          return (
-            <option key={index} value={value}>
-              {String(value.slice(0, 1)).toLocaleUpperCase()}
-              {String(value.slice(1))}
-            </option>
-          );
-        })}
-      </select>
-      <div className="flex-1 h-full aspect-square lg:hidden flex justify-center items-center cursor-pointer active:bg-black active:text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
-        </svg>
-      </div>
+    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center lg:px-4 border-l-2 border-black lg:border-l-0 relative hover:bg-black hover:text-white transition-all z-[1300]">
+      {
+        <div onClick={onClick} className="hidden lg:flex gap-2 cursor-pointer w-full h-full items-center">
+          <span>{placeholdertext}</span>
+          <span className={`${!getOrgaFilter ? "rotate-0" : "rotate-180"} transition-transform duration-500`}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+          </span>
+        </div>
+      }
+      {getOrgaFilter && (
+        <div
+          style={{ maxHeight: `calc(100vh - ${fHeight}px)` }}
+          className="absolute px-2 py-2 top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-2px] text-black w-screen lg:w-[calc(100%+2px)] bg-white h-fit overflow-y-scroll border-b-2 border-l-0 lg:border-l-2 border-black border-t-2 border-r-0"
+        >
+          <div className="border-b-2 last:border-b-0 border-black py-2 mb-2">
+            <div className="mb-4">
+              <div>Nach Themenschwerpunkt</div>
+              <div className="text-sm flex gap-4 flex-wrap mt-4">
+                {Object.values(themenschwerpunktBP).map((value, idx) => {
+                  return (
+                    <div key={idx} className="border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all cursor-pointer">
+                      {value}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div>
+              <div>Nach Themenschwerpunkt</div>
+              <div className="text-sm flex gap-4 flex-wrap mt-4">
+                {Object.values(themenschwerpunktBP).map((value, idx) => {
+                  return <div key={idx}>{value}</div>;
+                })}
+              </div>
+            </div>
+          </div>
+          <div className="border-b-2 last:border-b-0 border-black py-2 mb-2">
+            <div className="mb-4">
+              <div>Nach Themenschwerpunkt</div>
+              <div className="text-sm flex gap-4 flex-wrap mt-4">
+                {Object.values(themenschwerpunktBP).map((value, idx) => {
+                  return (
+                    <div key={idx} className="border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all cursor-pointer">
+                      {value}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div>
+              <div>Nach Themenschwerpunkt</div>
+              <div className="text-sm flex gap-4 flex-wrap mt-4">
+                {Object.values(themenschwerpunktBP).map((value, idx) => {
+                  return <div key={idx}>{value}</div>;
+                })}
+              </div>
+            </div>
+          </div>
+          <div className="border-b-2 last:border-b-0 border-black py-2 mb-2">
+            <div className="mb-4">
+              <div>Nach Themenschwerpunkt</div>
+              <div className="text-sm flex gap-4 flex-wrap mt-4">
+                {Object.values(themenschwerpunktBP).map((value, idx) => {
+                  return (
+                    <div key={idx} className="border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all cursor-pointer">
+                      {value}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div>
+              <div>Nach Themenschwerpunkt</div>
+              <div className="text-sm flex gap-4 flex-wrap mt-4">
+                {Object.values(themenschwerpunktBP).map((value, idx) => {
+                  return <div key={idx}>{value}</div>;
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
