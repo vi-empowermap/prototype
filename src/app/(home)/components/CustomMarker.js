@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-const CustomMarker = ({ id, getData, setData, artderorganisation, position, activeColor, archivoraktiv }) => {
+const CustomMarker = ({ id,title,font, color, getData, setData, artderorganisation, position, activeColor, archivoraktiv }) => {
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   const setclickedItemsList = useSetRecoilState(clickedItemsListAtom);
   const getSetViewAtom = useRecoilValue(setViewAtom);
@@ -100,7 +100,11 @@ const CustomMarker = ({ id, getData, setData, artderorganisation, position, acti
           },
         }}
       >
-        <Popup closeButton={true}>Orga: {id + 1}</Popup>
+        <Popup closeButton={true}>
+          <div className="flex flex-col">
+            <div style={{color: color}} className={`font-semibold text-lg`}>{title}</div>
+          </div>
+        </Popup>
       </Marker>
     </>
   );

@@ -2,9 +2,10 @@ import { clickedItemsListAtom, onFilterMobileOpenAtom, onOrgaFilterAtom, onSearc
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { angeboteBP, artderorganisationBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
+import FilterAddBtn from "./filter_items/FilterAddBtn";
+import SectionResetBtn from "./filter_items/SectionResetBtn";
 
 const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) => {
-  
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
   const [fHeight, setFHeight] = useState(0);
@@ -19,9 +20,27 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
   const [selectSprache, setSelectSprache] = useState([]);
   const [selectArt, setSelectArt] = useState([]);
   const [selectZeige, setSelectZeige] = useState([]);
+  const [activeFilter, setActiveFilter] = useState({
+    okThemen: false,
+    okTags: false,
+    okZiel: false,
+    okAngebote: false,
+    okSprache: false,
+    okArt: false,
+    okZeige: false,
+  });
+  const activeFilterRef = useRef({
+    okThemen: false,
+    okTags: false,
+    okZiel: false,
+    okAngebote: false,
+    okSprache: false,
+    okArt: false,
+    okZeige: false,
+  });
   /* Mobile */
-  const [onFilterMobileOpen, setOnFilterMobileOpen] = useRecoilState(onFilterMobileOpenAtom)
-  const [onSearchMobileOpen, setOnSearchMobileOpen] = useRecoilState(onSearchMobileOpenAtom)
+  const [onFilterMobileOpen, setOnFilterMobileOpen] = useRecoilState(onFilterMobileOpenAtom);
+  const [onSearchMobileOpen, setOnSearchMobileOpen] = useRecoilState(onSearchMobileOpenAtom);
 
   /* Note 
   1. click event
@@ -92,13 +111,13 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
   const onClick = () => {
     if (!openFilter) {
       setOpenFilter(true);
-      setOnFilterMobileOpen(true)
+      setOnFilterMobileOpen(true);
       if (filterContainer.current) {
         setFHeight(filterContainer.current.clientHeight * 2);
       }
     } else {
       setOpenFilter(false);
-      setOnFilterMobileOpen(false)
+      setOnFilterMobileOpen(false);
     }
   };
   const resetFilter = () => {
@@ -133,7 +152,7 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
   /* Search */
   const onSearch = () => {
     setOpenFilter(false);
-    setOnFilterMobileOpen(false)
+    setOnFilterMobileOpen(false);
     setOrgaFilter(true);
     let count = 0;
     const data = [...getData];
@@ -156,8 +175,10 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
         }
       });
       const okZiel = selectZielGroup.some((v) => {
-        if (data[i].zielgruppe === v) {
-          return true;
+        for (let j = 0; j < data[i].zielgruppe.length; j++) {
+          if (zielgruppeBP[data[i].zielgruppe[j]] === v) {
+            return true;
+          }
         }
       });
       const okAngebote = selectAngebote.some((v) => {
@@ -185,7 +206,16 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
         }
       });
 
-      if (okThemen && okTags && okZiel && okAngebote && okSprache && okArt && okZeige) {
+      // if (activeFilter["okThemen"] ? okThemen : false) {
+      if (
+        (activeFilterRef.current["okThemen"] ? okThemen : true) &&
+        (activeFilterRef.current["okTags"] ? okTags : true) &&
+        (activeFilterRef.current["okZiel"] ? okZiel : true) &&
+        (activeFilterRef.current["okAngebote"] ? okAngebote : true) &&
+        (activeFilterRef.current["okSprache"] ? okSprache : true) &&
+        (activeFilterRef.current["okArt"] ? okArt : true) &&
+        (activeFilterRef.current["okZeige"] ? okZeige : true)
+      ) {
         data[i].filterVisible = true;
         count += 1;
       } else {
@@ -208,19 +238,31 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
       //reset
       onResetAll();
       setOpenFilter(false);
-      setOnFilterMobileOpen(false)
+      setOnFilterMobileOpen(false);
       setOrgaFilter(false);
     }
   }, [getOnSearchFilter]);
 
   /* Close Mobile if search clicked */
   useEffect(() => {
-    if(onSearchMobileOpen){
+    if (onSearchMobileOpen) {
       setOpenFilter(false);
       setOnFilterMobileOpen(false);
-     
     }
-  },[onSearchMobileOpen])
+  }, [onSearchMobileOpen]);
+  const onActiveFilter = (keyName) => {
+    setActiveFilter((prev) => ({
+      ...prev,
+      [keyName]: !prev[keyName],
+    }));
+    activeFilterRef.current = {
+      ...activeFilterRef.current,
+      [keyName]: !activeFilterRef.current[keyName],
+    };
+  };
+  const onResetSection = (setSection) => {
+    setSection([])
+  }
   return (
     <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300]">
       <div className="hidden lg:flex gap-2 w-full h-full items-center">
@@ -279,101 +321,157 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">Nach Themenschwerpunkt</div>
-              <div className="filter_sub_item_box">
-                {[...Object.values(themenschwerpunktBP).sort()].map((value, idx) => {
-                  const ok = selectThemen.some((v) => v === value);
-                  return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "themen", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                      {value}
-                    </div>
-                  );
-                })}
+              <div className="filter_item_box_title">
+                <div>Nach Themenschwerpunkt</div>
+                <div className="flex gap-4 text-xs">
+                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okThemen"} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectThmen} />
+                </div>
               </div>
+              {activeFilter["okThemen"] && (
+                <div className="filter_sub_item_box">
+                  {[...Object.values(themenschwerpunktBP).sort()].map((value, idx) => {
+                    const ok = selectThemen.some((v) => v === value);
+                    return (
+                      <div key={idx} onClick={() => onClickFilterItem({ category: "themen", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                        {value}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">Nach Tags</div>
-              <div className="filter_sub_item_box">
-                {[...categories.sort()].map((value, idx) => {
-                  const ok = selectTags.some((v) => v === value);
-                  return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "tags", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                      {value}
-                    </div>
-                  );
-                })}
+              <div className="filter_item_box_title">
+                <div>Nach Tags</div>
+                <div className="flex gap-4 text-xs">
+                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okTags"} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectTags} />
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="filter_item_box">
-            <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">Zielgruppe</div>
-              <div className="filter_sub_item_box">
-                {[...Object.values(zielgruppeBP).sort()].map((value, idx) => {
-                  const ok = selectZielGroup.some((v) => v === value);
-                  return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "ziel", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                      {value}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">Angebote</div>
-              <div className="filter_sub_item_box">
-                {[...Object.values(angeboteBP).sort()].map((value, idx) => {
-                  const ok = selectAngebote.some((v) => v === value);
-                  return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "angebote", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                      {value}
-                    </div>
-                  );
-                })}
-              </div>
+              {activeFilter["okTags"] && (
+                <div className="filter_sub_item_box">
+                  {[...categories.sort()].map((value, idx) => {
+                    const ok = selectTags.some((v) => v === value);
+                    return (
+                      <div key={idx} onClick={() => onClickFilterItem({ category: "tags", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                        {value}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">Sprache</div>
-              <div className="filter_sub_item_box">
-                {[...Object.values(sprachunterstutzungBP).sort()].map((value, idx) => {
-                  const ok = selectSprache.some((v) => v === value);
-                  return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "sprache", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                      {value}
-                    </div>
-                  );
-                })}
+              <div className="filter_item_box_title">
+                <div>Zielgruppe</div>
+                <div className="flex gap-4 text-xs">
+                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZiel"} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZielGroup} />
+                </div>
               </div>
+              {activeFilter["okZiel"] && (
+                <div className="filter_sub_item_box">
+                  {[...Object.values(zielgruppeBP).sort()].map((value, idx) => {
+                    const ok = selectZielGroup.some((v) => v === value);
+                    return (
+                      <div key={idx} onClick={() => onClickFilterItem({ category: "ziel", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                        {value}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">Art der Organisation</div>
-              <div className="filter_sub_item_box">
-                {[...Object.values(artderorganisationBP).sort()].map((value, idx) => {
-                  const ok = selectArt.some((v) => v === value);
-                  return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "art", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                      {value}
-                    </div>
-                  );
-                })}
+              <div className="filter_item_box_title">
+                <div>Angebote</div>
+                <div className="flex gap-4 text-xs">
+                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okAngebote"} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectAngebote} />
+                </div>
               </div>
+              {activeFilter["okAngebote"] && (
+                <div className="filter_sub_item_box">
+                  {[...Object.values(angeboteBP).sort()].map((value, idx) => {
+                    const ok = selectAngebote.some((v) => v === value);
+                    return (
+                      <div key={idx} onClick={() => onClickFilterItem({ category: "angebote", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                        {value}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">Zeige</div>
-              <div className="filter_sub_item_box">
-                {[...["archiv", "aktive"]].map((value, idx) => {
-                  const ok = selectZeige.some((v) => v === value);
-                  return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "zeige", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                      {value}
-                    </div>
-                  );
-                })}
+              <div className="filter_item_box_title">
+                <div>Sprache</div>
+                <div className="flex gap-4 text-xs">
+                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okSprache"} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectSprache} />
+                </div>
               </div>
+              {activeFilter["okSprache"] && (
+                <div className="filter_sub_item_box">
+                  {[...Object.values(sprachunterstutzungBP).sort()].map((value, idx) => {
+                    const ok = selectSprache.some((v) => v === value);
+                    return (
+                      <div key={idx} onClick={() => onClickFilterItem({ category: "sprache", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                        {value}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">
+                <div>Art der Organisation</div>
+                <div className="flex gap-4 text-xs">
+                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okArt"} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectArt} />
+                </div>
+              </div>
+              {activeFilter["okArt"] && (
+                <div className="filter_sub_item_box">
+                  {[...Object.values(artderorganisationBP).sort()].map((value, idx) => {
+                    const ok = selectArt.some((v) => v === value);
+                    return (
+                      <div key={idx} onClick={() => onClickFilterItem({ category: "art", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                        {value}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="filter_item_box">
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">
+                <div>Zeige</div>
+                <div className="flex gap-4 text-xs">
+                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZeige"} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZeige} />
+                </div>
+              </div>
+              {activeFilter["okZeige"] && (
+                <div className="filter_sub_item_box">
+                  {[...["archiv", "aktive"]].map((value, idx) => {
+                    const ok = selectZeige.some((v) => v === value);
+                    return (
+                      <div key={idx} onClick={() => onClickFilterItem({ category: "zeige", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                        {value}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>
