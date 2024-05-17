@@ -1,17 +1,16 @@
-import { clickedItemsListAtom, onOrgaFilterAtom, onSearchFilterAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, onFilterMobileOpenAtom, onOrgaFilterAtom, onSearchFilterAtom, onSearchMobileOpenAtom } from "@/app/utils/state";
 import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { angeboteBP, artderorganisationBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
 
 const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) => {
-  const { register, handleSubmit, watch, setValue, getValues } = useForm();
+  
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
   const [fHeight, setFHeight] = useState(0);
   const [getOrgaFilter, setOrgaFilter] = useRecoilState(onOrgaFilterAtom);
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
-  const [foundList, setFoundList] = useState(0)
+  const [foundList, setFoundList] = useState(0);
   /* Filter */
   const [selectThemen, setSelectThmen] = useState([]);
   const [selectTags, setSelectTags] = useState([]);
@@ -20,6 +19,9 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
   const [selectSprache, setSelectSprache] = useState([]);
   const [selectArt, setSelectArt] = useState([]);
   const [selectZeige, setSelectZeige] = useState([]);
+  /* Mobile */
+  const [onFilterMobileOpen, setOnFilterMobileOpen] = useRecoilState(onFilterMobileOpenAtom)
+  const [onSearchMobileOpen, setOnSearchMobileOpen] = useRecoilState(onSearchMobileOpenAtom)
 
   /* Note 
   1. click event
@@ -90,11 +92,13 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
   const onClick = () => {
     if (!openFilter) {
       setOpenFilter(true);
+      setOnFilterMobileOpen(true)
       if (filterContainer.current) {
         setFHeight(filterContainer.current.clientHeight * 2);
       }
     } else {
       setOpenFilter(false);
+      setOnFilterMobileOpen(false)
     }
   };
   const resetFilter = () => {
@@ -102,8 +106,9 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
     for (let i = 0; i < data.length; i++) {
       data[i].filterVisible = true;
     }
-    setData(data)
+    setData(data);
     setOpenFilter(false);
+    setOnFilterMobileOpen(false);
     setOrgaFilter(false);
   };
   const onSelectAll = () => {
@@ -128,6 +133,7 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
   /* Search */
   const onSearch = () => {
     setOpenFilter(false);
+    setOnFilterMobileOpen(false)
     setOrgaFilter(true);
     let count = 0;
     const data = [...getData];
@@ -186,13 +192,13 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
         data[i].filterVisible = false;
       }
     }
-    setFoundList(count)
+    setFoundList(count);
     setData(data);
   };
   /* Reset */
   useEffect(() => {
     //reset
-    
+
     resetFilter();
     onResetAll();
   }, [turnOnMap]);
@@ -202,11 +208,21 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
       //reset
       onResetAll();
       setOpenFilter(false);
+      setOnFilterMobileOpen(false)
       setOrgaFilter(false);
     }
   }, [getOnSearchFilter]);
+
+  /* Close Mobile if search clicked */
+  useEffect(() => {
+    if(onSearchMobileOpen){
+      setOpenFilter(false);
+      setOnFilterMobileOpen(false);
+     
+    }
+  },[onSearchMobileOpen])
   return (
-    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1300]">
+    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300]">
       <div className="hidden lg:flex gap-2 w-full h-full items-center">
         <div onClick={onClick} className="lg:flex gap-2 cursor-pointer w-full h-full items-center hover:bg-black hover:text-white px-4">
           <span>{placeholdertext}</span>
@@ -216,16 +232,36 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
             </svg>
           </span>
         </div>
-        {getOrgaFilter && <div className="px-8">
+        {getOrgaFilter && (
+          <div className="px-8">
             <div className="bg-black text-white w-fit min-w-10 aspect-square flex items-center justify-center rounded-full">{foundList}</div>
-          </div>}
-        {getOrgaFilter && <button onClick={resetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l-2 border-black`}>reset</button>}
+          </div>
+        )}
+        {getOrgaFilter && (
+          <button onClick={resetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l-2 border-black`}>
+            reset
+          </button>
+        )}
+      </div>
+      <div onClick={onClick} className={`relative flex-1 flex h-full lg:hidden justify-center items-center cursor-pointer active:bg-black active:text-white ${openFilter ? "bg-black text-white" : "bg-white text-black"}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
+          />
+        </svg>
+        {getOrgaFilter && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+            <span className="translate-x-1/2 -translate-y-1/2 bg-black text-white min-w-5 min-h-5 text-xs flex justify-center items-center border border-white rounded-full">{String(foundList).length > 5 ? String(foundList).slice(0, 5) : String(foundList)}</span>
+          </div>
+        )}
       </div>
 
       {openFilter && (
         <div
           style={{ maxHeight: `calc(100vh - ${fHeight}px)` }}
-          className="absolute top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-2px] text-black w-screen lg:w-[calc(100%+2px)] bg-white h-fit overflow-y-scroll border-b-2 border-l-0 lg:border-l-2 border-black border-t-2 border-r-0 no-scrollbar"
+          className="absolute top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-2px] text-black w-screen lg:w-[calc(100%+2px)] bg-neutral-200 h-fit overflow-y-scroll border-b-2 border-l-0 lg:border-l-2 border-black border-t-2 border-r-0 no-scrollbar"
         >
           <div className="sticky flex items-center gap-4 top-0 left-0 border-b-2 last:border-b-0 border-black py-2 mb-2 pr-8 bg-white px-2">
             <div onClick={onSearch} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
@@ -237,28 +273,31 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
             <div onClick={onSelectAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Select All
             </div>
+            <div onClick={resetFilter} className="lg:hidden cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
+              Reset
+            </div>
           </div>
-          <div className="border-b last:border-b-0 border-neutral-400 py-2 mb-2 pr-8 px-2">
-            <div className="mb-4">
-              <div>Nach Themenschwerpunkt</div>
-              <div className="text-sm flex gap-4 flex-wrap mt-4">
+          <div className="filter_item_box">
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">Nach Themenschwerpunkt</div>
+              <div className="filter_sub_item_box">
                 {[...Object.values(themenschwerpunktBP).sort()].map((value, idx) => {
                   const ok = selectThemen.some((v) => v === value);
                   return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "themen", value: value })} className={`border-2 border-black px-2 py-1 transition-all cursor-pointer ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                    <div key={idx} onClick={() => onClickFilterItem({ category: "themen", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
                       {value}
                     </div>
                   );
                 })}
               </div>
             </div>
-            <div className="mb-4">
-              <div>Nach Tags</div>
-              <div className="text-sm flex gap-4 flex-wrap mt-4">
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">Nach Tags</div>
+              <div className="filter_sub_item_box">
                 {[...categories.sort()].map((value, idx) => {
                   const ok = selectTags.some((v) => v === value);
                   return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "tags", value: value })} className={`border-2 border-black px-2 py-1 transition-all cursor-pointer ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                    <div key={idx} onClick={() => onClickFilterItem({ category: "tags", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
                       {value}
                     </div>
                   );
@@ -266,27 +305,27 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
               </div>
             </div>
           </div>
-          <div className="border-b last:border-b-0 border-neutral-400 py-2 mb-2 pr-8 px-2">
-            <div className="mb-4">
-              <div>Zielgruppe</div>
-              <div className="text-sm flex gap-4 flex-wrap mt-4">
+          <div className="filter_item_box">
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">Zielgruppe</div>
+              <div className="filter_sub_item_box">
                 {[...Object.values(zielgruppeBP).sort()].map((value, idx) => {
                   const ok = selectZielGroup.some((v) => v === value);
                   return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "ziel", value: value })} className={`border-2 border-black px-2 py-1 transition-all cursor-pointer ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                    <div key={idx} onClick={() => onClickFilterItem({ category: "ziel", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
                       {value}
                     </div>
                   );
                 })}
               </div>
             </div>
-            <div className="mb-4">
-              <div>Angebote</div>
-              <div className="text-sm flex gap-4 flex-wrap mt-4">
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">Angebote</div>
+              <div className="filter_sub_item_box">
                 {[...Object.values(angeboteBP).sort()].map((value, idx) => {
                   const ok = selectAngebote.some((v) => v === value);
                   return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "angebote", value: value })} className={`border-2 border-black px-2 py-1 transition-all cursor-pointer ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                    <div key={idx} onClick={() => onClickFilterItem({ category: "angebote", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
                       {value}
                     </div>
                   );
@@ -294,27 +333,27 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
               </div>
             </div>
           </div>
-          <div className="border-b last:border-b-0 border-neutral-400 py-2 mb-2 pr-8 px-2">
-            <div className="mb-4">
-              <div>Sprache</div>
-              <div className="text-sm flex gap-4 flex-wrap mt-4">
+          <div className="filter_item_box">
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">Sprache</div>
+              <div className="filter_sub_item_box">
                 {[...Object.values(sprachunterstutzungBP).sort()].map((value, idx) => {
                   const ok = selectSprache.some((v) => v === value);
                   return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "sprache", value: value })} className={`border-2 border-black px-2 py-1 transition-all cursor-pointer ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                    <div key={idx} onClick={() => onClickFilterItem({ category: "sprache", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
                       {value}
                     </div>
                   );
                 })}
               </div>
             </div>
-            <div className="mb-4">
-              <div>Art der Organisation</div>
-              <div className="text-sm flex gap-4 flex-wrap mt-4">
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">Art der Organisation</div>
+              <div className="filter_sub_item_box">
                 {[...Object.values(artderorganisationBP).sort()].map((value, idx) => {
                   const ok = selectArt.some((v) => v === value);
                   return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "art", value: value })} className={`border-2 border-black px-2 py-1 transition-all cursor-pointer ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                    <div key={idx} onClick={() => onClickFilterItem({ category: "art", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
                       {value}
                     </div>
                   );
@@ -322,14 +361,14 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
               </div>
             </div>
           </div>
-          <div className="border-b last:border-b-0 border-neutral-400 py-2 mb-2 pr-8 px-2">
-            <div className="mb-4">
-              <div>Zeige</div>
-              <div className="text-sm flex gap-4 flex-wrap mt-4">
+          <div className="filter_item_box">
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">Zeige</div>
+              <div className="filter_sub_item_box">
                 {[...["archiv", "aktive"]].map((value, idx) => {
                   const ok = selectZeige.some((v) => v === value);
                   return (
-                    <div key={idx} onClick={() => onClickFilterItem({ category: "zeige", value: value })} className={`border-2 border-black px-2 py-1 transition-all cursor-pointer ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                    <div key={idx} onClick={() => onClickFilterItem({ category: "zeige", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
                       {value}
                     </div>
                   );

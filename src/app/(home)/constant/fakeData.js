@@ -53,7 +53,7 @@ export const fakeData = async () => {
             },
             angebote:["a"],
             zielgruppe: [...Object.values(zielgruppeBP)][Math.floor(Math.random() * Object.values(zielgruppeBP).length)],
-            sprachunterstutzung: [...Object.keys(sprachunterstutzungBP)][Math.floor(Math.random() * Object.values(sprachunterstutzungBP).length)],
+            sprachunterstutzung: [[...Object.keys(sprachunterstutzungBP)][Math.floor(Math.random() * Object.values(sprachunterstutzungBP).length)]],
             font:RANDOM_FONT_LIST[Math.floor(Math.random() * RANDOM_FONT_LIST.length)],
             filterVisible: true,
             lokalorga: Math.random() > 0.4 ? "false" : "true",

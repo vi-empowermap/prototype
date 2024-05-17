@@ -17,3 +17,23 @@ export const RANDOM_FONT_LIST = [
   "font-theFutureMono",
   "font-theFutureMonoBold",
 ];
+
+export const RANDOM_FONT_LIST_SIZE = {
+  "font-aktura": 55,
+  "font-alfaSlabOne": 55,
+  "font-bespokeStencilItalic": 55,
+  "font-britney": 55,
+  "font-courier": 55,
+  "font-courierBold": 55,
+  "font-panchang": 40,
+  "font-sharpie": 60,
+  "font-telma": 55,
+  "font-theFutureMono": 55,
+  "font-jetBrainsMonoMedium": 50,
+  "font-jetBrainsMonoLight": 55,
+  "font-jetBrainsMonoExtraBold": 55,
+  "font-kihim": 55,
+  "font-pramukhRoundedExtraboldItalic": 55,
+  "font-theFutureMono": 55,
+  "font-theFutureMonoBold": 50,
+};
