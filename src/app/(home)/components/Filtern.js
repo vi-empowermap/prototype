@@ -11,7 +11,7 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
   const [fHeight, setFHeight] = useState(0);
   const [getOrgaFilter, setOrgaFilter] = useRecoilState(onOrgaFilterAtom);
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
-
+  const [foundList, setFoundList] = useState(0)
   /* Filter */
   const [selectThemen, setSelectThmen] = useState([]);
   const [selectTags, setSelectTags] = useState([]);
@@ -98,6 +98,12 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
     }
   };
   const resetFilter = () => {
+    const data = [...getData];
+    for (let i = 0; i < data.length; i++) {
+      data[i].filterVisible = true;
+    }
+    setData(data)
+    setOpenFilter(false);
     setOrgaFilter(false);
   };
   const onSelectAll = () => {
@@ -108,7 +114,7 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
     setSelectSprache([...Object.values(sprachunterstutzungBP)]);
     setSelectArt([...Object.values(artderorganisationBP)]);
     setSelectZeige([...["archiv", "aktive"]]);
-  }
+  };
   const onResetAll = () => {
     setSelectThmen([]);
     setSelectTags([]);
@@ -123,6 +129,7 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
   const onSearch = () => {
     setOpenFilter(false);
     setOrgaFilter(true);
+    let count = 0;
     const data = [...getData];
     for (let i = 0; i < data.length; i++) {
       data[i].filterVisible = true;
@@ -174,48 +181,60 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
 
       if (okThemen && okTags && okZiel && okAngebote && okSprache && okArt && okZeige) {
         data[i].filterVisible = true;
+        count += 1;
       } else {
         data[i].filterVisible = false;
       }
     }
+    setFoundList(count)
     setData(data);
   };
   /* Reset */
   useEffect(() => {
     //reset
+    
     resetFilter();
+    onResetAll();
   }, [turnOnMap]);
 
   useEffect(() => {
     if (getOnSearchFilter) {
       //reset
+      onResetAll();
+      setOpenFilter(false);
+      setOrgaFilter(false);
     }
   }, [getOnSearchFilter]);
   return (
-    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center lg:px-4 border-l-2 border-black lg:border-l-0 relative hover:bg-black hover:text-white transition-all z-[1300]">
-      {
-        <div onClick={onClick} className="hidden lg:flex gap-2 cursor-pointer w-full h-full items-center">
+    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1300]">
+      <div className="hidden lg:flex gap-2 w-full h-full items-center">
+        <div onClick={onClick} className="lg:flex gap-2 cursor-pointer w-full h-full items-center hover:bg-black hover:text-white px-4">
           <span>{placeholdertext}</span>
-          <span className={`${!getOrgaFilter ? "rotate-0" : "rotate-180"} transition-transform duration-500`}>
+          <span className={`${!openFilter ? "rotate-0" : "rotate-180"} transition-transform duration-500`}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
             </svg>
           </span>
         </div>
-      }
+        {getOrgaFilter && <div className="px-8">
+            <div className="bg-black text-white w-fit min-w-10 aspect-square flex items-center justify-center rounded-full">{foundList}</div>
+          </div>}
+        {getOrgaFilter && <button onClick={resetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l-2 border-black`}>reset</button>}
+      </div>
+
       {openFilter && (
         <div
           style={{ maxHeight: `calc(100vh - ${fHeight}px)` }}
           className="absolute top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-2px] text-black w-screen lg:w-[calc(100%+2px)] bg-white h-fit overflow-y-scroll border-b-2 border-l-0 lg:border-l-2 border-black border-t-2 border-r-0 no-scrollbar"
         >
           <div className="sticky flex items-center gap-4 top-0 left-0 border-b-2 last:border-b-0 border-black py-2 mb-2 pr-8 bg-white px-2">
-            <div onClick={onSearch} className="cursor-pointer border-2 border-black px-2 py-1">
+            <div onClick={onSearch} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Search
             </div>
-            <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1">
+            <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Clear All
             </div>
-            <div onClick={onSelectAll} className="cursor-pointer border-2 border-black px-2 py-1">
+            <div onClick={onSelectAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Select All
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { themenschwerpunktBP } from "./blueprintOptionData"
+import { sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "./blueprintOptionData"
 import { RANDOMCOLOR_LIST } from "./colors"
 import { RANDOM_FONT_LIST } from "./fontList"
 
@@ -52,8 +52,8 @@ export const fakeData = async () => {
 
             },
             angebote:["a"],
-            zielgruppe: 'Afrikanische/Schwarze Kinder & Jugendliche',
-            sprachunterstutzung: ["a"],
+            zielgruppe: [...Object.values(zielgruppeBP)][Math.floor(Math.random() * Object.values(zielgruppeBP).length)],
+            sprachunterstutzung: [...Object.keys(sprachunterstutzungBP)][Math.floor(Math.random() * Object.values(sprachunterstutzungBP).length)],
             font:RANDOM_FONT_LIST[Math.floor(Math.random() * RANDOM_FONT_LIST.length)],
             filterVisible: true,
             lokalorga: Math.random() > 0.4 ? "false" : "true",
