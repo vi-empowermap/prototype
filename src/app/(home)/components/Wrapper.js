@@ -103,7 +103,7 @@ const Wrapper = ({
     if (!ready && !Boolean(search) && turnOnMap) {
       gsap.to("#anibtn", { opacity: 0, duration: aniDuration });
       gsap.to("#anitext", { opacity: 0, duration: aniDuration });
-      gsap.to("#filterContainer", { delay: 1.5, opacity: 1, duration: aniDuration });
+      // gsap.to("#filterContainer", { delay: 1.5, opacity: 1, duration: aniDuration });
       gsap.to("#mapCotainer", { delay: 1.5, opacity: 1, duration: aniDuration });
       gsap.to("#listContainer", { delay: 1.5, opacity: 1, duration: aniDuration });
       // gsap.to("#listContainer2", { delay: 1.5, opacity: 1, transform: "translateX(0px)", duration: aniDuration });
@@ -151,7 +151,6 @@ const Wrapper = ({
       {/* Animation Button */}
 
       <div id="anitext" className={`px-8 fixed top-0 left-0 font-semibold w-screen h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
-        
         <div className="py-8">
           <Logo text={panelDatas.webtitle} />
         </div>
@@ -163,7 +162,7 @@ const Wrapper = ({
         </div>
         <div className="flex justify-center mb-4">
           <div id="anibtn" onClick={onClickReady} className={`relative font-semibold cursor-pointer ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-          {panelDatas.introbtn} 
+            {panelDatas.introbtn}
           </div>
         </div>
       </div>
@@ -173,7 +172,16 @@ const Wrapper = ({
         <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white opacity-0" : "border-black opacity-100"} overflow-y-visible`}>
           <Menu />
           <Logo text={panelDatas.webtitle} />
-          <div id="filterContainer" className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black ${!ready ? "opacity-0" : "opacity-100"}`}>
+          <div className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black `}>
+            <div className="w-full h-full aspect-square flex lg:hidden justify-center items-center cursor-pointer active:bg-black active:text-white relative border-r-2 border-black">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z"
+                />
+              </svg>
+            </div>
             <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} />
             <Filtern turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} />
           </div>

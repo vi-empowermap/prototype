@@ -95,7 +95,7 @@ const getKirbyData = async () => {
       return value;
     }
   });
-  
+ 
   data.result.map((value) => {
     // That is for dragging event for CustomMarker
     value.visible = true;
@@ -109,15 +109,16 @@ const getKirbyData = async () => {
      /* Filteroptionen Mapping */
      value.social = yaml.load(value.social)
      value.themenschwerpunkt = value.themenschwerpunkt.split(",").map((val2) => val2.trim())  
-     value.zielgruppe = zielgruppeBP[value.zielgruppe]
-
+     value.zielgruppe = value.zielgruppe.split(",").map((val2) => val2.trim())  
+    //  value.zielgruppe = zielgruppeBP[value.zielgruppe]
+    console.log(data)
     //  value.sprachunterstutzung = sprachunterstutzungBP[value.sprachunterstutzung]
      value.sprachunterstutzung = value.sprachunterstutzung.split(",").map((val2) => val2.trim()) 
      value.angebote = value.angebote.split(",").map((val2) => val2.trim()) 
    
      return value
   })
-  console.log(data)
+  
   return data;
 };
 

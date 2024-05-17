@@ -27,7 +27,7 @@
         @apply font-semibold text-xl
     }
     .orga_sub_title{
-        @apply font-semibold
+        @apply font-semibold flex justify-between
     }
     /* Filter page */
     .filter_item_box {
@@ -40,7 +40,7 @@
         @apply mb-4
     }
     .filter_item_box_title {
-        @apply text-xl
+        @apply text-xl flex items-center justify-between
     }
     .filter_item {
         @apply border-2 border-black px-2 py-1 transition-all cursor-pointer

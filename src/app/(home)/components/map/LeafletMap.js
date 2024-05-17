@@ -109,7 +109,7 @@ const LeafletMap = ({doubleScreenTouched, data, setData, getDataForMarker }) => 
         {getDataForMarker.map((value, index) => {
           if(value.filterVisible){
             return (
-            <CustomMarker key={index} getData={data} setData={setData} id={value.id} artderorganisation={value.artderorganisation} position={value.location} activeColor={value.bgColor} archivoraktiv={value.archivoraktiv} />
+            <CustomMarker key={index} title={value.name} color={value.bgColor} font={value.font} getData={data} setData={setData} id={value.id} artderorganisation={value.artderorganisation} position={value.location} activeColor={value.bgColor} archivoraktiv={value.archivoraktiv} />
           )
           }
           
