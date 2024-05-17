@@ -16,6 +16,12 @@
     background-color: white;
 }
 
+@layer base {
+    * {
+        @apply selection:bg-emerald-300
+    }
+}
+
 @layer components{
     .orga_icon_text{
         @apply font-semibold text-xl
@@ -23,6 +29,23 @@
     .orga_sub_title{
         @apply font-semibold
     }
+    /* Filter page */
+    .filter_item_box {
+        @apply border-b last:border-b-0 border-neutral-400 py-2 mb-2 pr-8 px-2
+    }
+    .filter_sub_item_box {
+        @apply text-sm flex gap-4 flex-wrap mt-4
+    }
+    .filter_sub_item_box_wrapper {
+        @apply mb-4
+    }
+    .filter_item_box_title {
+        @apply text-xl
+    }
+    .filter_item {
+        @apply border-2 border-black px-2 py-1 transition-all cursor-pointer
+    }
+
 }
 
 
@@ -43,6 +66,7 @@
     src: url("/assets/fonts/BespokeStencil-Variable.ttf");
     font-weight: 700;
     font-style: normal;
+    
 }
 /* List */
 @font-face {
@@ -50,12 +74,14 @@
     src: url("/assets/fonts/Aktura-Regular.ttf");
     font-weight: normal;
     font-style: normal;
+   
 }
 @font-face {
     font-family: "AlfaSlabOne";
     src: url("/assets/fonts/AlfaSlabOne-Regular.ttf");
     font-weight: 700;
     font-style: normal;
+    
 }
 @font-face {
     font-family: "BespokeStencilItalic";

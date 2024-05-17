@@ -62,3 +62,13 @@ export const onOrgaFilterAtom = atom({
   key: "onOrgaFilterAtom",
   default: false
 })
+
+/* Filter & Search Mobile Open Button */
+export const onSearchMobileOpenAtom = atom({
+  key: "onSearchMobileOpenAtom",
+  default: false
+})
+export const onFilterMobileOpenAtom = atom({
+  key: "onFilterMobileOpenAtom",
+  default: false
+})

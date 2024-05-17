@@ -18,6 +18,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   const setReady = useSetRecoilState(readyAniAtom);
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   useEffect(() => {
+   
     if (Boolean(search)) {
       setReady(true);
       setTimeout(() => {
@@ -55,6 +56,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           }
         }
       }
+      console.log(orgaInfo)
     } else {
       setOpen(false);
     }
@@ -71,7 +73,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     alert("Copied the Url: " + `${window.location.href}`);
   };
   return (
-    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[1400] lg:px-6 lg:pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500`}>
+    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500`}>
       <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-full lg:border-x-2 lg:border-t-2 border-black lg:rounded-tl-3xl lg:rounded-tr-3xl">
         <nav className="flex gap-4 justify-end p-4 mb-4">
           <div onClick={onCopyText} className="cursor-pointer">
