@@ -1,4 +1,4 @@
-import { angeboteBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "./blueprintOptionData"
+import { angeboteBP, bundeslandBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "./blueprintOptionData"
 import { RANDOMCOLOR_LIST } from "./colors"
 import { RANDOM_FONT_LIST } from "./fontList"
 
@@ -33,6 +33,7 @@ export const fakeData = async () => {
             themenschwerpunkt:["a", "b"],
             angebote:["a"],
             sprachunterstutzung:["a"],
+            bundesland: Object.values(bundeslandBP)[Math.floor(Math.random() * Object.values(bundeslandBP).length)],
             bgColor: randomColorList[Math.floor(Math.random() * randomColorList.length)]
         },
        
@@ -63,6 +64,7 @@ export const fakeData = async () => {
             categories: [category[Math.floor(Math.random() * category.length)]],
             artderorganisation: ["a", "b", "c", "d", "e", "f"][Math.floor(Math.random() * 6)],
             archivoraktiv: Math.random() > 0.5 ? "aktive" : "archiv",
+            bundesland: Object.values(bundeslandBP)[Math.floor(Math.random() * Object.values(bundeslandBP).length)],
             themenschwerpunkt: [Object.keys(themenschwerpunktBP)[Math.floor(Math.random() * Object.keys(themenschwerpunktBP).length)]],
         }
         dataList.push(data)

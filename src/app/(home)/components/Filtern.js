@@ -1,7 +1,7 @@
 import { clickedItemsListAtom, onFilterMobileOpenAtom, onOrgaFilterAtom, onSearchFilterAtom, onSearchMobileOpenAtom } from "@/app/utils/state";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { angeboteBP, artderorganisationBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
+import { angeboteBP, artderorganisationBP, bundeslandBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
 import FilterAddBtn from "./filter_items/FilterAddBtn";
 import SectionResetBtn from "./filter_items/SectionResetBtn";
 import DynamicMiniMap from "./minimap";
@@ -14,6 +14,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
   const [foundList, setFoundList] = useState(0);
   /* Filter */
+  const [selectBundesland, setSelectBundesland] = useState([]);
   const [selectThemen, setSelectThmen] = useState([]);
   const [selectTags, setSelectTags] = useState([]);
   const [selectZielGroup, setSelectZielGroup] = useState([]);
@@ -22,6 +23,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
   const [selectArt, setSelectArt] = useState([]);
   const [selectZeige, setSelectZeige] = useState([]);
   const [activeFilter, setActiveFilter] = useState({
+    okBundes: false,
     okThemen: false,
     okTags: false,
     okZiel: false,
@@ -31,6 +33,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
     okZeige: false,
   });
   const activeFilterRef = useRef({
+    okBundes: false,
     okThemen: false,
     okTags: false,
     okZiel: false,
@@ -50,6 +53,14 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
   */
   /* Click Filter Item */
   const onClickFilterItem = ({ category, value }) => {
+    if (category === "bundes") {
+      const exist = selectBundesland.findIndex((v) => v === value);
+      if (exist >= 0) {
+        setSelectBundesland([...selectBundesland.filter((v) => v !== value)]);
+      } else {
+        setSelectBundesland([...selectBundesland, value]);
+      }
+    }
     if (category === "themen") {
       const exist = selectThemen.findIndex((v) => v === value);
       if (exist >= 0) {
@@ -141,6 +152,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
     setSelectZeige([...["archiv", "aktive"]]);
   };
   const onResetAll = () => {
+    setSelectBundesland([])
     setSelectThmen([]);
     setSelectTags([]);
     setSelectZielGroup([]);
@@ -161,6 +173,11 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
       data[i].filterVisible = true;
     }
     for (let i = 0; i < data.length; i++) {
+      const okBundes = selectBundesland.some((v) => {
+        if (String(data[i].bundesland).toLocaleLowerCase() === String(v).toLocaleLowerCase()) {
+          return true;
+        }
+      });
       const okThemen = selectThemen.some((v) => {
         for (let j = 0; j < data[i].themenschwerpunkt.length; j++) {
           if (themenschwerpunktBP[data[i].themenschwerpunkt[j]] === v) {
@@ -209,6 +226,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
 
       // if (activeFilter["okThemen"] ? okThemen : false) {
       if (
+        (activeFilterRef.current["okBundes"] ? okBundes : true) &&
         (activeFilterRef.current["okThemen"] ? okThemen : true) &&
         (activeFilterRef.current["okTags"] ? okTags : true) &&
         (activeFilterRef.current["okZiel"] ? okZiel : true) &&
@@ -325,7 +343,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
             {turnOnMap && <div className="filter_sub_item_box_wrapper">
               <div className="filter_item_box_title">Mini Map</div>
               <div id="leaflet_minimap_container2" className="h-[calc(3vw+310px)] w-full flex justify-center">
-                <DynamicMiniMap />
+                <DynamicMiniMap setOpenFilter={setOpenFilter} />
               </div>
             </div>}
             <div className="filter_sub_item_box_wrapper">
@@ -334,6 +352,30 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 <div onClick={onTurOnMap} className={`filter_item ${turnOnMap ? "bg-black text-white" : "bg-white text-black"}`}>Ort</div>
               </div>
             </div>
+          </div>
+          <div className="filter_item_box">
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">
+                <div>Bundesland</div>
+                <div className="flex gap-4 text-xs">
+                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okBundes"} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectBundesland} />
+                </div>
+              </div>
+              {activeFilter["okBundes"] && (
+                <div className="filter_sub_item_box">
+                  {[...Object.values(bundeslandBP).sort()].map((value, idx) => {
+                    const ok = selectBundesland.some((v) => v === value);
+                    return (
+                      <div key={idx} onClick={() => onClickFilterItem({ category: "bundes", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                        {value}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+           
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
