@@ -72,3 +72,14 @@ export const onFilterMobileOpenAtom = atom({
   key: "onFilterMobileOpenAtom",
   default: false
 })
+
+/* Orga Filter */
+export const onOrgaFilterActivateAtom = atom({
+  key: "onOrgaFilterActivateAtom",
+  default: {
+    ready: false,
+    all: false,
+    bundes: ""
+  }
+
+})

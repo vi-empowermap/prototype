@@ -1,4 +1,4 @@
-import { clickedItemsListAtom, onFilterMobileOpenAtom, onOrgaFilterAtom, onSearchFilterAtom, onSearchMobileOpenAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, onFilterMobileOpenAtom, onOrgaFilterActivateAtom, onOrgaFilterAtom, onSearchFilterAtom, onSearchMobileOpenAtom } from "@/app/utils/state";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { angeboteBP, artderorganisationBP, bundeslandBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
@@ -6,13 +6,14 @@ import FilterAddBtn from "./filter_items/FilterAddBtn";
 import SectionResetBtn from "./filter_items/SectionResetBtn";
 import DynamicMiniMap from "./minimap";
 
-const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext }) => {
+const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
   const [fHeight, setFHeight] = useState(0);
   const [getOrgaFilter, setOrgaFilter] = useRecoilState(onOrgaFilterAtom);
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
   const [foundList, setFoundList] = useState(0);
+  const [getOrgaFilterActivateAtom, setOrgaFilterActivateAtom] = useRecoilState(onOrgaFilterActivateAtom);
   /* Filter */
   const [selectBundesland, setSelectBundesland] = useState([]);
   const [selectThemen, setSelectThmen] = useState([]);
@@ -22,6 +23,15 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
   const [selectSprache, setSelectSprache] = useState([]);
   const [selectArt, setSelectArt] = useState([]);
   const [selectZeige, setSelectZeige] = useState([]);
+
+  const selectBundeslandRef = useRef([]);
+  const selectThemenRef = useRef([]);
+  const selectTagsRef = useRef([]);
+  const selectZielGroupRef = useRef([]);
+  const selectAngeboteRef = useRef([]);
+  const selectSpracheRef = useRef([]);
+  const selectArtRef = useRef([]);
+  const selectZeigeRef = useRef([]);
   const [activeFilter, setActiveFilter] = useState({
     okBundes: false,
     okThemen: false,
@@ -57,64 +67,80 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
       const exist = selectBundesland.findIndex((v) => v === value);
       if (exist >= 0) {
         setSelectBundesland([...selectBundesland.filter((v) => v !== value)]);
+        selectBundeslandRef.current = [...selectBundesland.filter((v) => v !== value)];
       } else {
         setSelectBundesland([...selectBundesland, value]);
+        selectBundeslandRef.current = [...selectBundesland, value];
       }
     }
     if (category === "themen") {
       const exist = selectThemen.findIndex((v) => v === value);
       if (exist >= 0) {
         setSelectThmen([...selectThemen.filter((v) => v !== value)]);
+        selectThemenRef.current = [...selectThemen.filter((v) => v !== value)];
       } else {
         setSelectThmen([...selectThemen, value]);
+        selectThemenRef.current = [...selectThemen, value];
       }
     }
     if (category === "tags") {
       const exist = selectTags.findIndex((v) => v === value);
       if (exist >= 0) {
         setSelectTags([...selectTags.filter((v) => v !== value)]);
+        selectTagsRef.current = [...selectTags.filter((v) => v !== value)];
       } else {
         setSelectTags([...selectTags, value]);
+        selectTagsRef.current = [...selectTags, value];
       }
     }
     if (category === "ziel") {
       const exist = selectZielGroup.findIndex((v) => v === value);
       if (exist >= 0) {
         setSelectZielGroup([...selectZielGroup.filter((v) => v !== value)]);
+        selectZielGroupRef.current = [...selectZielGroup.filter((v) => v !== value)];
       } else {
         setSelectZielGroup([...selectZielGroup, value]);
+        selectZielGroupRef.current = [...selectZielGroup, value];
       }
     }
     if (category === "angebote") {
       const exist = selectAngebote.findIndex((v) => v === value);
       if (exist >= 0) {
         setSelectAngebote([...selectAngebote.filter((v) => v !== value)]);
+        selectAngeboteRef.current = [...selectAngebote.filter((v) => v !== value)];
       } else {
         setSelectAngebote([...selectAngebote, value]);
+        selectAngeboteRef.current = [...selectAngebote, value];
       }
     }
     if (category === "sprache") {
       const exist = selectSprache.findIndex((v) => v === value);
       if (exist >= 0) {
         setSelectSprache([...selectSprache.filter((v) => v !== value)]);
+        selectSpracheRef.current = [...selectSprache.filter((v) => v !== value)];
       } else {
         setSelectSprache([...selectSprache, value]);
+        selectSpracheRef.current = [...selectSprache, value];
       }
     }
     if (category === "art") {
       const exist = selectArt.findIndex((v) => v === value);
       if (exist >= 0) {
         setSelectArt([...selectArt.filter((v) => v !== value)]);
+        selectArtRef.current = [...selectArt.filter((v) => v !== value)];
       } else {
         setSelectArt([...selectArt, value]);
+        selectArtRef.current = [...selectArt, value];
       }
     }
     if (category === "zeige") {
       const exist = selectZeige.findIndex((v) => v === value);
       if (exist >= 0) {
         setSelectZeige([...selectZeige.filter((v) => v !== value)]);
+        selectZeigeRef.current = [...selectZeige.filter((v) => v !== value)];
       } else {
         setSelectZeige([...selectZeige, value]);
+        selectZeigeRef.current = [...selectZeige, value];
       }
     }
   };
@@ -137,6 +163,27 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
     for (let i = 0; i < data.length; i++) {
       data[i].filterVisible = true;
     }
+    setActiveFilter({
+      okBundes: false,
+      okThemen: false,
+      okTags: false,
+      okZiel: false,
+      okAngebote: false,
+      okSprache: false,
+      okArt: false,
+      okZeige: false,
+    });
+    activeFilterRef.current = {
+      okBundes: false,
+      okThemen: false,
+      okTags: false,
+      okZiel: false,
+      okAngebote: false,
+      okSprache: false,
+      okArt: false,
+      okZeige: false,
+    };
+    onResetAll()
     setData(data);
     setOpenFilter(false);
     setOnFilterMobileOpen(false);
@@ -152,7 +199,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
     setSelectZeige([...["archiv", "aktive"]]);
   };
   const onResetAll = () => {
-    setSelectBundesland([])
+    setSelectBundesland([]);
     setSelectThmen([]);
     setSelectTags([]);
     setSelectZielGroup([]);
@@ -160,6 +207,14 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
     setSelectSprache([]);
     setSelectArt([]);
     setSelectZeige([]);
+    selectBundeslandRef.current = [];
+    selectThemenRef.current = [];
+    selectTagsRef.current = [];
+    selectZielGroupRef.current = [];
+    selectAngeboteRef.current = [];
+    selectSpracheRef.current = [];
+    selectArtRef.current = [];
+    selectZeigeRef.current = [];
   };
 
   /* Search */
@@ -167,58 +222,59 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
     setOpenFilter(false);
     setOnFilterMobileOpen(false);
     setOrgaFilter(true);
+
     let count = 0;
     const data = [...getData];
     for (let i = 0; i < data.length; i++) {
       data[i].filterVisible = true;
     }
     for (let i = 0; i < data.length; i++) {
-      const okBundes = selectBundesland.some((v) => {
+      const okBundes = selectBundeslandRef.current.some((v) => {
         if (String(data[i].bundesland).toLocaleLowerCase() === String(v).toLocaleLowerCase()) {
           return true;
         }
       });
-      const okThemen = selectThemen.some((v) => {
+      const okThemen = selectThemenRef.current.some((v) => {
         for (let j = 0; j < data[i].themenschwerpunkt.length; j++) {
           if (themenschwerpunktBP[data[i].themenschwerpunkt[j]] === v) {
             return true;
           }
         }
       });
-      const okTags = selectTags.some((v, idx) => {
+      const okTags = selectTagsRef.current.some((v, idx) => {
         for (let j = 0; j < data[i].categories.length; j++) {
           if (data[i].categories[j] === v) {
             return true;
           }
         }
       });
-      const okZiel = selectZielGroup.some((v) => {
+      const okZiel = selectZielGroupRef.current.some((v) => {
         for (let j = 0; j < data[i].zielgruppe.length; j++) {
           if (zielgruppeBP[data[i].zielgruppe[j]] === v) {
             return true;
           }
         }
       });
-      const okAngebote = selectAngebote.some((v) => {
+      const okAngebote = selectAngeboteRef.current.some((v) => {
         for (let j = 0; j < data[i].angebote.length; j++) {
           if (angeboteBP[data[i].angebote[j]] === v) {
             return true;
           }
         }
       });
-      const okSprache = selectSprache.some((v) => {
+      const okSprache = selectSpracheRef.current.some((v) => {
         for (let j = 0; j < data[i].sprachunterstutzung.length; j++) {
           if (sprachunterstutzungBP[data[i].sprachunterstutzung[j]] === v) {
             return true;
           }
         }
       });
-      const okArt = selectArt.some((v) => {
+      const okArt = selectArtRef.current.some((v) => {
         if (artderorganisationBP[data[i].artderorganisation] === v) {
           return true;
         }
       });
-      const okZeige = selectZeige.some((v) => {
+      const okZeige = selectZeigeRef.current.some((v) => {
         if (data[i].archivoraktiv === v) {
           return true;
         }
@@ -251,6 +307,53 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
     resetFilter();
     onResetAll();
   }, [turnOnMap]);
+  useEffect(() => {
+    if (getOrgaFilterActivateAtom.ready) {
+      setActiveFilter({
+        okBundes: true,
+        okThemen: getOrgaFilterActivateAtom.all,
+        okTags: getOrgaFilterActivateAtom.all,
+        okZiel: getOrgaFilterActivateAtom.all,
+        okAngebote: getOrgaFilterActivateAtom.all,
+        okSprache: getOrgaFilterActivateAtom.all,
+        okArt: getOrgaFilterActivateAtom.all,
+        okZeige: getOrgaFilterActivateAtom.all,
+      });
+      activeFilterRef.current = {
+        okBundes: true,
+        okThemen: getOrgaFilterActivateAtom.all,
+        okTags: getOrgaFilterActivateAtom.all,
+        okZiel: getOrgaFilterActivateAtom.all,
+        okAngebote: getOrgaFilterActivateAtom.all,
+        okSprache: getOrgaFilterActivateAtom.all,
+        okArt: getOrgaFilterActivateAtom.all,
+        okZeige: getOrgaFilterActivateAtom.all,
+      };
+      if (!getOrgaFilterActivateAtom.all) {
+        console.log(getOrgaFilterActivateAtom);
+        setSelectBundesland([getOrgaFilterActivateAtom.bundes]);
+        selectBundeslandRef.current = [getOrgaFilterActivateAtom.bundes];
+      } else {
+        setSelectBundesland([getOrgaFilterActivateAtom.bundes]);
+        selectBundeslandRef.current = [getOrgaFilterActivateAtom.bundes];
+        setSelectThmen([...getOrgaFilterActivateAtom.themen]);
+        selectThemenRef.current = [...getOrgaFilterActivateAtom.themen];
+        setSelectTags([...getOrgaFilterActivateAtom.tags]);
+        selectTagsRef.current = [...getOrgaFilterActivateAtom.tags];
+        setSelectZielGroup([...getOrgaFilterActivateAtom.ziel]);
+        selectZielGroupRef.current = [...getOrgaFilterActivateAtom.ziel];
+        setSelectAngebote([...getOrgaFilterActivateAtom.angebote]);
+        selectAngeboteRef.current = [...getOrgaFilterActivateAtom.angebote];
+        setSelectSprache([...getOrgaFilterActivateAtom.sprache]);
+        selectSpracheRef.current = [...getOrgaFilterActivateAtom.sprache];
+        setSelectArt([...getOrgaFilterActivateAtom.art]);
+        selectArtRef.current = [...getOrgaFilterActivateAtom.art];
+        setSelectZeige([getOrgaFilterActivateAtom.zeige]);
+        selectZeigeRef.current = [getOrgaFilterActivateAtom.zeige];
+      }
+      onSearch();
+    }
+  }, [getOrgaFilterActivateAtom.ready]);
 
   useEffect(() => {
     if (getOnSearchFilter) {
@@ -279,8 +382,9 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
       [keyName]: !activeFilterRef.current[keyName],
     };
   };
-  const onResetSection = (setSection) => {
+  const onResetSection = (setSection, setRef) => {
     setSection([]);
+    setRef.current = [];
   };
   return (
     <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300]">
@@ -340,16 +444,20 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
           </div>
 
           <div className="filter_item_box lg:hidden">
-            {turnOnMap && <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">Mini Map</div>
-              <div id="leaflet_minimap_container2" className="h-[calc(3vw+310px)] w-full flex justify-center">
-                <DynamicMiniMap setOpenFilter={setOpenFilter} />
+            {turnOnMap && (
+              <div className="filter_sub_item_box_wrapper">
+                <div className="filter_item_box_title">Mini Map</div>
+                <div id="leaflet_minimap_container2" className="h-[calc(3vw+310px)] w-full flex justify-center">
+                  <DynamicMiniMap setOpenFilter={setOpenFilter} />
+                </div>
               </div>
-            </div>}
+            )}
             <div className="filter_sub_item_box_wrapper">
               <div className="filter_item_box_title">Ohne Verortung</div>
               <div className="filter_sub_item_box">
-                <div onClick={onTurOnMap} className={`filter_item ${turnOnMap ? "bg-black text-white" : "bg-white text-black"}`}>Ort</div>
+                <div onClick={onTurOnMap} className={`filter_item ${turnOnMap ? "bg-black text-white" : "bg-white text-black"}`}>
+                  Ort
+                </div>
               </div>
             </div>
           </div>
@@ -359,7 +467,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 <div>Bundesland</div>
                 <div className="flex gap-4 text-xs">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okBundes"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectBundesland} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectBundesland} setRef={selectBundeslandRef} />
                 </div>
               </div>
               {activeFilter["okBundes"] && (
@@ -375,7 +483,6 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 </div>
               )}
             </div>
-           
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
@@ -383,7 +490,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 <div>Nach Themenschwerpunkt</div>
                 <div className="flex gap-4 text-xs">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okThemen"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectThmen} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectThmen} setRef={selectThemenRef} />
                 </div>
               </div>
               {activeFilter["okThemen"] && (
@@ -404,7 +511,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 <div>Nach Tags</div>
                 <div className="flex gap-4 text-xs">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okTags"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectTags} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectTags} setRef={selectTagsRef} />
                 </div>
               </div>
               {activeFilter["okTags"] && (
@@ -427,7 +534,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 <div>Zielgruppe</div>
                 <div className="flex gap-4 text-xs">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZiel"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZielGroup} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZielGroup} setRef={selectZielGroupRef} />
                 </div>
               </div>
               {activeFilter["okZiel"] && (
@@ -448,7 +555,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 <div>Angebote</div>
                 <div className="flex gap-4 text-xs">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okAngebote"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectAngebote} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectAngebote} setRef={selectAngeboteRef} />
                 </div>
               </div>
               {activeFilter["okAngebote"] && (
@@ -471,7 +578,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 <div>Sprache</div>
                 <div className="flex gap-4 text-xs">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okSprache"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectSprache} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectSprache} setRef={selectSpracheRef} />
                 </div>
               </div>
               {activeFilter["okSprache"] && (
@@ -492,7 +599,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 <div>Art der Organisation</div>
                 <div className="flex gap-4 text-xs">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okArt"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectArt} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectArt} setRef={selectArtRef} />
                 </div>
               </div>
               {activeFilter["okArt"] && (
@@ -515,7 +622,7 @@ const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placehold
                 <div>Zeige</div>
                 <div className="flex gap-4 text-xs">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZeige"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZeige} />
+                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZeige} setRef={selectZeigeRef} />
                 </div>
               </div>
               {activeFilter["okZeige"] && (

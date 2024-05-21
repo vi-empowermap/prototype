@@ -1,9 +1,9 @@
-import { clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, readyAniAtom, setViewAtom } from "@/app/utils/state";
+import { clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, onOrgaFilterActivateAtom, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import ListBoxIcon from "./ListBoxIcon";
-import { angeboteBP, socialMediaBP, sprachunterstutzungBP, themenschwerpunktBP } from "../constant/blueprintOptionData";
+import { angeboteBP, artderorganisationBP, socialMediaBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
 import useKirbyText from "@/app/utils/hooks/useKirbyText";
 
 const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) => {
@@ -17,8 +17,14 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   const setCloseOrgaAtom = useSetRecoilState(closeOrgaAtom);
   const setReady = useSetRecoilState(readyAniAtom);
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
+  const [getOrgaFilterActivateAtom, setOrgaFilterActivateAtom] = useRecoilState(onOrgaFilterActivateAtom);
   useEffect(() => {
     if (Boolean(search)) {
+      setOrgaFilterActivateAtom({
+        ready: false,
+        all: false,
+        bundes: ""
+      })
       setReady(true);
       setTimeout(() => {
         setCloseOrgaAtom(false);
@@ -71,6 +77,39 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     navigator.clipboard.writeText(`${window.location.href}`);
     alert("Copied the Url: " + `${window.location.href}`);
   };
+  const onFilterBundesLand = () => {
+    console.log(orgaInfo)
+    setOrgaFilterActivateAtom({
+      ready: true,
+      all: false,
+      bundes: orgaInfo.bundesland
+    })
+    onClose()
+  }
+  const onFilterAll = () => {
+    console.log(orgaInfo)
+    setOrgaFilterActivateAtom({
+      ready: true,
+      all: true,
+      bundes: orgaInfo.bundesland,
+      themen: orgaInfo.themenschwerpunkt.map((v) => {
+        return themenschwerpunktBP[v]
+      }),
+      tags: [...orgaInfo.categories],
+      ziel: orgaInfo.zielgruppe.map((v) => {
+        return zielgruppeBP[v]
+      }),
+      angebote: orgaInfo.angebote.map((v) => {
+        return angeboteBP[v]
+      }),
+      sprache: orgaInfo.sprachunterstutzung.map((v) => {
+        return sprachunterstutzungBP[v]
+      }),
+      art: [artderorganisationBP[orgaInfo.artderorganisation]],
+      zeige: orgaInfo.archivoraktiv
+    })
+    onClose()
+  }
   return (
     <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 `}>
       <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-screen lg:h-full lg:border-x-2 lg:border-t-2 border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
@@ -186,7 +225,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           </div>
           <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 lg:overflow-hidden gap-4 mb-4 lg:gap-0 lg:mb-0">
             <div className="w-full h-fit flex justify-center lg:px-8">
-              <div className="flex w-full relative group h-28 ">
+              <div onClick={() => onFilterBundesLand()} className="flex w-full relative group h-28 ">
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-10 -left-6 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-4 -left-3 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border-2 lg:border-b-0 p-6 text-xl cursor-pointer select-none">
@@ -195,7 +234,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
               </div>
             </div>
             <div className="w-full h-fit flex justify-center lg:px-8">
-              <div className="flex w-full relative group h-28">
+              <div onClick={() => onFilterAll()} className="flex w-full relative group h-28">
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-10 -left-6 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-4 -left-3 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border-2 lg:border-b-0 p-6 text-xl cursor-pointer select-none">
