@@ -1,3 +1,21 @@
+export const bundeslandBP = {
+    a: "bayern",
+    b: "niedersachsen",
+    c: "baden-Württemberg",
+    d: "nordrhein-Westfalen",
+    e: "brandenburg",
+    f: "mecklenburg-Vorpommern",
+    g: "hessen",
+    h: "sachsen-Anhalt",
+    i: "rheinland-Pfalz",
+    j: "sachsen",
+    k: "thüringen",
+    l: "schleswig-Holstein",
+    m: "saarland",
+    n: "berlin",
+    o: "hamburg",
+    p: "bremen",
+}
 export const themenschwerpunktBP = {
     a: "Bildung & Professionalisierung",
     b: "Kultur und Kunst",

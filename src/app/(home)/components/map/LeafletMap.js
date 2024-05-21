@@ -76,7 +76,7 @@ const MapController = ({ setViewAtomValue }) => {
       // console.log(custom)
       if (setViewAtomValue.name !== "start") {
         if(setViewAtomValue.type === "mini"){
-          map.setView(setViewAtomValue.pos, 18, {animate: false})
+          map.setView(setViewAtomValue.pos, 11, {animate: false})
          
         }else{
           map.closePopup()
@@ -109,7 +109,7 @@ const LeafletMap = ({doubleScreenTouched, data, setData, getDataForMarker }) => 
         {getDataForMarker.map((value, index) => {
           if(value.filterVisible){
             return (
-            <CustomMarker key={index} title={value.name} color={value.bgColor} font={value.font} getData={data} setData={setData} id={value.id} artderorganisation={value.artderorganisation} position={value.location} activeColor={value.bgColor} archivoraktiv={value.archivoraktiv} />
+            <CustomMarker key={index} title={value.organame} color={value.bgColor} font={value.font} getData={data} setData={setData} id={value.id} artderorganisation={value.artderorganisation} position={value.location} activeColor={value.bgColor} archivoraktiv={value.archivoraktiv} />
           )
           }
           

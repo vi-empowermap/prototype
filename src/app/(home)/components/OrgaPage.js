@@ -18,7 +18,6 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   const setReady = useSetRecoilState(readyAniAtom);
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   useEffect(() => {
-   
     if (Boolean(search)) {
       setReady(true);
       setTimeout(() => {
@@ -56,7 +55,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           }
         }
       }
-      console.log(orgaInfo)
+      console.log(orgaInfo);
     } else {
       setOpen(false);
     }
@@ -73,11 +72,11 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     alert("Copied the Url: " + `${window.location.href}`);
   };
   return (
-    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500`}>
-      <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-full lg:border-x-2 lg:border-t-2 border-black lg:rounded-tl-3xl lg:rounded-tr-3xl">
-        <nav className="flex gap-4 justify-end p-4 mb-4">
+    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 `}>
+      <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-screen lg:h-full lg:border-x-2 lg:border-t-2 border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
+        <nav className="flex gap-4 justify-end p-4 lg:mb-2">
           <div onClick={onCopyText} className="cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-9 h-9">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 lg:w-8 lg:h-8">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -86,13 +85,14 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
             </svg>
           </div>
           <div onClick={onClose} className="cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-9 h-9">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 lg:w-8 lg:h-8">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
           </div>
         </nav>
-        <div className="px-6 flex h-full flex-col">
-          <h1 style={{ color: `${orgaInfo.bgColor}` }} className={`text-8xl font-bold mb-8 ${orgaInfo.font}`}>
+
+        <div className="px-4 flex flex-grow flex-col overflow-y-auto">
+          <h1 style={{ color: `${orgaInfo.bgColor}` }} className={`text-4xl lg:text-8xl font-bold mb-8 ${orgaInfo.font}`}>
             {orgaInfo.organame}
           </h1>
           <div className="flex flex-wrap items-center gap-x-10 gap-y-4 mb-8">
@@ -106,8 +106,8 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 );
               })}
           </div>
-          <div className="flex-grow flex flex-col lg:flex-row justify-between overflow-y-scroll">
-            <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="flex-1 flex flex-col border-b-2 lg:border-b-0 lg:border-r-2 lg:pr-4">
+          <div className="flex-grow flex flex-col lg:flex-row justify-start lg:justify-between">
+            <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="lg:flex-1 flex flex-col border-b-2 lg:border-b-0 lg:border-r-2 lg:pr-4 lg:pb-0 pb-4">
               <div className="text-base font-base">{orgaInfo.aboutorga}</div>
               <div className="mt-4">
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.languagesupporttext })}</div>
@@ -142,8 +142,8 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 <div className="flex flex-wrap">{orgaInfo.categories && <div>{orgaInfo.categories.join(", ")}</div>}</div>
               </div>
             </div>
-            <div className="flex-1 lg:pt-0 lg:pl-4">
-              <div className={`${turnOnMap ? "block": "hidden"} mb-4`}>
+            <div className="lg:flex-1 lg:pt-0 lg:pl-4 pt-4 ">
+              <div className={`${turnOnMap ? "block" : "hidden"} mb-4`}>
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.locationtext })}</div>
                 <div>
                   {useKirbyText({ text: panelDatas.bundeslabeltext })}: {String(orgaInfo.bundesland).slice(0, 1).toUpperCase()}
@@ -184,9 +184,25 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
               </div>
             </div>
           </div>
-          <div className="w-full h-48 justify-between flex bg-blue-200 mt-8">
-            <div className="flex-1">ds</div>
-            <div className="flex-1">as</div>
+          <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 lg:overflow-hidden gap-4 mb-4 lg:gap-0 lg:mb-0">
+            <div className="w-full h-fit flex justify-center lg:px-8">
+              <div className="flex w-full relative group h-28 ">
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-10 -left-6 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-4 -left-3 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border-2 lg:border-b-0 p-6 text-xl cursor-pointer select-none">
+                  Zeige alle Initiativen <span className="font-semibold">in der selben Stadt</span>
+                </div>
+              </div>
+            </div>
+            <div className="w-full h-fit flex justify-center lg:px-8">
+              <div className="flex w-full relative group h-28">
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-10 -left-6 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-4 -left-3 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border-2 lg:border-b-0 p-6 text-xl cursor-pointer select-none">
+                  Zeige alle Initiativen <span className="font-semibold">mit den gleichen Kategorien</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

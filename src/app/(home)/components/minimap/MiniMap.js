@@ -6,7 +6,7 @@ import { currentBundesLand, setViewAtom } from "@/app/utils/state";
 import { MAPTILELAYER } from "../../constant/mapInfo";
 import { RANDOMCOLOR_LIST } from "../../constant/colors";
 
-const LeafletMap = () => {
+const LeafletMap = ({setOpenFilter}) => {
   const [setViewAtomValue, setViewAtomSet] = useRecoilState(setViewAtom);
   const [getCurrentBundesLand,setCurrentBundesLand] = useRecoilState(currentBundesLand);
   
@@ -51,7 +51,9 @@ const LeafletMap = () => {
               const latlng = e.latlng;
               const bundesland = e["layer"].feature.properties.name;
               console.log(bundesland);
-
+              if(setOpenFilter){
+                setOpenFilter(false)
+              }
               setViewAtomSet({
                 pos: [latlng.lat, latlng.lng],
                 name: bundesland,

@@ -31,7 +31,7 @@
 
 @layer components{
     .orga_icon_text{
-        @apply font-semibold text-xl
+        @apply font-semibold text-sm lg:text-xl
     }
     .orga_sub_title{
         @apply font-semibold flex justify-between

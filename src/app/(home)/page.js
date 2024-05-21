@@ -95,7 +95,7 @@ const getKirbyData = async () => {
       return value;
     }
   });
- 
+  console.log(data)
   data.result.map((value) => {
     // That is for dragging event for CustomMarker
     value.visible = true;
@@ -123,6 +123,7 @@ const getKirbyData = async () => {
 };
 
 export default async function Home() {
+  let totalCountOfBundesland = {}
 // kirby Panel data
 const panelData = await getKirbyPanelData();
 
@@ -142,6 +143,14 @@ const panelData = await getKirbyPanelData();
   })
   const dataL = data.filter((v) => {
     if(v.lokalorga === "false"){
+       // Counting Bundesland
+       if(totalCountOfBundesland[v.bundesland.toLowerCase()]){
+        totalCountOfBundesland[v.bundesland.toLowerCase()] += 1
+      }else {
+        if(v.bundesland !== ''){
+          totalCountOfBundesland[v.bundesland.toLowerCase()] = 1
+        }
+      }
       return v
     }
   })
@@ -149,7 +158,7 @@ const panelData = await getKirbyPanelData();
   /* Organisations have some categories. To make Categories List you need to collect here the categoires */
 
  
-  let totalCountOfBundesland = {}
+ 
 
   /* --- KQL Data: Organisation only --- */
   const kqlData = await getKirbyData();
