@@ -15,6 +15,13 @@
 #leaflet_minimap_container .leaflet-container {
     background-color: white;
 }
+#leaflet_minimap_container2 .leaflet-control-attribution {
+    display: none;
+}
+#leaflet_minimap_container2 .leaflet-container {
+    background-color: rgb(229 229 229);
+
+}
 
 @layer base {
     * {
@@ -31,7 +38,7 @@
     }
     /* Filter page */
     .filter_item_box {
-        @apply border-b last:border-b-0 border-neutral-400 py-2 mb-2 pr-8 px-2
+        @apply border-b last:border-b-0 border-neutral-400 py-2 mb-2 lg:pr-8 px-2
     }
     .filter_sub_item_box {
         @apply text-sm flex gap-4 flex-wrap mt-4

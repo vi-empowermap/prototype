@@ -4,8 +4,9 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { angeboteBP, artderorganisationBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
 import FilterAddBtn from "./filter_items/FilterAddBtn";
 import SectionResetBtn from "./filter_items/SectionResetBtn";
+import DynamicMiniMap from "./minimap";
 
-const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) => {
+const Filtern = ({onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
   const [fHeight, setFHeight] = useState(0);
@@ -261,8 +262,8 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
     };
   };
   const onResetSection = (setSection) => {
-    setSection([])
-  }
+    setSection([]);
+  };
   return (
     <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300]">
       <div className="hidden lg:flex gap-2 w-full h-full items-center">
@@ -286,7 +287,7 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
         )}
       </div>
       <div onClick={onClick} className={`relative flex-1 flex h-full lg:hidden justify-center items-center cursor-pointer active:bg-black active:text-white ${openFilter ? "bg-black text-white" : "bg-white text-black"}`}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -305,18 +306,33 @@ const Filtern = ({ turnOnMap, getData, setData, categories, placeholdertext }) =
           style={{ maxHeight: `calc(100vh - ${fHeight}px)` }}
           className="absolute top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-2px] text-black w-screen lg:w-[calc(100%+2px)] bg-neutral-200 h-fit overflow-y-scroll border-b-2 border-l-0 lg:border-l-2 border-black border-t-2 border-r-0 no-scrollbar"
         >
-          <div className="sticky flex items-center gap-4 top-0 left-0 border-b-2 last:border-b-0 border-black py-2 mb-2 pr-8 bg-white px-2">
+          <div className="sticky flex items-center gap-4 top-0 left-0 border-b-2 last:border-b-0 border-black py-2 mb-2 pr-8 bg-white px-2 z-[2000]">
             <div onClick={onSearch} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Search
             </div>
-            <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
+            {/* <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Clear All
-            </div>
-            <div onClick={onSelectAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
+            </div> */}
+            {/* <div onClick={onSelectAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Select All
-            </div>
+            </div> */}
             <div onClick={resetFilter} className="lg:hidden cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Reset
+            </div>
+          </div>
+
+          <div className="filter_item_box lg:hidden">
+            {turnOnMap && <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">Mini Map</div>
+              <div id="leaflet_minimap_container2" className="h-[calc(3vw+310px)] w-full flex justify-center">
+                <DynamicMiniMap />
+              </div>
+            </div>}
+            <div className="filter_sub_item_box_wrapper">
+              <div className="filter_item_box_title">Ohne Verortung</div>
+              <div className="filter_sub_item_box">
+                <div onClick={onTurOnMap} className={`filter_item ${turnOnMap ? "bg-black text-white" : "bg-white text-black"}`}>Ort</div>
+              </div>
             </div>
           </div>
           <div className="filter_item_box">
