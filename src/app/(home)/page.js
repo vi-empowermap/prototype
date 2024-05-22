@@ -58,6 +58,7 @@ const getKirbyData = async () => {
     query: "kirby.users",
     select: {
       id: true,
+      orgaimage: true,
       name: true,
       email: true,
       location: true,
@@ -88,7 +89,7 @@ const getKirbyData = async () => {
   /* KQL Fetch and get Data */
   const kirbyApiDraft = `${kirbyOriginAPI}`;
   const data = await fetchDataOriginAPI({ url: kirbyApiDraft, userInfo: { authEmail, authPassword }, method: "POST", bodyData });
-
+  console.log(data)
   // here you should bring only the Organisation users and who are ready
   data.result = data.result.filter((value) => {
     if (value.role_title === "Orga" && value.publicbtn === "true") {

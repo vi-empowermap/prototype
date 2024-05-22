@@ -22,6 +22,21 @@
     background-color: rgb(229 229 229);
 
 }
+.leaflet-popup-content-wrapper {
+    border: 2px solid black !important;
+    padding: 0px !important;
+    overflow: hidden;
+}
+
+.leaflet-popup-content{
+    width: fit-content !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+.leaflet-popup-tip{
+    display: none;
+    /* border: 2px solid black; */
+}
 
 @layer base {
     * {
