@@ -39,32 +39,38 @@ const CustomMarker = ({ id,title,font, color, getData, setData, artderorganisati
         // map.addLayer(markerRef.current);
         const data = [...getData];
         data.find((e) => e.id === id).visible = true;
-
         setData(data);
       } else {
         // map.removeLayer(markerRef.current);
-
         const data = [...getData];
         data.find((e) => e.id === id).visible = false;
         setData(data);
       }
     }
   };
-
+ 
   useEffect(() => {
-    map.on("dragend", dragEndEvent);
-    map.on("zoomend", dragEndEvent);
+    map.on("moveend", dragEndEvent);
+    
+    // map.on("dragend", dragEndEvent);
+    // map.on("zoomend", dragEndEvent);
+   
     // start
     dragEndEvent();
   }, []);
-
+  
+  
   /* Click Marker */
   useEffect(() => {
+    
     if (clicked.id === id) {
-      map.setView(clicked.pos, map.getZoom(), { animate: true, duration: 0.3 });
-      setTimeout(() => {
-        setClickedMarkerAtom(id);
-      }, 300);
+      // map.setView(clicked.pos, map.getZoom(), { animate: false , duration: 0.3 });
+      dragEndEvent();
+      setClickedMarkerAtom(id);
+      // setTimeout(() => {
+      //   // TODO: 💡 Do I need to update all of the markers? or just update the clicked marker.
+      //   dragEndEvent()
+      // }, 300);
       // if(clicked.id !== getClickedMarkerAtom){
       //   setClicked({id: ""})
       // }
@@ -85,6 +91,7 @@ const CustomMarker = ({ id,title,font, color, getData, setData, artderorganisati
         ref={markerRef}
         icon={getClickedMarkerAtom === id ? customIcon2 : customIcon1}
         position={position}
+        autoPan={false}
         eventHandlers={{
           click: (e) => {
             const data = [...getData];
@@ -100,9 +107,13 @@ const CustomMarker = ({ id,title,font, color, getData, setData, artderorganisati
           },
         }}
       >
-        <Popup closeButton={true}>
+        <Popup closeButton={true}
+        autoPan={false}>
           <div className="flex flex-col">
             <div style={{color: color}} className={`font-semibold text-lg`}>{title}</div>
+            <div className="w-full aspect-square bg-neutral-300 flex justify-center items-center">
+              Image?
+            </div>
           </div>
         </Popup>
       </Marker>

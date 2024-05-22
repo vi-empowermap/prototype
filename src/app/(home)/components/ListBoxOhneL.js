@@ -13,7 +13,7 @@ const ListBoxOhneL = ({ index, value }) => {
   };
 
   return (
-    <div onClick={() => onClick(value)} className="w-full aspect-square relative group">
+    <div onClick={() => onClick(value)} className="w-full aspect-square relative group overflow-hidden">
       <div
         style={{ backgroundColor: `${value.bgColor}`, transformStyle: "preserve-3d" }}
         className={`absolute top-0 left-0 flex flex-col py-4 px-2 gap-4 w-full aspect-square  cursor-pointer rounded-2xl [transform:rotateY(180deg)] group-hover:[transform:rotateY(0deg)] transition-all origin-center duration-700`}
@@ -22,15 +22,15 @@ const ListBoxOhneL = ({ index, value }) => {
           <div className="w-8 h-8 bg-white rounded-full"></div>
         </div>
         <div className="flex flex-wrap gap-2 justify-center items-center">
-          <div style={{}} className={`text-2xl font-semibold ${value.font} text-white`}>
-            {value.organame}
+          <div style={{}} className={`text-2xl font-semibold ${value.font} text-white `}>
+          {String(value.organame).slice(0, 11)}{String(value.organame).length > 12 && "..."}
           </div>
         </div>
       </div>
       <div style={{ borderColor: `${value.bgColor}`, backfaceVisibility: "hidden" }} className={`absolute top-0 left-0 flex flex-col py-2 px-2 gap-4 w-full aspect-square border-2 border-black cursor-pointer rounded-2xl group-hover:[transform:rotateY(180deg)] transition-all bg-white duration-700`}>
         <div className="flex flex-wrap gap-2 justify-center items-center">
           <div style={{ color: `${value.bgColor}` }} className={`text-2xl font-semibold ${value.font}`}>
-            {value.organame}
+          {String(value.organame).slice(0, 11)}{String(value.organame).length > 12 && "..."}
           </div>
         </div>
         <div className="flex flex-grow items-center justify-center gap-4">

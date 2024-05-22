@@ -5,7 +5,7 @@ const Wrapper = ({
     result: { content: data },
   },
 }) => {
-  console.log(data);
+  
   return (
     <div className="w-screen min-h-screen h-full">
       <MenuNav />

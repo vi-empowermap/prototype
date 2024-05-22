@@ -59,13 +59,12 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
         foundIdList.push(data[i].id);
       } else {
         data[i].filterVisible = false;
-        console.log("No words found.");
       }
     }
 
     setData(data);
     setDataForMarker(data);
-    console.log(foundIdList);
+    
     setFoundList(foundIdList.length);
     setOnSearchFilter(true);
     setOrgaFilter(false);

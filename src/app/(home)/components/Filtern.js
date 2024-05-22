@@ -330,7 +330,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
         okZeige: getOrgaFilterActivateAtom.all,
       };
       if (!getOrgaFilterActivateAtom.all) {
-        console.log(getOrgaFilterActivateAtom);
+        
         setSelectBundesland([getOrgaFilterActivateAtom.bundes]);
         selectBundeslandRef.current = [getOrgaFilterActivateAtom.bundes];
       } else {

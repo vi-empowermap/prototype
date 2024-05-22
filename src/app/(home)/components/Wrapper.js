@@ -136,7 +136,7 @@ const Wrapper = ({
   }, [turnOnMap]);
 
   const onTurOnMap = () => {
-    console.log("reset all");
+    
     setTurnOnMap((pre) => !pre);
     setClickedMarkerAtom(-1);
     setClickedItemsList([]);
