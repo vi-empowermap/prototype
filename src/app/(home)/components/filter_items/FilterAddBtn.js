@@ -1,5 +1,5 @@
 const FilterAddBtn = ({onActiveFilter, activeFilter, keyName}) => {
-    return <div onClick={() => onActiveFilter(keyName)} className="cursor-pointer opacity-50 hover:opacity-100 transition-all">
+    return <div onClick={() => onActiveFilter(keyName)} className="filter_btn">
     {activeFilter[keyName] ? (
       <div>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.} stroke="currentColor" className="w-6 h-6">

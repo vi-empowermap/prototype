@@ -183,7 +183,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
       okArt: false,
       okZeige: false,
     };
-    onResetAll()
+    onResetAll();
     setData(data);
     setOpenFilter(false);
     setOnFilterMobileOpen(false);
@@ -426,34 +426,19 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
       {openFilter && (
         <div
           style={{ maxHeight: `calc(100vh - ${fHeight}px)` }}
-          className="absolute top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-2px] text-black w-screen lg:w-[calc(100%+2px)] bg-neutral-200 h-fit overflow-y-scroll border-b-2 border-l-0 lg:border-l-2 border-black border-t-2 border-r-0 no-scrollbar"
+          className="absolute top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-2px] text-black w-screen lg:w-[calc(100%+2px)] bg-neutral-100 h-fit overflow-y-scroll border-b-2 border-l-0 lg:border-l-2 border-black border-t-2 border-r-0 no-scrollbar"
         >
-          <div className="sticky flex items-center gap-4 top-0 left-0 border-b-2 last:border-b-0 border-black py-2 mb-2 pr-8 bg-white px-2 z-[2000]">
-            <div onClick={onSearch} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
-              Search
-            </div>
-            {/* <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
-              Clear All
-            </div> */}
-            {/* <div onClick={onSelectAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
-              Select All
-            </div> */}
-            <div onClick={resetFilter} className="lg:hidden cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
-              Reset
-            </div>
-          </div>
-
           <div className="filter_item_box lg:hidden">
             {turnOnMap && (
               <div className="filter_sub_item_box_wrapper">
-                <div className="filter_item_box_title">Mini Map</div>
+                <div className="filter_item_box_title border-t-0 border-b-2 px-2 h-10">Mini Map</div>
                 <div id="leaflet_minimap_container2" className="h-[calc(3vw+310px)] w-full flex justify-center">
                   <DynamicMiniMap setOpenFilter={setOpenFilter} />
                 </div>
               </div>
             )}
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">Ohne Verortung</div>
+              <div className="filter_item_box_title border-b-2 px-2 h-10">Ohne Verortung</div>
               <div className="filter_sub_item_box">
                 <div onClick={onTurOnMap} className={`filter_item ${turnOnMap ? "bg-black text-white" : "bg-white text-black"}`}>
                   Ort
@@ -463,12 +448,12 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">
-                <div>Bundesland</div>
-                <div className="flex gap-4 text-xs">
+              <div className={`filter_item_box_title lg:border-t-0 ${activeFilter["okBundes"] ? "border-b-2": "border-b-0"}`}>
+                <div className="filter_btn_wrapper">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okBundes"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectBundesland} setRef={selectBundeslandRef} />
                 </div>
+                <div className="filter_box_title">Bundesland</div>
               </div>
               {activeFilter["okBundes"] && (
                 <div className="filter_sub_item_box">
@@ -486,12 +471,12 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">
-                <div>Nach Themenschwerpunkt</div>
-                <div className="flex gap-4 text-xs">
+              <div className={`filter_item_box_title ${activeFilter["okThemen"] ? "border-b-2": "border-b-0"}`}>
+                <div className="filter_btn_wrapper ">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okThemen"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectThmen} setRef={selectThemenRef} />
                 </div>
+                <div className="filter_box_title">Nach Themenschwerpunkt</div>
               </div>
               {activeFilter["okThemen"] && (
                 <div className="filter_sub_item_box">
@@ -506,13 +491,15 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                 </div>
               )}
             </div>
+          </div>
+          <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">
-                <div>Nach Tags</div>
-                <div className="flex gap-4 text-xs">
+              <div className={`filter_item_box_title ${activeFilter["okTags"] ? "border-b-2": "border-b-0"}`}>
+                <div className="filter_btn_wrapper ">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okTags"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectTags} setRef={selectTagsRef} />
                 </div>
+                <div className="filter_box_title">Nach Tags</div>
               </div>
               {activeFilter["okTags"] && (
                 <div className="filter_sub_item_box">
@@ -530,12 +517,12 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">
-                <div>Zielgruppe</div>
-                <div className="flex gap-4 text-xs">
+              <div className={`filter_item_box_title ${activeFilter["okZiel"] ? "border-b-2": "border-b-0"}`}>
+                <div className="filter_btn_wrapper ">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZiel"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZielGroup} setRef={selectZielGroupRef} />
                 </div>
+                <div className="filter_box_title">Zielgruppe</div>
               </div>
               {activeFilter["okZiel"] && (
                 <div className="filter_sub_item_box">
@@ -550,13 +537,15 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                 </div>
               )}
             </div>
+          </div>
+          <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">
-                <div>Angebote</div>
-                <div className="flex gap-4 text-xs">
+              <div className={`filter_item_box_title ${activeFilter["okAngebote"] ? "border-b-2": "border-b-0"}`}>
+                <div className="filter_btn_wrapper ">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okAngebote"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectAngebote} setRef={selectAngeboteRef} />
                 </div>
+                <div className="filter_box_title">Angebote</div>
               </div>
               {activeFilter["okAngebote"] && (
                 <div className="filter_sub_item_box">
@@ -574,12 +563,12 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">
-                <div>Sprache</div>
-                <div className="flex gap-4 text-xs">
+              <div className={`filter_item_box_title ${activeFilter["okSprache"] ? "border-b-2": "border-b-0"}`}>
+                <div className="filter_btn_wrapper ">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okSprache"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectSprache} setRef={selectSpracheRef} />
                 </div>
+                <div className="filter_box_title">Sprache</div>
               </div>
               {activeFilter["okSprache"] && (
                 <div className="filter_sub_item_box">
@@ -594,13 +583,15 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                 </div>
               )}
             </div>
+          </div>
+          <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">
-                <div>Art der Organisation</div>
-                <div className="flex gap-4 text-xs">
+              <div className={`filter_item_box_title ${activeFilter["okArt"] ? "border-b-2": "border-b-0"}`}>
+                <div className="filter_btn_wrapper ">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okArt"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectArt} setRef={selectArtRef} />
                 </div>
+                <div className="filter_box_title">Art der Organisation</div>
               </div>
               {activeFilter["okArt"] && (
                 <div className="filter_sub_item_box">
@@ -618,12 +609,12 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           </div>
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title">
-                <div>Zeige</div>
-                <div className="flex gap-4 text-xs">
+              <div className={`filter_item_box_title ${activeFilter["okZeige"] ? "border-b-2": "border-b-0"}`}>
+                <div className={`filter_btn_wrapper `}>
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZeige"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZeige} setRef={selectZeigeRef} />
                 </div>
+                <div className="filter_box_title">Zeige</div>
               </div>
               {activeFilter["okZeige"] && (
                 <div className="filter_sub_item_box">
@@ -637,6 +628,20 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                   })}
                 </div>
               )}
+            </div>
+          </div>
+          <div className="sticky bottom-0 flex items-center border-b-2 last:border-b-0 border-black z-[2000]">
+            <div onClick={onSearch} className="cursor-pointer hover:bg-black bg-white py-2 hover:text-white transition-all flex-1 flex items-center justify-center border-t-2 border-black">
+              Search
+            </div>
+            {/* <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
+              Clear All
+            </div> */}
+            {/* <div onClick={onSelectAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
+              Select All
+            </div> */}
+            <div onClick={resetFilter} className="lg:hidden cursor-pointer border-t-2 border-l-2 border-black py-2 hover:bg-black hover:text-white transition-all flex-1 flex justify-center items-center bg-white">
+              Reset
             </div>
           </div>
         </div>
