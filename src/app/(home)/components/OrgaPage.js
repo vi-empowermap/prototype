@@ -226,17 +226,17 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 lg:overflow-hidden gap-4 mb-4 lg:gap-0 lg:mb-0">
             <div className="w-full h-fit flex justify-center lg:px-8">
               <div onClick={() => onFilterBundesLand()} className="flex w-full relative group h-28 ">
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-10 -left-6 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-4 -left-3 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border-2 lg:border-b-0 p-6 text-xl cursor-pointer select-none">
-                  Zeige alle Initiativen <span className="font-semibold">in der selben Stadt</span>
+                  Zeige alle Initiativen <span className="font-semibold">in dem selben Bundesland</span>
                 </div>
               </div>
             </div>
             <div className="w-full h-fit flex justify-center lg:px-8">
               <div onClick={() => onFilterAll()} className="flex w-full relative group h-28">
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-10 -left-6 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-0 group-hover:left-0 top-4 -left-3 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border-2 lg:border-b-0 p-6 text-xl cursor-pointer select-none">
                   Zeige alle Initiativen <span className="font-semibold">mit den gleichen Kategorien</span>
                 </div>

@@ -38,19 +38,28 @@
     }
     /* Filter page */
     .filter_item_box {
-        @apply border-b last:border-b-0 border-neutral-400 py-2 mb-2 lg:pr-8 px-2
+        @apply lg:pr-0
     }
     .filter_sub_item_box {
-        @apply text-sm flex gap-4 flex-wrap mt-4
+        @apply text-sm flex gap-2 flex-wrap mt-0 px-2 py-2 bg-neutral-300 pb-4 lg:pr-8
     }
     .filter_sub_item_box_wrapper {
-        @apply mb-4
+        @apply mb-0
     }
     .filter_item_box_title {
-        @apply text-xl flex items-center justify-between
+        @apply text-xl flex items-center justify-start border-t-2 border-black
+    }
+    .filter_box_title {
+        @apply pl-2
     }
     .filter_item {
         @apply border-2 border-black px-2 py-1 transition-all cursor-pointer
+    }
+    .filter_btn_wrapper {
+        @apply flex text-xs
+    }
+    .filter_btn {
+        @apply cursor-pointer transition-all aspect-square w-10 flex justify-center items-center border-r-2 border-black hover:bg-black hover:text-white
     }
 
 }
