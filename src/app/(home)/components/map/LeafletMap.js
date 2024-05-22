@@ -73,10 +73,10 @@ const MapController = ({ setViewAtomValue }) => {
     const map = useMap()
    
     useEffect(() => {
-      // console.log(custom)
+      // 
       if (setViewAtomValue.name !== "start") {
         if(setViewAtomValue.type === "mini"){
-          map.setView(setViewAtomValue.pos, 11, {animate: false})
+          map.setView(setViewAtomValue.pos, 9, {animate: false})
          
         }else{
           map.closePopup()

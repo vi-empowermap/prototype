@@ -32,7 +32,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
       setOpen(true);
       // TODO
       const idx = getData.findIndex((value) => String(value.id) === search);
-      console.log("dddddd", idx);
+      
       if (idx < 0) {
         const nidx = noLGetData.findIndex((value) => String(value.id) === search);
         if (nidx > -1) {
@@ -44,7 +44,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           setCloseOrgaAtom(true);
         }
       } else {
-        console.log([getData[idx]]);
+        
         setOrgaInfo(getData[idx]);
         if ([getData[idx]][0].lokalorga === "true") {
           setTurnOnMap(false);
@@ -61,7 +61,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           }
         }
       }
-      console.log(orgaInfo);
+      
     } else {
       setOpen(false);
     }
@@ -78,7 +78,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     alert("Copied the Url: " + `${window.location.href}`);
   };
   const onFilterBundesLand = () => {
-    console.log(orgaInfo)
+    
     setOrgaFilterActivateAtom({
       ready: true,
       all: false,
@@ -87,7 +87,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     onClose()
   }
   const onFilterAll = () => {
-    console.log(orgaInfo)
+    
     setOrgaFilterActivateAtom({
       ready: true,
       all: true,
@@ -223,8 +223,8 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
               </div>
             </div>
           </div>
-          <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 lg:overflow-hidden gap-4 mb-4 lg:gap-0 lg:mb-0">
-            <div className="w-full h-fit flex justify-center lg:px-8">
+          <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 gap-4 mb-4 lg:gap-0 lg:mb-0">
+            <div className="w-full h-fit flex justify-center lg:px-8 overflow-hidden">
               <div onClick={() => onFilterBundesLand()} className="flex w-full relative group h-28 ">
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
@@ -233,7 +233,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 </div>
               </div>
             </div>
-            <div className="w-full h-fit flex justify-center lg:px-8">
+            <div className="w-full h-fit flex justify-center lg:px-8 overflow-hidden">
               <div onClick={() => onFilterAll()} className="flex w-full relative group h-28">
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>

@@ -50,7 +50,7 @@ const LeafletMap = ({setOpenFilter}) => {
             click: (e) => {
               const latlng = e.latlng;
               const bundesland = e["layer"].feature.properties.name;
-              console.log(bundesland);
+              
               if(setOpenFilter){
                 setOpenFilter(false)
               }
