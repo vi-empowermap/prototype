@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-const CustomMarker = ({ id,title,font, color, getData, setData, artderorganisation, position, activeColor, archivoraktiv }) => {
+const CustomMarker = ({ id,title,imageUrl,font, color, getData, setData, artderorganisation, position, activeColor, archivoraktiv }) => {
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   const setclickedItemsList = useSetRecoilState(clickedItemsListAtom);
   const getSetViewAtom = useRecoilValue(setViewAtom);
@@ -50,6 +50,7 @@ const CustomMarker = ({ id,title,font, color, getData, setData, artderorganisati
   };
  
   useEffect(() => {
+    
     map.on("moveend", dragEndEvent);
     
     // map.on("dragend", dragEndEvent);
@@ -107,13 +108,16 @@ const CustomMarker = ({ id,title,font, color, getData, setData, artderorganisati
           },
         }}
       >
-        <Popup closeButton={true}
-        autoPan={false}>
-          <div className="flex flex-col">
-            <div style={{color: color}} className={`font-semibold text-lg`}>{title}</div>
-            <div className="w-full aspect-square bg-neutral-300 flex justify-center items-center">
-              Image?
+        <Popup 
+        closeButton={true}
+        autoPan={false}
+        
+        >
+          <div className="flex flex-col w-fit">
+            <div style={{backgroundImage: `url(${process.env.KB_FOR_FILE}/@/file/${String(imageUrl).slice(7)})`}} className="w-60 aspect-video bg-neutral-300 flex justify-center items-center bg-cover">
+              
             </div>
+            <div style={{color: color, }} className={`font-semibold text-sm p-2`}>{title}</div>
           </div>
         </Popup>
       </Marker>
