@@ -158,10 +158,10 @@ const Wrapper = ({
           <div className="w-full h-full border-2 border-black overflow-hidden flex justify-center items-center">
             <div className=" border-2 border-black rounded-full flex justify-center items-center"> Map Image</div>
           </div>
-          <div className="w-full lg:text-4xl font-medium lg:leading-10">{panelDatas.introtext}</div>
+          <div className="w-full lg:text-4xl lg:leading-10 font-jetBrainsMono font-normal">{panelDatas.introtext}</div>
         </div>
         <div className="flex justify-center mb-4">
-          <div id="anibtn" onClick={onClickReady} className={`relative font-semibold cursor-pointer ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+          <div id="anibtn" onClick={onClickReady} className={`relative font-semibold cursor-pointer ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} font-jetBrainsMono font-normal`}>
             {panelDatas.introbtn}
           </div>
         </div>
@@ -183,7 +183,7 @@ const Wrapper = ({
             <div onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b-2 border-black">
               <LeafletMap doubleScreenTouched={doubleScreenTouched} data={getData} getDataForMarker={getDataForMarker} setData={setData} />
               {!Boolean(search) && (
-                <div className="absolute bottom-2 left-2 flex items-end">
+                <div className="absolute bottom-2 left-2 flex items-end select-none">
                   <div id="leaflet_minimap_container" className={`relative pt-10 hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
                     {openMiniMap && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.minimaptitle}</div>}
                     {getCurrentBundesLand !== "" && (

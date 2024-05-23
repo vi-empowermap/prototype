@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import ListBoxIcon from "./ListBoxIcon";
-import { angeboteBP, artderorganisationBP, socialMediaBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
+import { angeboteBP, artderorganisationBP, bundeslandBP, socialMediaBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
 import useKirbyText from "@/app/utils/hooks/useKirbyText";
 
 const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) => {
@@ -82,7 +82,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     setOrgaFilterActivateAtom({
       ready: true,
       all: false,
-      bundes: orgaInfo.bundesland
+      bundes: bundeslandBP[orgaInfo.bundesland]
     })
     onClose()
   }
@@ -91,7 +91,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     setOrgaFilterActivateAtom({
       ready: true,
       all: true,
-      bundes: orgaInfo.bundesland,
+      bundes: bundeslandBP[orgaInfo.bundesland],
       themen: orgaInfo.themenschwerpunkt.map((v) => {
         return themenschwerpunktBP[v]
       }),
@@ -111,7 +111,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     onClose()
   }
   return (
-    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 `}>
+    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 font-jetBrainsMono font-medium`}>
       <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-screen lg:h-full lg:border-x-2 lg:border-t-2 border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
         <nav className="flex gap-4 justify-end p-4 lg:mb-2">
           <div onClick={onCopyText} className="cursor-pointer">
