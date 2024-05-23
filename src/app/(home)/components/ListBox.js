@@ -5,6 +5,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import ListBoxIcon from "./ListBoxIcon";
 import gsap from "gsap";
 import { RANDOM_FONT_LIST, RANDOM_FONT_LIST_SIZE } from "../constant/fontList";
+import { bundeslandBP } from "../constant/blueprintOptionData";
 
 const ListBox = ({ index, value, bundeslandtext }) => {
   const [getClickedItemList, clickedItemsListset] = useRecoilState(clickedItemsListAtom);
@@ -20,7 +21,7 @@ const ListBox = ({ index, value, bundeslandtext }) => {
  
 
   return (
-    <div className={`listbox w-full relative z-[${index}] group flex items-start justify-start ${ready ? "translate-y-0 opacity-100 " : "translate-y-[150%] opacity-0"}`}>
+    <div className={`listbox w-full relative z-[${index}] group flex items-start justify-start ${ready ? "translate-y-0 opacity-100 " : "translate-y-[150%] opacity-0"} font-jetBrainsMono font-medium`}>
       {value.visible && value.filterVisible && (
         <>
           <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }} className="w-24 h-40 flex flex-col gap-4 justify-center items-center border-2 border-r-0 rounded-l-3xl -mt-14 group-hover:-translate-y-6 transition-all">
@@ -37,7 +38,7 @@ const ListBox = ({ index, value, bundeslandtext }) => {
             {/* <div className="text-lg">{value.email}</div> */}
             {!getOnSearchFilter && <div className="text-stone-950 font-semibold text-sm">
               {String(bundeslandtext).slice(0, 1).toUpperCase()}
-              {String(bundeslandtext).slice(1)}: {value.bundesland}
+              {String(bundeslandtext).slice(1)}: {bundeslandBP[value.bundesland]}
             </div>}
             {
               getOnSearchFilter && <div className="text-black">{String(value.aboutorga).slice(0, 200)}{String(value.aboutorga).length > 200 && "..."}</div>

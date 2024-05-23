@@ -29,6 +29,7 @@ module.exports = {
         sharpie: ["Sharpie"],
         telma: ["Telma"],
         theFutureMono: ["TheFutureMono"],
+        jetBrainsMono: ["JetBrainsMono"],
         jetBrainsMonoMedium: ["JetBrainsMonoMedium"],
         jetBrainsMonoLight: ["JetBrainsMonoLight"],
         jetBrainsMonoExtraBold: ["JetBrainsMonoExtraBold"],

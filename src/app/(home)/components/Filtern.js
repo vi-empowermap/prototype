@@ -230,7 +230,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
     }
     for (let i = 0; i < data.length; i++) {
       const okBundes = selectBundeslandRef.current.some((v) => {
-        if (String(data[i].bundesland).toLocaleLowerCase() === String(v).toLocaleLowerCase()) {
+        if (bundeslandBP[String(data[i].bundesland)] === String(v).toLocaleLowerCase()) {
           return true;
         }
       });
@@ -387,10 +387,10 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
     setRef.current = [];
   };
   return (
-    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300]">
+    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300] select-none">
       <div className="hidden lg:flex gap-2 w-full h-full items-center">
         <div onClick={onClick} className="lg:flex gap-2 cursor-pointer w-full h-full items-center hover:bg-black hover:text-white px-4">
-          <span>{placeholdertext}</span>
+          <span className="font-jetBrainsMono font-medium">{placeholdertext}</span>
           <span className={`${!openFilter ? "rotate-0" : "rotate-180"} transition-transform duration-500`}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
