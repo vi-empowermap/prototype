@@ -113,11 +113,11 @@ const CustomMarker = ({ id,title,imageUrl,font, color, getData, setData, artdero
         autoPan={false}
         
         >
-          <div className="flex flex-col w-fit">
-            <div style={{backgroundImage: `url(${process.env.KB_FOR_FILE}/@/file/${String(imageUrl).slice(7)})`}} className="w-60 aspect-video bg-neutral-300 flex justify-center items-center bg-cover">
-              
-            </div>
-            <div style={{color: color, }} className={`font-semibold text-sm p-2`}>{title}</div>
+          <div className="flex flex-col w-fit font-jetBrainsMono font-medium">
+          {/* If we need a photo then use this */}
+            {/* {String(imageUrl) !== "" && <div style={{backgroundImage: `url(${process.env.KB_FOR_FILE}/@/file/${String(imageUrl).slice(7)})`}} className="w-60 aspect-video bg-neutral-300 flex justify-center items-center bg-cover">
+            </div>} */}
+            <div style={{color: color,}} className={`flex flex-1 w-fit font-semibold text-sm p-2 ${String(imageUrl) === "" && "pt-6"}`}>{title}</div>
           </div>
         </Popup>
       </Marker>

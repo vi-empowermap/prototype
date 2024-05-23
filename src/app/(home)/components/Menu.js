@@ -6,7 +6,7 @@ const Menu = () => {
         router.push(path)
     }
   return (
-    <div className="h-full px-2 flex justify-center items-center cursor-pointer hover:bg-black hover:text-white transition-all relative z-[1300] group select-none">
+    <div className="h-full px-2 flex justify-center items-center cursor-pointer hover:bg-black hover:text-white transition-all relative z-[1300] group select-none font-jetBrainsMono font-medium">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 lg:w-8 lg:h-8">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>

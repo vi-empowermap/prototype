@@ -56,6 +56,9 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
   const [onFilterMobileOpen, setOnFilterMobileOpen] = useRecoilState(onFilterMobileOpenAtom);
   const [onSearchMobileOpen, setOnSearchMobileOpen] = useRecoilState(onSearchMobileOpenAtom);
 
+  useEffect(() => {
+    
+  },[ ])
   /* Note 
   1. click event
   2. Search Function
@@ -230,7 +233,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
     }
     for (let i = 0; i < data.length; i++) {
       const okBundes = selectBundeslandRef.current.some((v) => {
-        if (bundeslandBP[String(data[i].bundesland)] === String(v).toLocaleLowerCase()) {
+        if (bundeslandBP[String(data[i].bundesland)].toLocaleLowerCase() === String(v).toLocaleLowerCase()) {
           return true;
         }
       });
@@ -387,7 +390,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
     setRef.current = [];
   };
   return (
-    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300] select-none">
+    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l-2 border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300] select-none font-jetBrainsMono font-medium">
       <div className="hidden lg:flex gap-2 w-full h-full items-center">
         <div onClick={onClick} className="lg:flex gap-2 cursor-pointer w-full h-full items-center hover:bg-black hover:text-white px-4">
           <span className="font-jetBrainsMono font-medium">{placeholdertext}</span>
@@ -453,7 +456,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okBundes"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectBundesland} setRef={selectBundeslandRef} />
                 </div>
-                <div className="filter_box_title">Bundesland</div>
+                <div onClick={() => onActiveFilter("okBundes")} className="filter_box_title">Bundesland</div>
               </div>
               {activeFilter["okBundes"] && (
                 <div className="filter_sub_item_box">
@@ -476,7 +479,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okThemen"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectThmen} setRef={selectThemenRef} />
                 </div>
-                <div className="filter_box_title">Nach Themenschwerpunkt</div>
+                <div onClick={() => onActiveFilter("okThemen")} className="filter_box_title">Nach Themenschwerpunkt</div>
               </div>
               {activeFilter["okThemen"] && (
                 <div className="filter_sub_item_box">
@@ -499,7 +502,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okTags"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectTags} setRef={selectTagsRef} />
                 </div>
-                <div className="filter_box_title">Nach Tags</div>
+                <div onClick={() => onActiveFilter("okTags")} className="filter_box_title">Nach Tags</div>
               </div>
               {activeFilter["okTags"] && (
                 <div className="filter_sub_item_box">
@@ -522,7 +525,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZiel"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZielGroup} setRef={selectZielGroupRef} />
                 </div>
-                <div className="filter_box_title">Zielgruppe</div>
+                <div onClick={() => onActiveFilter("okZiel")} className="filter_box_title">Zielgruppe</div>
               </div>
               {activeFilter["okZiel"] && (
                 <div className="filter_sub_item_box">
@@ -545,7 +548,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okAngebote"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectAngebote} setRef={selectAngeboteRef} />
                 </div>
-                <div className="filter_box_title">Angebote</div>
+                <div onClick={() => onActiveFilter("okAngebote")} className="filter_box_title">Angebote</div>
               </div>
               {activeFilter["okAngebote"] && (
                 <div className="filter_sub_item_box">
@@ -568,7 +571,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okSprache"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectSprache} setRef={selectSpracheRef} />
                 </div>
-                <div className="filter_box_title">Sprache</div>
+                <div onClick={() => onActiveFilter("okSprache")} className="filter_box_title">Sprache</div>
               </div>
               {activeFilter["okSprache"] && (
                 <div className="filter_sub_item_box">
@@ -591,7 +594,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okArt"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectArt} setRef={selectArtRef} />
                 </div>
-                <div className="filter_box_title">Art der Organisation</div>
+                <div onClick={() => onActiveFilter("okArt")} className="filter_box_title">Art der Organisation</div>
               </div>
               {activeFilter["okArt"] && (
                 <div className="filter_sub_item_box">
@@ -614,7 +617,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZeige"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZeige} setRef={selectZeigeRef} />
                 </div>
-                <div className="filter_box_title">Zeige</div>
+                <div onClick={() => onActiveFilter("okZeige")} className="filter_box_title">Zeige</div>
               </div>
               {activeFilter["okZeige"] && (
                 <div className="filter_sub_item_box">
