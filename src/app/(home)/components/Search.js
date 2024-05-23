@@ -109,7 +109,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
   },[])
 
   return (
-    <div className="lg:flex-1 aspect-square h-full lg:aspect-auto lg:w-full flex items-center lg:border-b-2 border-black lg:pl-4 relative select-none">
+    <div className="lg:flex-1 aspect-square h-full lg:aspect-auto lg:w-full flex items-center lg:border-b-2 border-black lg:pl-4 relative select-none font-jetBrainsMono font-medium">
       <div className="w-full h-full hidden lg:flex items-center">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center ">
           <input type="text" {...register("search")} placeholder={placeholdertext} className="bg-white w-full border-black rounded-xl focus:outline-none font-jetBrainsMono font-medium" />

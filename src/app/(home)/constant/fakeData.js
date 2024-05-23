@@ -21,6 +21,7 @@ export const fakeData = async () => {
                 osm: "23123"
 
             },
+            orgaimage: '',
             zielgruppe: [Object.keys(zielgruppeBP)[Math.floor(Math.random() * Object.keys(zielgruppeBP).length)]],
             font:RANDOM_FONT_LIST[Math.floor(Math.random() * RANDOM_FONT_LIST.length)],
             lokalorga: "false",
@@ -52,6 +53,7 @@ export const fakeData = async () => {
                 osm: "23123"
 
             },
+            orgaimage: '',
             angebote:[Object.keys(angeboteBP)[Math.floor(Math.random() * Object.keys(angeboteBP).length)]],
             zielgruppe: [Object.keys(zielgruppeBP)[Math.floor(Math.random() * Object.keys(zielgruppeBP).length)]],
             sprachunterstutzung: [[...Object.keys(sprachunterstutzungBP)][Math.floor(Math.random() * Object.values(sprachunterstutzungBP).length)]],

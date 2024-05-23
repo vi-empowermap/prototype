@@ -3,7 +3,7 @@ import Wrapper from "./components/Wrapper";
 import { fakeData } from "./constant/fakeData";
 import { fetchDataOriginAPI } from "../utils/hooks/useFetchData";
 import { RANDOMCOLOR_LIST } from "./constant/colors";
-import { angeboteBP, artderorganisationBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "./constant/blueprintOptionData";
+import { angeboteBP, artderorganisationBP, bundeslandBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "./constant/blueprintOptionData";
 import yaml from "js-yaml";
 import { RANDOM_FONT_LIST } from "./constant/fontList";
 const authEmail = process.env.KB_USER;
@@ -89,7 +89,7 @@ const getKirbyData = async () => {
   /* KQL Fetch and get Data */
   const kirbyApiDraft = `${kirbyOriginAPI}`;
   const data = await fetchDataOriginAPI({ url: kirbyApiDraft, userInfo: { authEmail, authPassword }, method: "POST", bodyData });
-  console.log(data)
+
   // here you should bring only the Organisation users and who are ready
   data.result = data.result.filter((value) => {
     if (value.role_title === "Orga" && value.publicbtn === "true") {
@@ -145,11 +145,11 @@ const panelData = await getKirbyPanelData();
   const dataL = data.filter((v) => {
     if(v.lokalorga === "false"){
        // Counting Bundesland
-       if(totalCountOfBundesland[v.bundesland.toLowerCase()]){
-        totalCountOfBundesland[v.bundesland.toLowerCase()] += 1
+       if(totalCountOfBundesland[bundeslandBP[v.bundesland].toLowerCase()]){
+        totalCountOfBundesland[bundeslandBP[v.bundesland].toLowerCase()] += 1
       }else {
         if(v.bundesland !== ''){
-          totalCountOfBundesland[v.bundesland.toLowerCase()] = 1
+          totalCountOfBundesland[bundeslandBP[v.bundesland].toLowerCase()] = 1
         }
       }
       return v
@@ -195,15 +195,17 @@ const panelData = await getKirbyPanelData();
       
      
       // Counting Bundesland
-      if(totalCountOfBundesland[value.bundesland.toLowerCase()]){
-        totalCountOfBundesland[value.bundesland.toLowerCase()] += 1
+      if(totalCountOfBundesland[bundeslandBP[value.bundesland].toLowerCase()]){
+        totalCountOfBundesland[bundeslandBP[value.bundesland].toLowerCase()] += 1
       }else {
         if(value.bundesland !== ''){
-          totalCountOfBundesland[value.bundesland.toLowerCase()] = 1
+          totalCountOfBundesland[bundeslandBP[value.bundesland].toLowerCase()] = 1
         }
       }
       return value;
+
     });
+   console.log(totalCountOfBundesland)
     // 
 
   return (

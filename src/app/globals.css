@@ -69,7 +69,7 @@
         @apply text-xl flex items-center justify-start border-t-2 border-black
     }
     .filter_box_title {
-        @apply pl-2
+        @apply pl-2 cursor-pointer
     }
     .filter_item {
         @apply border-2 border-black px-2 py-1 transition-all cursor-pointer
