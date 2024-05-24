@@ -113,8 +113,8 @@ const LeafletMap = ({doubleScreenTouched, data, setData, getDataForMarker }) => 
             return (
             <CustomMarker key={index} imageUrl={value.orgaimage} title={value.organame} color={value.bgColor} font={value.font} getData={data} setData={setData} id={value.id} artderorganisation={value.artderorganisation} position={value.location} activeColor={value.bgColor} archivoraktiv={value.archivoraktiv} />
           )
-          }
-          
+              }
+              
         })}
       </MapContainer>
     </>
