@@ -233,7 +233,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
     }
     for (let i = 0; i < data.length; i++) {
       const okBundes = selectBundeslandRef.current.some((v) => {
-        if (bundeslandBP[String(data[i].bundesland)].toLocaleLowerCase() === String(v).toLocaleLowerCase()) {
+        if (String(bundeslandBP[String(data[i].bundesland)]).toLocaleLowerCase() === String(v).toLocaleLowerCase()) {
           return true;
         }
       });
