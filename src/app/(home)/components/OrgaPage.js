@@ -78,7 +78,6 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     alert("Copied the Url: " + `${window.location.href}`);
   };
   const onFilterBundesLand = () => {
-      console.log(orgaInfo)
     setOrgaFilterActivateAtom({
       ready: true,
       all: false,
