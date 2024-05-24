@@ -312,8 +312,9 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
   }, [turnOnMap]);
   useEffect(() => {
     if (getOrgaFilterActivateAtom.ready) {
+      console.log(getOrgaFilterActivateAtom.location)
       setActiveFilter({
-        okBundes: true,
+        okBundes: getOrgaFilterActivateAtom.location ? true : false,
         okThemen: getOrgaFilterActivateAtom.all,
         okTags: getOrgaFilterActivateAtom.all,
         okZiel: getOrgaFilterActivateAtom.all,
@@ -323,7 +324,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
         okZeige: getOrgaFilterActivateAtom.all,
       });
       activeFilterRef.current = {
-        okBundes: true,
+        okBundes: getOrgaFilterActivateAtom.location ? true : false,
         okThemen: getOrgaFilterActivateAtom.all,
         okTags: getOrgaFilterActivateAtom.all,
         okZiel: getOrgaFilterActivateAtom.all,

@@ -78,7 +78,7 @@ body {
         @apply pl-2 cursor-pointer
     }
     .filter_item {
-        @apply border-2 border-black px-2 py-1 transition-all cursor-pointer
+        @apply border-0 text-[16px] rounded-lg border-black px-2 py-1 transition-all cursor-pointer
     }
     .filter_btn_wrapper {
         @apply flex text-xs

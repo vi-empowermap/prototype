@@ -23,6 +23,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
       setOrgaFilterActivateAtom({
         ready: false,
         all: false,
+        location: false,
         bundes: ""
       })
       setReady(true);
@@ -81,15 +82,16 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     setOrgaFilterActivateAtom({
       ready: true,
       all: false,
+      location: turnOnMap,
       bundes: bundeslandBP[orgaInfo.bundesland]
     })
     onClose()
   }
   const onFilterAll = () => {
-
     setOrgaFilterActivateAtom({
       ready: true,
       all: true,
+      location: turnOnMap,
       bundes: bundeslandBP[orgaInfo.bundesland],
       themen: orgaInfo.themenschwerpunkt.map((v) => {
         return themenschwerpunktBP[v]
@@ -223,7 +225,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
             </div>
           </div>
           <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 gap-4 mb-4 lg:gap-0 lg:mb-0">
-            <div className="w-full h-fit flex justify-center lg:px-8 overflow-hidden">
+            <div className={`${turnOnMap ? "block" : "hidden"} w-full h-fit flex justify-center lg:px-8 overflow-hidden`}>
               <div onClick={() => onFilterBundesLand()} className="flex w-full relative group h-28 ">
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
@@ -232,7 +234,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 </div>
               </div>
             </div>
-            <div className="w-full h-fit flex justify-center lg:px-8 overflow-hidden">
+            <div className={`w-full h-fit flex justify-center lg:px-8 overflow-hidden`}>
               <div onClick={() => onFilterAll()} className="flex w-full relative group h-28">
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
