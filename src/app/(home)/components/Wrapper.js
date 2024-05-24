@@ -171,7 +171,7 @@ const Wrapper = ({
         {/* Navigation BAR */}
         <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white opacity-0" : "border-black opacity-100"} overflow-y-visible`}>
           <Menu />
-          <Logo text={panelDatas.webtitle} />
+          <Logo text={panelDatas.webtitle} first={true} />
           <div className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black `}>
             <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} />
             <Filtern onTurOnMap={onTurOnMap} turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} />
@@ -293,7 +293,7 @@ const Wrapper = ({
         </div>
       </div>
 
-      <ListContainer bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
+      <ListContainer stadtText={panelDatas.stadtinfo} bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
       <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
     </main>

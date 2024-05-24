@@ -26,6 +26,7 @@ const getKirbyPanelData = async () => {
           placeholderfilter: true,
           // list info
           bundeslandinfo: true,
+          stadtinfo: true,
           // minimap navigation info
           minimaptitle: true,
           verortungbtntext: true,
@@ -127,16 +128,10 @@ export default async function Home() {
   let totalCountOfBundesland = {}
 // kirby Panel data
 const panelData = await getKirbyPanelData();
-
-
-  
-
   // Loading page testing
   // await new Promise((resolve) => setTimeout(resolve, 1000))
-
   /* That Code is just for Development. It is fake Data for Production you don't need have it */
   const data = await fakeData();
-
   const dataNoL = data.filter((v) => {
     if(v.lokalorga === "true"){
       return v

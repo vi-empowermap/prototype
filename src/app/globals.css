@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 
+body {
+    background-color: rgb(110 231 183);
+}
+.highlight{
+    background-color: rgb(229 229 229 );
+}
 
 .leaflet-popup-close-button{
     /* display: none; */

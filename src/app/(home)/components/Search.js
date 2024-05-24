@@ -1,4 +1,4 @@
-import { clickedItemsListAtom, onFilterMobileOpenAtom, onOrgaFilterAtom, onSearchFilterAtom, onSearchMobileOpenAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, highLightWordAtom, onFilterMobileOpenAtom, onOrgaFilterAtom, onSearchFilterAtom, onSearchMobileOpenAtom } from "@/app/utils/state";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
@@ -9,6 +9,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
   const [getOrgaFilter, setOrgaFilter] = useRecoilState(onOrgaFilterAtom);
   const [getFoundIdList, setFoundList] = useState(0);
+  const setHighLightWordAtom = useSetRecoilState(highLightWordAtom)
 
   /* Mobile */
   const mobileDiv = useRef(null);
@@ -48,13 +49,16 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
 
     const foundIdList = [];
 
+    setHighLightWordAtom(value)
     const data = [...getData];
     for (let i = 0; i < data.length; i++) {
       data[i].filterVisible = true;
     }
     for (let i = 0; i < data.length; i++) {
       const matches = String(data[i].aboutorga + " " + data[i].organame).match(pattern);
-      if (matches) {
+      
+      if (Boolean(matches)) {
+        
         data[i].filterVisible = true;
         foundIdList.push(data[i].id);
       } else {

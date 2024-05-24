@@ -1,1 +1,1 @@
-export const RANDOMCOLOR_LIST = ["#8C0B23", "#D971AA", "#5D5ABF", "#0468BF", "#A66A21"]
+export const RANDOMCOLOR_LIST = ["rgb(140, 11, 35)", "rgb(217, 113, 170)", "rgb(93, 90, 191)", "rgb(4, 104, 191)", "rgb(166, 106, 33)"]
