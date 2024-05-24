@@ -200,8 +200,7 @@ const panelData = await getKirbyPanelData();
       return value;
 
     });
-   console.log(totalCountOfBundesland)
-    // 
+   
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

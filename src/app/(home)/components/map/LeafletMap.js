@@ -102,7 +102,9 @@ const LeafletMap = ({doubleScreenTouched, data, setData, getDataForMarker }) => 
  
   return (
     <>
-      <MapContainer className="w-full h-full" center={setViewAtomValue.pos} zoom={7} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
+      <MapContainer
+        attributionControl={false}
+       className="w-full h-full" center={setViewAtomValue.pos} zoom={7} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={`${MAPTILELAYER.ex01}`} />
         <LocationFinderDummy doubleScreenTouched={doubleScreenTouched} />
         <MapController setViewAtomValue={setViewAtomValue} />
