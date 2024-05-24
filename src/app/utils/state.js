@@ -72,6 +72,10 @@ export const onFilterMobileOpenAtom = atom({
   key: "onFilterMobileOpenAtom",
   default: false
 })
+export const highLightWordAtom = atom({
+  key: "highLightWordAtom",
+  default: []
+})
 
 /* Orga Filter */
 export const onOrgaFilterActivateAtom = atom({
@@ -83,3 +87,5 @@ export const onOrgaFilterActivateAtom = atom({
   }
 
 })
+
+

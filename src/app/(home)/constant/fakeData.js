@@ -22,12 +22,13 @@ export const fakeData = async () => {
 
             },
             orgaimage: '',
+            city: "berlin",
             zielgruppe: [Object.keys(zielgruppeBP)[Math.floor(Math.random() * Object.keys(zielgruppeBP).length)]],
             font:RANDOM_FONT_LIST[Math.floor(Math.random() * RANDOM_FONT_LIST.length)],
             lokalorga: "false",
             visible: true,
             filterVisible: true,
-            aboutorga: "Brachte dus gerbers stickig die. Sprach heimat und ruhmte zeitig eck wichse. So da frei ob brot da alte sage dran. Eia zog darin mir genie der dahin denen. Um erschrak gelandes ja la arbeiter he. Zu leuchtete es ja flanierte kraftiger.", 
+            aboutorga: "Brachte dain gerbers stickig die. Sprach heimat und ruhmte zeitig eck wichse. So dain frei ob brot da alte sage dran. Eia zog darin dain mir genie der dahin denen. Um erschrak gelandes ja la arbeiter he. Zu leuchtete es ja flanierte kraftiger.", 
             categories: ["car"],
             artderorganisation: ["a"],
             archivoraktiv: "aktive",
@@ -54,6 +55,7 @@ export const fakeData = async () => {
 
             },
             orgaimage: '',
+            city: "berlin",
             angebote:[Object.keys(angeboteBP)[Math.floor(Math.random() * Object.keys(angeboteBP).length)]],
             zielgruppe: [Object.keys(zielgruppeBP)[Math.floor(Math.random() * Object.keys(zielgruppeBP).length)]],
             sprachunterstutzung: [[...Object.keys(sprachunterstutzungBP)][Math.floor(Math.random() * Object.values(sprachunterstutzungBP).length)]],

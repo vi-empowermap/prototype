@@ -185,8 +185,8 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
               <div className={`${turnOnMap ? "block" : "hidden"} mb-4`}>
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.locationtext })}</div>
                 <div>
-                  {useKirbyText({ text: panelDatas.bundeslabeltext })}: {String(orgaInfo.bundesland).slice(0, 1).toUpperCase()}
-                  {String(orgaInfo.bundesland).slice(1)}
+                  {useKirbyText({ text: panelDatas.bundeslabeltext })}: {String(bundeslandBP[orgaInfo.bundesland]).slice(0, 1).toUpperCase()}
+                  {String(bundeslandBP[orgaInfo.bundesland]).slice(1)}
                 </div>
                 <div>
                   {useKirbyText({ text: panelDatas.stadtlabeltext })}: {String(orgaInfo.city).slice(0, 1).toUpperCase()}
@@ -204,7 +204,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.kontakttext })}</div>
                 <div>{String(orgaInfo.email)}</div>
                 <div>{String(orgaInfo.contactnummber)}</div>
-                <div className="mt-4">{String(orgaInfo.website)}</div>
+                <a target="_blank" href={String(orgaInfo.website)} style={{ color: `${orgaInfo.bgColor}` }} className="mt-4">website</a>
               </div>
               <div className="mb-4">
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.socialmediatext })}</div>
@@ -213,7 +213,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                     orgaInfo.social.map((value, idx) => {
                       return (
                         <div key={idx}>
-                          <a target="_blank" href={value.mediasocial}>
+                          <a target="_blank" href={value.mediasocial} style={{ color: `${orgaInfo.bgColor}` }}>
                             {value.notfound === "false" ? socialMediaBP[`${value.medianame}`] : value.medianamecustom}
                           </a>
                         </div>

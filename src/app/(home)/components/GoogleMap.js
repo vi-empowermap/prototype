@@ -2,7 +2,7 @@ import useKirbyText from "@/app/utils/hooks/useKirbyText";
 
 const GoogleMapTag = ({lat, long, text}) => {
   return (
-    <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${lat},${long}`} className="absolute hidden lg:flex lg:items-center lg:gap-2 bottom-4 left-4 bg-slate-100 rounded-lg px-3 py-1 border-2 border-black z-[1000] cursor-pointer">
+    <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${lat},${long}`} className="absolute hidden lg:flex lg:items-center lg:gap-2 bottom-4 left-4 bg-slate-100 rounded-lg px-3 py-1 border-2 border-black z-[1000] cursor-pointer hover:bg-black hover:text-white transition-all">
       <span>{useKirbyText({text:text})}</span>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
         <path
