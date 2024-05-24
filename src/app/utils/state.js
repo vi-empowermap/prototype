@@ -83,6 +83,7 @@ export const onOrgaFilterActivateAtom = atom({
   default: {
     ready: false,
     all: false,
+    location: false,
     bundes: ""
   }
 
