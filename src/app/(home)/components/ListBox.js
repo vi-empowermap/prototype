@@ -55,7 +55,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
   }, [getHighLightWordAtom]);
 
   return (
-    <div className={`listbox w-full relative z-[${index}] group flex items-start justify-start ${ready ? "translate-y-0 opacity-100 " : "translate-y-[150%] opacity-0"} font-jetBrainsMono font-medium`}>
+    <div  onClick={() => onClick(value)} className={`listbox w-full relative z-[${index}] group flex items-start justify-start ${ready ? "translate-y-0 opacity-100 " : "translate-y-[150%] opacity-0"} font-jetBrainsMono font-medium cursor-pointer`}>
       {value.visible && value.filterVisible && (
         <>
           <div
@@ -68,7 +68,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
               })}
           </div>
           <div
-            onClick={() => onClick(value)}
+           
             style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }}
             className="flex-1 min-h-64 border-2 cursor-pointer p-2 rounded-r-3xl rounded-b-3xl bg-white -mt-14 relative group-hover:-translate-y-6 transition-all group overflow-hidden duration-300"
           >
