@@ -53,6 +53,22 @@ useEffect(() => {
  (async () => {
   const data = await getKirbyAPI()
  console.log(data)
+   // update current length 
+   const bodyData = {
+    infototalcount: 20,
+  }
+  const encodedAuthString = Buffer.from(`${authEmail}:${authPassword}`).toString("base64");
+  const headerAuthString = `Basic ${encodedAuthString}`;
+
+  const updateSite = await fetch(`${kirbyAPI}/api/site`, {
+    method: "PATCH",
+    headers: {
+      "Authorization": headerAuthString,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData)
+  })
+  console.log(updateSite)
  })()
 }, []);
 
