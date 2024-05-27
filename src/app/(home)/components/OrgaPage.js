@@ -112,8 +112,8 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     onClose()
   }
   return (
-    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l-2 border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 font-jetBrainsMono font-medium`}>
-      <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-screen lg:h-full lg:border-x-2 lg:border-t-2 border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
+    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 font-jetBrainsMono font-medium`}>
+      <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-screen lg:h-full lg:border-x lg:border-t border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
         <nav className="flex gap-4 justify-end p-4 lg:mb-2">
           <div onClick={onCopyText} className="cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 lg:w-8 lg:h-8">
@@ -147,7 +147,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
               })}
           </div>
           <div className="flex-grow flex flex-col lg:flex-row justify-start lg:justify-between">
-            <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="lg:flex-1 flex flex-col border-b-2 lg:border-b-0 lg:border-r-2 lg:pr-4 lg:pb-0 pb-4">
+            <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="lg:flex-1 flex flex-col border-b lg:border-b-0 lg:border-r lg:pr-4 lg:pb-0 pb-4">
               <div className="text-base font-base">{orgaInfo.aboutorga}</div>
               <div className="mt-4">
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.languagesupporttext })}</div>
@@ -227,18 +227,18 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 gap-4 mb-4 lg:gap-0 lg:mb-0">
             <div className={`${turnOnMap ? "block" : "hidden"} w-full h-fit flex justify-center lg:px-8 overflow-hidden`}>
               <div onClick={() => onFilterBundesLand()} className="flex w-full relative group h-28 ">
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border-2 lg:border-b-0 p-6 text-xl cursor-pointer select-none">
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border lg:border-b-0 p-6 text-xl cursor-pointer select-none">
                   Zeige alle Initiativen <span className="font-semibold">in dem selben Bundesland</span>
                 </div>
               </div>
             </div>
             <div className={`w-full h-fit flex justify-center lg:px-8 overflow-hidden`}>
               <div onClick={() => onFilterAll()} className="flex w-full relative group h-28">
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border-2 border-b-0 transition-all duration-500"></div>
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border-2 lg:border-b-0 p-6 text-xl cursor-pointer select-none">
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border lg:border-b-0 p-6 text-xl cursor-pointer select-none">
                   Zeige alle Initiativen <span className="font-semibold">mit den gleichen Kategorien</span>
                 </div>
               </div>

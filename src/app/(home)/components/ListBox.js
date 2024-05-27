@@ -60,7 +60,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
         <>
           <div
             style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }}
-            className="w-24 h-40 flex flex-col gap-4 justify-center items-center border-2 border-r-0 rounded-l-3xl -mt-14 group-hover:-translate-y-6 transition-all duration-300"
+            className="w-24 h-40 flex flex-col gap-4 justify-center items-center border border-r-0 rounded-l-3xl -mt-14 group-hover:-translate-y-6 transition-all duration-300"
           >
             {value.themenschwerpunkt &&
               value.themenschwerpunkt.slice(0, 3).map((val2, idx) => {
@@ -70,7 +70,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
           <div
            
             style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }}
-            className="flex-1 min-h-64 border-2 cursor-pointer p-2 rounded-r-3xl rounded-b-3xl bg-white -mt-14 relative group-hover:-translate-y-6 transition-all group overflow-hidden duration-300"
+            className="flex-1 min-h-64 border cursor-pointer p-2 rounded-r-3xl rounded-b-3xl bg-white -mt-14 relative group-hover:-translate-y-6 transition-all group overflow-hidden duration-300"
           >
             <div
               style={{

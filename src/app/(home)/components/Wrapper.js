@@ -116,7 +116,7 @@ const Wrapper = ({
         },
         transform: "translateY(0px)",
       });
-      gsap.to("#navContainer", { delay: 1.5, css: { "border-bottom": "2px solid black", opacity: 1 }, duration: aniDuration });
+      gsap.to("#navContainer", { delay: 1.5, css: { "border-bottom": "1px solid black", opacity: 1 }, duration: aniDuration });
     }
 
     setTimeout(() => {
@@ -155,8 +155,8 @@ const Wrapper = ({
           <Logo text={panelDatas.webtitle} />
         </div>
         <div className="flex flex-col lg:flex-row justify-center items-center gap-10 w-full h-full mb-8">
-          <div className="w-full h-full border-2 border-black overflow-hidden flex justify-center items-center">
-            <div className=" border-2 border-black rounded-full flex justify-center items-center"> Map Image</div>
+          <div className="w-full h-full border border-black overflow-hidden flex justify-center items-center">
+            <div className=" border border-black rounded-full flex justify-center items-center"> Map Image</div>
           </div>
           <div className="w-full lg:text-4xl lg:leading-10 font-jetBrainsMono font-normal">{panelDatas.introtext}</div>
         </div>
@@ -169,10 +169,10 @@ const Wrapper = ({
 
       <div className="flex flex-col w-full h-full bg-white">
         {/* Navigation BAR */}
-        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b-2  ${!ready ? "border-white opacity-0" : "border-black opacity-100"} overflow-y-visible`}>
+        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b  ${!ready ? "border-white opacity-0" : "border-black opacity-100"} overflow-y-visible`}>
           <Menu />
           <Logo text={panelDatas.webtitle} first={true} />
-          <div className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l-2 border-black `}>
+          <div className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l border-black `}>
             <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} />
             <Filtern onTurOnMap={onTurOnMap} turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} />
           </div>
@@ -180,11 +180,11 @@ const Wrapper = ({
         <div id="mapCotainer" style={{ width: Boolean(search) ? (turnOnMap ? `${orgaMapSize}px` : "100%") : "100%" }} className={`flex-1 bg-white flex overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"} font-jetBrainsMono font-medium`}>
           {/* Orga who has location info */}
           {turnOnMap && (
-            <div onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b-2 border-black">
+            <div onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b border-black">
               <LeafletMap doubleScreenTouched={doubleScreenTouched} data={getData} getDataForMarker={getDataForMarker} setData={setData} />
               {!Boolean(search) && (
                 <div className="absolute bottom-2 left-2 flex items-end select-none">
-                  <div id="leaflet_minimap_container" className={`relative pt-10 hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
+                  <div id="leaflet_minimap_container" className={`relative pt-10 hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden`}>
                     {openMiniMap && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.minimaptitle}</div>}
                     {getCurrentBundesLand !== "" && (
                       <div className="absolute flex justify-center items-center w-10 h-10 rounded-full top-4 right-3 z-[1000] text-2xl leading-5 font-semibold bg-black text-white">{Boolean(totalCountOfBundesland[getCurrentBundesLand]) ? totalCountOfBundesland[getCurrentBundesLand] : 0}</div>
@@ -206,9 +206,9 @@ const Wrapper = ({
                       )}
                     </div>
                   </div>
-                  <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden -ml-10`}>
+                  <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-10`}>
                     {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
-                    {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
+                    {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border border-black"></div>}
 
                     <div onClick={() => setOpenVerortung((prev) => !prev)} className={`cursor-pointer absolute ${openVerotung ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
                       {openVerotung && (
@@ -226,7 +226,7 @@ const Wrapper = ({
                       )}
                     </div>
                   </div>
-                  <div className={`relative justify-center items-center hidden pt-7 pb-3 lg:flex w-[calc(3vw+70px)] ${openCenter ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden -ml-6`}>
+                  <div className={`relative justify-center items-center hidden pt-7 pb-3 lg:flex w-[calc(3vw+70px)] ${openCenter ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-6`}>
                     {openCenter && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.centerbtntext}</div>}
                     {openCenter && (
                       <div onClick={() => setSetViewAtom({ pos: [51.1657, 10.4515], name: "start" })} className="cursor-pointer w-1/3 aspect-square flex justify-center items-center">
@@ -265,9 +265,9 @@ const Wrapper = ({
                 {!turnOnMap && <ListContainerOhneL getData={getData} />}
                 {!Boolean(search) && (
                   <div className="fixed bottom-2 left-2 flex items-end">
-                    <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border-2 border-black z-[1000] overflow-hidden`}>
+                    <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden`}>
                       {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
-                      {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border-2 border-black"></div>}
+                      {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border border-black"></div>}
 
                       <div onClick={() => setOpenVerortung((prev) => !prev)} className={`cursor-pointer absolute ${openVerotung ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
                         {openVerotung && (

@@ -29,7 +29,7 @@ body {
 
 }
 .leaflet-popup-content-wrapper {
-    border: 2px solid black !important;
+    border: 1px solid black !important;
     padding: 0px !important;
     overflow: hidden;
 }
@@ -72,7 +72,7 @@ body {
         @apply mb-0
     }
     .filter_item_box_title {
-        @apply text-xl flex items-center justify-start border-t-2 border-black
+        @apply text-xl flex items-center justify-start border-t border-black
     }
     .filter_box_title {
         @apply pl-2 cursor-pointer
@@ -84,7 +84,7 @@ body {
         @apply flex text-xs
     }
     .filter_btn {
-        @apply cursor-pointer transition-all aspect-square w-10 flex justify-center items-center border-r-2 border-black hover:bg-black hover:text-white
+        @apply cursor-pointer transition-all aspect-square w-10 flex justify-center items-center border-r border-black hover:bg-black hover:text-white
     }
 
 }

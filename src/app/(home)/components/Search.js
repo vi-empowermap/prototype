@@ -113,7 +113,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
   },[])
 
   return (
-    <div className="lg:flex-1 aspect-square h-full lg:aspect-auto lg:w-full flex items-center lg:border-b-2 border-black lg:pl-4 relative select-none font-jetBrainsMono font-medium">
+    <div className="lg:flex-1 aspect-square h-full lg:aspect-auto lg:w-full flex items-center lg:border-b border-black lg:pl-4 relative select-none font-jetBrainsMono font-medium">
       <div className="w-full h-full hidden lg:flex items-center">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center ">
           <input type="text" {...register("search")} placeholder={placeholdertext} className="bg-white w-full border-black rounded-xl focus:outline-none font-jetBrainsMono font-medium" />
@@ -124,7 +124,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
           </div>
         )}
         {getOnSearchFilter && (
-          <button onClick={onResetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l-2 border-black`}>
+          <button onClick={onResetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l border-black`}>
             reset
           </button>
         )}
@@ -132,13 +132,13 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
 
       <div ref={mobileDiv} className="flex-1 flex h-full lg:hidden justify-center items-center  z-[1800]">
         {onSearchMobileOpen && (
-          <div style={{ left: `-${leftSize}px` }} className="absolute top-full w-screen border-y-2 border-black bg-white text-black">
+          <div style={{ left: `-${leftSize}px` }} className="absolute top-full w-screen border-y border-black bg-white text-black">
             <div className="py-4 px-4 flex">
-              <div onClick={onResetFilter} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
+              <div onClick={onResetFilter} className="cursor-pointer border border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
                 Reset
               </div>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center py-4 border-t-2 border-black px-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center py-4 border-t border-black px-4">
               <input type="text" {...register("search")} placeholder={placeholdertext} className="bg-white w-full border-black rounded-xl focus:outline-none " />
             </form>
           </div>

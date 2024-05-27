@@ -22,7 +22,7 @@ const FilterItemBox = ({
     <>
     {(locationBox ? turnOnMap : true) && <div className="filter_item_box">
       <div className="filter_sub_item_box_wrapper">
-        <div className={`filter_item_box_title ${top && "lg:border-t-0"} ${(!top && sTop && !turnOnMap) && "lg:border-t-0"} ${activeFilter[keyName] ? "border-b-2" : "border-b-0"}`}>
+        <div className={`filter_item_box_title ${top && "lg:border-t-0"} ${(!top && sTop && !turnOnMap) && "lg:border-t-0"} ${activeFilter[keyName] ? "border-b" : "border-b-0"}`}>
           <div className="filter_btn_wrapper ">
             <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={keyName} />
             <SectionResetBtn onResetSection={onResetSection} setSection={setSection} setRef={setRef} />
