@@ -5,6 +5,7 @@ import { angeboteBP, artderorganisationBP, bundeslandBP, sprachunterstutzungBP, 
 import FilterAddBtn from "./filter_items/FilterAddBtn";
 import SectionResetBtn from "./filter_items/SectionResetBtn";
 import DynamicMiniMap from "./minimap";
+import FilterItemBox from "./filter_items/FilterItemBox";
 
 const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext }) => {
   const [openFilter, setOpenFilter] = useState(false);
@@ -450,190 +451,140 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
               </div>
             </div>
           </div>
-         {turnOnMap && <div className="filter_item_box">
-            <div className="filter_sub_item_box_wrapper">
-              <div className={`filter_item_box_title lg:border-t-0 ${activeFilter["okBundes"] ? "border-b-2": "border-b-0"}`}>
-                <div className="filter_btn_wrapper">
-                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okBundes"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectBundesland} setRef={selectBundeslandRef} />
-                </div>
-                <div onClick={() => onActiveFilter("okBundes")} className="filter_box_title">Bundesland</div>
-              </div>
-              {activeFilter["okBundes"] && (
-                <div className="filter_sub_item_box">
-                  {[...Object.values(bundeslandBP).sort()].map((value, idx) => {
-                    const ok = selectBundesland.some((v) => v === value);
-                    return (
-                      <div key={idx} onClick={() => onClickFilterItem({ category: "bundes", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                        {value}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>}
-          <div className="filter_item_box">
-            <div className="filter_sub_item_box_wrapper">
-              <div className={`filter_item_box_title ${!turnOnMap && "lg:border-t-0"} ${activeFilter["okThemen"] ? "border-b-2": "border-b-0"}`}>
-                <div className="filter_btn_wrapper ">
-                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okThemen"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectThmen} setRef={selectThemenRef} />
-                </div>
-                <div onClick={() => onActiveFilter("okThemen")} className="filter_box_title">Nach Themenschwerpunkt</div>
-              </div>
-              {activeFilter["okThemen"] && (
-                <div className="filter_sub_item_box">
-                  {[...Object.values(themenschwerpunktBP).sort()].map((value, idx) => {
-                    const ok = selectThemen.some((v) => v === value);
-                    return (
-                      <div key={idx} onClick={() => onClickFilterItem({ category: "themen", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                        {value}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="filter_item_box">
-            <div className="filter_sub_item_box_wrapper">
-              <div className={`filter_item_box_title ${activeFilter["okTags"] ? "border-b-2": "border-b-0"}`}>
-                <div className="filter_btn_wrapper ">
-                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okTags"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectTags} setRef={selectTagsRef} />
-                </div>
-                <div onClick={() => onActiveFilter("okTags")} className="filter_box_title">Nach Tags</div>
-              </div>
-              {activeFilter["okTags"] && (
-                <div className="filter_sub_item_box">
-                  {[...categories.sort()].map((value, idx) => {
-                    const ok = selectTags.some((v) => v === value);
-                    return (
-                      <div key={idx} onClick={() => onClickFilterItem({ category: "tags", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                        {value}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="filter_item_box">
-            <div className="filter_sub_item_box_wrapper">
-              <div className={`filter_item_box_title ${activeFilter["okZiel"] ? "border-b-2": "border-b-0"}`}>
-                <div className="filter_btn_wrapper ">
-                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZiel"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZielGroup} setRef={selectZielGroupRef} />
-                </div>
-                <div onClick={() => onActiveFilter("okZiel")} className="filter_box_title">Zielgruppe</div>
-              </div>
-              {activeFilter["okZiel"] && (
-                <div className="filter_sub_item_box">
-                  {[...Object.values(zielgruppeBP).sort()].map((value, idx) => {
-                    const ok = selectZielGroup.some((v) => v === value);
-                    return (
-                      <div key={idx} onClick={() => onClickFilterItem({ category: "ziel", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                        {value}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="filter_item_box">
-            <div className="filter_sub_item_box_wrapper">
-              <div className={`filter_item_box_title ${activeFilter["okAngebote"] ? "border-b-2": "border-b-0"}`}>
-                <div className="filter_btn_wrapper ">
-                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okAngebote"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectAngebote} setRef={selectAngeboteRef} />
-                </div>
-                <div onClick={() => onActiveFilter("okAngebote")} className="filter_box_title">Angebote</div>
-              </div>
-              {activeFilter["okAngebote"] && (
-                <div className="filter_sub_item_box">
-                  {[...Object.values(angeboteBP).sort()].map((value, idx) => {
-                    const ok = selectAngebote.some((v) => v === value);
-                    return (
-                      <div key={idx} onClick={() => onClickFilterItem({ category: "angebote", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                        {value}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="filter_item_box">
-            <div className="filter_sub_item_box_wrapper">
-              <div className={`filter_item_box_title ${activeFilter["okSprache"] ? "border-b-2": "border-b-0"}`}>
-                <div className="filter_btn_wrapper ">
-                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okSprache"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectSprache} setRef={selectSpracheRef} />
-                </div>
-                <div onClick={() => onActiveFilter("okSprache")} className="filter_box_title">Sprache</div>
-              </div>
-              {activeFilter["okSprache"] && (
-                <div className="filter_sub_item_box">
-                  {[...Object.values(sprachunterstutzungBP).sort()].map((value, idx) => {
-                    const ok = selectSprache.some((v) => v === value);
-                    return (
-                      <div key={idx} onClick={() => onClickFilterItem({ category: "sprache", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                        {value}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="filter_item_box">
-            <div className="filter_sub_item_box_wrapper">
-              <div className={`filter_item_box_title ${activeFilter["okArt"] ? "border-b-2": "border-b-0"}`}>
-                <div className="filter_btn_wrapper ">
-                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okArt"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectArt} setRef={selectArtRef} />
-                </div>
-                <div onClick={() => onActiveFilter("okArt")} className="filter_box_title">Art der Organisation</div>
-              </div>
-              {activeFilter["okArt"] && (
-                <div className="filter_sub_item_box">
-                  {[...Object.values(artderorganisationBP).sort()].map((value, idx) => {
-                    const ok = selectArt.some((v) => v === value);
-                    return (
-                      <div key={idx} onClick={() => onClickFilterItem({ category: "art", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                        {value}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="filter_item_box">
-            <div className="filter_sub_item_box_wrapper">
-              <div className={`filter_item_box_title ${activeFilter["okZeige"] ? "border-b-2": "border-b-0"}`}>
-                <div className={`filter_btn_wrapper `}>
-                  <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okZeige"} />
-                  <SectionResetBtn onResetSection={onResetSection} setSection={setSelectZeige} setRef={selectZeigeRef} />
-                </div>
-                <div onClick={() => onActiveFilter("okZeige")} className="filter_box_title">Zeige</div>
-              </div>
-              {activeFilter["okZeige"] && (
-                <div className="filter_sub_item_box">
-                  {[...["archiv", "aktive"]].map((value, idx) => {
-                    const ok = selectZeige.some((v) => v === value);
-                    return (
-                      <div key={idx} onClick={() => onClickFilterItem({ category: "zeige", value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
-                        {value}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
+          <FilterItemBox
+            activeFilter={activeFilter}
+            onActiveFilter={onActiveFilter}
+            onResetSection={onResetSection}
+            setSection={setSelectBundesland} //
+            setRef={selectBundeslandRef} //
+            keyName={"okBundes"} // 
+            arrayData={Object.values(bundeslandBP)} // 
+            titleName={"Bundesland"} // 
+            turnOnMap={turnOnMap}
+            locationBox={true} // 
+            categoryName={"bundes"} // 
+            onClickFilterItem={onClickFilterItem}
+            selectList={selectBundesland} //
+            top={true}
+           />
+        
+          <FilterItemBox
+            activeFilter={activeFilter}
+            onActiveFilter={onActiveFilter}
+            onResetSection={onResetSection}
+            setSection={setSelectThmen}
+            setRef={selectThemenRef}
+            keyName={"okThemen"}
+            arrayData={Object.values(themenschwerpunktBP)}
+            titleName={"Nach Themenschwerpunkt"}
+            turnOnMap={turnOnMap}
+            locationBox={false}
+            categoryName={"themen"}
+            onClickFilterItem={onClickFilterItem}
+            selectList={selectThemen}
+            sTop={true}
+           />
+        
+          <FilterItemBox
+            activeFilter={activeFilter}
+            onActiveFilter={onActiveFilter}
+            onResetSection={onResetSection}
+            setSection={setSelectTags} //
+            setRef={selectTagsRef} //
+            keyName={"okTags"} // 
+            arrayData={categories} // 
+            titleName={"Nach Tags"} // 
+            turnOnMap={turnOnMap}
+            locationBox={false} // 
+            categoryName={"tags"} // 
+            onClickFilterItem={onClickFilterItem}
+            selectList={selectTags} //
+            top={false}
+           />
+         
+          <FilterItemBox
+            activeFilter={activeFilter}
+            onActiveFilter={onActiveFilter}
+            onResetSection={onResetSection}
+            setSection={setSelectZielGroup} //
+            setRef={selectZielGroupRef} //
+            keyName={"okZiel"} // 
+            arrayData={Object.values(zielgruppeBP)} // 
+            titleName={"Zielgruppe"} // 
+            turnOnMap={turnOnMap}
+            locationBox={false} // 
+            categoryName={"ziel"} // 
+            onClickFilterItem={onClickFilterItem}
+            selectList={selectZielGroup} //
+            top={false}
+           />
+         
+         <FilterItemBox
+            activeFilter={activeFilter}
+            onActiveFilter={onActiveFilter}
+            onResetSection={onResetSection}
+            setSection={setSelectAngebote} //
+            setRef={selectAngeboteRef} //
+            keyName={"okAngebote"} // 
+            arrayData={Object.values(angeboteBP)} // 
+            titleName={"Angebote"} // 
+            turnOnMap={turnOnMap}
+            locationBox={false} // 
+            categoryName={"angebote"} // 
+            onClickFilterItem={onClickFilterItem}
+            selectList={selectAngebote} //
+            top={false}
+           />
+         <FilterItemBox
+            activeFilter={activeFilter}
+            onActiveFilter={onActiveFilter}
+            onResetSection={onResetSection}
+            setSection={setSelectSprache} //
+            setRef={selectSpracheRef} //
+            keyName={"okSprache"} // 
+            arrayData={Object.values(sprachunterstutzungBP)} // 
+            titleName={"Sprache"} // 
+            turnOnMap={turnOnMap}
+            locationBox={false} // 
+            categoryName={"sprache"} // 
+            onClickFilterItem={onClickFilterItem}
+            selectList={selectSprache} //
+            top={false}
+           />
+         <FilterItemBox
+            activeFilter={activeFilter}
+            onActiveFilter={onActiveFilter}
+            onResetSection={onResetSection}
+            setSection={setSelectArt} //
+            setRef={selectArtRef} //
+            keyName={"okArt"} // 
+            arrayData={Object.values(artderorganisationBP)} // 
+            titleName={"Art der Organisation"} // 
+            turnOnMap={turnOnMap}
+            locationBox={false} // 
+            categoryName={"art"} // 
+            onClickFilterItem={onClickFilterItem}
+            selectList={selectArt} //
+            top={false}
+           />
+         <FilterItemBox
+            activeFilter={activeFilter}
+            onActiveFilter={onActiveFilter}
+            onResetSection={onResetSection}
+            setSection={setSelectZeige} //
+            setRef={selectZeigeRef} //
+            keyName={"okZeige"} // 
+            arrayData={["archiv", "aktive"]} // 
+            titleName={"Zeige"} // 
+            turnOnMap={turnOnMap}
+            locationBox={false} // 
+            categoryName={"zeige"} // 
+            onClickFilterItem={onClickFilterItem}
+            selectList={selectZeige} //
+            top={false}
+           />
+          
+          
           <div className="sticky bottom-0 flex items-center border-b-2 last:border-b-0 border-black z-[2000]">
             <div onClick={onSearch} className="cursor-pointer hover:bg-black bg-white py-2 hover:text-white transition-all flex-1 flex items-center justify-center border-t-2 border-black">
               Search
