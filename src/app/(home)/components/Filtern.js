@@ -442,7 +442,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
               </div>
             )}
             <div className="filter_sub_item_box_wrapper">
-              <div className="filter_item_box_title border-b-2 px-2 h-10">Ohne Verortung</div>
+              <div className={`filter_item_box_title ${!turnOnMap && "border-t-0"} border-b-2 px-2 h-10`}>Ohne Verortung</div>
               <div className="filter_sub_item_box">
                 <div onClick={onTurOnMap} className={`filter_item ${turnOnMap ? "bg-black text-white" : "bg-white text-black"}`}>
                   Ort
@@ -450,7 +450,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
               </div>
             </div>
           </div>
-          <div className="filter_item_box">
+         {turnOnMap && <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
               <div className={`filter_item_box_title lg:border-t-0 ${activeFilter["okBundes"] ? "border-b-2": "border-b-0"}`}>
                 <div className="filter_btn_wrapper">
@@ -472,10 +472,10 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
                 </div>
               )}
             </div>
-          </div>
+          </div>}
           <div className="filter_item_box">
             <div className="filter_sub_item_box_wrapper">
-              <div className={`filter_item_box_title ${activeFilter["okThemen"] ? "border-b-2": "border-b-0"}`}>
+              <div className={`filter_item_box_title ${!turnOnMap && "lg:border-t-0"} ${activeFilter["okThemen"] ? "border-b-2": "border-b-0"}`}>
                 <div className="filter_btn_wrapper ">
                   <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={"okThemen"} />
                   <SectionResetBtn onResetSection={onResetSection} setSection={setSelectThmen} setRef={selectThemenRef} />

@@ -1,13 +1,11 @@
 "use client";
 
-import { fetchDataApi } from "@/app/utils/hooks/useFetchApi";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 
 const Wrapper = ({errorMessageList :errorMessageListP, pageTextList}) => {
   const authEmail = process.env.KB_USER;
   const authPassword = process.env.KB_PASS;
-  const kirbyOriginAPI = process.env.KB_API_ORIGIN;
   const kirbyAPI = process.env.KB_API_API;
 
 
@@ -27,7 +25,7 @@ useEffect(() => {
 
   /* Error Messages List: Panel->Site->user */
   const errorMessageList = errorMessageListP
-  console.log(errorMessageList)
+ 
 
   const FPBtn = document.querySelector(".user_password")
   const userWraapper = document.querySelector(".user_wrapper")
@@ -122,7 +120,7 @@ useEffect(() => {
         cache: "no-store",
       })
       const data = await res.json()
-    
+   
       if (data.status === "ok") {
         if (data.data.content.signupon) {
           signPBtn.disabled = false
