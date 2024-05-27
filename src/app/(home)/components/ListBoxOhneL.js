@@ -27,7 +27,7 @@ const ListBoxOhneL = ({ index, value }) => {
           </div>
         </div>
       </div>
-      <div style={{ borderColor: `${value.bgColor}`, backfaceVisibility: "hidden" }} className={`absolute top-0 left-0 flex flex-col py-2 px-2 gap-4 w-full aspect-square border-2 border-black cursor-pointer rounded-2xl group-hover:[transform:rotateY(180deg)] transition-all bg-white duration-700`}>
+      <div style={{ borderColor: `${value.bgColor}`, backfaceVisibility: "hidden" }} className={`absolute top-0 left-0 flex flex-col py-2 px-2 gap-4 w-full aspect-square border border-black cursor-pointer rounded-2xl group-hover:[transform:rotateY(180deg)] transition-all bg-white duration-700`}>
         <div className="flex flex-wrap gap-2 justify-center items-center">
           <div style={{ color: `${value.bgColor}` }} className={`text-2xl font-semibold ${value.font}`}>
           {String(value.organame).slice(0, 11)}{String(value.organame).length > 12 && "..."}

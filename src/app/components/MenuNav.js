@@ -15,14 +15,14 @@ const MenuNav = () => {
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
           <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
-        <div className="hidden group-hover:flex flex-col absolute top-full left-0 h-fit bg-white border-y-2 lg:border-2 border-black text-black w-screen lg:w-fit">
+        <div className="hidden group-hover:flex flex-col absolute top-full left-0 h-fit bg-white border-y lg:border border-black text-black w-screen lg:w-fit">
           {pathname !== "/about" && (
-            <div onClick={() => onClick("/about")} className="font-medium text-xl border-b-2 border-black px-2 py-2 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+            <div onClick={() => onClick("/about")} className="font-medium text-xl border-b border-black px-2 py-2 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
               About & Contact
             </div>
           )}
-          {pathname !== "/imprint" && <div className="font-medium text-xl border-b-2 border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">Imprint</div>}
-          {pathname !== "/faq" && <div className="font-medium text-xl border-b-2 border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">FAQ</div>}
+          {pathname !== "/imprint" && <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">Imprint</div>}
+          {pathname !== "/faq" && <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">FAQ</div>}
         </div>
       </div>
       <h1 onClick={() => onClick("/")} className="w-fit bg-white text-2xl md:text-4xl lg:text-6xl font-bold flex items-center px-4 py-4 lg:py-0 cursor-pointer hover:bg-black hover:text-white transition-all">
