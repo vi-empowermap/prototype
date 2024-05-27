@@ -107,6 +107,7 @@ const Wrapper = ({
       gsap.to("#mapCotainer", { delay: 1.5, opacity: 1, duration: aniDuration });
       gsap.to("#listContainer", { delay: 1.5, opacity: 1, duration: aniDuration });
       // gsap.to("#listContainer2", { delay: 1.5, opacity: 1, transform: "translateX(0px)", duration: aniDuration });
+      gsap.to("#navContainer", { delay: 1.5, opacity: 1, duration: aniDuration });
       gsap.to(".listbox", {
         delay: 1.5,
         opacity: 1,
@@ -116,7 +117,6 @@ const Wrapper = ({
         },
         transform: "translateY(0px)",
       });
-      gsap.to("#navContainer", { delay: 1.5, css: { "border-bottom": "1px solid black", opacity: 1 }, duration: aniDuration });
     }
 
     setTimeout(() => {
@@ -169,7 +169,7 @@ const Wrapper = ({
 
       <div className="flex flex-col w-full h-full bg-white">
         {/* Navigation BAR */}
-        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b  ${!ready ? "border-white opacity-0" : "border-black opacity-100"} overflow-y-visible`}>
+        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b border-black  ${!ready ? "opacity-0" : " opacity-100"} overflow-y-visible`}>
           <Menu />
           <Logo text={panelDatas.webtitle} first={true} />
           <div className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l border-black `}>
