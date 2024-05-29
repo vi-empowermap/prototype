@@ -40,6 +40,20 @@ const getKirbyPanelData = async () => {
           socialmediatext: true,
           bundeslabeltext: true,
           stadtlabeltext: true,
+          // filter text
+          fbundesland: true,
+          fthemenschwerpunkt: true,
+          ftag: true,
+          fzielgroup: true,
+          fangebote: true,
+          fsprache: true,
+          fartderorganisation: true,
+          fzeige: true,
+          // filter Btn Text
+          fsearch: true,
+          freset: true,
+         
+
         }
       }
     },
@@ -51,6 +65,7 @@ const getKirbyPanelData = async () => {
 
   return data;
 };
+
 const getKirbyData = async () => {
   /* Random Color List */
   const randomColorList = RANDOMCOLOR_LIST;
@@ -127,7 +142,8 @@ const getKirbyData = async () => {
 export default async function Home() {
   let totalCountOfBundesland = {}
 // kirby Panel data
-const panelData = await getKirbyPanelData();
+  const panelData = await getKirbyPanelData();
+
   // Loading page testing
   // await new Promise((resolve) => setTimeout(resolve, 1000))
   /* That Code is just for Development. It is fake Data for Production you don't need have it */

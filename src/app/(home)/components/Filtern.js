@@ -7,7 +7,7 @@ import SectionResetBtn from "./filter_items/SectionResetBtn";
 import DynamicMiniMap from "./minimap";
 import FilterItemBox from "./filter_items/FilterItemBox";
 
-const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext }) => {
+const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext, panelTexts }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
   const [fHeight, setFHeight] = useState(0);
@@ -431,7 +431,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
       {openFilter && (
         <div
           style={{ maxHeight: `calc(100vh - ${fHeight}px)` }}
-          className="absolute top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-1px] text-black w-screen lg:w-[calc(100%+2px)] bg-neutral-100 h-fit overflow-y-scroll border-b border-l-0 lg:border-l border-black border-t border-r-0 no-scrollbar"
+          className="absolute top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-3px] text-black w-screen lg:w-[calc(100%+3px)] bg-neutral-100 h-fit overflow-y-scroll border-b border-l-0 lg:border-l border-black border-t border-r-0 no-scrollbar"
         >
           <div className="filter_item_box lg:hidden">
             {turnOnMap && (
@@ -459,7 +459,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             setRef={selectBundeslandRef} //
             keyName={"okBundes"} // 
             arrayData={Object.values(bundeslandBP)} // 
-            titleName={"Bundesland"} // 
+            titleName={panelTexts.fbundesland} // 
             turnOnMap={turnOnMap}
             locationBox={true} // 
             categoryName={"bundes"} // 
@@ -476,7 +476,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             setRef={selectThemenRef}
             keyName={"okThemen"}
             arrayData={Object.values(themenschwerpunktBP)}
-            titleName={"Nach Themenschwerpunkt"}
+            titleName={panelTexts.fthemenschwerpunkt}
             turnOnMap={turnOnMap}
             locationBox={false}
             categoryName={"themen"}
@@ -493,7 +493,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             setRef={selectTagsRef} //
             keyName={"okTags"} // 
             arrayData={categories} // 
-            titleName={"Nach Tags"} // 
+            titleName={panelTexts.ftag} // 
             turnOnMap={turnOnMap}
             locationBox={false} // 
             categoryName={"tags"} // 
@@ -510,7 +510,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             setRef={selectZielGroupRef} //
             keyName={"okZiel"} // 
             arrayData={Object.values(zielgruppeBP)} // 
-            titleName={"Zielgruppe"} // 
+            titleName={panelTexts.fzielgroup} // 
             turnOnMap={turnOnMap}
             locationBox={false} // 
             categoryName={"ziel"} // 
@@ -527,7 +527,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             setRef={selectAngeboteRef} //
             keyName={"okAngebote"} // 
             arrayData={Object.values(angeboteBP)} // 
-            titleName={"Angebote"} // 
+            titleName={panelTexts.fangebote} // 
             turnOnMap={turnOnMap}
             locationBox={false} // 
             categoryName={"angebote"} // 
@@ -543,7 +543,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             setRef={selectSpracheRef} //
             keyName={"okSprache"} // 
             arrayData={Object.values(sprachunterstutzungBP)} // 
-            titleName={"Sprache"} // 
+            titleName={panelTexts.fsprache} // 
             turnOnMap={turnOnMap}
             locationBox={false} // 
             categoryName={"sprache"} // 
@@ -559,7 +559,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             setRef={selectArtRef} //
             keyName={"okArt"} // 
             arrayData={Object.values(artderorganisationBP)} // 
-            titleName={"Art der Organisation"} // 
+            titleName={panelTexts.fartderorganisation} // 
             turnOnMap={turnOnMap}
             locationBox={false} // 
             categoryName={"art"} // 
@@ -575,7 +575,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             setRef={selectZeigeRef} //
             keyName={"okZeige"} // 
             arrayData={["archiv", "aktive"]} // 
-            titleName={"Zeige"} // 
+            titleName={panelTexts.fzeige} // 
             turnOnMap={turnOnMap}
             locationBox={false} // 
             categoryName={"zeige"} // 
@@ -587,7 +587,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           
           <div className="sticky bottom-0 flex items-center border-b last:border-b-0 border-black z-[2000]">
             <div onClick={onSearch} className="cursor-pointer hover:bg-black bg-white py-2 hover:text-white transition-all flex-1 flex items-center justify-center border-t border-black">
-              Search
+            {panelTexts.fsearch}
             </div>
             {/* <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Clear All
@@ -596,7 +596,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
               Select All
             </div> */}
             <div onClick={resetFilter} className="lg:hidden cursor-pointer border-t border-l border-black py-2 hover:bg-black hover:text-white transition-all flex-1 flex justify-center items-center bg-white">
-              Reset
+            {panelTexts.freset}
             </div>
           </div>
         </div>

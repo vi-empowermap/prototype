@@ -13,7 +13,7 @@ module.exports = {
         lg: "1025px"
       },
       borderWidth: {
-        DEFAULT: '1px',
+        DEFAULT: '3px',
         '0': '0',
         '2': '2px',
         '3': '3px',

@@ -11,7 +11,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
     </style>
   </defs>
   <rect class="a${id}1" x="0" y="0" width="800" height="800" rx="400" ry="400"/>
-</svg>`;
+  </svg>`;
   // Initiative : Rect
   const bI = `
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
