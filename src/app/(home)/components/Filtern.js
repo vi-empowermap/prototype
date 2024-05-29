@@ -408,7 +408,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           </div>
         )}
         {getOrgaFilter && (
-          <button onClick={resetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l-2 border-black`}>
+          <button onClick={resetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l border-black`}>
             reset
           </button>
         )}
