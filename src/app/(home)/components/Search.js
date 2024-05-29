@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
-const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext }) => {
+const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext, resetText }) => {
   const { register, handleSubmit, setValue, getValues } = useForm();
   const clickedItemsList = useSetRecoilState(clickedItemsListAtom);
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
@@ -125,7 +125,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
         )}
         {getOnSearchFilter && (
           <button onClick={onResetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l border-black`}>
-            reset
+            {resetText}
           </button>
         )}
       </div>
@@ -135,7 +135,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
           <div style={{ left: `-${leftSize}px` }} className="absolute top-full w-screen border-y border-black bg-white text-black">
             <div className="py-4 px-4 flex">
               <div onClick={onResetFilter} className="cursor-pointer border border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
-                Reset
+                {resetText}
               </div>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center py-4 border-t border-black px-4">

@@ -119,8 +119,9 @@ useEffect(() => {
         },
         cache: "no-store",
       })
+
       const data = await res.json()
-   
+   console.log(data)
       if (data.status === "ok") {
         if (data.data.content.signupon) {
           signPBtn.disabled = false
