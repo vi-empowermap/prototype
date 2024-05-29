@@ -27,7 +27,7 @@ const FilterItemBox = ({
             <FilterAddBtn onActiveFilter={onActiveFilter} activeFilter={activeFilter} keyName={keyName} />
             <SectionResetBtn onResetSection={onResetSection} setSection={setSection} setRef={setRef} />
           </div>
-          <div onClick={() => onActiveFilter(keyName)} className="filter_box_title">
+          <div onClick={() => onActiveFilter(keyName)} className="filter_box_title w-full">
             {titleName}
           </div>
         </div>
