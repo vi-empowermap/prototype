@@ -3,7 +3,7 @@ import Wrapper from "./components/Wrapper";
 import { fakeData } from "./constant/fakeData";
 import { fetchDataOriginAPI } from "../utils/hooks/useFetchData";
 import { RANDOMCOLOR_LIST } from "./constant/colors";
-import { angeboteBP, artderorganisationBP, bundeslandBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "./constant/blueprintOptionData";
+import { bundeslandBP } from "./constant/blueprintOptionData";
 import yaml from "js-yaml";
 import { RANDOM_FONT_LIST } from "./constant/fontList";
 const authEmail = process.env.KB_USER;
@@ -146,7 +146,7 @@ export default async function Home() {
 
   // Loading page testing
   // await new Promise((resolve) => setTimeout(resolve, 1000))
-  /* That Code is just for Development. It is fake Data for Production you don't need have it */
+  /* ❌That Code is just for Development. It is fake Data for Production you don't need have it */
   const data = await fakeData();
   const dataNoL = data.filter((v) => {
     if(v.lokalorga === "true"){
@@ -219,8 +219,8 @@ export default async function Home() {
    
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Wrapper data={dataL} dataN={dataNoL} categories={categories} kqlDataResult={kqlDataResult} kqlDataResultNoLocation={kqlDataResultNoLocation} panelData={panelData} totalCountOfBundesland={totalCountOfBundesland} />
-    </Suspense>
+    
+    <Wrapper data={dataL} dataN={dataNoL} categories={categories} kqlDataResult={kqlDataResult} kqlDataResultNoLocation={kqlDataResultNoLocation} panelData={panelData} totalCountOfBundesland={totalCountOfBundesland} />
+  
   );
 }
