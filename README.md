@@ -1,5 +1,12 @@
 # Empowermap Frontend
 
+## TODOS
+
+- [ ] Update Marker Icon
+- [ ] Orga Icons
+- [ ] Web Icons
+- [ ] Intro Map Image
+
 ### Experiments
 
 - [Experiments](https://github.com/DainPark-web/empowermap_vis_experiment)
