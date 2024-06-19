@@ -13,10 +13,12 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useSearchParams } from "next/navigation";
 import OrgaPage from "./OrgaPage";
-import Logo from "./Logo";
 import GoogleMapTag from "./GoogleMap";
 import ListContainerOhneL from "./ListContainerOhneL";
-import Menu from "./Menu";
+import IntroCotainer from "./intro_page/IntroContainer";
+import MapContainerHome from "./MapContainer";
+import NavContainer from "./NavContainer";
+import MapSubContainer from "./MapSubContainer";
 
 const Wrapper = ({
   data,
@@ -136,7 +138,6 @@ const Wrapper = ({
   }, [turnOnMap]);
 
   const onTurOnMap = () => {
-    
     setTurnOnMap((pre) => !pre);
     setClickedMarkerAtom(-1);
     setClickedItemsList([]);
@@ -148,36 +149,18 @@ const Wrapper = ({
 
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
-      {/* Animation Button */}
+      {/* Intro Page */}
+      <IntroCotainer webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} />
 
-      <div id="anitext" className={`px-8 fixed top-0 left-0 font-semibold w-screen h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
-        <div className="py-8">
-          <Logo text={panelDatas.webtitle} />
-        </div>
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-10 w-full h-full mb-8">
-          <div className="w-full h-full border border-black overflow-hidden flex justify-center items-center">
-            <div className=" border border-black rounded-full flex justify-center items-center"> Map Image</div>
-          </div>
-          <div className="w-full lg:text-4xl lg:leading-10 font-jetBrainsMono font-normal">{panelDatas.introtext}</div>
-        </div>
-        <div className="flex justify-center mb-4">
-          <div id="anibtn" onClick={onClickReady} className={`relative font-semibold cursor-pointer ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} font-jetBrainsMono font-normal`}>
-            {panelDatas.introbtn}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col w-full h-full bg-white">
+      <MapContainerHome>
         {/* Navigation BAR */}
-        <nav id="navContainer" className={`w-full bg-white lg:h-36 flex justify-between border-b border-black  ${!ready ? "opacity-0" : " opacity-100"} overflow-y-visible`}>
-          <Menu />
-          <Logo text={panelDatas.webtitle} first={true} />
+        <NavContainer webtitle={panelDatas.webtitle} ready={ready}>
           <div className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l border-black `}>
             <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} resetText={panelDatas.freset} />
             <Filtern onTurOnMap={onTurOnMap} turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} panelTexts={panelDatas} />
           </div>
-        </nav>
-        <div id="mapCotainer" style={{ width: Boolean(search) ? (turnOnMap ? `${orgaMapSize}px` : "100%") : "100%" }} className={`flex-1 bg-white flex overflow-hidden relative ${!ready ? "opacity-0" : "opacity-100"} font-jetBrainsMono font-medium`}>
+        </NavContainer>
+        <MapSubContainer search={search} turnOnMap={turnOnMap} orgaMapSize={orgaMapSize} ready={ready}>
           {/* Orga who has location info */}
           {turnOnMap && (
             <div onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b border-black">
@@ -262,7 +245,7 @@ const Wrapper = ({
           {!turnOnMap && (
             <>
               <div className="w-full h-full overflow-y-scroll relative">
-                {!turnOnMap && <ListContainerOhneL getData={getData} />}
+                <ListContainerOhneL getData={getData} />
                 {!Boolean(search) && (
                   <div className="fixed bottom-2 left-2 flex items-end">
                     <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden`}>
@@ -290,9 +273,8 @@ const Wrapper = ({
               </div>
             </>
           )}
-        </div>
-      </div>
-
+        </MapSubContainer>
+      </MapContainerHome>
       <ListContainer stadtText={panelDatas.stadtinfo} bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
       <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
