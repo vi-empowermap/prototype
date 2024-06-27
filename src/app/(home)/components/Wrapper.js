@@ -19,10 +19,11 @@ import IntroCotainer from "./intro_page/IntroContainer";
 import MapContainerHome from "./MapContainer";
 import NavContainer from "./NavContainer";
 import MapSubContainer from "./MapSubContainer";
+import ControllerBtn from "./buttons/ControllerBtn";
 
 const Wrapper = ({
-  data,
-  dataN,
+  // data,
+  // dataN,
   categories,
   kqlDataResult,
   kqlDataResultNoLocation,
@@ -34,9 +35,11 @@ const Wrapper = ({
   gsap.registerPlugin(useGSAP);
   const container = useRef();
   const [ready, setReady] = useRecoilState(readyAniAtom);
-  const [getData, setData] = useState([...kqlDataResult, ...data]);
+  const [getData, setData] = useState([...kqlDataResult]);
+  // const [getData, setData] = useState([...kqlDataResult, ...data]);
+  const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult]);
+  // const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const [turnOnMap, setTurnOnMap] = useState(true);
-  const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const [findMobile, setFindMobile] = useState(false);
   const [clickedItemsList, setClickedItemsList] = useRecoilState(clickedItemsListAtom);
   const [doubleScreenTouched, setDoubleScreenTouched] = useState(false);
@@ -129,11 +132,15 @@ const Wrapper = ({
   /* Switch Orga types */
   useEffect(() => {
     if (!turnOnMap) {
-      setData([...kqlDataResultNoLocation, ...dataN]);
-      setDataForMarker([...kqlDataResultNoLocation, ...dataN]);
+      setData([...kqlDataResultNoLocation]);
+      setDataForMarker([...kqlDataResultNoLocation]);
+      // setData([...kqlDataResultNoLocation, ...dataN]);
+      // setDataForMarker([...kqlDataResultNoLocation, ...dataN]);
     } else {
-      setData([...kqlDataResult, ...data]);
-      setDataForMarker([...kqlDataResult, ...data]);
+      setData([...kqlDataResult]);
+      setDataForMarker([...kqlDataResult]);
+      // setData([...kqlDataResult, ...data]);
+      // setDataForMarker([...kqlDataResult, ...data]);
     }
   }, [turnOnMap]);
 
@@ -173,41 +180,12 @@ const Wrapper = ({
                       <div className="absolute flex justify-center items-center w-10 h-10 rounded-full top-4 right-3 z-[1000] text-2xl leading-5 font-semibold bg-black text-white">{Boolean(totalCountOfBundesland[getCurrentBundesLand]) ? totalCountOfBundesland[getCurrentBundesLand] : 0}</div>
                     )}
                     {openMiniMap && <DynamicMiniMap />}
-                    <div onClick={() => setOpenMiniMap((prev) => !prev)} className={`cursor-pointer absolute ${openMiniMap ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
-                      {openMiniMap && (
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                          <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
-                        </svg>
-                      )}
-                      {!openMiniMap && (
-                        <span className="flex items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
-                            <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
-                          </svg>
-                          <div className="text-xs">{panelDatas.minimaptitle}</div>
-                        </span>
-                      )}
-                    </div>
+                    <ControllerBtn open={openMiniMap} setOpen={setOpenMiniMap} text={panelDatas.minimaptitle} />
                   </div>
                   <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-10`}>
                     {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
                     {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border border-black"></div>}
-
-                    <div onClick={() => setOpenVerortung((prev) => !prev)} className={`cursor-pointer absolute ${openVerotung ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
-                      {openVerotung && (
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                          <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
-                        </svg>
-                      )}
-                      {!openVerotung && (
-                        <span className="flex items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
-                            <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
-                          </svg>
-                          <div className="text-xs">{panelDatas.verortungbtntext}</div>
-                        </span>
-                      )}
-                    </div>
+                    <ControllerBtn open={openVerotung} setOpen={setOpenVerortung} text={panelDatas.verortungbtntext} />
                   </div>
                   <div className={`relative justify-center items-center hidden pt-7 pb-3 lg:flex w-[calc(3vw+70px)] ${openCenter ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-6`}>
                     {openCenter && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.centerbtntext}</div>}
@@ -218,22 +196,7 @@ const Wrapper = ({
                         </svg>
                       </div>
                     )}
-
-                    <div onClick={() => setOpenCenter((prev) => !prev)} className={`cursor-pointer absolute ${openCenter ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
-                      {openCenter && (
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                          <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
-                        </svg>
-                      )}
-                      {!openCenter && (
-                        <span className="flex items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
-                            <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
-                          </svg>
-                          <div className="text-xs">{panelDatas.centerbtntext}</div>
-                        </span>
-                      )}
-                    </div>
+                    <ControllerBtn open={openCenter} setOpen={setOpenCenter} text={panelDatas.centerbtntext} />
                   </div>
                 </div>
               )}
@@ -251,22 +214,7 @@ const Wrapper = ({
                     <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden`}>
                       {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
                       {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border border-black"></div>}
-
-                      <div onClick={() => setOpenVerortung((prev) => !prev)} className={`cursor-pointer absolute ${openVerotung ? "w-fit" : "w-full"} bottom-0 left-0 py-2 px-3 z-[1000] text-xl leading-5 font-semibold`}>
-                        {openVerotung && (
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                            <path fillRule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
-                          </svg>
-                        )}
-                        {!openVerotung && (
-                          <span className="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
-                              <path fillRule="evenodd" d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z" clipRule="evenodd" />
-                            </svg>
-                            <div className="text-xs">{panelDatas.verortungbtntext}</div>
-                          </span>
-                        )}
-                      </div>
+                      <ControllerBtn open={openVerotung} setOpen={setOpenVerortung} text={panelDatas.verortungbtntext} />
                     </div>
                   </div>
                 )}
@@ -277,7 +225,8 @@ const Wrapper = ({
       </MapContainerHome>
       <ListContainer stadtText={panelDatas.stadtinfo} bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
-      <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
+      <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
+      {/* <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} /> */}
     </main>
   );
 };

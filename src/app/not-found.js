@@ -30,7 +30,7 @@ const getKirbyPanelDataError = async () => {
 };
 const NotFoundPage = async () => {
   const panelData = await getKirbyPanelDataError()
-  
+ 
   return (
     <NotFoundWrapper panelData={panelData} />
   );

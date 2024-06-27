@@ -153,19 +153,19 @@ export default async function Home() {
       return v
     }
   })
-  const dataL = data.filter((v) => {
-    if(v.lokalorga === "false"){
-       // Counting Bundesland
-       if(totalCountOfBundesland[bundeslandBP[v.bundesland].toLowerCase()]){
-        totalCountOfBundesland[bundeslandBP[v.bundesland].toLowerCase()] += 1
-      }else {
-        if(v.bundesland !== ''){
-          totalCountOfBundesland[bundeslandBP[v.bundesland].toLowerCase()] = 1
-        }
-      }
-      return v
-    }
-  })
+  // const dataL = data.filter((v) => {
+  //   if(v.lokalorga === "false"){
+  //      // Counting Bundesland
+  //      if(totalCountOfBundesland[bundeslandBP[v.bundesland].toLowerCase()]){
+  //       totalCountOfBundesland[bundeslandBP[v.bundesland].toLowerCase()] += 1
+  //     }else {
+  //       if(v.bundesland !== ''){
+  //         totalCountOfBundesland[bundeslandBP[v.bundesland].toLowerCase()] = 1
+  //       }
+  //     }
+  //     return v
+  //   }
+  // })
 
   /* Organisations have some categories. To make Categories List you need to collect here the categoires */
 
@@ -220,7 +220,7 @@ export default async function Home() {
 
   return (
     
-    <Wrapper data={dataL} dataN={dataNoL} categories={categories} kqlDataResult={kqlDataResult} kqlDataResultNoLocation={kqlDataResultNoLocation} panelData={panelData} totalCountOfBundesland={totalCountOfBundesland} />
+    <Wrapper categories={categories} kqlDataResult={kqlDataResult} kqlDataResultNoLocation={kqlDataResultNoLocation} panelData={panelData} totalCountOfBundesland={totalCountOfBundesland} />
   
   );
 }
