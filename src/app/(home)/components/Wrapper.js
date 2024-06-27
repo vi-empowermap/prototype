@@ -22,8 +22,8 @@ import MapSubContainer from "./MapSubContainer";
 import ControllerBtn from "./buttons/ControllerBtn";
 
 const Wrapper = ({
-  data,
-  dataN,
+  // data,
+  // dataN,
   categories,
   kqlDataResult,
   kqlDataResultNoLocation,
@@ -35,9 +35,11 @@ const Wrapper = ({
   gsap.registerPlugin(useGSAP);
   const container = useRef();
   const [ready, setReady] = useRecoilState(readyAniAtom);
-  const [getData, setData] = useState([...kqlDataResult, ...data]);
+  const [getData, setData] = useState([...kqlDataResult]);
+  // const [getData, setData] = useState([...kqlDataResult, ...data]);
+  const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult]);
+  // const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const [turnOnMap, setTurnOnMap] = useState(true);
-  const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const [findMobile, setFindMobile] = useState(false);
   const [clickedItemsList, setClickedItemsList] = useRecoilState(clickedItemsListAtom);
   const [doubleScreenTouched, setDoubleScreenTouched] = useState(false);
@@ -130,11 +132,15 @@ const Wrapper = ({
   /* Switch Orga types */
   useEffect(() => {
     if (!turnOnMap) {
-      setData([...kqlDataResultNoLocation, ...dataN]);
-      setDataForMarker([...kqlDataResultNoLocation, ...dataN]);
+      setData([...kqlDataResultNoLocation]);
+      setDataForMarker([...kqlDataResultNoLocation]);
+      // setData([...kqlDataResultNoLocation, ...dataN]);
+      // setDataForMarker([...kqlDataResultNoLocation, ...dataN]);
     } else {
-      setData([...kqlDataResult, ...data]);
-      setDataForMarker([...kqlDataResult, ...data]);
+      setData([...kqlDataResult]);
+      setDataForMarker([...kqlDataResult]);
+      // setData([...kqlDataResult, ...data]);
+      // setDataForMarker([...kqlDataResult, ...data]);
     }
   }, [turnOnMap]);
 
@@ -219,7 +225,8 @@ const Wrapper = ({
       </MapContainerHome>
       <ListContainer stadtText={panelDatas.stadtinfo} bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
       {/* Orga page */}
-      <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
+      <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
+      {/* <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} /> */}
     </main>
   );
 };
