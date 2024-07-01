@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={inter.className}>
+      <body suppressHydrationWarning={true} className={inter.className}>
         <RecoilContextProvider>{children}</RecoilContextProvider>
       </body>
     </html>
