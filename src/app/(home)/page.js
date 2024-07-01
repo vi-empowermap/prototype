@@ -147,12 +147,12 @@ export default async function Home() {
   // Loading page testing
   // await new Promise((resolve) => setTimeout(resolve, 1000))
   /* ❌That Code is just for Development. It is fake Data for Production you don't need have it */
-  const data = await fakeData();
-  const dataNoL = data.filter((v) => {
-    if(v.lokalorga === "true"){
-      return v
-    }
-  })
+  // const data = await fakeData();
+  // const dataNoL = data.filter((v) => {
+  //   if(v.lokalorga === "true"){
+  //     return v
+  //   }
+  // })
   // const dataL = data.filter((v) => {
   //   if(v.lokalorga === "false"){
   //      // Counting Bundesland
@@ -206,7 +206,7 @@ export default async function Home() {
       
      
       // Counting Bundesland
-      if(totalCountOfBundesland[bundeslandBP[value.bundesland].toLowerCase()]){
+      if(totalCountOfBundesland[bundeslandBP[value.bundesland]]){
         totalCountOfBundesland[bundeslandBP[value.bundesland].toLowerCase()] += 1
       }else {
         if(value.bundesland !== ''){
