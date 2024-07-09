@@ -55,7 +55,8 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
       data[i].filterVisible = true;
     }
     for (let i = 0; i < data.length; i++) {
-      const matches = String(data[i].aboutorga + " " + data[i].organame).match(pattern);
+      console.log(data[i])
+      const matches = String(data[i].aboutorga + " " + data[i].organame + " " + data[i].categories.join(" ")).match(pattern);
       
       if (Boolean(matches)) {
         
