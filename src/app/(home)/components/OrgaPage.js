@@ -22,7 +22,9 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   const [getOrgaFilterActivateAtom, setOrgaFilterActivateAtom] = useRecoilState(onOrgaFilterActivateAtom);
   useEffect(() => {
+  
     if (Boolean(search)) {
+
       setOrgaFilterActivateAtom({
         ready: false,
         all: false,
@@ -118,7 +120,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
         <OrgaNav onClose={onClose} />
 
         <div className="px-4 flex flex-grow flex-col overflow-y-auto">
-          <OrgaHeader bgColor={orgaInfo.bgColor} font={orgaInfo.font} organame={orgaInfo.organame} />
+          <OrgaHeader bgColor={orgaInfo.bgColor} font={orgaInfo.font} organame={orgaInfo.organame} imgUrl={orgaInfo.orgaimage} />
           <OrgaIconWrapper themenschwerpunkt={orgaInfo.themenschwerpunkt} />
           
           <div className="flex-grow flex flex-col lg:flex-row justify-start lg:justify-between">

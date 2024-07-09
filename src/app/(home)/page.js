@@ -86,6 +86,7 @@ const getKirbyData = async () => {
       social: true,
       role_title: "user.role.title",
       organame: true,
+      organameshortform: true,
       aboutorga: true,
       tags: true,
       tagpool: true,

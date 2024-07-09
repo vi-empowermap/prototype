@@ -81,8 +81,8 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
             ></div>
             <div style={{ fontSize: `${RANDOM_FONT_LIST_SIZE[value.font]}px` }} className={`mb-4 ${value.font} flex items-center h-16 `}>
               <div className="leading-none">
-                {String(value.organame).slice(0, 11)}
-                {String(value.organame).length > 12 && "..."}
+                {String(value.organameshortform).slice(0, 11)}
+                {String(value.organameshortform).length > 12 && "..."}
               </div>
             </div>
             {/* <div className="text-lg">{value.email}</div> */}
