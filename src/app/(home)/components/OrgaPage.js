@@ -1,6 +1,6 @@
 import { clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, onOrgaFilterActivateAtom, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import ListBoxIcon from "./ListBoxIcon";
 import { angeboteBP, artderorganisationBP, bundeslandBP, socialMediaBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
@@ -21,6 +21,8 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   const setReady = useSetRecoilState(readyAniAtom);
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   const [getOrgaFilterActivateAtom, setOrgaFilterActivateAtom] = useRecoilState(onOrgaFilterActivateAtom);
+  const emailRef = useRef(null)
+  const leftContainer = useRef(null)
   useEffect(() => {
   
     if (Boolean(search)) {
@@ -113,6 +115,26 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     })
     onClose()
   }
+
+  useEffect(() => {
+    if(leftContainer.current && orgaInfo){
+      console.log(orgaInfo)
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${leftContainer.current.clientWidth}" height="25">
+       <text x="0" y="18" fill="${orgaInfo.bgColor}" font-family="JetBrainsMono">${String(orgaInfo.email)}</text>
+      </svg>`;
+      const blob = new Blob([svg], {type: 'image/svg+xml'});
+      const url = URL.createObjectURL(blob);
+      if(emailRef.current){
+        emailRef.current.src = url
+      }
+    }
+  },[orgaInfo])
+
+  const clickEmail = () => {
+    if(orgaInfo){
+      router.push(`mailto:${String(orgaInfo.email)}`);
+    }
+  }
   return (
     <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 font-jetBrainsMono font-medium`}>
       <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-screen lg:h-full lg:border-x lg:border-t border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
@@ -159,7 +181,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 <div className="flex flex-wrap">{orgaInfo.categories && <div>{orgaInfo.categories.join(", ")}</div>}</div>
               </div>
             </div>
-            <div className="lg:flex-1 lg:pt-0 lg:pl-4 pt-4 ">
+            <div ref={leftContainer} className="lg:flex-1 lg:pt-0 lg:pl-4 pt-4 ">
               <div className={`${turnOnMap ? "block" : "hidden"} mb-4`}>
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.locationtext })}</div>
                 <div>
@@ -180,7 +202,8 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
               </div>
               <div className="mb-4">
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.kontakttext })}</div>
-                <div>{String(orgaInfo.email)}</div>
+                {/* <a >{String(orgaInfo.email)}</a> */}
+                <img className="cursor-pointer" onClick={clickEmail} ref={emailRef} />
                 <div>{String(orgaInfo.contactnummber)}</div>
                 <a target="_blank" href={String(orgaInfo.website)} style={{ color: `${orgaInfo.bgColor}` }} className="mt-4">website</a>
               </div>

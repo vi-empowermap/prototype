@@ -6,6 +6,13 @@
 body {
     background-color: rgb(110 231 183);
 }
+/* Email Style */
+.smalld{
+    font: italic 13px sans-serif;
+    fill: yellow;
+}
+
+
 .highlight{
     background-color: rgb(229 229 229 );
 }
@@ -227,3 +234,4 @@ body {
     font-weight: 700;
     font-style: normal;
 } 
+
