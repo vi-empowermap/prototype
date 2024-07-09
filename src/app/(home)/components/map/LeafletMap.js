@@ -1,124 +1,127 @@
-import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet"
-import "leaflet/dist/leaflet.css"
-import CustomMarker from "../CustomMarker"
-import { useRecoilValue, useSetRecoilState } from "recoil"
-import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, setViewAtom } from "@/app/utils/state"
-import { useEffect } from "react"
-import { MAPTILELAYER } from "../../constant/mapInfo"
-import { useSearchParams } from "next/navigation"
+import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import CustomMarker from "../CustomMarker";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, setViewAtom } from "@/app/utils/state";
+import { useEffect } from "react";
+import { MAPTILELAYER } from "../../constant/mapInfo";
+import { useSearchParams } from "next/navigation";
 
 /* Event: if cancel selection of marker */
-const LocationFinderDummy = ({doubleScreenTouched}) => {
+const LocationFinderDummy = ({ doubleScreenTouched }) => {
   const searchParams = useSearchParams();
   const search = searchParams.get("organisation");
-  const getCloseOrgaAtom = useRecoilValue(closeOrgaAtom)
-  const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom)
+  const getCloseOrgaAtom = useRecoilValue(closeOrgaAtom);
+  const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom);
   const setClickedItemsList = useSetRecoilState(clickedItemsListAtom);
+  
   const map = useMapEvent({
-      click() {
-        setClickedMarkerAtom(-1)
-       
-      }
-   })
+    click() {
+      setClickedMarkerAtom(-1);
+    },
+  });
+
   useEffect(() => {
     const closeEvent = () => {
-      setClickedMarkerAtom(-1)
-      setClickedItemsList([])
-    }
-    map.on("popupclose", closeEvent)
+      setClickedMarkerAtom(-1);
+      setClickedItemsList([]);
+    };
+    map.on("popupclose", closeEvent);
 
     return () => {
-      map.off("popupclose", closeEvent)
-    }
-  },[map])
-/* Orga page Resizing Map */
+      map.off("popupclose", closeEvent);
+    };
+  }, [map]);
+
+  /* Orga page Resizing Map */
   useEffect(() => {
     setTimeout(() => {
-      map.invalidateSize()
-    },300)
+      map.invalidateSize();
+    }, 300);
+  }, [getCloseOrgaAtom]);
 
-  },[getCloseOrgaAtom])
   useEffect(() => {
-    if(Boolean(search)){
+    if (Boolean(search)) {
       setTimeout(() => {
-        map.invalidateSize()
-      },300)
+        map.invalidateSize();
+      }, 300);
     }
-  },[search])
+  }, [search]);
   /* Double tap resizing map */
   useEffect(() => {
-    
-      setTimeout(() => {
-        map.invalidateSize()
-      },300)
-    
-  },[doubleScreenTouched])
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 300);
+  }, [doubleScreenTouched]);
 
   useEffect(() => {
     const resizeEvent = () => {
       setTimeout(() => {
-        map.invalidateSize()
-      },300)
-    }
-    window.addEventListener('resize', resizeEvent);
+        map.invalidateSize();
+      }, 300);
+    };
+    window.addEventListener("resize", resizeEvent);
 
     return () => {
-      window.removeEventListener('resize', resizeEvent)
-    }
-  },[])
+      window.removeEventListener("resize", resizeEvent);
+    };
+  }, []);
 
-  return null
-}
+  return null;
+};
 const MapController = ({ setViewAtomValue }) => {
-    const map = useMap()
-   
-    useEffect(() => {
-      // 
-      if (setViewAtomValue.name !== "start") {
-        if(setViewAtomValue.type === "mini"){
-          map.setView(setViewAtomValue.pos, 9, {animate: false})
-         
-        }else{
-          map.closePopup()
-          map.setView(setViewAtomValue.pos, 13)
-          
-       
-        }
-      }else{
-        // center reset
-        map.setView([51.1657, 10.4515],7)
-      
-       
-      }
-      
-    }, [setViewAtomValue])
-  
-  
-    return null
-  }
+  const map = useMap();
 
-const LeafletMap = ({doubleScreenTouched, data, setData, getDataForMarker }) => {
-    const setViewAtomValue = useRecoilValue(setViewAtom)
- 
+  useEffect(() => {
+    //
+    if (setViewAtomValue.name !== "start") {
+      if (setViewAtomValue.type === "mini") {
+        map.setView(setViewAtomValue.pos, 9, { animate: false });
+      } else {
+        map.closePopup();
+        map.setView(setViewAtomValue.pos, 13);
+      }
+    } else {
+      // center reset
+      map.setView([51.1657, 10.4515], 7);
+    }
+  }, [setViewAtomValue]);
+
+  return null;
+};
+
+const LeafletMap = ({ doubleScreenTouched, data, setData, getDataForMarker }) => {
+  const setViewAtomValue = useRecoilValue(setViewAtom);
+
   return (
     <>
-      <MapContainer
-        attributionControl={false}
-       className="w-full h-full" center={setViewAtomValue.pos} zoom={7} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
+      <MapContainer attributionControl={false} className="w-full h-full" center={setViewAtomValue.pos} zoom={7} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={`${MAPTILELAYER.ex01}`} />
         <LocationFinderDummy doubleScreenTouched={doubleScreenTouched} />
         <MapController setViewAtomValue={setViewAtomValue} />
         {getDataForMarker.map((value, index) => {
-          if(value.filterVisible){
+          if (value.filterVisible) {
             return (
-            <CustomMarker key={index} imageUrl={value.orgaimage} title={value.organame} color={value.bgColor} font={value.font} getData={data} setData={setData} id={value.id} artderorganisation={value.artderorganisation} position={value.location} activeColor={value.bgColor} archivoraktiv={value.archivoraktiv} />
-          )
-              }
-              
+              <CustomMarker
+                key={index}
+                imageUrl={value.orgaimage}
+                title={value.organame}
+                color={value.bgColor}
+                font={value.font}
+                getData={data}
+                setData={setData}
+                id={value.id}
+                artderorganisation={value.artderorganisation}
+                position={value.location}
+                activeColor={value.bgColor}
+                archivoraktiv={value.archivoraktiv}
+              />
+            );
+          }
         })}
       </MapContainer>
     </>
-  )
-}
+  );
+};
 
-export default LeafletMap
+export default LeafletMap;
