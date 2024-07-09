@@ -22,6 +22,7 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
   });
 
   useEffect(() => {
+    
     const closeEvent = () => {
       setClickedMarkerAtom(-1);
       setClickedItemsList([]);
@@ -73,7 +74,8 @@ const MapController = ({ setViewAtomValue }) => {
   const map = useMap();
 
   useEffect(() => {
-    //
+      
+    
     if (setViewAtomValue.name !== "start") {
       if (setViewAtomValue.type === "mini") {
         map.setView(setViewAtomValue.pos, 9, { animate: false });
@@ -82,8 +84,17 @@ const MapController = ({ setViewAtomValue }) => {
         map.setView(setViewAtomValue.pos, 13);
       }
     } else {
+     
       // center reset
-      map.setView([51.1657, 10.4515], 7);
+      const successCallback = (position) => {
+        map.setView([position.coords.latitude, position.coords.longitude], 7);
+      };
+      
+      const errorCallback = (error) => {
+        map.setView([51.1657, 10.4515], 7);
+      };
+      
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     }
   }, [setViewAtomValue]);
 

@@ -69,6 +69,7 @@ const Wrapper = ({
   };
   /* Detection Mobile Device and Tablet */
   useEffect(() => {
+    
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       // true for mobile device
       setFindMobile(true);
