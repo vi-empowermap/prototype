@@ -39,7 +39,7 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
     setTimeout(() => {
       map.invalidateSize();
     }, 300);
-  }, [getCloseOrgaAtom]);
+  }, [getCloseOrgaAtom,  map, search]);
 
   useEffect(() => {
     if (Boolean(search)) {
