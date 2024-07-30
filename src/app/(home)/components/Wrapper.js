@@ -157,6 +157,7 @@ const Wrapper = ({
 
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
+   
       {/* Intro Page */}
       <IntroCotainer webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} />
 

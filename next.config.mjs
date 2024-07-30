@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
     env: {
         KB_FOR_FILE: process.env.KB_FOR_FILE,
         KB_API_API:process.env.KB_API_API,
