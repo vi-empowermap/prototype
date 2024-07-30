@@ -36,9 +36,12 @@ export const artderorganisationBP = {
     a: "Verein",
     b: "Initiative",
     c: "NGO (Nichtregierungsorganisation)",
-    d: "Projektgruppe",
+    d: "Projekt",
     e: "Bildungseinrichtung",
     f: "Kultureinrichtung",
+    g: "Verbund/Verband",
+    h: "Kollektiv",
+    i: "Weitere",
 }
 
 export const zielgruppeBP = {
@@ -75,21 +78,24 @@ export const sprachunterstutzungBP = {
 }
 
 export const angeboteBP = {
-    a: "Workshops und Seminare",
-    b: "Veranstaltungen und Events",
-    c: "Forschungsprojekte",
-    d: "Publikationen und (Online-)Ressourcen/Materialien",
-    e: "Freizeitangebote",
-    f: "Nachhilfe",
-    g: "Sprachunterricht",
-    h: "Übersetzungen",
-    i: "Dolmetschung",
-    j: "Betreuung/Pflegedienste",
-    k: "Kinder- und Jugendbetreuung",
-    l: "Coaching / Supervision",
-    m: "Aus- und Weiterbildungen",
-    o: "Inputs und Vorträge",
-    p: "Networking",
+    a: "Workshops & Seminare",
+    b: "Veranstaltungen & Events",
+    c: "Beratungsdienste",
+    d: "Forschung",
+    e: "Publikationen & (Online-)Ressourcen/Materialien",
+    f: "Bibliothek/Archiv",
+    g: "Freizeitangebote",
+    h: "Nachhilfe",
+    i: "Sprachunterricht",
+    j: "Übersetzungen",
+    k: "Dolmetschung",
+    l: "Betreuung/Pflegedienste",
+    m: "Kinder- & Jugendbetreuung",
+    o: "Coaching/Supervision",
+    p: "Aus- & Weiterbildungen",
+    q: "Inputs & Vorträge",
+    r: "Networking",
+    s: "Weitere",
 }
 export const socialMediaBP = {
     a: "Facebook",
