@@ -41,19 +41,22 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
     }, 300);
   }, [getCloseOrgaAtom,  map, search]);
 
+ 
   useEffect(() => {
-    if (Boolean(search)) {
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 300);
+    if(map){
+      if(Boolean(search)){
+        setTimeout(() => {
+          map.invalidateSize()
+        },300)
+      }
     }
-  }, [search]);
+  },[search, map])
   /* Double tap resizing map */
   useEffect(() => {
     setTimeout(() => {
       map.invalidateSize();
     }, 300);
-  }, [doubleScreenTouched]);
+  }, [doubleScreenTouched, map]);
 
   useEffect(() => {
     const resizeEvent = () => {
