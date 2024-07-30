@@ -12,7 +12,7 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady }) =
           <div className="flex-1 lg:text-4xl lg:leading-10 font-jetBrainsMono font-normal">{introtext}</div>
         </div>
       </div>
-      <div className="w-screen h-screen max-h-screen min-h-screen px-8 py-4 flex flex-col relative">
+      <div className="w-screen h-fit px-8 py-4 flex flex-col relative">
         <div className="lg:text-4xl lg:leading-10 font-jetBrainsMono font-normal">About</div>
         <p className="lg:text-xl font-jetBrainsMono font-normal columns-2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra mi id quam tincidunt placerat. Praesent tortor felis, lacinia ut ligula eu, pulvinar consectetur massa. Suspendisse a eros convallis, lacinia odio a, mollis diam. Aliquam vitae sapien dapibus ex imperdiet eleifend. Sed
@@ -26,7 +26,7 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady }) =
           efficitur, porta ligula fringilla, bibendum nulla. Praesent posuere sed velit non sagittis. Vestibulum bibendum dictum neque non sagittis. Vivamus ut finibus elit. Donec at tortor sed mi suscipit ultrices. Cras varius ex sem, ut auctor leo molestie a. Nam venenatis sapien vitae massa
           blandit, quis vulputate ex ultricies. Donec nisl ante, luctus non enim sed, placerat viverra mi.
         </p>
-        <div className="flex justify-center absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div className="flex justify-center mt-8">
           <div id="anibtn" onClick={onClickReady} className={`relative font-semibold cursor-pointer ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} font-jetBrainsMono font-normal`}>
             {introbtn}
           </div>
