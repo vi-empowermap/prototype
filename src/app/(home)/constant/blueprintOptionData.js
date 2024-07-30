@@ -18,10 +18,10 @@ export const bundeslandBP = {
 }
 export const themenschwerpunktBP = {
     a: "Bildung & Professionalisierung",
-    b: "Kultur und Kunst",
-    c: "Gesundheit und Soziales",
+    b: "Kultur & Kunst",
+    c: "Gesundheit & Soziales",
     d: "Rech",
-    e: "Politik & und Advocacy",
+    e: "Politik & Advocacy",
     f: "Community-Building",
     g: "Beratung",
     h: "Wissenschaft",
@@ -44,16 +44,19 @@ export const artderorganisationBP = {
 export const zielgruppeBP = {
     a: "Afrikanische/Schwarze Kinder & Jugendliche",
     b: "Afrikanische/Schwarze Frauen",
-    c: "Afrikanische/Schwarze FLINTA(*)",
-    d: "Afrikanische/Schwarze LSBTQIA+",
-    e: "Afrikanische/Schwarze Geflüchtete & Migrant*innen",
-    f: "Afrikanische/Schwarze Menschen mit Behinderungen/chronischen Erkrankungen",
-    g: "Afrikanische/Schwarze Menschen höheren Alters und Senior*innen",
-    h: "Eltern/Bezugspersonen/Pflegeverantwortliche Afrikanischer/Schwarzer Kinder",
-    i: "Pflegeverantwortliche/Angehörige Afrikanischer/Schwarzer Personen",
-    j: "Afrikanische/Schwarze Fachkräfte und Freischaffende",
-    k: "Familien mit Afrikanischen/Schwarzen Mitgliedern",
-    l: "Weitere",
+    c: "Afrikanische/Schwarze Männer",
+    d: "Afrikanische/Schwarze FLINTA(*)",
+    e: "Afrikanische/Schwarze LSBTQIA+",
+    f: "Afrikanische/Schwarze Geflüchtete & Migrant*innen",
+    g: "Afrikanische/Schwarze Studierenden",
+    h: "Afrikanische/Schwarze Auszubildende",
+    i: "Afrikanische/Schwarze Menschen mit Behinderungen/chronischen Erkrankungen",
+    j: "Afrikanische/Schwarze Menschen höheren Alters und Senior*innen",
+    k: "Eltern/Bezugspersonen/Pflegeverantwortliche Afrikanischer/Schwarzer Kinder",
+    l: "Pflegeverantwortliche/Angehörige Afrikanischer/Schwarzer Personen",
+    m: "Afrikanische/Schwarze Fachkräfte und Freischaffende",
+    o: "Familien mit Afrikanischen/ Schwarzen Mitgliedern",
+    p: "Weitere",
 }
 
 // Do you need this code?🤔
