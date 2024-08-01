@@ -225,7 +225,7 @@ const Wrapper = ({
           )}
         </MapSubContainer>
       </MapContainerHome>
-      <ListContainer stadtText={panelDatas.stadtinfo} bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} />
+      <ListContainer stadtText={panelDatas.stadtinfo} bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} noLGetData={[...kqlDataResultNoLocation]} />
       {/* Orga page */}
       <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
       {/* <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} /> */}

@@ -4,6 +4,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
  
   return (
     <>
+    {/* Bildung & Professionalisierung */}
       {thema === "a" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -15,6 +16,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Kultur & Kunst */}
       {thema === "b" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -26,6 +28,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Gesundheit & Soziales */}
       {thema === "c" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -37,6 +40,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Rech */}
       {thema === "d" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -44,6 +48,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Politik & Advocacy */}
       {thema === "e" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -55,6 +60,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Community-Building */}
       {thema === "f" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -62,6 +68,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Beratung */}
       {thema === "g" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -73,6 +80,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Wissenschaft */}
       {thema === "h" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -84,6 +92,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Sprachen & Übersetzungsarbeit */}
       {thema === "i" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -95,6 +104,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Kinder & Jugend */}
       {thema === "j" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -106,6 +116,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Sport & Freizeit */}
       {thema === "k" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -117,6 +128,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Religion */}
       {thema === "l" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
@@ -124,6 +136,7 @@ const ListBoxIcon = ({ thema, size="small" }) => {
           </svg>
         </div>
       )}
+      {/* Flucht & Migration */}
       {thema === "m" && (
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`${size === "small" ? "w-6 h-6":"w-10 h-10" }`}>
