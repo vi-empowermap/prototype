@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        stroke: #fff;
+        stroke-linecap: square;
+        stroke-miterlimit: 10;
+        stroke-width: 14px;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
+  <g>
+    <g id="rand">
+      <rect class="cls-1" x="7" y="7" width="387" height="385"/>
+    </g>
+    <g id="PICTO">
+      <path class="cls-2" d="M382,120.5s-51,82.5-183,82.5S16,120.5,16,120.5c0,0,53-82.5,183-82.5s183,82.5,183,82.5Z"/>
+      <circle class="cls-2" cx="198.5" cy="120.5" r="74.5"/>
+      <line class="cls-2" x1="193" y1="8" x2="193" y2="38"/>
+      <path class="cls-2" d="M198.5,203l.5,75s-40,7-40,46,44,43,44,43v23.42"/>
+    </g>
+  </g>
+</svg>
