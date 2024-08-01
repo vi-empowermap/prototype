@@ -3,7 +3,7 @@
   <defs>
     <style>
       .cls-1, .cls-2 {
-        stroke: #fff;
+        <!-- stroke: #fff; -->
         stroke-linecap: square;
         stroke-miterlimit: 10;
         stroke-width: 14px;
