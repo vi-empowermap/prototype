@@ -1,36 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
   <defs>
     <style>
       .cls-1 {
-        <!-- stroke: #000; -->
-      }
-
-      .cls-1, .cls-2 {
-        fill: none;
-        stroke-linecap: square;
-        stroke-miterlimit: 10;
-        stroke-width: 14px;
-      }
-
-      .cls-2 {
-        stroke: #fff;
+        fill: #000;
+        stroke-width: 0px;
       }
     </style>
   </defs>
-  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
-  <g>
-    <g id="rand">
-      <rect class="cls-1" x="6" y="7" width="387" height="385"/>
-    </g>
-    <g id="PICTO">
-      <polygon points="176.23 14 259.33 82.38 330.55 156.63 305.3 185.38 293.52 249.17 266 291.71 266 385.94 129.37 385.94 144.25 275.86 59 153 123.99 67.75 133.98 67.75 176.23 14"/>
-      <polyline class="cls-2" points="127.06 62.68 219 131 192 165"/>
-      <polyline class="cls-2" points="137.82 148.68 237.69 185.38 261.83 210.81 315 188"/>
-      <polyline class="cls-2" points="173 166 226.35 242.92 223 377"/>
-      <line class="cls-2" x1="183.14" y1="90.59" x2="210.13" y2="44.02"/>
-      <line class="cls-2" x1="198.22" y1="157.83" x2="256.83" y2="79.88"/>
-      <line class="cls-2" x1="237.69" y1="185.38" x2="297.61" y2="122.41"/>
-    </g>
+  <g id="rand">
+    <path class="cls-1" d="M-1,.3v399h401V.3H-1ZM386,385.3H13V14.3h373v371Z"/>
   </g>
+  <g>
+    <polygon class="cls-1" points="205.5 38.4 175.4 90.2 138.3 62.6 176.2 14.3 205.5 38.4"/>
+    <polygon class="cls-1" points="302.4 201.3 293.5 249.5 266 292 266 386.2 229.8 386.2 229.8 384.5 233.4 241.1 187.3 174.6 233.7 191.7 260.1 219.5 302.4 201.3"/>
+    <polygon class="cls-1" points="219.3 245.3 215.8 384.1 215.8 386.2 129.4 386.2 129.5 385.3 144.2 276.1 59 153.3 123.3 68.9 208.8 132.4 202.1 141.3 187.5 159.8 133.7 140 128.8 153.1 164.4 166.2 219.3 245.3"/>
+    <polygon class="cls-1" points="229.8 384.5 229.8 386.2 215.8 386.2 215.8 384.1 229.8 384.5"/>
+  </g>
+  <polygon class="cls-1" points="330.5 156.9 306.5 184.3 263.5 202.7 247.3 185.7 302.5 127.7 330.5 156.9"/>
+  <polygon class="cls-1" points="292.8 117.6 235.8 177.5 201.8 165 213.1 149.9 227.8 130.4 228.4 129.6 261.8 85.2 292.8 117.6"/>
+  <polygon class="cls-1" points="251.2 76 217.2 121.2 186.8 98.6 216.4 47.4 251.2 76"/>
 </svg>

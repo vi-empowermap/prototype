@@ -1,30 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
   <defs>
     <style>
       .cls-1 {
-        fill: none;
-        stroke: #000;
-        stroke-linecap: square;
-        stroke-miterlimit: 10;
-        stroke-width: 14px;
+        <!-- fill: #000; -->
+        stroke-width: 0px;
       }
     </style>
   </defs>
-  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
-  <g>
-    <g id="rand">
-      <rect class="cls-1" x="6" y="7" width="387" height="385"/>
-    </g>
-    <g id="PICTO">
-      <path class="cls-1" d="M34.67,115.83c0-40.98,33.22-74.2,74.2-74.2s74.2,33.22,74.2,74.2-33.22,74.2-74.2,74.2h-26.26v139.41h27.74v-113.32c56.15,0,101.66-45.52,101.66-101.66S166.48,12.81,110.34,12.81,8.68,58.32,8.68,114.47l25.99,1.37Z"/>
-      <rect class="cls-1" x="82.6" y="356.65" width="28.42" height="34.35"/>
-      <polyline class="cls-1" points="132.5 356.65 296.37 356.65 296.37 210.81"/>
-      <rect class="cls-1" x="238" y="8" width="155" height="202"/>
-      <line class="cls-1" x1="261" y1="55" x2="367" y2="55"/>
-      <line class="cls-1" x1="261" y1="85" x2="367" y2="85"/>
-      <line class="cls-1" x1="261" y1="115" x2="367" y2="115"/>
-      <line class="cls-1" x1="261" y1="144" x2="367" y2="144"/>
-    </g>
-  </g>
+  <path class="cls-1" d="M-1,0v399h401V0H-1ZM13,14h56c-24.4,10.1-44.3,28.7-56,52.2V14ZM110.3,19.8c52.2,0,94.7,42.5,94.7,94.7s-42.5,94.7-94.7,94.7h-7v113.3h-13.7v-125.4h19.3c44.8,0,81.2-36.4,81.2-81.2s-36.4-81.2-81.2-81.2S31.7,67.1,28,108.5l-12.1-.6C19.3,58.7,60.4,19.8,110.3,19.8ZM104,384h-14.4v-20.3h14.4v20.3ZM386,385H118v-35.3h-42.4v35.3H13V121.7l28.7,1.5v-7.4c0-37,30.2-67.2,67.2-67.2s67.2,30.2,67.2,67.2-30.2,67.2-67.2,67.2h-33.3v153.4h41.7v-113.5c56.7-3.6,101.7-50.9,101.7-108.4S191.2,30.3,151.7,14h79.3v203h58.4v132.7H125.5v14h177.9v-146.7h82.6v168ZM386,203h-141V15h141v188Z"/>
+  <rect class="cls-1" x="254" y="48" width="120" height="14"/>
+  <rect class="cls-1" x="254" y="78" width="120" height="14"/>
+  <rect class="cls-1" x="254" y="108" width="120" height="14"/>
+  <rect class="cls-1" x="254" y="137" width="120" height="14"/>
 </svg>
