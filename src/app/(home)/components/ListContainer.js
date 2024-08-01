@@ -3,12 +3,13 @@ import ListBox from "./ListBox";
 import { clikedMarkerAtom, readyAniAtom } from "@/app/utils/state";
 import { useEffect, useRef } from "react";
 
-const ListContainer = ({turnOnMap, doubleScreenTouched, getData, bundeslandtext, stadtText }) => {
+const ListContainer = ({turnOnMap, doubleScreenTouched, getData, bundeslandtext, stadtText, noLGetData }) => {
   const ready = useRecoilValue(readyAniAtom)
   const listContainerRef = useRef(null)
   const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
   useEffect(() => {
     if(listContainerRef.current){
+      console.log(noLGetData)
       listContainerRef.current.scrollTop = 0;
     }
   },[getClikedMarkerAtom])
@@ -19,6 +20,10 @@ const ListContainer = ({turnOnMap, doubleScreenTouched, getData, bundeslandtext,
         {getData.map((value, index) => {
           return <ListBox key={index} index={index} value={value} bundeslandtext={bundeslandtext} stadtText={stadtText} />;
         })}
+        {/* <div className="w-full relative z-[100]">ddddd</div> */}
+        {/* {noLGetData.map((value, index) => {
+          return <ListBox key={index} index={index} value={value} bundeslandtext={bundeslandtext} stadtText={stadtText} />;
+        })} */}
       </div>
     </div>
   );
