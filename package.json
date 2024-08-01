@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.0",
+    "@svgr/webpack": "^8.1.0",
     "gsap": "^3.12.5",
     "js-yaml": "^4.1.0",
     "leaflet": "^1.9.4",

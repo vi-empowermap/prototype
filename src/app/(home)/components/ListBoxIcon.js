@@ -1,124 +1,100 @@
-import Image from "next/image";
+import Bildung from "/public/assets/themen/bildung.svg";
+import Kultur from "/public/assets/themen/kultur.svg";
+import Soziales from "/public/assets/themen/soziales.svg";
+import Recht from "/public/assets/themen/recht.svg";
+import Advocacy from "/public/assets/themen/advocacy.svg";
+import Community from "/public/assets/themen/community.svg";
+import Beratung from "/public/assets/themen/beratung.svg";
+import Wissenschaft from "/public/assets/themen/wissenschaft.svg";
+import Sprachen from "/public/assets/themen/sprachen.svg";
+import Kinder from "/public/assets/themen/kinder.svg";
+import Freizeit from "/public/assets/themen/freizeit.svg";
+import Religion from "/public/assets/themen/religion.svg";
+import Flucht from "/public/assets/themen/flucht.svg";
+
+
 // size : small , big
 const ListBoxIcon = ({ thema, size="small" }) => {
- 
+  const currentSize = size === "small" ? "30px" : "40px"
   return (
     <>
     {/* Bildung & Professionalisierung */}
       {thema === "a" && (
-        <div>
-          <Image src={`assets/themen/bildung.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Bildung & Professionalisierung"} />
+     
+        <div >
+        <Bildung style={{ stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Kultur & Kunst */}
       {thema === "b" && (
-        <div>
-          <Image src={`assets/themen/kultur.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Kultur & Kunst"} />
+        <div >
+        <Kultur style={{fill: "black", stroke: "white", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Gesundheit & Soziales */}
       {thema === "c" && (
-        <div>
-          <Image src={`assets/themen/soziales.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Gesundheit & Soziales"} />
+        <div >
+        <Soziales style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Recht */}
       {thema === "d" && (
-        <div>
-          <Image src={`assets/themen/recht.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Recht"} />
+        <div >
+        <Recht style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Politik & Advocacy */}
       {thema === "e" && (
-        <div>
-          <Image src={`assets/themen/advocacy.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Politik & Advocacy"} />
+        <div >
+        <Advocacy style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Community-Building */}
       {thema === "f" && (
-        <div>
-          <Image src={`assets/themen/community.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Community-Building"} />
+        <div >
+        <Community style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Beratung */}
       {thema === "g" && (
-        <div>
-          <Image src={`assets/themen/beratung.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Beratung"} />
+        <div >
+        <Beratung style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Wissenschaft */}
       {thema === "h" && (
-        <div>
-          <Image src={`assets/themen/wissenschaft.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Wissenschaft"} />
+        <div >
+        <Wissenschaft style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Sprachen & Übersetzungsarbeit */}
       {thema === "i" && (
-        <div>
-          <Image src={`assets/themen/sprachen.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Sprachen & Übersetzungsarbeit"} />
+        <div >
+        <Sprachen style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Kinder & Jugend */}
       {thema === "j" && (
-        <div>
-          <Image src={`assets/themen/kinder.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Kinder & Jugend"} />
+        <div >
+        <Kinder style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Sport & Freizeit */}
       {thema === "k" && (
-        <div>
-          <Image src={`assets/themen/freizeit.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Sport & Freizeit"} />
+        <div >
+        <Freizeit style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Religion */}
       {thema === "l" && (
-        <div>
-          <Image src={`assets/themen/religion.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Religion"} />
+        <div >
+        <Religion style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Flucht & Migration */}
       {thema === "m" && (
-        <div>
-          <Image src={`assets/themen/flucht.svg`} 
-            width={size === "small" ? 24: 40}
-            height={size === "small" ? 24: 40}
-            alt={"Flucht & Migration"} />
+        <div >
+        <Flucht style={{fill: "black", stroke: "black", width: currentSize, height: currentSize }} />
         </div>
       )}
     </>
