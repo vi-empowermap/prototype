@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke-linecap: square;
+        stroke-miterlimit: 10;
+        stroke-width: 14px;
+      }
+
+      .cls-1, .cls-3, .cls-4 {
+        stroke: #000;
+      }
+
+      .cls-2 {
+        stroke: #fff;
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
+  <g>
+    <g id="rand">
+      <rect class="cls-3" x="6" y="9" width="387" height="129.18"/>
+      <rect class="cls-3" x="6" y="263.82" width="387" height="129.18"/>
+      <rect class="cls-4" x="6" y="138.18" width="387" height="129.18"/>
+    </g>
+    <g id="PICTO">
+      <path class="cls-1" d="M36.74,52.66c2.26,1.34,55.26,0,55.26,0,0,0-7-18.72,0-18.72h49"/>
+      <path class="cls-1" d="M151,57h69"/>
+      <polyline class="cls-1" points="37 79 37 107.09 67.72 80.36 94.47 107.11 175 107.11"/>
+      <path class="cls-1" d="M251.81,57c4.19,1,66.19,0,66.19,0,0,0,.98,16.59,12.49,16.59s12.67-16.59,12.67-16.59h16.84"/>
+      <line class="cls-1" x1="363" y1="28" x2="363" y2="39"/>
+      <polyline class="cls-1" points="182 86 182 106.85 208.82 106.85 219.48 96.42 219.48 111.09 364 111.09"/>
+      <line class="cls-2" x1="34.24" y1="161.02" x2="34.24" y2="184.88"/>
+      <line class="cls-2" x1="64.24" y1="161.02" x2="64.24" y2="184.88"/>
+      <line class="cls-2" x1="205.24" y1="161.02" x2="205.24" y2="184.88"/>
+      <line class="cls-2" x1="235.24" y1="161.02" x2="235.24" y2="184.88"/>
+      <line class="cls-2" x1="266.24" y1="161.02" x2="266.24" y2="184.88"/>
+      <line class="cls-2" x1="296.24" y1="161.02" x2="296.24" y2="184.88"/>
+      <line class="cls-2" x1="326.24" y1="161.02" x2="326.24" y2="184.88"/>
+      <line class="cls-2" x1="356.24" y1="161.02" x2="356.24" y2="184.88"/>
+      <line class="cls-2" x1="34.24" y1="226.15" x2="34.24" y2="250"/>
+      <line class="cls-2" x1="64.24" y1="226.15" x2="64.24" y2="250"/>
+      <line class="cls-2" x1="94.24" y1="226.15" x2="94.24" y2="250"/>
+      <circle class="cls-2" cx="105.74" cy="172.52" r="13.5"/>
+      <circle class="cls-2" cx="161.5" cy="172.5" r="13.5"/>
+      <circle class="cls-2" cx="140.5" cy="236.5" r="13.5"/>
+      <circle class="cls-2" cx="299.5" cy="236.5" r="13.5"/>
+      <circle class="cls-2" cx="349.5" cy="236.5" r="13.5"/>
+      <polygon class="cls-2" points="248 250 195 250 221.5 219 248 250"/>
+      <polyline class="cls-1" points="31 297 31 366.35 88.87 302.82"/>
+      <line class="cls-1" x1="36.74" y1="321.45" x2="137.31" y2="321.45"/>
+      <line class="cls-1" x1="215.74" y1="349.45" x2="316.31" y2="349.45"/>
+      <line class="cls-1" x1="215.74" y1="321.45" x2="316.31" y2="321.45"/>
+      <line class="cls-1" x1="119.24" y1="297" x2="119.24" y2="349"/>
+      <line class="cls-1" x1="212" y1="295" x2="212" y2="366"/>
+      <path class="cls-1" d="M154,297s34.5,1,35,31-35,31.57-35,31.57"/>
+      <path class="cls-1" d="M251.81,366c2.19-3,47.69-71,47.69-71h47.03v71"/>
+      <circle class="cls-1" cx="370.5" cy="345.5" r="3.5"/>
+    </g>
+  </g>
+</svg>

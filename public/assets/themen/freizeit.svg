@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #000;
+        stroke-linecap: square;
+        stroke-miterlimit: 10;
+        stroke-width: 14px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
+  <g>
+    <g id="rand">
+      <rect class="cls-1" x="6" y="7" width="387" height="385"/>
+    </g>
+    <g id="PICTO">
+      <circle class="cls-2" cx="200" cy="200" r="76"/>
+      <line class="cls-2" x1="200" y1="297" x2="200" y2="327"/>
+      <line class="cls-2" x1="200" y1="80" x2="200" y2="106.41"/>
+      <line class="cls-2" x1="200" y1="38" x2="200" y2="46"/>
+      <line class="cls-2" x1="37" y1="204" x2="45" y2="204"/>
+      <line class="cls-2" x1="356" y1="204" x2="364" y2="204"/>
+      <line class="cls-2" x1="200" y1="356" x2="200" y2="364"/>
+      <line class="cls-2" x1="103.34" y1="203.5" x2="76.5" y2="203.5"/>
+      <line class="cls-2" x1="323.5" y1="203.5" x2="297.06" y2="203.5"/>
+      <line class="cls-2" x1="129.95" y1="133.45" x2="112.67" y2="116.17"/>
+      <line class="cls-2" x1="287.33" y1="290.83" x2="270.05" y2="273.55"/>
+      <line class="cls-2" x1="132.25" y1="271.25" x2="112.67" y2="290.83"/>
+      <line class="cls-2" x1="287.33" y1="116.17" x2="270.05" y2="133.45"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #000;
+        stroke-linecap: square;
+        stroke-miterlimit: 10;
+        stroke-width: 14px;
+      }
+    </style>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
+  <g>
+    <g id="rand">
+      <rect class="cls-1" x="6" y="7" width="387" height="385"/>
+    </g>
+    <g id="PICTO">
+      <polyline class="cls-1" points="56.95 109 56.95 55.15 342 55.15 342 233"/>
+      <polyline class="cls-1" points="313 238.33 340.29 268.27 372 238.33"/>
+      <polyline class="cls-1" points="86 163.27 58.71 133.33 27 163.27"/>
+      <polyline class="cls-1" points="342 299 342 346.46 56.95 346.46 56.95 168"/>
+      <polygon class="cls-2" points="264.43 182.04 220.89 182.04 220.89 140.14 177.36 140.14 177.36 182.04 135 182.04 135 225.1 177.36 225.1 177.36 268.17 220.89 268.17 220.89 225.1 264.43 225.1 264.43 182.04"/>
+    </g>
+  </g>
+</svg>
