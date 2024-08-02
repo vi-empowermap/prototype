@@ -35,7 +35,7 @@ const ListBoxOhneL = ({ index, value }) => {
         </div>
         <div className="flex flex-grow items-center justify-center gap-4">
           {value.themenschwerpunkt &&
-            value.themenschwerpunkt.slice(0, 3).map((val2, idx) => {
+            value.themenschwerpunkt.slice(0, 1).map((val2, idx) => {
               return <ListBoxIcon key={idx} thema={val2} size={"big"} />;
             })}
         </div>
