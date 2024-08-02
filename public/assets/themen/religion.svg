@@ -1,46 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
   <defs>
     <style>
       .cls-1 {
-        fill: #fff;
-      }
-
-      .cls-1, .cls-2, .cls-3 {
-        stroke-linecap: square;
-        stroke-miterlimit: 10;
-        stroke-width: 14px;
-      }
-
-      .cls-1, .cls-3 {
-        stroke: #fff;
-      }
-
-      .cls-2 {
-        stroke: #000;
-      }
-
-      .cls-3 {
-        fill: none;
+        <!-- fill: #000; -->
+        stroke-width: 0px;
       }
     </style>
   </defs>
-  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
-  <g>
-    <g id="rand">
-      <rect class="cls-2" x="6" y="7" width="387" height="385"/>
-    </g>
-    <g id="PICTO">
-      <line class="cls-3" x1="202" y1="25" x2="202" y2="33"/>
-      <line class="cls-3" x1="311" y1="123" x2="303" y2="123"/>
-      <line class="cls-3" x1="102" y1="123" x2="94" y2="123"/>
-      <polyline class="cls-3" points="356 150 344.85 257 298.95 292 298.95 377.26"/>
-      <polyline class="cls-3" points="312 195 255 248 255 377.26"/>
-      <polyline class="cls-3" points="45 150 56.15 257 102.05 292 102.05 377.26"/>
-      <polyline class="cls-3" points="89 195 146 248 146 377.26"/>
-      <circle class="cls-1" cx="202" cy="132" r="74"/>
-      <line class="cls-3" x1="284.83" y1="55.17" x2="279.17" y2="60.83"/>
-      <line class="cls-3" x1="120.17" y1="55.17" x2="125.83" y2="60.83"/>
-    </g>
-  </g>
+  <path class="cls-1" d="M-1,0v399h401V0H-1ZM296,116h22v14h-22v-14ZM284.8,45.3l9.9,9.9-15.6,15.6-9.9-9.9,15.6-15.6ZM195,18h14v22h-14v-22ZM120.2,45.3l15.6,15.6-9.9,9.9-15.6-15.6,9.9-9.9ZM87,116h22v14h-22v-14ZM109,384.3h-14v-88.8l-45.5-34.7-12.2-117,13.9-1.5,11.6,111,46.2,35.3v95.7ZM153,384.3h-14v-133.2l-59.9-55.7,9.5-10.2,64.4,59.8v139.3ZM121,132c0-44.7,36.3-81,81-81s81,36.3,81,81-36.3,81-81,81-81-36.3-81-81ZM262,384.3h-14v-139.3l64.4-59.8,9.5,10.2-59.9,55.7v133.2ZM351.5,260.7l-45.5,34.7v88.8h-14v-95.7l46.2-35.3,11.6-111,13.9,1.5-12.2,117Z"/>
 </svg>

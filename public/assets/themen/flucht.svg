@@ -1,49 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
   <defs>
     <style>
-      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
-        stroke: #000;
-        stroke-linecap: square;
-        stroke-miterlimit: 10;
-        stroke-width: 14px;
-      }
-
-      .cls-1, .cls-3, .cls-5 {
-        fill: none;
-      }
-
-      .cls-2 {
-        fill: #fff;
-      }
-
-      .cls-3 {
-        stroke-dasharray: 18.29 27.43;
-      }
-
-      .cls-5 {
-        stroke-dasharray: 18.25 27.38;
+      .cls-1 {
+        <!-- fill: #000; -->
+        stroke-width: 0px;
       }
     </style>
   </defs>
-  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
-  <g>
-    <g id="rand">
-      <rect class="cls-1" x="6" y="7" width="387" height="385"/>
-    </g>
-    <g id="PICTO">
-      <polyline class="cls-1" points="58.71 339 58.71 210 349.59 210 349.59 55 105.78 55 105.78 146 208 146"/>
-      <rect class="cls-4" x="41" y="327" width="33" height="33"/>
-      <circle class="cls-4" cx="287" cy="146" r="23"/>
-      <polyline class="cls-2" points="210.82 119.17 239 146 210.82 177"/>
-      <g>
-        <line class="cls-1" x1="74" y1="343.5" x2="84" y2="343.5"/>
-        <line class="cls-3" x1="111.43" y1="343.5" x2="280.57" y2="343.5"/>
-        <polyline class="cls-1" points="294.28 343.5 304.28 343.5 304.28 333.5"/>
-        <line class="cls-5" x1="304.28" y1="306.12" x2="304.28" y2="274.19"/>
-        <line class="cls-1" x1="304.28" y1="260.5" x2="304.28" y2="250.5"/>
-      </g>
-      <polyline class="cls-2" points="278 273.18 304.82 245 335.82 273.18"/>
-    </g>
-  </g>
+  <path class="cls-1" d="M-1,0v399h401V0H-1ZM386,385H13V14h373v371Z"/>
+  <polygon class="cls-1" points="65.7 217 65.7 320 81 320 81 336.5 91 336.5 91 350.5 81 350.5 81 367 34 367 34 320 51.7 320 51.7 203 342.6 203 342.6 62 112.8 62 112.8 139 210.8 139 210.8 153 98.8 153 98.8 48 356.6 48 356.6 217 65.7 217"/>
+  <path class="cls-1" d="M317,146c0,16.5-13.5,30-30,30s-30-13.5-30-30,13.5-30,30-30,30,13.5,30,30Z"/>
+  <polygon class="cls-1" points="248.8 145.7 211.3 186.9 200.9 177.5 210.8 166.6 229.2 146.3 210.8 128.8 200.9 119.4 210.6 109.3 248.8 145.7"/>
+  <path class="cls-1" d="M241.6,336.5v14h32.3v-14h-32.3ZM195.9,336.5v14h32.3v-14h-32.3ZM150.2,336.5v14h32.3v-14h-32.3ZM104.4,336.5v14h32.3v-14h-32.3Z"/>
+  <polygon class="cls-1" points="311.3 326.5 311.3 350.5 287.3 350.5 287.3 336.5 297.3 336.5 297.3 326.5 311.3 326.5"/>
+  <rect class="cls-1" x="297.3" y="280.9" width="14" height="32.2"/>
+  <polygon class="cls-1" points="345.7 272.7 336.3 283.1 325.4 273.2 311.3 260.3 305.2 254.8 297.3 263.1 287.7 273.2 278.2 283.1 268.1 273.4 304.5 235.2 345.7 272.7"/>
 </svg>
