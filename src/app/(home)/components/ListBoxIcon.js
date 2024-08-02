@@ -15,7 +15,7 @@ import Flucht from "/public/assets/themen/flucht.svg";
 
 // size : small , big
 const ListBoxIcon = ({ thema, size="small" }) => {
-  const currentSize = size === "small" ? "100px" : "40px"
+  const currentSize = size === "small" ? "100px" : "100px"
   const fillColor = "black"
   return (
     <>

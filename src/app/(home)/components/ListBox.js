@@ -60,10 +60,10 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
         <>
           <div
             style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }}
-            className="w-24 h-40 flex flex-col gap-4 justify-center items-center border border-r-0 rounded-l-3xl -mt-14 group-hover:-translate-y-6 transition-all duration-300"
+            className="w-fit h-fit flex flex-col gap-4 justify-center items-center border border-r-0 p-1 -mt-14 group-hover:-translate-y-6 transition-all duration-300"
           >
             {value.themenschwerpunkt &&
-              value.themenschwerpunkt.slice(0, 3).map((val2, idx) => {
+              value.themenschwerpunkt.slice(0, 1).map((val2, idx) => {
                 return <ListBoxIcon key={idx} thema={val2} />;
               })}
           </div>
