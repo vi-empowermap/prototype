@@ -2,6 +2,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Verin : Circle
   const aI = `
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+  <title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
   <defs>
     <style>
       .a${id}1 {
@@ -15,6 +17,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Initiative : Rect
   const bI = `
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+  <title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
     <defs>
       <style>
         .a${id}2 {
@@ -28,6 +32,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Ngo : Triangle
   const cI = `
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+  <title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
     <defs>
       <style>
         .a${id}3 {
@@ -41,6 +47,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Projectgrouppe
   const dI = `
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+  <title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
   <defs>
     <style>
       .a${id}4 {
@@ -54,6 +62,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Bildungseinrichtung
   const eI = `
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+<title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
   <defs>
     <style>
       .a${id}5 {
@@ -68,6 +78,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Kultureinrichtung
   const fI = `
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+<title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
   <defs>
     <style>
       .a${id}6 {
@@ -83,6 +95,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Verion
   const saI = `
   <svg  xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+  <title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
   <defs>
     <style>
       .b${id}1 {
@@ -97,6 +111,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Initiative
   const sbI = `
   <svg  xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+  <title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
     <defs>
       <style>
         .b${id}2 {
@@ -110,6 +126,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Ngo
   const scI = `
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1200 1200">
+  <title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
   <defs>
     <style>
       .b${id}3 {
@@ -132,6 +150,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Projectgrouppe
   const sdI = `
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+  <title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
   <defs>
     <style>
       .b${id}4 {
@@ -145,6 +165,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Bildungseinrichtung
   const seI = `
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+<title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
   <defs>
     <style>
       .b${id}5 {
@@ -159,6 +181,8 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
   // Kultureinrichtung
   const sfI = `
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 800 800">
+<title>Custom Marker</title>
+            <desc>A custom marker for the map</desc>
   <defs>
     <style>
       .b${id}6 {

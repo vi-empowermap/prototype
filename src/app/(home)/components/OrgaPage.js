@@ -203,7 +203,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
               <div className="mb-4">
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.kontakttext })}</div>
                 {/* <a >{String(orgaInfo.email)}</a> */}
-                <img className="cursor-pointer" onClick={clickEmail} ref={emailRef} />
+                <img style={{width: "100%", height: "100%"}} alt="email" className="cursor-pointer" onClick={clickEmail} ref={emailRef} />
                 <div>{String(orgaInfo.contactnummber)}</div>
                 <a target="_blank" href={String(orgaInfo.website)} style={{ color: `${orgaInfo.bgColor}` }} className="mt-4">website</a>
               </div>
