@@ -19,16 +19,16 @@ const CustomMarker = ({ id,title,imageUrl,font, color, getData, setData, artdero
   const customIcon1 = L.divIcon({
     className: "marker",
     html: currentIcon, // Path to your icon image
-    iconSize: [35 / 1.4, 35 / 1.4], // Size of the icon
-    iconAnchor: [17 / 1.4, 35 / 1.4], // Point of the icon which will correspond to marker's location
-    popupAnchor: [0, -35 / 1.4], // Point from which the popup should open relative to the iconAnchor
+    iconSize: [35 / 1.1, 35 / 1.1], // Size of the icon
+    iconAnchor: [17, 35], // Point of the icon which will correspond to marker's location
+    popupAnchor: [0, -35], // Point from which the popup should open relative to the iconAnchor
   });
 
   const customIcon2 = L.divIcon({
     className: "marker",
     html: acurrentIcon, 
-    iconSize: [35, 35], 
-    iconAnchor: [17, 35],
+    iconSize: [45, 45], 
+    iconAnchor: [45/2, 45],
     popupAnchor: [0, -35], 
   });
 
