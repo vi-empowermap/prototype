@@ -12,90 +12,88 @@ import Freizeit from "/public/assets/themen/freizeit.svg";
 import Religion from "/public/assets/themen/religion.svg";
 import Flucht from "/public/assets/themen/flucht.svg";
 
-
 // size : small , big
-const ListBoxIcon = ({ thema, size="small" }) => {
-  const currentSize = size === "small" ? "100px" : "100px"
-  const fillColor = "black"
+const ListBoxIcon = ({ thema, size = "small" }) => {
+  const currentSize = size === "small" ? "100px" : "50px";
+  const fillColor = "black";
   return (
     <>
-    {/* Bildung & Professionalisierung */}
+      {/* Bildung & Professionalisierung */}
       {thema === "a" && (
-     
-        <div >
-        <Bildung style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Bildung style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Kultur & Kunst */}
       {thema === "b" && (
-        <div >
-        <Kultur style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Kultur style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Gesundheit & Soziales */}
       {thema === "c" && (
-        <div >
-        <Soziales style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Soziales style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Recht */}
       {thema === "d" && (
-        <div >
-        <Recht style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Recht style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Politik & Advocacy */}
       {thema === "e" && (
-        <div >
-        <Advocacy style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Advocacy style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Community-Building */}
       {thema === "f" && (
-        <div >
-        <Community style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Community style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Beratung */}
       {thema === "g" && (
-        <div >
-        <Beratung style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Beratung style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Wissenschaft */}
       {thema === "h" && (
-        <div >
-        <Wissenschaft style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Wissenschaft style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Sprachen & Übersetzungsarbeit */}
       {thema === "i" && (
-        <div >
-        <Sprachen style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Sprachen style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Kinder & Jugend */}
       {thema === "j" && (
-        <div >
-        <Kinder style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Kinder style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Sport & Freizeit */}
       {thema === "k" && (
-        <div >
-        <Freizeit style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Freizeit style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Religion */}
       {thema === "l" && (
-        <div >
-        <Religion style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Religion style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
       {/* Flucht & Migration */}
       {thema === "m" && (
-        <div >
-        <Flucht style={{fill: fillColor, width: currentSize, height: currentSize }} />
+        <div>
+          <Flucht style={{ fill: fillColor, width: currentSize, height: currentSize }} />
         </div>
       )}
     </>

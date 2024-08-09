@@ -97,7 +97,11 @@ const MapController = ({ setViewAtomValue }) => {
         map.setView([51.1657, 10.4515], 7);
       };
       
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
     }
   }, [setViewAtomValue]);
 

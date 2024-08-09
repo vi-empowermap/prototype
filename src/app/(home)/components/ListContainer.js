@@ -9,7 +9,6 @@ const ListContainer = ({turnOnMap, doubleScreenTouched, getData, bundeslandtext,
   const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
   useEffect(() => {
     if(listContainerRef.current){
-      console.log(noLGetData)
       listContainerRef.current.scrollTop = 0;
     }
   },[getClikedMarkerAtom])
@@ -20,25 +19,9 @@ const ListContainer = ({turnOnMap, doubleScreenTouched, getData, bundeslandtext,
         {getData.map((value, index) => {
           return <ListBox key={index} index={index} value={value} bundeslandtext={bundeslandtext} stadtText={stadtText} />;
         })}
-        {/* <div className="w-full relative z-[100]">ddddd</div> */}
-        {/* {noLGetData.map((value, index) => {
-          return <ListBox key={index} index={index} value={value} bundeslandtext={bundeslandtext} stadtText={stadtText} />;
-        })} */}
       </div>
     </div>
   );
 };
 
 export default ListContainer;
-{
-  /* <div id="listContainer" className={`w-full bg-blue-200 lg:max-w-[calc(200px+20vw)] ${!doubleScreenTouched ? "h-full" : "h-[200px]"} lg:h-screen border-l-2 border-black pt-16 relative overflow-y-scroll`}>
-    <div className={`w-full bg-blue-200 lg:max-w-[calc(200px+20vw)] ${!doubleScreenTouched ? "h-full" : "h-[200px]"} lg:h-screen border-l-2 border-black pt-16 relative overflow-y-scroll`}>
-      {getData.length <= 0 && <div className="w-full text-center absolute left-0 top-1/2 -translate-y-1/2">No Data</div>}
-      {getData.map((value, index) => {
-        return (
-          <ListBox key={index} index={index} value={value} />
-        );
-      })}
-    </div>
-    </div> */
-}

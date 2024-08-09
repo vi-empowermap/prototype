@@ -2,7 +2,6 @@ import { clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, onOrgaFilterActivate
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import ListBoxIcon from "./ListBoxIcon";
 import { angeboteBP, artderorganisationBP, bundeslandBP, socialMediaBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
 import useKirbyText from "@/app/utils/hooks/useKirbyText";
 import OrgaNav from "./openpage/OrgaNav";
@@ -21,18 +20,16 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   const setReady = useSetRecoilState(readyAniAtom);
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   const [getOrgaFilterActivateAtom, setOrgaFilterActivateAtom] = useRecoilState(onOrgaFilterActivateAtom);
-  const emailRef = useRef(null)
-  const leftContainer = useRef(null)
+  const emailRef = useRef(null);
+  const leftContainer = useRef(null);
   useEffect(() => {
-  
     if (Boolean(search)) {
-
       setOrgaFilterActivateAtom({
         ready: false,
         all: false,
         location: false,
-        bundes: ""
-      })
+        bundes: "",
+      });
       setReady(true);
       setTimeout(() => {
         setCloseOrgaAtom(false);
@@ -40,7 +37,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
       setOpen(true);
       // TODO
       const idx = getData.findIndex((value) => String(value.id) === search);
-      
+
       if (idx < 0) {
         const nidx = noLGetData.findIndex((value) => String(value.id) === search);
         if (nidx > -1) {
@@ -52,7 +49,6 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           setCloseOrgaAtom(true);
         }
       } else {
-        
         setOrgaInfo(getData[idx]);
         if ([getData[idx]][0].lokalorga === "true") {
           setTurnOnMap(false);
@@ -69,7 +65,6 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           }
         }
       }
-      
     } else {
       setOpen(false);
     }
@@ -81,16 +76,15 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     router.push("/");
   };
 
-
   const onFilterBundesLand = () => {
     setOrgaFilterActivateAtom({
       ready: true,
       all: false,
       location: turnOnMap,
-      bundes: bundeslandBP[orgaInfo.bundesland]
-    })
-    onClose()
-  }
+      bundes: bundeslandBP[orgaInfo.bundesland],
+    });
+    onClose();
+  };
   const onFilterAll = () => {
     setOrgaFilterActivateAtom({
       ready: true,
@@ -98,53 +92,51 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
       location: turnOnMap,
       bundes: bundeslandBP[orgaInfo.bundesland],
       themen: orgaInfo.themenschwerpunkt.map((v) => {
-        return themenschwerpunktBP[v]
+        return themenschwerpunktBP[v];
       }),
       tags: [...orgaInfo.categories],
       ziel: orgaInfo.zielgruppe.map((v) => {
-        return zielgruppeBP[v]
+        return zielgruppeBP[v];
       }),
       angebote: orgaInfo.angebote.map((v) => {
-        return angeboteBP[v]
+        return angeboteBP[v];
       }),
       sprache: orgaInfo.sprachunterstutzung.map((v) => {
-        return sprachunterstutzungBP[v]
+        return sprachunterstutzungBP[v];
       }),
       art: [artderorganisationBP[orgaInfo.artderorganisation]],
-      zeige: orgaInfo.archivoraktiv
-    })
-    onClose()
-  }
+      zeige: orgaInfo.archivoraktiv,
+    });
+    onClose();
+  };
 
   useEffect(() => {
-    if(leftContainer.current && orgaInfo){
-      console.log(orgaInfo)
+    if (leftContainer.current && orgaInfo) {
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${leftContainer.current.clientWidth}" height="25">
        <text x="0" y="18" fill="${orgaInfo.bgColor}" font-family="JetBrainsMono">${String(orgaInfo.email)}</text>
       </svg>`;
-      const blob = new Blob([svg], {type: 'image/svg+xml'});
+      const blob = new Blob([svg], { type: "image/svg+xml" });
       const url = URL.createObjectURL(blob);
-      if(emailRef.current){
-        emailRef.current.src = url
+      if (emailRef.current) {
+        emailRef.current.src = url;
       }
     }
-  },[orgaInfo])
+  }, [orgaInfo]);
 
   const clickEmail = () => {
-    if(orgaInfo){
+    if (orgaInfo) {
       router.push(`mailto:${String(orgaInfo.email)}`);
     }
-  }
+  };
   return (
     <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 font-jetBrainsMono font-medium`}>
       <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-screen lg:h-full lg:border-x lg:border-t border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
-        
         <OrgaNav onClose={onClose} />
 
         <div className="px-4 flex flex-grow flex-col overflow-y-auto">
           <OrgaHeader bgColor={orgaInfo.bgColor} font={orgaInfo.font} organame={orgaInfo.organame} imgUrl={orgaInfo.orgaimage} />
           <OrgaIconWrapper themenschwerpunkt={orgaInfo.themenschwerpunkt} />
-          
+
           <div className="flex-grow flex flex-col lg:flex-row justify-start lg:justify-between">
             <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="lg:flex-1 flex flex-col border-b lg:border-b-0 lg:border-r lg:pr-4 lg:pb-0 pb-4">
               <div className="text-base font-base">{orgaInfo.aboutorga}</div>
@@ -203,9 +195,11 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
               <div className="mb-4">
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.kontakttext })}</div>
                 {/* <a >{String(orgaInfo.email)}</a> */}
-                <img style={{width: "100%", height: "100%"}} alt="email" className="cursor-pointer" onClick={clickEmail} ref={emailRef} />
+                <img style={{ width: "100%", height: "100%" }} alt="email" className="cursor-pointer" onClick={clickEmail} ref={emailRef} />
                 <div>{String(orgaInfo.contactnummber)}</div>
-                <a target="_blank" href={String(orgaInfo.website)} style={{ color: `${orgaInfo.bgColor}` }} className="mt-4">website</a>
+                <a target="_blank" href={String(orgaInfo.website)} style={{ color: `${orgaInfo.bgColor}` }} className="mt-4">
+                  website
+                </a>
               </div>
               <div className="mb-4">
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.socialmediatext })}</div>

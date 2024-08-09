@@ -1,6 +1,4 @@
-import { Suspense } from "react";
 import Wrapper from "./components/Wrapper";
-import { fakeData } from "./constant/fakeData";
 import { fetchDataOriginAPI } from "../utils/hooks/useFetchData";
 import { RANDOMCOLOR_LIST } from "./constant/colors";
 import { bundeslandBP } from "./constant/blueprintOptionData";
