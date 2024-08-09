@@ -8,7 +8,7 @@ const OrgaIconWrapper = ({themenschwerpunkt}) => {
               themenschwerpunkt.map((val, idx) => {
                 return (
                   <div key={idx} className="flex gap-2 items-center">
-                    <ListBoxIcon thema={val} />
+                    <ListBoxIcon size="big" thema={val} />
                     <div className="orga_icon_text">{themenschwerpunktBP[`${val}`]}</div>
                   </div>
                 );

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        <!-- stroke: #000; -->
+        stroke-linecap: square;
+        stroke-miterlimit: 10;
+        <!-- stroke-width: 14px; -->
+      }
+    </style>
+  </defs>
+  <g id="PICTO">
+    <polyline class="cls-1" points="74.3 254.3 199 145.7 325.7 254.3"/>
+  </g>
+</svg>

@@ -1,10 +1,9 @@
 import { clickedItemsListAtom, clikedMarkerAtom, highLightWordAtom, onSearchFilterAtom, readyAniAtom } from "@/app/utils/state";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import ListBoxIcon from "./ListBoxIcon";
-import gsap from "gsap";
-import { RANDOM_FONT_LIST, RANDOM_FONT_LIST_SIZE } from "../constant/fontList";
+import { RANDOM_FONT_LIST_SIZE } from "../constant/fontList";
 import { bundeslandBP } from "../constant/blueprintOptionData";
 
 const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
@@ -22,7 +21,6 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
   };
 
   useEffect(() => {
-    // console.log(value.bgColor.slice(4, value.bgColor.length-1))
     if (value.filterVisible && getOnSearchFilter) {
       function escapeRegExp(string) {
         return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -38,8 +36,6 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
         for (let i = 0; i < matches.length; i++) {
           const indexN = text.indexOf(matches[i], indexOfStartPoint);
           indexOfStartPoint += indexN + 1;
-
-          // text = text.replace(matches[i], `<span class="highlight">${matches[i]}</span>`)
           const before = text.slice(indexN - 30 <= 0 ? 0 : indexN - 30, indexN);
           const markerText = text.slice(indexN, indexN + matches[i].length);
 
@@ -85,7 +81,6 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
                 {String(value.organameshortform).length > 12 && "..."}
               </div>
             </div>
-            {/* <div className="text-lg">{value.email}</div> */}
             {!getOnSearchFilter && (
               <div className="text-stone-950 font-medium text-sm">
                 {String(bundeslandtext).slice(0, 1).toUpperCase()}
@@ -99,8 +94,6 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
               </div>
             )}
             {getOnSearchFilter && <div className="text-black" dangerouslySetInnerHTML={{ __html: `...${String(getHBodyText).slice(0, 300)}...` }}></div>}
-            {/* {clickedItemsList.some((v) => v === value.id) && <div>{value.aboutorga}</div>}
-                  {clickedItemsList.some((v) => v === value.id) && <div>Category: {value.categories[0]}</div>} */}
           </div>
         </>
       )}

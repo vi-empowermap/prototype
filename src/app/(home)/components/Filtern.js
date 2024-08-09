@@ -1,12 +1,11 @@
-import { clickedItemsListAtom, onFilterMobileOpenAtom, onOrgaFilterActivateAtom, onOrgaFilterAtom, onSearchFilterAtom, onSearchMobileOpenAtom } from "@/app/utils/state";
+import { onFilterMobileOpenAtom, onOrgaFilterActivateAtom, onOrgaFilterAtom, onSearchFilterAtom, onSearchMobileOpenAtom } from "@/app/utils/state";
 import { useEffect, useRef, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { angeboteBP, artderorganisationBP, bundeslandBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
-import FilterAddBtn from "./filter_items/FilterAddBtn";
-import SectionResetBtn from "./filter_items/SectionResetBtn";
 import DynamicMiniMap from "./minimap";
 import FilterItemBox from "./filter_items/FilterItemBox";
-
+import OpenIcon from "/public/assets/icons/open.svg"
+import { ICON_SIZE, ICON_STROKE_SIZE } from "../constant/iconSize";
 const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext, panelTexts }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
@@ -394,12 +393,10 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
   return (
     <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300] select-none font-jetBrainsMono font-medium">
       <div className="hidden lg:flex gap-2 w-full h-full items-center">
-        <div onClick={onClick} className="lg:flex gap-2 cursor-pointer w-full h-full items-center hover:bg-black hover:text-white px-4">
+        <div onClick={onClick} className="lg:flex gap-2 cursor-pointer w-full h-full items-center stroke-black hover:stroke-white hover:bg-black hover:text-white px-4">
           <span className="font-jetBrainsMono font-medium">{placeholdertext}</span>
           <span className={`${!openFilter ? "rotate-0" : "rotate-180"} transition-transform duration-500`}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-            </svg>
+            <OpenIcon style={{strokeWidth: ICON_STROKE_SIZE,width: ICON_SIZE, height: ICON_SIZE}} />
           </span>
         </div>
         {getOrgaFilter && (

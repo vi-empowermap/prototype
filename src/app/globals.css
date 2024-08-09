@@ -181,16 +181,6 @@ body {
     font-display: swap;
 }
 
-
-@font-face {
-    font-family: "Kihim";
-    src: url("/assets/fonts/Kihim-Regular.ttf");
-    font-display: swap;
-}
-/* @font-face {
-    font-family: "minionPro";
-    src: url("/public/assets/fonts/MinionPro-Regular.otf");
-} */
 @font-face {
     font-family: "Panchang";
     src: url("/assets/fonts/Panchang-Variable.ttf");
