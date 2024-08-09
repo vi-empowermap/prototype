@@ -5,7 +5,8 @@ import { angeboteBP, artderorganisationBP, bundeslandBP, sprachunterstutzungBP, 
 import DynamicMiniMap from "./minimap";
 import FilterItemBox from "./filter_items/FilterItemBox";
 import OpenIcon from "/public/assets/icons/open.svg"
-import { ICON_SIZE, ICON_STROKE_SIZE } from "../constant/iconSize";
+import FilterIcon from "/public/assets/icons/filter.svg"
+import { ICON_SIZE, ICON_SIZE_2, ICON_STROKE_SIZE, ICON_STROKE_SIZE_3 } from "../constant/iconSize";
 const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext, panelTexts }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
@@ -410,14 +411,8 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           </button>
         )}
       </div>
-      <div onClick={onClick} className={`relative flex-1 flex h-full lg:hidden justify-center items-center cursor-pointer active:bg-black active:text-white ${openFilter ? "bg-black text-white" : "bg-white text-black"}`}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
-          />
-        </svg>
+      <div onClick={onClick} className={`relative flex-1 flex h-full lg:hidden justify-center items-center cursor-pointer active:bg-black stroke-black active:stroke-white active:text-white ${openFilter ? "bg-black text-white stroke-white" : "bg-white text-black stroke-black"}`}>
+        <FilterIcon style={{strokeWidth: ICON_STROKE_SIZE_3 ,width: ICON_SIZE_2, height: ICON_SIZE_2}} />
         {getOrgaFilter && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
             <span className="translate-x-1/2 -translate-y-1/2 bg-black text-white min-w-5 min-h-5 text-xs flex justify-center items-center border border-white rounded-full">{String(foundList).length > 5 ? String(foundList).slice(0, 5) : String(foundList)}</span>

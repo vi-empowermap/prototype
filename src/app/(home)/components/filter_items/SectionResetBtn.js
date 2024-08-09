@@ -1,4 +1,4 @@
-import { ICON_SIZE_2, ICON_STROKE_SIZE, ICON_STROKE_SIZE_3 } from "../../constant/iconSize";
+import { ICON_SIZE_2, ICON_STROKE_SIZE_3 } from "../../constant/iconSize";
 import ResetIcon from "/public/assets/icons/reset.svg"
 
 

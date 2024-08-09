@@ -1,8 +1,9 @@
 import { clickedItemsListAtom, highLightWordAtom, onFilterMobileOpenAtom, onOrgaFilterAtom, onSearchFilterAtom, onSearchMobileOpenAtom } from "@/app/utils/state";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-
+import { useRecoilState, useSetRecoilState } from "recoil";
+import SearchIcon from "/public/assets/icons/search.svg"
+import { ICON_SIZE_2, ICON_STROKE_SIZE_3 } from "../constant/iconSize";
 const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext, resetText }) => {
   const { register, handleSubmit, setValue, getValues } = useForm();
   const clickedItemsList = useSetRecoilState(clickedItemsListAtom);
@@ -144,10 +145,8 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
             </form>
           </div>
         )}
-        <div onClick={onOpenMobile} className="w-full h-full flex justify-center items-center cursor-pointer active:bg-black active:text-white relative">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-          </svg>
+        <div onClick={onOpenMobile} className="w-full h-full flex justify-center items-center cursor-pointer stroke-black active:bg-black active:text-white relative">
+          <SearchIcon style={{strokeWidth: ICON_STROKE_SIZE_3 ,width: ICON_SIZE_2, height: ICON_SIZE_2}} />
           {getOnSearchFilter && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
             <span className="translate-x-1/2 -translate-y-1/2 bg-black text-white min-w-5 min-h-5 text-xs flex justify-center items-center border border-white rounded-full">{String(getFoundIdList).length > 5 ? String(getFoundIdList).slice(0, 5) : String(getFoundIdList)}</span>
