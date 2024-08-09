@@ -15,11 +15,14 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
 
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
   const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
+  const [randomIcon, setRandomIcon] = useState(0)
   const onClick = (value) => {
     clickedItemsListset([value.id]);
     router.push(`?organisation=${value.id}`);
   };
-
+  useEffect(() => {
+    setRandomIcon(Math.floor(Math.random() * value.themenschwerpunkt.length))
+  },[])
   useEffect(() => {
     if (value.filterVisible && getOnSearchFilter) {
       function escapeRegExp(string) {
@@ -58,10 +61,12 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
             style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }}
             className="w-fit h-fit flex flex-col gap-4 justify-center items-center border border-r-0 p-1 -mt-14 group-hover:-translate-y-6 transition-all duration-300"
           >
-            {value.themenschwerpunkt &&
+            {/* {value.themenschwerpunkt &&
               value.themenschwerpunkt.slice(0, 1).map((val2, idx) => {
                 return <ListBoxIcon key={idx} thema={val2} />;
-              })}
+              })} */}
+            {value.themenschwerpunkt && <ListBoxIcon thema={value.themenschwerpunkt[randomIcon]} />
+              }
           </div>
           <div
            
