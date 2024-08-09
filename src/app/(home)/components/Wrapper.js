@@ -20,7 +20,8 @@ import MapContainerHome from "./MapContainer";
 import NavContainer from "./NavContainer";
 import MapSubContainer from "./MapSubContainer";
 import ControllerBtn from "./buttons/ControllerBtn";
-
+import { ICON_SIZE, ICON_STROKE_SIZE } from "../constant/iconSize";
+import CenterIcon from "/public/assets/icons/center.svg"
 const Wrapper = ({
   // data,
   // dataN,
@@ -191,10 +192,8 @@ const Wrapper = ({
                     <div className={`relative justify-center items-center hidden pt-7 pb-3 lg:flex w-[calc(3vw+70px)] ${openCenter ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-6`}>
                       {openCenter && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.centerbtntext}</div>}
                       {openCenter && (
-                        <div onClick={() => setSetViewAtom({ pos: [51.1657, 10.4515], name: "start" })} className="cursor-pointer w-1/3 aspect-square flex justify-center items-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
-                          </svg>
+                        <div onClick={() => setSetViewAtom({ pos: [51.1657, 10.4515], name: "start" })} className="cursor-pointer w-1/3 aspect-square flex justify-center items-center stroke-black">
+                          <CenterIcon style={{strokeWidth: ICON_STROKE_SIZE,width: ICON_SIZE, height: ICON_SIZE}} />
                         </div>
                       )}
                       <ControllerBtn open={openCenter} setOpen={setOpenCenter} text={panelDatas.centerbtntext} />
