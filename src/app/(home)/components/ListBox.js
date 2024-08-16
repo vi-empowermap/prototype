@@ -15,15 +15,16 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
 
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
   const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
-  const [randomIcon, setRandomIcon] = useState(0)
+  // const [randomIcon, setRandomIcon] = useState(0)
   const onClick = (value) => {
     clickedItemsListset([value.id]);
     router.push(`?organisation=${value.id}`);
   };
-  useEffect(() => {
-   
-    setRandomIcon(value.themenschwerpunkt_list_icon)
-  },[])
+  // useEffect(() => {
+  //   console.log(value.themenschwerpunkt)
+  //   console.log(value.themenschwerpunkt_list_icon)
+  //   setRandomIcon(value.themenschwerpunkt_list_icon)
+  // },[getClikedMarkerAtom])
   useEffect(() => {
     if (value.filterVisible && getOnSearchFilter) {
       function escapeRegExp(string) {
@@ -66,7 +67,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
               value.themenschwerpunkt.slice(0, 1).map((val2, idx) => {
                 return <ListBoxIcon key={idx} thema={val2} />;
               })} */}
-            {value.themenschwerpunkt && <ListBoxIcon thema={value.themenschwerpunkt[randomIcon]} color={getClikedMarkerAtom === value.id ? "white" : value.bgColor} />
+            {value.themenschwerpunkt && <ListBoxIcon thema={value.themenschwerpunkt[value.themenschwerpunkt_list_icon]} color={getClikedMarkerAtom === value.id ? "white" : value.bgColor} />
               }
           </div>
           <div
