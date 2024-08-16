@@ -124,7 +124,9 @@ const getKirbyData = async () => {
 
      /* Filteroptionen Mapping */
      value.social = yaml.load(value.social)
-     value.themenschwerpunkt = value.themenschwerpunkt.split(",").map((val2) => val2.trim())  
+     const newTheme = value.themenschwerpunkt.split(",").map((val2) => val2.trim())  
+     value.themenschwerpunkt = newTheme 
+     value.themenschwerpunkt_list_icon = Math.floor(Math.random() * newTheme.length)
      value.zielgruppe = value.zielgruppe.split(",").map((val2) => val2.trim())  
     //  value.zielgruppe = zielgruppeBP[value.zielgruppe]
     
