@@ -13,9 +13,9 @@ import Religion from "/public/assets/themen/religion.svg";
 import Flucht from "/public/assets/themen/flucht.svg";
 
 // size : small , big
-const ListBoxIcon = ({ thema, size = "small" }) => {
+const ListBoxIcon = ({ thema, size = "small", color }) => {
   const currentSize = size === "small" ? "100px" : "50px";
-  const fillColor = "black";
+  const fillColor = color;
   return (
     <>
       {/* Bildung & Professionalisierung */}

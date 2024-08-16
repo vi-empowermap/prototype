@@ -20,7 +20,7 @@ export const themenschwerpunktBP = {
     a: "Bildung & Professionalisierung",
     b: "Kultur & Kunst",
     c: "Gesundheit & Soziales",
-    d: "Rech",
+    d: "Recht",
     e: "Politik & Advocacy",
     f: "Community-Building",
     g: "Beratung",

@@ -15,13 +15,14 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
 
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
   const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
-  const [randomIcon, setRandomIcon] = useState(value.themenschwerpunkt[0])
+  const [randomIcon, setRandomIcon] = useState(0)
   const onClick = (value) => {
     clickedItemsListset([value.id]);
     router.push(`?organisation=${value.id}`);
   };
   useEffect(() => {
-    setRandomIcon(Math.floor(Math.random() * value.themenschwerpunkt.length))
+   
+    setRandomIcon(value.themenschwerpunkt_list_icon)
   },[])
   useEffect(() => {
     if (value.filterVisible && getOnSearchFilter) {
@@ -54,7 +55,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
   }, [getHighLightWordAtom]);
 
   return (
-    <div  onClick={() => onClick(value)} className={`listbox w-full relative z-[${index}] group flex items-start justify-start ${ready ? "translate-y-0 opacity-100 " : "translate-y-[150%] opacity-0"} font-jetBrainsMono font-medium cursor-pointer`}>
+    <div onClick={() => onClick(value)} className={`listbox w-full relative z-[${index}] group flex items-start justify-start ${ready ? "translate-y-0 opacity-100 " : "translate-y-[150%] opacity-0"} font-jetBrainsMono font-medium cursor-pointer`}>
       {value.visible && value.filterVisible && (
         <>
           <div
@@ -65,7 +66,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
               value.themenschwerpunkt.slice(0, 1).map((val2, idx) => {
                 return <ListBoxIcon key={idx} thema={val2} />;
               })} */}
-            {value.themenschwerpunkt && <ListBoxIcon thema={value.themenschwerpunkt[randomIcon]} />
+            {value.themenschwerpunkt && <ListBoxIcon thema={value.themenschwerpunkt[randomIcon]} color={getClikedMarkerAtom === value.id ? "white" : value.bgColor} />
               }
           </div>
           <div
