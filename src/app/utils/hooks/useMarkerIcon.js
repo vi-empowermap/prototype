@@ -1,4 +1,6 @@
 export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisation, selection }) => {
+
+  const whiteBG = "rgba(255,255,255,0.8)"
   // Verin : Circle
   const aI = `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -6,7 +8,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
     <desc>A custom marker for the map</desc>
     <defs>
       <style>
-        .cls-1{fill:#fff;}.cls-1,
+        .cls-1{fill:${whiteBG};}.cls-1,
         .cls-2{stroke-width:0px;}
         .a${id}1{fill: ${archivoraktiv === "aktive" ? "#000" : "#BFBFBF"};}
       </style>
@@ -21,7 +23,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
     <desc>A custom marker for the map</desc>
     <defs>
       <style>
-        .cls-1{fill:#fff;}
+        .cls-1{fill:${whiteBG};}
         .cls-1,.cls-2{stroke-width:0px;}
         .a${id}2{fill: ${archivoraktiv === "aktive" ? "#000" : "#BFBFBF"};}
       </style>
@@ -36,7 +38,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .a${id}3{fill: ${archivoraktiv === "aktive" ? "#000" : "#BFBFBF"};}
         </style>
@@ -51,7 +53,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .a${id}4{fill: ${archivoraktiv === "aktive" ? "#000" : "#BFBFBF"};}
         </style>
@@ -66,7 +68,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .a${id}5{fill: ${archivoraktiv === "aktive" ? "#000" : "#BFBFBF"};}
         </style>
@@ -82,7 +84,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .a${id}6{fill: ${archivoraktiv === "aktive" ? "#000" : "#BFBFBF"};}
         </style>
@@ -98,7 +100,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .a${id}7{fill: ${archivoraktiv === "aktive" ? "#000" : "#BFBFBF"};}
         </style>
@@ -114,7 +116,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .a${id}8{fill: ${archivoraktiv === "aktive" ? "#000" : "#BFBFBF"};}
         </style>
@@ -130,7 +132,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .a${id}9{fill: ${archivoraktiv === "aktive" ? "#000" : "#BFBFBF"};}
         </style>
@@ -148,7 +150,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
     <desc>A custom marker for the map</desc>
     <defs>
       <style>
-        .cls-1{fill:#fff;}.cls-1,
+        .cls-1{fill:${whiteBG};}.cls-1,
         .cls-2{stroke-width:0px;}
         .b${id}1{fill: ${activeColor};}
       </style>
@@ -164,7 +166,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
     <desc>A custom marker for the map</desc>
     <defs>
       <style>
-        .cls-1{fill:#fff;}.cls-1,
+        .cls-1{fill:${whiteBG};}.cls-1,
         .cls-2{stroke-width:0px;}
         .b${id}2{fill: ${activeColor};}
       </style>
@@ -179,7 +181,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .b${id}3{fill: ${activeColor};}
         </style>
@@ -195,7 +197,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .b${id}4{fill: ${activeColor};}
         </style>
@@ -210,7 +212,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .b${id}5{fill: ${activeColor};}
         </style>
@@ -226,7 +228,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .b${id}6{fill: ${activeColor};}
         </style>
@@ -241,7 +243,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .b${id}7{fill: ${activeColor};}
         </style>
@@ -256,7 +258,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .b${id}8{fill: ${activeColor};}
         </style>
@@ -271,7 +273,7 @@ export const useMarkerIcon = ({ id, archivoraktiv, activeColor, artderorganisati
       <desc>A custom marker for the map</desc>
       <defs>
         <style>
-          .cls-1{fill:#fff;}
+          .cls-1{fill:${whiteBG};}
           .cls-1,.cls-2{stroke-width:0px;}
           .b${id}9{fill: ${activeColor};}
         </style>
