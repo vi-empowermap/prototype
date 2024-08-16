@@ -15,7 +15,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
 
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
   const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
-  const [randomIcon, setRandomIcon] = useState(0)
+  const [randomIcon, setRandomIcon] = useState(value.themenschwerpunkt[0])
   const onClick = (value) => {
     clickedItemsListset([value.id]);
     router.push(`?organisation=${value.id}`);
