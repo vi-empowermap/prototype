@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import ListBoxIcon from "./ListBoxIcon";
 import { RANDOM_FONT_LIST_SIZE } from "../constant/fontList";
-import { bundeslandBP } from "../constant/blueprintOptionData";
+import { bundeslandBP, themenschwerpunktBP } from "../constant/blueprintOptionData";
 
 const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
   const [getClickedItemList, clickedItemsListset] = useRecoilState(clickedItemsListAtom);
@@ -59,48 +59,49 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
     <div onClick={() => onClick(value)} className={`listbox w-full relative z-[${index}] group flex items-start justify-start ${ready ? "translate-y-0 opacity-100 " : "translate-y-[150%] opacity-0"} font-jetBrainsMono font-medium cursor-pointer`}>
       {value.visible && value.filterVisible && (
         <>
-          <div
-            style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }}
-            className="w-fit h-fit flex flex-col gap-4 justify-center items-center border border-r-0 p-1 -mt-14 group-hover:-translate-y-6 transition-all duration-300"
-          >
+          <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }} className="w-fit h-fit flex flex-col gap-4 justify-center items-center border border-r-0 p-1 -mt-14 group-hover:-translate-y-6 transition-all duration-300">
             {/* {value.themenschwerpunkt &&
               value.themenschwerpunkt.slice(0, 1).map((val2, idx) => {
                 return <ListBoxIcon key={idx} thema={val2} />;
               })} */}
-            {value.themenschwerpunkt && <ListBoxIcon thema={value.themenschwerpunkt[value.themenschwerpunkt_list_icon]} color={getClikedMarkerAtom === value.id ? "white" : value.bgColor} />
-              }
+            {value.themenschwerpunkt && <ListBoxIcon thema={value.themenschwerpunkt[value.themenschwerpunkt_list_icon]} color={getClikedMarkerAtom === value.id ? "white" : value.bgColor} />}
           </div>
-          <div
-           
-            style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }}
-            className="flex-1 min-h-64 border cursor-pointer p-2 rounded-r-3xl rounded-b-3xl bg-white -mt-14 relative group-hover:-translate-y-6 transition-all group overflow-hidden duration-300"
-          >
+          <div style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }} className="flex-1 min-h-64 max-h-64 overflow-hidden border cursor-pointer p-2 rounded-r-3xl rounded-b-3xl bg-white -mt-14 relative group-hover:-translate-y-6 transition-all group overflow-hidden duration-300">
             <div
               style={{
-                background: 
-                `linear-gradient(0deg, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.7) 0%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.4) 10%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.1) 20%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.05) 25%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.01) 28%, rgba(255,255,255,0) 30%)`,
+                background: `linear-gradient(0deg, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.7) 0%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.4) 10%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.1) 20%, rgba(${value.bgColor.slice(
+                  4,
+                  value.bgColor.length - 1
+                )},0.05) 25%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.01) 28%, rgba(255,255,255,0) 30%)`,
               }}
               className="absolute top-0 left-0 pointer-events-none select-none bg-black w-full h-full translate-y-1/4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500"
             ></div>
-            <div style={{ fontSize: `${RANDOM_FONT_LIST_SIZE[value.font]}px` }} className={`mb-4 ${value.font} flex items-center h-16 `}>
+            <div style={{ fontSize: `${RANDOM_FONT_LIST_SIZE[value.font]}px` }} className={`mb-4 ${value.font} flex items-center h-16`}>
               <div className="leading-none">
-                {String(value.organameshortform).slice(0, 11)}
-                {String(value.organameshortform).length > 12 && "..."}
+                {String(value.organameshortform).slice(0, 6)}
+                {String(value.organameshortform).length > 6 && "..."}
               </div>
             </div>
+            <div className="flex gap-2">
             {!getOnSearchFilter && (
               <div className="text-stone-950 font-medium text-sm">
-                {String(bundeslandtext).slice(0, 1).toUpperCase()}
-                {String(bundeslandtext).slice(1).toLocaleLowerCase()}: {String(bundeslandBP[value.bundesland]).slice(0, 1).toUpperCase() + String(bundeslandBP[value.bundesland]).slice(1).toLocaleLowerCase()}
+                {/* {String(bundeslandtext).slice(0, 1).toUpperCase()}
+                {String(bundeslandtext).slice(1).toLocaleLowerCase()}:  */}
+                {String(bundeslandBP[value.bundesland]).slice(0, 1).toUpperCase() + String(bundeslandBP[value.bundesland]).slice(1).toLocaleLowerCase()},
               </div>
             )}
             {!getOnSearchFilter && (
               <div className="text-stone-950 font-medium text-sm">
-                {String(stadtText).slice(0, 1).toUpperCase()}
-                {String(stadtText).slice(1)}: {String(value.city).slice(0, 1).toUpperCase() + String(value.city).slice(1).toLocaleLowerCase()}
+                {/* {String(stadtText).slice(0, 1).toUpperCase()}
+                {String(stadtText).slice(1)}:  */}
+                {String(value.city).slice(0, 1).toUpperCase() + String(value.city).slice(1).toLocaleLowerCase()}
               </div>
             )}
-            {getOnSearchFilter && <div className="text-black" dangerouslySetInnerHTML={{ __html: `...${String(getHBodyText).slice(0, 300)}...` }}></div>}
+            </div>
+            {!getOnSearchFilter && <div className="text-stone-950 mt-2 flex flex-wrap font-medium text-sm">{value.themenschwerpunkt.map((v,idx) => {
+              return <div key={idx} className="mr-1">{themenschwerpunktBP[v]}{(idx + 1) === value.themenschwerpunkt.length ? "" : ","}</div>
+            })}</div>}
+            {getOnSearchFilter && <div className="text-stone-950 font-medium text-sm" dangerouslySetInnerHTML={{ __html: `...${String(getHBodyText).slice(0, 300)}...` }}></div>}
           </div>
         </>
       )}

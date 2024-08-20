@@ -134,7 +134,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
         <OrgaNav onClose={onClose} />
 
         <div className="px-4 flex flex-grow flex-col overflow-y-auto">
-          <OrgaHeader bgColor={orgaInfo.bgColor} font={orgaInfo.font} organame={orgaInfo.organame} imgUrl={orgaInfo.orgaimage} />
+          <OrgaHeader bgColor={orgaInfo.bgColor} font={orgaInfo.font} organame={orgaInfo.organame} />
           <OrgaIconWrapper themenschwerpunkt={orgaInfo.themenschwerpunkt} />
 
           <div className="flex-grow flex flex-col lg:flex-row justify-start lg:justify-between">
@@ -216,6 +216,11 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                     })}
                 </div>
               </div>
+              {orgaInfo.orgaimage && <div className="mb-4">
+                <div className="orga_sub_title">Logo</div>
+                <div style={{ backgroundImage: `url(${process.env.KB_FOR_FILE}/@/file/${String(orgaInfo.orgaimage).slice(7)})` }} className="w-8 aspect-square bg-cover bg-center"></div>
+                
+              </div>}
             </div>
           </div>
           <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 gap-4 mb-4 lg:gap-0 lg:mb-0">

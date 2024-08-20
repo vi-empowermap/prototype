@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+<svg id="PICTO" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
   <defs>
     <style>
       .cls-1 {
-        stroke-linecap: square;
-      }
-
-      .cls-1, .cls-2 {
         fill: none;
         <!-- stroke: #000; -->
         stroke-miterlimit: 10;
@@ -15,11 +11,11 @@
     </style>
   </defs>
   <g>
-    <polyline class="cls-1" points="96.7 164.3 67.1 136.4 37.5 164.3"/>
-    <polyline class="cls-2" points="332.9 290.8 332.9 335.1 67.1 335.1 67.1 136.4"/>
+    <polyline class="cls-1" points="90.9 207.7 57.6 174.5 24.4 207.7"/>
+    <polyline class="cls-1" points="342.4 311.9 342.4 345.3 57.6 345.3 57.6 174.5"/>
   </g>
   <g>
-    <polyline class="cls-1" points="303.3 235.7 332.9 263.6 362.5 235.7"/>
-    <polyline class="cls-2" points="67.1 109.2 67.1 64.9 332.9 64.9 332.9 263.6"/>
+    <polyline class="cls-1" points="309.1 192.3 342.4 225.5 375.6 192.3"/>
+    <polyline class="cls-1" points="57.6 88.1 57.6 54.7 342.4 54.7 342.4 225.5"/>
   </g>
 </svg>
