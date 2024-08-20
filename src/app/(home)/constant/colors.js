@@ -1,1 +1,2 @@
 export const RANDOMCOLOR_LIST = ["rgb(140, 11, 35)", "rgb(217, 113, 170)", "rgb(93, 90, 191)", "rgb(4, 104, 191)", "rgb(166, 106, 33)"]
+export const RANDOMCOLOR_LIST_TAILWIND = ["rgb(140,11,35)", "rgb(217,113,170)", "rgb(93,90,191)", "rgb(4,104,191)", "rgb(166,106,33)"]

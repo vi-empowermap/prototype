@@ -7,6 +7,7 @@ import FilterItemBox from "./filter_items/FilterItemBox";
 import OpenIcon from "/public/assets/icons/open.svg"
 import FilterIcon from "/public/assets/icons/filter.svg"
 import { ICON_SIZE, ICON_SIZE_2, ICON_STROKE_SIZE, ICON_STROKE_SIZE_3 } from "../constant/iconSize";
+import { RANDOMCOLOR_LIST, RANDOMCOLOR_LIST_TAILWIND } from "../constant/colors";
 const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext, panelTexts }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
@@ -578,7 +579,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           
           
           <div className="sticky bottom-0 flex items-center border-b last:border-b-0 border-black z-[2000]">
-            <div onClick={onSearch} className="cursor-pointer hover:bg-black bg-white py-2 hover:text-white transition-all flex-1 flex items-center justify-center border-t border-black">
+            <div onClick={onSearch} className={`cursor-pointer hover:bg-[rgb(4,104,191)] bg-black py-2 text-white transition-all flex-1 flex items-center justify-center border-t border-black`}>
             {panelTexts.fsearch}
             </div>
             {/* <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
