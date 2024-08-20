@@ -7,13 +7,11 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, tot
   const [mapLoaded, setMapLoaded] = useState(false);
   const zurKarteBtnRef = useRef();
   useEffect(() => {
-    console.log(mapLoaded);
-    // if(zurKarteBtnRef.current && !ready){
-    //   const autoClose = setTimeout(() => {
-    //     zurKarteBtnRef.current.click()
-    //   },60000)
-
-    // }
+    if (zurKarteBtnRef.current && !ready) {
+      const autoClose = setTimeout(() => {
+        zurKarteBtnRef.current.click();
+      }, 60000);
+    }
   }, [mapLoaded]);
 
   useEffect(() => {
@@ -63,9 +61,12 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, tot
       {mapLoaded && (
         <div className="z-[1803]">
           <div className="w-screen h-screen max-h-screen min-h-screen flex flex-col items-center lg:items-start justify-center px-4 lg:px-16 gap-4">
-            <div className="border border-black w-fit text-2xl lg:text-8xl text-black bg-white font-bold p-2">{webtitle}</div>
+            <div className="border border-black w-fit text-2xl lg:text-8xl text-black bg-white font-bold p-2">
+              <span className="font-bespokeStencil">{String(webtitle).toUpperCase().slice(0, 3)}</span>
+              <span className="font-britney pr-4">{String(webtitle).toUpperCase().slice(3)}</span>
+            </div>
             <div className="border border-black lg:w-2/5 text-black bg-white text-xl p-2">{introtext}</div>
-            <div ref={zurKarteBtnRef} id="anibtn" onClick={onClickReady} className={`border border-black relative font-bold cursor-pointer w-fit bg-white text-black select-none p-2 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+            <div ref={zurKarteBtnRef} id="anibtn" onClick={onClickReady} className={`border border-black relative font-bold cursor-pointer w-fit bg-white text-black lg:hover:bg-black lg:hover:text-white select-none p-2 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
               {introbtn} &rarr;
             </div>
           </div>
