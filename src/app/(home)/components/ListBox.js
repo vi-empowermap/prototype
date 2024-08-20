@@ -66,7 +66,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
               })} */}
             {value.themenschwerpunkt && <ListBoxIcon thema={value.themenschwerpunkt[value.themenschwerpunkt_list_icon]} color={getClikedMarkerAtom === value.id ? "white" : value.bgColor} />}
           </div>
-          <div style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }} className="flex-1 min-h-64 max-h-64 overflow-hidden border cursor-pointer p-2 rounded-r-3xl rounded-b-3xl bg-white -mt-14 relative group-hover:-translate-y-6 transition-all group overflow-hidden duration-300">
+          <div style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }} className="flex-1 min-h-44 max-h-44 lg:min-h-64 lg:max-h-64 overflow-hidden border cursor-pointer p-2 rounded-r-3xl rounded-b-3xl bg-white -mt-14 relative group-hover:-translate-y-6 transition-all group duration-300">
             <div
               style={{
                 background: `linear-gradient(0deg, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.7) 0%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.4) 10%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.1) 20%, rgba(${value.bgColor.slice(
@@ -98,7 +98,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
               </div>
             )}
             </div>
-            {!getOnSearchFilter && <div className="text-stone-950 mt-2 flex flex-wrap font-medium text-sm">{value.themenschwerpunkt.map((v,idx) => {
+            {!getOnSearchFilter && <div className="text-stone-950 mt-2 hidden lg:flex flex-col flex-wrap font-medium text-sm">{value.themenschwerpunkt.map((v,idx) => {
               return <div key={idx} className="mr-1">{themenschwerpunktBP[v]}{(idx + 1) === value.themenschwerpunkt.length ? "" : ","}</div>
             })}</div>}
             {getOnSearchFilter && <div className="text-stone-950 font-medium text-sm" dangerouslySetInnerHTML={{ __html: `...${String(getHBodyText).slice(0, 300)}...` }}></div>}

@@ -2,7 +2,7 @@ import { clickedItemsListAtom, highLightWordAtom, onFilterMobileOpenAtom, onOrga
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import SearchIcon from "/public/assets/icons/search.svg"
+import SearchIcon from "/public/assets/icons/search.svg";
 import { ICON_SIZE_2, ICON_STROKE_SIZE_3 } from "../constant/iconSize";
 const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext, resetText }) => {
   const { register, handleSubmit, setValue, getValues } = useForm();
@@ -10,7 +10,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
   const [getOnSearchFilter, setOnSearchFilter] = useRecoilState(onSearchFilterAtom);
   const [getOrgaFilter, setOrgaFilter] = useRecoilState(onOrgaFilterAtom);
   const [getFoundIdList, setFoundList] = useState(0);
-  const setHighLightWordAtom = useSetRecoilState(highLightWordAtom)
+  const setHighLightWordAtom = useSetRecoilState(highLightWordAtom);
 
   /* Mobile */
   const mobileDiv = useRef(null);
@@ -27,7 +27,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
     setValue("search", "");
     setOnSearchFilter(false);
     setFoundList(0);
-    setOnSearchMobileOpen(false)
+    setOnSearchMobileOpen(false);
   };
   /* Reset: if click Verortung Btn, Reset Button and Filtern Btn */
   useEffect(() => {
@@ -44,38 +44,38 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
     function escapeRegExp(string) {
       return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     }
+
     const value = getValues("search");
+    if (value !== "") {
+      const pattern = new RegExp(escapeRegExp(value), "gi");
 
-    const pattern = new RegExp(escapeRegExp(value), "gi");
+      const foundIdList = [];
 
-    const foundIdList = [];
-
-    setHighLightWordAtom(value)
-    const data = [...getData];
-    for (let i = 0; i < data.length; i++) {
-      data[i].filterVisible = true;
-    }
-    for (let i = 0; i < data.length; i++) {
-      console.log(data[i])
-      const matches = String(data[i].aboutorga + " " + data[i].organame + " " + data[i].categories.join(" ")).match(pattern);
-      
-      if (Boolean(matches)) {
-        
+      setHighLightWordAtom(value);
+      const data = [...getData];
+      for (let i = 0; i < data.length; i++) {
         data[i].filterVisible = true;
-        foundIdList.push(data[i].id);
-      } else {
-        data[i].filterVisible = false;
       }
+      for (let i = 0; i < data.length; i++) {
+        const matches = String(data[i].aboutorga + " " + data[i].organame + " " + data[i].categories.join(" ")).match(pattern);
+
+        if (Boolean(matches)) {
+          data[i].filterVisible = true;
+          foundIdList.push(data[i].id);
+        } else {
+          data[i].filterVisible = false;
+        }
+      }
+
+      setData(data);
+      setDataForMarker(data);
+
+      setFoundList(foundIdList.length);
+      setOnSearchFilter(true);
+      setOrgaFilter(false);
+
+      setOnSearchMobileOpen(false);
     }
-
-    setData(data);
-    setDataForMarker(data);
-    
-    setFoundList(foundIdList.length);
-    setOnSearchFilter(true);
-    setOrgaFilter(false);
-
-    setOnSearchMobileOpen(false);
   };
 
   const onSubmit = () => {
@@ -106,13 +106,13 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
         const rect = mobileDiv.current.getBoundingClientRect();
         setLeftSize(rect.x);
       }
-    }
-    window.addEventListener("resize", resizeEvent)
+    };
+    window.addEventListener("resize", resizeEvent);
 
     return () => {
-      window.removeEventListener('resize', resizeEvent)
-    }
-  },[])
+      window.removeEventListener("resize", resizeEvent);
+    };
+  }, []);
 
   return (
     <div className="lg:flex-1 aspect-square h-full lg:aspect-auto lg:w-full flex items-center lg:border-b border-black lg:pl-4 relative select-none font-jetBrainsMono font-medium">
@@ -146,12 +146,12 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
           </div>
         )}
         <div onClick={onOpenMobile} className="w-full h-full flex justify-center items-center cursor-pointer stroke-black active:bg-black active:text-white relative">
-          <SearchIcon style={{strokeWidth: ICON_STROKE_SIZE_3 ,width: ICON_SIZE_2, height: ICON_SIZE_2}} />
+          <SearchIcon style={{ strokeWidth: ICON_STROKE_SIZE_3, width: ICON_SIZE_2, height: ICON_SIZE_2 }} />
           {getOnSearchFilter && (
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-            <span className="translate-x-1/2 -translate-y-1/2 bg-black text-white min-w-5 min-h-5 text-xs flex justify-center items-center border border-white rounded-full">{String(getFoundIdList).length > 5 ? String(getFoundIdList).slice(0, 5) : String(getFoundIdList)}</span>
-          </div>
-        )}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+              <span className="translate-x-1/2 -translate-y-1/2 bg-black text-white min-w-5 min-h-5 text-xs flex justify-center items-center border border-white rounded-full">{String(getFoundIdList).length > 5 ? String(getFoundIdList).slice(0, 5) : String(getFoundIdList)}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

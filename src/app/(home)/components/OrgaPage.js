@@ -129,7 +129,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
     }
   };
   return (
-    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 border-l border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 font-jetBrainsMono font-medium`}>
+    <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 lg:border-l border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 font-jetBrainsMono font-medium`}>
       <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-screen lg:h-full lg:border-x lg:border-t border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
         <OrgaNav onClose={onClose} />
 
@@ -198,7 +198,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 <img style={{ width: "100%", height: "100%" }} alt="email" className="cursor-pointer" onClick={clickEmail} ref={emailRef} />
                 <div>{String(orgaInfo.contactnummber)}</div>
                 <a target="_blank" href={String(orgaInfo.website)} style={{ color: `${orgaInfo.bgColor}` }} className="mt-4">
-                  website
+                  {String(orgaInfo.website)}
                 </a>
               </div>
               <div className="mb-4">
@@ -225,20 +225,20 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
           </div>
           <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 gap-4 mb-4 lg:gap-0 lg:mb-0">
             <div className={`${turnOnMap ? "block" : "hidden"} w-full h-fit flex justify-center lg:px-8 overflow-hidden`}>
-              <div onClick={() => onFilterBundesLand()} className="flex w-full relative group h-28 ">
+              <div onClick={() => onFilterBundesLand()} className="flex w-full relative group h-28 items ">
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border lg:border-b-0 p-6 text-xl cursor-pointer select-none">
-                  Zeige alle Initiativen <span className="font-semibold">in dem selben Bundesland</span>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border lg:border-b-0 p-6 text-lg lg:text-xl cursor-pointer select-none">
+                  Zeige alle Initiativen <span style={{color: `${orgaInfo.bgColor}`}} className="font-semibold">in dem selben Bundesland</span>
                 </div>
               </div>
             </div>
-            <div className={`w-full h-fit flex justify-center lg:px-8 overflow-hidden`}>
-              <div onClick={() => onFilterAll()} className="flex w-full relative group h-28">
+            <div className={`w-full h-fit flex justify-center lg:px-8 overflow-hidden items-center`}>
+              <div onClick={() => onFilterAll()} className="flex w-full relative group h-28 items">
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
-                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border lg:border-b-0 p-6 text-xl cursor-pointer select-none">
-                  Zeige alle Initiativen <span className="font-semibold">mit den gleichen Kategorien</span>
+                <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border lg:border-b-0 p-6 text-lg lg:text-xl cursor-pointer select-none">
+                  Zeige alle Initiativen <span style={{color: `${orgaInfo.bgColor}`}} className="font-semibold">mit den gleichen Kategorien</span>
                 </div>
               </div>
             </div>
