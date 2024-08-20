@@ -54,6 +54,7 @@ const Wrapper = ({
   const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom);
   const getCloseOrgaAtom = useRecoilValue(closeOrgaAtom);
 
+ 
   /* Double touch map for Mobile */
   const [lastTap, setLastTap] = useState(null);
   const doubleTapDelay = 300; // milliseconds
@@ -159,7 +160,7 @@ const Wrapper = ({
    
       <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
         {/* Intro Page */}
-        <IntroCotainer webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} />
+        <IntroCotainer webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} totalCountOfInstitution={kqlDataResult.length + kqlDataResultNoLocation.length} />
 
         <MapContainerHome>
           {/* Navigation BAR */}
