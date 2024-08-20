@@ -1,5 +1,5 @@
 export const ICON_SIZE = "40px"
 export const ICON_SIZE_2 = "25px"
 export const ICON_STROKE_SIZE = "30px"
-export const ICON_STROKE_SIZE_3 = "40px"
+export const ICON_STROKE_SIZE_3 = "30px"
 export const ICON_STROKE_SIZE_2 = "18px"
