@@ -1,19 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import IntroMap from "../intromap";
-import Logo from "../Logo";
 import gsap from "gsap";
 import Karte from "/public/assets/icons/zurkarte.svg";
 
 const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [iconColor, setIconColor] = useState("#000")
   const zurKarteBtnRef = useRef();
   useEffect(() => {
-    // if (zurKarteBtnRef.current && !ready) {
-    //   const autoClose = setTimeout(() => {
-    //     zurKarteBtnRef.current.click();
-    //   }, 60000);
-    // }
+    if (zurKarteBtnRef.current && !ready) {
+      const autoClose = setTimeout(() => {
+        zurKarteBtnRef.current.click();
+      }, 60000);
+    }
   }, [mapLoaded]);
 
   useEffect(() => {
