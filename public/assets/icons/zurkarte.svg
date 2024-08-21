@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-linecap: square;
+      }
+
+      .cls-1, .cls-2 {
+        fill: none;
+        <!-- stroke: #000; -->
+        stroke-miterlimit: 10;
+        <!-- stroke-width: 14px; -->
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="260" cy="249" r="59"/>
+  <line class="cls-2" x1="260.3" x2="260.3" y2="190"/>
+  <line class="cls-2" x1="260.3" y1="308" x2="260.3" y2="400"/>
+  <line class="cls-2" y1="249" x2="201.3" y2="249"/>
+  <polyline class="cls-1" points="104 249 104 108 170.2 108"/>
+  <polyline class="cls-2" points="146.8 249 146.8 342 400 342"/>
+  <line class="cls-1" x1="260.3" y1="55.8" x2="334.6" y2="55.8"/>
+  <line class="cls-1" x1="260.3" y1="127.8" x2="334.6" y2="127.8"/>
+  <line class="cls-1" x1="47.8" y1="249" x2="47.8" y2="342"/>
+</svg>
