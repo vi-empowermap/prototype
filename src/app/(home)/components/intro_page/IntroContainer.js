@@ -7,11 +7,11 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, tot
   const [mapLoaded, setMapLoaded] = useState(false);
   const zurKarteBtnRef = useRef();
   useEffect(() => {
-    if (zurKarteBtnRef.current && !ready) {
-      const autoClose = setTimeout(() => {
-        zurKarteBtnRef.current.click();
-      }, 60000);
-    }
+    // if (zurKarteBtnRef.current && !ready) {
+    //   const autoClose = setTimeout(() => {
+    //     zurKarteBtnRef.current.click();
+    //   }, 60000);
+    // }
   }, [mapLoaded]);
 
   useEffect(() => {
@@ -52,22 +52,30 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, tot
         </div>
         <div className="flex-1 lg:text-4xl lg:leading-10 font-jetBrainsMono font-normal">{introtext}</div>
       </div> */}
-      {mapLoaded && (
+      {/* {mapLoaded && (
         <div className="fixed top-2 right-2 text-sm text-black bg-white border border-black z-[1805] p-1">
           <span>Total Number of Institutions: </span>
           <span className="totalCount">{totalCountOfInstitution}</span>
         </div>
-      )}
+      )} */}
       {mapLoaded && (
         <div className="z-[1803]">
-          <div className="w-screen h-screen max-h-screen min-h-screen flex flex-col items-center lg:items-start justify-center px-4 lg:px-16 gap-4">
-            <div className="border border-black w-fit text-2xl lg:text-8xl text-black bg-white font-bold p-2">
-              <span className="font-bespokeStencil">{String(webtitle).toUpperCase().slice(0, 3)}</span>
-              <span className="font-britney pr-4">{String(webtitle).toUpperCase().slice(3)}</span>
+          <div className="w-screen h-screen max-h-screen min-h-screen flex items-center lg:items-start justify-center px-4 lg:px-16 gap-4">
+            <div className="w-full h-full flex flex-col justify-center gap-4">
+              <div className=" w-fit text-2xl lg:text-8xl text-black bg-white font-bold p-2 rounded-lg">
+                <span className="font-bespokeStencil">{String(webtitle).toUpperCase().slice(0, 3)}</span>
+                <span className="font-britney pr-4">{String(webtitle).toUpperCase().slice(3)}</span>
+              </div>
+              <div className=" lg:w-4/5 text-black bg-white text-xl p-2 rounded-lg">{introtext}</div>
+              <div ref={zurKarteBtnRef} id="anibtn" onClick={onClickReady} className={`rounded-lg relative font-bold cursor-pointer w-fit bg-white text-black lg:hover:bg-black lg:hover:text-white select-none p-2 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+                {introbtn} &rarr;
+              </div>
             </div>
-            <div className="border border-black lg:w-2/5 text-black bg-white text-xl p-2">{introtext}</div>
-            <div ref={zurKarteBtnRef} id="anibtn" onClick={onClickReady} className={`border border-black relative font-bold cursor-pointer w-fit bg-white text-black lg:hover:bg-black lg:hover:text-white select-none p-2 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-              {introbtn} &rarr;
+            <div className="w-full h-full flex justify-center items-center">
+              <div className="w-fit h-fit flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
+                <span className="totalCount text-8xl">{totalCountOfInstitution}</span>
+                <span>Total Number of Institutions</span>
+              </div>
             </div>
           </div>
           {/* <div className="w-screen h-fit px-8 py-4 flex flex-col relative">

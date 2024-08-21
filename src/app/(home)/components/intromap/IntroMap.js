@@ -6,12 +6,31 @@ import { useEffect, useRef } from "react";
 
 const MapController = ({  }) => {
   const map = useMap();
-
+  
   useEffect(() => {
-    map.flyTo([51.1657, 10.4515], 14, {
+    map.flyTo([52.5200, 13.4050], 14, {
       animate: true,
-      duration: 120 // Duration in seconds
+      duration: 60, // Duration in seconds
     });
+    setTimeout(() => {
+      map.flyTo([51.1657, 10.4515], 14, {
+        animate: true,
+        duration: 60, // Duration in seconds
+      });
+    },1000 * 20)
+    setTimeout(() => {
+      map.flyTo([50.9375, 6.9603], 14, {
+        animate: true,
+        duration: 60, // Duration in seconds
+      });
+    },1000 * 40)
+    setTimeout(() => {
+      map.flyTo([48.1351, 11.5820], 14, {
+        animate: true,
+        duration: 60, // Duration in seconds
+      });
+    },1000 * 50)
+ 
     
   }, [map]);
 
