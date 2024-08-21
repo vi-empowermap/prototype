@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import IntroMap from "../intromap";
 import Logo from "../Logo";
 import gsap from "gsap";
+import Karte from "/public/assets/icons/zurkarte.svg";
 
 const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [iconColor, setIconColor] = useState("#000")
   const zurKarteBtnRef = useRef();
   useEffect(() => {
     // if (zurKarteBtnRef.current && !ready) {
@@ -60,21 +62,29 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, tot
       )} */}
       {mapLoaded && (
         <div className="z-[1803]">
-          <div className="w-screen h-screen max-h-screen min-h-screen flex items-center lg:items-start justify-center px-4 lg:px-16 gap-4">
+          <div className="w-screen h-screen max-h-screen min-h-screen flex items-center lg:items-start justify-center px-4 lg:px-16 gap-4 overflow-hidden">
             <div className="w-full h-full flex flex-col justify-center gap-4">
-              <div className=" w-fit text-2xl lg:text-8xl text-black bg-white font-bold p-2 rounded-lg">
-                <span className="font-bespokeStencil">{String(webtitle).toUpperCase().slice(0, 3)}</span>
-                <span className="font-britney pr-4">{String(webtitle).toUpperCase().slice(3)}</span>
+              <div className="min-w-fit max-w-fit w-auto flex justify-start items-center text-black bg-white bg-opacity-80 rounded-lg">
+                <span className="text-2xl lg:text-9xl font-bespokeStencil">{String(webtitle).toUpperCase().slice(0, 3)}</span>
+                <span className="text-2xl lg:text-9xl font-britney pr-4 lg:pr-8">{String(webtitle).toUpperCase().slice(3)}</span>
               </div>
-              <div className=" lg:w-4/5 text-black bg-white text-xl p-2 rounded-lg">{introtext}</div>
-              <div ref={zurKarteBtnRef} id="anibtn" onClick={onClickReady} className={`rounded-lg relative font-bold cursor-pointer w-fit bg-white text-black lg:hover:bg-black lg:hover:text-white select-none p-2 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-                {introbtn} &rarr;
+              <div className=" lg:w-4/5 text-black bg-white bg-opacity-80 text-2xl p-2 rounded-lg font-jetBrainsMono">{introtext}</div>
+              <div ref={zurKarteBtnRef} id="anibtn" onClick={onClickReady} className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative font-bold cursor-pointer w-fit bg-white text-black lg:hover:bg-black lg:hover:text-white select-none p-2 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} transition-all duration-300 bg-opacity-80`}>
+                <div><Karte style={{ strokeWidth: "30px", width: "40px", height: "40px" }} /></div><div>{introbtn}</div>
               </div>
             </div>
-            <div className="w-full h-full flex justify-center items-center">
-              <div className="w-fit h-fit flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
-                <span className="totalCount text-8xl">{totalCountOfInstitution}</span>
-                <span>Total Number of Institutions</span>
+            <div className="w-full h-full flex justify-center items-center font-jetBrainsMono">
+              <div onClick={onClickReady} className="group w-1/2 max-w-full cursor-pointer hover:w-2/3 transition-all duration-500 rounded-full bg-opacity-80 aspect-square overflow-hidden flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
+                <div className="w-2/3 h-2/3 rounded-full overflow-hidden relative">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:left-full transition-all duration-500 flex flex-col justify-center items-center">
+                    <span className="totalCount text-8xl">{totalCountOfInstitution}</span>
+                    <span className="text-center">Gesamtzahl der Institutionen</span>
+                  </div>
+                  <div className="absolute top-1/2 -left-full translate-x-0 -translate-y-1/2 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all duration-500 flex flex-col justify-center items-center gap-2">
+                    <Karte style={{ strokeWidth: "30px", stroke: "#000", width: "100px", height: "100px" }} />
+                    <span>{introbtn}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
