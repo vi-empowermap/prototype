@@ -48,37 +48,26 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, tot
       <div className="fixed top-0 left-0 w-screen h-screen max-h-screen min-h-screen z-[1801] select-none pointer-events-none">
         <IntroMap setMapLoaded={setMapLoaded} />
       </div>
-      {/* <div className="w-screen h-screen max-h-screen min-h-screen px-4 lg:px-8 lg:py-4 flex flex-col">
-        <div className="mb-2 lg:mb-4">
-          <Logo text={webtitle} />
-        </div>
-        <div className="flex-1 lg:text-4xl lg:leading-10 font-jetBrainsMono font-normal">{introtext}</div>
-      </div> */}
-      {/* {mapLoaded && (
-        <div className="fixed top-2 right-2 text-sm text-black bg-white border border-black z-[1805] p-1">
-          <span>Total Number of Institutions: </span>
-          <span className="totalCount">{totalCountOfInstitution}</span>
-        </div>
-      )} */}
+     
       {mapLoaded && (
         <div className="z-[1803]">
-          <div className="w-screen h-screen max-h-screen min-h-screen flex items-center lg:items-start justify-center px-4 lg:px-16 gap-4 overflow-hidden">
+          <div className="w-screen h-screen max-h-screen min-h-screen flex flex-col lg:flex-row items-center lg:items-start justify-center px-4 py-4 lg:px-16 gap-4 overflow-hidden">
             <div className="w-full h-full flex flex-col justify-center gap-4">
               <div className="min-w-fit max-w-fit w-auto flex justify-start items-center text-black bg-white bg-opacity-80 rounded-lg">
-                <span className="text-2xl lg:text-9xl font-bespokeStencil">{String(webtitle).toUpperCase().slice(0, 3)}</span>
-                <span className="text-2xl lg:text-9xl font-britney pr-4 lg:pr-8">{String(webtitle).toUpperCase().slice(3)}</span>
+                <span className="text-5xl md:text-9xl lg:text-9xl font-bespokeStencil">{String(webtitle).toUpperCase().slice(0, 3)}</span>
+                <span className="text-5xl md:text-9xl lg:text-9xl font-britney pr-4 lg:pr-8">{String(webtitle).toUpperCase().slice(3)}</span>
               </div>
-              <div className=" lg:w-4/5 text-black bg-white bg-opacity-80 text-2xl p-2 rounded-lg font-jetBrainsMono">{introtext}</div>
-              <div ref={zurKarteBtnRef} id="anibtn" onClick={onClickReady} className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative font-bold cursor-pointer w-fit bg-white text-black lg:hover:bg-black lg:hover:text-white select-none p-2 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} transition-all duration-300 bg-opacity-80`}>
+              <div className="lg:w-4/5 text-black bg-white bg-opacity-80 text-lg md:text-xl lg:text-2xl p-2 rounded-lg font-jetBrainsMono">{introtext}</div>
+              <div ref={zurKarteBtnRef} id="anibtn" onClick={onClickReady} className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative font-bold cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} transition-all duration-300 bg-opacity-80`}>
                 <div><Karte style={{ strokeWidth: "30px", width: "40px", height: "40px" }} /></div><div>{introbtn}</div>
               </div>
             </div>
             <div className="w-full h-full flex justify-center items-center font-jetBrainsMono">
               <div onClick={onClickReady} className="group w-1/2 max-w-full cursor-pointer hover:w-2/3 transition-all duration-500 rounded-full bg-opacity-80 aspect-square overflow-hidden flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
-                <div className="w-2/3 h-2/3 rounded-full overflow-hidden relative">
+                <div className="w-full h-full rounded-full overflow-hidden relative">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:left-full transition-all duration-500 flex flex-col justify-center items-center">
-                    <span className="totalCount text-8xl">{totalCountOfInstitution}</span>
-                    <span className="text-center">Gesamtzahl der Institutionen</span>
+                    <span className="totalCount text-3xl md:text-5xl lg:text-8xl">{totalCountOfInstitution}</span>
+                    <span className="text-center text-xs md:text-sm lg:text-base">Gesamtzahl der Institutionen</span>
                   </div>
                   <div className="absolute top-1/2 -left-full translate-x-0 -translate-y-1/2 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all duration-500 flex flex-col justify-center items-center gap-2">
                     <Karte style={{ strokeWidth: "30px", stroke: "#000", width: "100px", height: "100px" }} />
@@ -88,26 +77,7 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, tot
               </div>
             </div>
           </div>
-          {/* <div className="w-screen h-fit px-8 py-4 flex flex-col relative">
-          <div className="lg:text-4xl lg:leading-10 font-jetBrainsMono font-normal">About</div>
-          <p className="lg:text-xl font-jetBrainsMono font-normal columns-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra mi id quam tincidunt placerat. Praesent tortor felis, lacinia ut ligula eu, pulvinar consectetur massa. Suspendisse a eros convallis, lacinia odio a, mollis diam. Aliquam vitae sapien dapibus ex imperdiet eleifend.
-            Sed cursus blandit pulvinar. Donec scelerisque dui ac magna ornare tincidunt. Curabitur vel condimentum diam. Suspendisse gravida tellus non enim molestie lobortis. Nunc et ullamcorper nisi. Mauris viverra condimentum lectus vel faucibus. Mauris vel libero nisl. Praesent non orci
-            maximus, ultrices purus quis, bibendum mi. In tempor diam fringilla, accumsan leo et, posuere lectus. Donec ac augue pellentesque, ultricies lorem ut, auctor eros. Fusce ex dolor, lacinia a urna sed, aliquam cursus dui. Ut molestie varius lectus ut dapibus. Aenean faucibus purus nisi, id
-            bibendum leo dapibus id. Phasellus ut condimentum erat. Aliquam tristique interdum risus et auctor. Sed nisi tortor, pretium et eros non, viverra volutpat eros. Sed aliquam, felis id molestie dapibus, augue nisl tristique enim, nec sodales urna ligula eget nulla. Nunc in elit ac eros
-            convallis fringilla. Proin vel felis sit amet ex eleifend facilisis. Sed commodo lobortis nibh vitae volutpat. Integer viverra arcu et elementum fermentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent a pharetra felis, quis consequat
-            ante. Integer vitae risus nisl. Vivamus dictum velit et vestibulum gravida. Sed pulvinar dolor quis turpis iaculis venenatis. Nunc scelerisque, tortor nec porta dignissim, libero orci bibendum metus, ac ornare magna felis id quam. Proin congue et sapien id rhoncus. Suspendisse laoreet
-            risus non eros volutpat pharetra. Ut blandit facilisis lectus. Morbi sit amet nisi vel nisl dictum rhoncus a vitae tortor. Quisque rhoncus purus sed metus fringilla feugiat. Donec semper congue arcu sit amet consectetur. Morbi maximus congue tristique. Nullam euismod facilisis dui eu
-            accumsan. Curabitur venenatis augue eget metus laoreet, ut hendrerit sapien suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras euismod sapien suscipit ullamcorper blandit. Fusce metus dui, ornare ut rutrum eget, scelerisque vel
-            elit. Etiam ut augue efficitur, porta ligula fringilla, bibendum nulla. Praesent posuere sed velit non sagittis. Vestibulum bibendum dictum neque non sagittis. Vivamus ut finibus elit. Donec at tortor sed mi suscipit ultrices. Cras varius ex sem, ut auctor leo molestie a. Nam venenatis
-            sapien vitae massa blandit, quis vulputate ex ultricies. Donec nisl ante, luctus non enim sed, placerat viverra mi.
-          </p>
-          <div className="flex justify-center mt-8">
-            <div id="anibtn" onClick={onClickReady} className={`relative font-semibold cursor-pointer ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} font-jetBrainsMono font-normal`}>
-              {introbtn}
-            </div>
-          </div>
-        </div> */}
+         
         </div>
       )}
     </div>
