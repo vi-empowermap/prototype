@@ -18,10 +18,10 @@ export const fetchDataApi = async ({url, userInfo, method, bodyData={}}) => {
       });
 
       const dataKirby = await response.json();
-      console.log(dataKirby)
+      
       return dataKirby;
     } catch (error) {
-      console.log(error)
+      
       
     }
   };

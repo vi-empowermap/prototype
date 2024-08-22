@@ -21,8 +21,8 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
     router.push(`?organisation=${value.id}`);
   };
   // useEffect(() => {
-  //   console.log(value.themenschwerpunkt)
-  //   console.log(value.themenschwerpunkt_list_icon)
+  //   
+  //   
   //   setRandomIcon(value.themenschwerpunkt_list_icon)
   // },[getClikedMarkerAtom])
   useEffect(() => {

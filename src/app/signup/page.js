@@ -76,7 +76,7 @@ const Page = async () => {
         resetbtn: kirbydata.result.content.resetbtn,
       }
 
-      console.log(pageTextList)
+      
       
     return (
       

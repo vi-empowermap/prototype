@@ -1,5 +1,4 @@
 "use client";
-/* CSR: NO SSR */
 
 import { useEffect, useRef, useState } from "react";
 import LeafletMap from "./map";
@@ -34,12 +33,12 @@ const Wrapper = ({
   totalCountOfBundesland,
 }) => {
   gsap.registerPlugin(useGSAP);
+  // const [getData, setData] = useState([...kqlDataResult, ...data]);
+  // const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const container = useRef();
   const [ready, setReady] = useRecoilState(readyAniAtom);
   const [getData, setData] = useState([...kqlDataResult]);
-  // const [getData, setData] = useState([...kqlDataResult, ...data]);
   const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult]);
-  // const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const [turnOnMap, setTurnOnMap] = useState(true);
   const [findMobile, setFindMobile] = useState(false);
   const [clickedItemsList, setClickedItemsList] = useRecoilState(clickedItemsListAtom);

@@ -2,7 +2,7 @@ import { TileLayer, MapContainer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 import { MAPTILELAYER } from "../../constant/mapInfo";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 const MapController = ({  }) => {
   const map = useMap();
