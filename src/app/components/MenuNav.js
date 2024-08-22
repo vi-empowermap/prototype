@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 
-const MenuNav = () => {
+const MenuNav = ({kirbyPanelHomeData: {result: {content: data}}}) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -26,8 +26,8 @@ const MenuNav = () => {
         </div>
       </div>
       <h1 onClick={() => onClick("/")} className="w-fit bg-white text-2xl md:text-4xl lg:text-6xl font-bold flex items-center px-4 py-4 lg:py-0 cursor-pointer hover:bg-black hover:text-white transition-all">
-        <span className="font-bespokeStencil">{String("empowermap").toUpperCase().slice(0, 7)}</span>
-        <span className="font-britney">{String("empowermap").toUpperCase().slice(7)}</span>
+        <span className="font-bespokeStencil">{String(data.webtitle).toUpperCase().slice(0, 3)}</span>
+        <span className="font-britney">{String(data.webtitle).toUpperCase().slice(3)}</span>
       </h1>
     </nav>
   );
