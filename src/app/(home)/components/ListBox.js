@@ -98,7 +98,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
               </div>
             )}
             </div>
-            {!getOnSearchFilter && <div className="text-stone-950 mt-2 hidden lg:flex flex-col flex-wrap font-medium text-sm">{value.themenschwerpunkt.map((v,idx) => {
+            {!getOnSearchFilter && <div className="text-stone-950 mt-2 hidden lg:flex flex-row flex-wrap font-medium text-sm"><span className="mr-1 font-bold">Themenschwerpunkte:</span>{value.themenschwerpunkt.map((v,idx) => {
               return <div key={idx} className="mr-1">{themenschwerpunktBP[v]}{(idx + 1) === value.themenschwerpunkt.length ? "" : ","}</div>
             })}</div>}
             {getOnSearchFilter && <div className="text-stone-950 font-medium text-sm" dangerouslySetInnerHTML={{ __html: `...${String(getHBodyText).slice(0, 300)}...` }}></div>}

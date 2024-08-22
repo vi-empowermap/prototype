@@ -277,7 +277,6 @@ const GeolocationAlert = ({ ready }) => {
     <>
       {(ready && showAlert) && (
         <div className="fixed bottom-0 left-0 z-[25000] w-screen h-fit flex flex-col p-4 pb-8 bg-neutral-400 border-t border-black text-white">
-         
             <div> We Recommend Allowing Location Access To enhance your experience and improve the performance of this website, we recommend enabling location services. Allowing access to your current location will help us provide more accurate and personalized content</div>
             <div className="w-full flex gap-4 mt-8">
               <div onClick={onAllow} className="flex-1 text-center cursor-pointer py-3 bg-red-400 rounded-xl">Ja</div>
