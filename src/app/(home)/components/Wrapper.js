@@ -10,7 +10,7 @@ import Search from "./Search";
 import Filtern from "./Filtern";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import OrgaPage from "./OrgaPage";
 import GoogleMapTag from "./GoogleMap";
 import ListContainerOhneL from "./ListContainerOhneL";
@@ -36,6 +36,7 @@ const Wrapper = ({
   // const [getData, setData] = useState([...kqlDataResult, ...data]);
   // const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult, ...data]);
   const container = useRef();
+  const router = useRouter()
   const [ready, setReady] = useRecoilState(readyAniAtom);
   const [getData, setData] = useState([...kqlDataResult]);
   const [getDataForMarker, setDataForMarker] = useState([...kqlDataResult]);
@@ -130,6 +131,14 @@ const Wrapper = ({
     }, 2500);
   });
 
+  const pushIntroToAbout = () => {
+    
+    router.push("/about")
+    setTimeout(() => {
+      setReady(true);
+    }, 300);
+  }
+
   /* Switch Orga types */
   useEffect(() => {
     if (!turnOnMap) {
@@ -159,7 +168,7 @@ const Wrapper = ({
    
       <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">
         {/* Intro Page */}
-        <IntroCotainer webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} totalCountOfInstitution={kqlDataResult.length + kqlDataResultNoLocation.length} />
+        <IntroCotainer pushIntroToAbout={pushIntroToAbout} webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} totalCountOfInstitution={kqlDataResult.length + kqlDataResultNoLocation.length} />
 
         <MapContainerHome>
           {/* Navigation BAR */}
