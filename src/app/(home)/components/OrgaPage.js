@@ -131,7 +131,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   return (
     <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-screen z-[2400] lg:px-6 lg:pt-6 lg:border-l border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 font-jetBrainsMono font-medium`}>
       <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-screen lg:h-full lg:border-x lg:border-t border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
-        <OrgaNav onClose={onClose} />
+        <OrgaNav color={orgaInfo.bgColor} onClose={onClose} />
 
         <div className="px-4 flex flex-grow flex-col overflow-y-auto">
           <OrgaHeader bgColor={orgaInfo.bgColor} font={orgaInfo.font} organame={orgaInfo.organame} />
