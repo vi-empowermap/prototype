@@ -61,12 +61,19 @@ const IntroCotainer = ({pushIntroToAbout, webtitle, introbtn, introtext, ready, 
 };
 
 const TotalCountWrapper = ({ onClickReady, totalCountOfInstitution, introbtn }) => {
+  const [getCurrentDate, setCurrentDate] = useState("")
+  useEffect(() => {
+    const currentDate = new Date();
+    setCurrentDate(String(currentDate.toLocaleDateString()))
+
+  },[])
   return (
     <div onClick={onClickReady} className="group w-1/2 max-w-full cursor-pointer hover:w-2/3 transition-all duration-500 rounded-full bg-opacity-80 aspect-square overflow-hidden flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
       <div className="w-full h-full rounded-full overflow-hidden relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:left-full transition-all duration-500 flex flex-col justify-center items-center">
           <span className="totalCount text-3xl md:text-5xl lg:text-8xl">{totalCountOfInstitution}</span>
           <span className="text-center text-xs md:text-sm lg:text-base">Gesamtzahl der Institutionen</span>
+          <span className="text-center text-xs mt-2">Stand: {getCurrentDate}</span>
         </div>
         <div className="absolute top-1/2 -left-full translate-x-0 -translate-y-1/2 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all duration-500 flex flex-col justify-center items-center gap-2">
           <Karte style={{ strokeWidth: "30px", stroke: "#000", width: "100px", height: "100px" }} />
