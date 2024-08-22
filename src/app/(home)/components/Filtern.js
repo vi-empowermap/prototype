@@ -314,7 +314,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
   }, [turnOnMap]);
   useEffect(() => {
     if (getOrgaFilterActivateAtom.ready) {
-      console.log(getOrgaFilterActivateAtom.location)
+      
       setActiveFilter({
         okBundes: getOrgaFilterActivateAtom.location ? true : false,
         okThemen: getOrgaFilterActivateAtom.all,
