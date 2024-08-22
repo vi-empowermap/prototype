@@ -3,16 +3,16 @@ import IntroMap from "../intromap";
 import gsap from "gsap";
 import Karte from "/public/assets/icons/zurkarte.svg";
 
-const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
+const IntroCotainer = ({pushIntroToAbout, webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const zurKarteBtnRef = useRef();
   useEffect(() => {
-    if (zurKarteBtnRef.current && !ready) {
-      // after 1 minute the zur karte button will be clicked automatically
-      setTimeout(() => {
-        zurKarteBtnRef.current.click();
-      }, 60000);
-    }
+    // if (zurKarteBtnRef.current && !ready) {
+    //   // after 1 minute the zur karte button will be clicked automatically
+    //   setTimeout(() => {
+    //     zurKarteBtnRef.current.click();
+    //   }, 60000);
+    // }
   }, [mapLoaded]);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const IntroCotainer = ({ webtitle, introbtn, introtext, ready, onClickReady, tot
             <div className="w-full h-full flex flex-col justify-center gap-4">
               <IntroLogo webtitle={webtitle} />
               <IntroText introtext={introtext} />
-              <ZurKarteBtn zurKarteBtnRef={zurKarteBtnRef} onClickReady={onClickReady} ready={ready} introbtn={introbtn} />
+              <ButtonWrapper pushIntroToAbout={pushIntroToAbout} zurKarteBtnRef={zurKarteBtnRef} onClickReady={onClickReady} ready={ready} introbtn={introbtn} />
             </div>
             <div className="w-full h-full flex justify-center items-center font-jetBrainsMono">
               <TotalCountWrapper onClickReady={onClickReady} totalCountOfInstitution={totalCountOfInstitution} introbtn={introbtn} />
@@ -77,20 +77,35 @@ const TotalCountWrapper = ({ onClickReady, totalCountOfInstitution, introbtn }) 
   );
 };
 
-const ZurKarteBtn = ({ zurKarteBtnRef, onClickReady, ready, introbtn }) => {
+const ButtonWrapper = ({pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, introbtn }) => {
   return (
-    <div
-      ref={zurKarteBtnRef}
-      id="anibtn"
-      onClick={onClickReady}
-      className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative font-bold cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
-        ready ? "opacity-0 pointer-events-none" : "opacity-100"
-      } transition-all duration-300 bg-opacity-80`}
-    >
-      <div>
-        <Karte style={{ strokeWidth: "30px", width: "40px", height: "40px" }} />
+    <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
+      <div
+        ref={zurKarteBtnRef}
+        id="anibtn"
+        onClick={onClickReady}
+        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative font-bold cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
+          ready ? "opacity-0 pointer-events-none" : "opacity-100"
+        } transition-all duration-300 bg-opacity-80`}
+      >
+        {/* <div>
+          <Karte style={{ strokeWidth: "30px", width: "40px", height: "40px" }} />
+        </div> */}
+        <div>{introbtn}</div>
       </div>
-      <div>{introbtn}</div>
+      <div
+        ref={zurKarteBtnRef}
+        id="anibtn"
+        onClick={pushIntroToAbout}
+        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative font-bold cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
+          ready ? "opacity-0 pointer-events-none" : "opacity-100"
+        } transition-all duration-300 bg-opacity-80`}
+      >
+        {/* <div>
+          <Karte style={{ strokeWidth: "30px", width: "40px", height: "40px" }} />
+        </div> */}
+        <div>Mehr über das Projekt</div>
+      </div>
     </div>
   );
 };
