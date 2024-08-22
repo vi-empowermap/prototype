@@ -71,7 +71,7 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
 
   return null;
 };
-const MapController = ({ setViewAtomValue, getGeoLocationPermission }) => {
+const MapController = ({ setViewAtomValue }) => {
   const map = useMap();
 
   useEffect(() => {
@@ -100,21 +100,21 @@ const MapController = ({ setViewAtomValue, getGeoLocationPermission }) => {
         }
       
     }
-  }, [setViewAtomValue, getGeoLocationPermission]);
+  }, [setViewAtomValue]);
 
   return null;
 };
 
 const LeafletMap = ({ doubleScreenTouched, data, setData, getDataForMarker }) => {
   const setViewAtomValue = useRecoilValue(setViewAtom);
-  const getGeoLocationPermission = useRecoilValue(geoLocationPermission);
+  // const getGeoLocationPermission = useRecoilValue(geoLocationPermission);
 
   return (
     <>
       <MapContainer attributionControl={false} className="w-full h-full" center={setViewAtomValue.pos} zoom={7} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={`${MAPTILELAYER.ex01}`} />
         <LocationFinderDummy doubleScreenTouched={doubleScreenTouched} />
-        <MapController setViewAtomValue={setViewAtomValue} getGeoLocationPermission={getGeoLocationPermission} />
+        <MapController setViewAtomValue={setViewAtomValue} />
         {getDataForMarker.map((value, index) => {
           if (value.filterVisible) {
             return (
