@@ -7,12 +7,12 @@ const IntroCotainer = ({pushIntroToAbout, webtitle, introbtn, introtext, ready, 
   const [mapLoaded, setMapLoaded] = useState(false);
   const zurKarteBtnRef = useRef();
   useEffect(() => {
-    // if (zurKarteBtnRef.current && !ready) {
-    //   // after 1 minute the zur karte button will be clicked automatically
-    //   setTimeout(() => {
-    //     zurKarteBtnRef.current.click();
-    //   }, 60000);
-    // }
+    if (zurKarteBtnRef.current && !ready) {
+      // after 1 minute the zur karte button will be clicked automatically
+      setTimeout(() => {
+        zurKarteBtnRef.current.click();
+      }, 60000);
+    }
   }, [mapLoaded]);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import CustomMarker from "../CustomMarker";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, setViewAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, setViewAtom } from "@/app/utils/state";
 import { useEffect } from "react";
 import { MAPTILELAYER } from "../../constant/mapInfo";
 import { useSearchParams } from "next/navigation";
@@ -14,7 +14,7 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
   const getCloseOrgaAtom = useRecoilValue(closeOrgaAtom);
   const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom);
   const setClickedItemsList = useSetRecoilState(clickedItemsListAtom);
-  
+
   const map = useMapEvent({
     click() {
       setClickedMarkerAtom(-1);
@@ -22,7 +22,6 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
   });
 
   useEffect(() => {
-    
     const closeEvent = () => {
       setClickedMarkerAtom(-1);
       setClickedItemsList([]);
@@ -39,18 +38,17 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
     setTimeout(() => {
       map.invalidateSize();
     }, 300);
-  }, [getCloseOrgaAtom,  map, search]);
+  }, [getCloseOrgaAtom, map, search]);
 
- 
   useEffect(() => {
-    if(map){
-      if(Boolean(search)){
+    if (map) {
+      if (Boolean(search)) {
         setTimeout(() => {
-          map.invalidateSize()
-        },300)
+          map.invalidateSize();
+        }, 300);
       }
     }
-  },[search, map])
+  }, [search, map]);
   /* Double tap resizing map */
   useEffect(() => {
     setTimeout(() => {
@@ -73,12 +71,10 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
 
   return null;
 };
-const MapController = ({ setViewAtomValue }) => {
+const MapController = ({ setViewAtomValue, getGeoLocationPermission }) => {
   const map = useMap();
 
   useEffect(() => {
-      
-    
     if (setViewAtomValue.name !== "start") {
       if (setViewAtomValue.type === "mini") {
         map.setView(setViewAtomValue.pos, 9, { animate: false });
@@ -87,36 +83,38 @@ const MapController = ({ setViewAtomValue }) => {
         map.setView(setViewAtomValue.pos, 13);
       }
     } else {
-     
       // center reset
-      const successCallback = (position) => {
-        map.setView([position.coords.latitude, position.coords.longitude], 7);
-      };
       
-      const errorCallback = (error) => {
-        map.setView([51.1657, 10.4515], 7);
-      };
+        const successCallback = (position) => {
+          map.setView([position.coords.latitude, position.coords.longitude], 7);
+        };
+
+        const errorCallback = (error) => {
+          map.setView([51.1657, 10.4515], 7);
+        };
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
       
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    } else {
-        alert("Geolocation is not supported by this browser.");
     }
-    }
-  }, [setViewAtomValue]);
+  }, [setViewAtomValue, getGeoLocationPermission]);
 
   return null;
 };
 
 const LeafletMap = ({ doubleScreenTouched, data, setData, getDataForMarker }) => {
   const setViewAtomValue = useRecoilValue(setViewAtom);
+  const getGeoLocationPermission = useRecoilValue(geoLocationPermission);
 
   return (
     <>
       <MapContainer attributionControl={false} className="w-full h-full" center={setViewAtomValue.pos} zoom={7} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={`${MAPTILELAYER.ex01}`} />
         <LocationFinderDummy doubleScreenTouched={doubleScreenTouched} />
-        <MapController setViewAtomValue={setViewAtomValue} />
+        <MapController setViewAtomValue={setViewAtomValue} getGeoLocationPermission={getGeoLocationPermission} />
         {getDataForMarker.map((value, index) => {
           if (value.filterVisible) {
             return (
