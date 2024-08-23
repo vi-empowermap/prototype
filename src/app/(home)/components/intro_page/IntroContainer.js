@@ -39,7 +39,7 @@ const IntroCotainer = ({pushIntroToAbout, webtitle, introbtn, introtext, ready, 
     totalCountAnimation();
   }, [mapLoaded]);
   return (
-    <div id="anitext" className={`fixed top-0 left-0 font-normal w-screen h-screen max-h-screen min-h-screen overflow-y-scroll z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
+    <div id="anitext" className={`fixed top-0 left-0 font-normal w-screen h-[100dvh] lg:h-screen max-h-screen min-h-screen overflow-y-scroll z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
       <IntroLoadingPage mapLoaded={mapLoaded} />
       <IntroBackgroundMap mapLoaded={mapLoaded} setMapLoaded={setMapLoaded} />
       {mapLoaded && (
