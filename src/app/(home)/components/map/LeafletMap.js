@@ -2,12 +2,12 @@ import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import CustomMarker from "../CustomMarker";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, setViewAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, geoLocationPermissionError, setViewAtom } from "@/app/utils/state";
 import { useEffect, useState } from "react";
 import { MAPTILELAYER } from "../../constant/mapInfo";
 import { useSearchParams } from "next/navigation";
-import germanyGeoJson from "../../../utils/json/germany.json"
-import L from 'leaflet';
+import germanyGeoJson from "../../../utils/json/germany.json";
+import L from "leaflet";
 /* Event: if cancel selection of marker */
 const LocationFinderDummy = ({ doubleScreenTouched }) => {
   const searchParams = useSearchParams();
@@ -90,8 +90,7 @@ function SetMaxBounds({ geoJSONData }) {
 
 const MapController = ({ setViewAtomValue }) => {
   const map = useMap();
-
-  
+  const setGeoLocationPermissionError = useSetRecoilState(geoLocationPermissionError);
 
   useEffect(() => {
     if (setViewAtomValue.name !== "start") {
@@ -105,21 +104,34 @@ const MapController = ({ setViewAtomValue }) => {
       // center reset
 
       // check if a User clicked the geolocation button or not
+      const geoPermissionCheck = localStorage.getItem("padlas_standortbestimmung");
+
+      if (geoPermissionCheck) {
+        const geoPermission = JSON.parse(geoPermissionCheck);
+
         // if clicked
-        const successCallback = (position) => {
-          map.setView([position.coords.latitude, position.coords.longitude], 10);
-        };
-        const errorCallback = (error) => {
-          map.setView([51.1657, 10.4515], 7);
-        };
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        if (geoPermission.answer) {
+          const successCallback = (position) => {
+            setGeoLocationPermissionError(false);
+            map.setView([position.coords.latitude, position.coords.longitude], 10);
+          };
+          const errorCallback = (error) => {
+            setGeoLocationPermissionError(true);
+            // error handling if bestimmung is on but you turn off the geolocation permission
+            map.setView([51.1657, 10.4515], 7);
+          };
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+          } else {
+            alert("Geolocation is not supported by this browser.");
+          }
         } else {
-          alert("Geolocation is not supported by this browser.");
+          setGeoLocationPermissionError(false);
+          map.setView([51.1657, 10.4515], 7);
         }
-        
-        // if not
-      
+      }
+
+      // if not
     }
   }, [setViewAtomValue]);
 
@@ -130,8 +142,8 @@ const LeafletMap = ({ doubleScreenTouched, data, setData, getDataForMarker }) =>
   const [geoJSONData, setGeoJSONData] = useState(null);
 
   useEffect(() => {
-    setGeoJSONData(germanyGeoJson)
-  },[])
+    setGeoJSONData(germanyGeoJson);
+  }, []);
   const setViewAtomValue = useRecoilValue(setViewAtom);
   // const getGeoLocationPermission = useRecoilValue(geoLocationPermission);
 
