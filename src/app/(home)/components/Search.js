@@ -83,6 +83,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
   };
 
   const onOpenMobile = () => {
+    console.log("dd")
     if (!onSearchMobileOpen) {
       setOnSearchMobileOpen(true);
     } else {
@@ -115,7 +116,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
   }, []);
 
   return (
-    <div className="lg:flex-1 aspect-square h-full lg:aspect-auto lg:w-full flex items-center lg:border-b border-black lg:pl-4 relative select-none font-jetBrainsMono font-medium">
+    <div className="lg:flex-1 h-full lg:aspect-auto lg:w-full flex items-center lg:border-b border-black lg:pl-4 relative select-none font-jetBrainsMono font-medium">
       <div className="w-full h-full hidden lg:flex items-center">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center ">
           <input type="text" {...register("search")} placeholder={placeholdertext} className="bg-white w-full border-black rounded-xl focus:outline-none font-jetBrainsMono font-medium" />
@@ -132,7 +133,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
         )}
       </div>
 
-      <div ref={mobileDiv} className="flex-1 flex h-full lg:hidden justify-center items-center  z-[1800]">
+      <div ref={mobileDiv} className="flex-1  flex h-full lg:hidden justify-center items-center z-[1800]">
         {onSearchMobileOpen && (
           <div style={{ left: `-${leftSize}px` }} className="absolute top-full w-screen border-y border-black bg-white text-black">
             <div className="py-4 px-4 flex">
@@ -145,7 +146,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
             </form>
           </div>
         )}
-        <div onClick={onOpenMobile} className="w-full h-full flex justify-center items-center cursor-pointer stroke-black active:bg-black active:text-white relative">
+        <div onClick={onOpenMobile} className="w-[44px] h-[44px] flex justify-center items-center cursor-pointer stroke-black active:bg-black active:text-white relative">
           <SearchIcon style={{ strokeWidth: ICON_STROKE_SIZE_3, width: ICON_SIZE_2, height: ICON_SIZE_2 }} />
           {getOnSearchFilter && (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
