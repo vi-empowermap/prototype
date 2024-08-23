@@ -174,7 +174,9 @@ const Wrapper = ({
       <MapContainerHome>
         {/* Navigation BAR */}
         <NavContainer webtitle={panelDatas.webtitle} ready={ready}>
-          <div className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l border-black `}>
+          <div className={`flex flex-row lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l border-black `}>
+            {/* <div className="w-[44px] h-[44px] border">t</div>
+            <div className="w-[44px] h-[44px] border">t</div> */}
             <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} resetText={panelDatas.freset} />
             <Filtern ready={ready} onTurOnMap={onTurOnMap} turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} panelTexts={panelDatas} resetText={panelDatas.freset} />
           </div>

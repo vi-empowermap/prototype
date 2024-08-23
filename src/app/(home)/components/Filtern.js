@@ -394,7 +394,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
     setRef.current = [];
   };
   return (
-    <div ref={filterContainer} className="lg:flex-1 aspect-square lg:aspect-auto h-full w-full flex items-center border-l border-black lg:border-l-0 relative transition-all z-[1900] lg:z-[1300] select-none font-jetBrainsMono font-medium">
+    <div ref={filterContainer} className="lg:flex-1 lg:aspect-auto h-full w-full flex items-center border-l border-black border-b lg:border-b-0 lg:border-l-0 relative transition-all z-[1900] lg:z-[1300] select-none font-jetBrainsMono font-medium">
       <div className="hidden lg:flex gap-2 w-full h-full items-center">
         <div onClick={onClick} className="lg:flex gap-2 cursor-pointer w-full h-full items-center stroke-black hover:stroke-white hover:bg-black hover:text-white px-4">
           <span className="font-jetBrainsMono font-medium">{placeholdertext}</span>
@@ -413,7 +413,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
           </button>
         )}
       </div>
-      <div onClick={onClick} className={`relative flex-1 flex h-full lg:hidden justify-center items-center cursor-pointer active:bg-black stroke-black active:stroke-white active:text-white ${openFilter ? "bg-black text-white stroke-white" : "bg-white text-black stroke-black"}`}>
+      <div onClick={onClick} className={`relative flex-1 flex w-[44px] h-[44px] lg:hidden justify-center items-center cursor-pointer active:bg-black stroke-black active:stroke-white active:text-white ${openFilter ? "bg-black text-white stroke-white" : "bg-white text-black stroke-black"}`}>
         <FilterIcon style={{strokeWidth: ICON_STROKE_SIZE_3 ,width: ICON_SIZE_2, height: ICON_SIZE_2}} />
         {getOrgaFilter && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
@@ -425,7 +425,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
       {openFilter && (
         <div
           style={{ maxHeight: `calc(100vh - ${fHeight}px)` }}
-          className="absolute top-full left-full -translate-x-full lg:translate-x-0 lg:left-[-3px] text-black w-screen lg:w-[calc(100%+3px)] bg-neutral-100 h-fit overflow-y-scroll border-b border-l-0 lg:border-l border-black border-t border-r-0 no-scrollbar"
+          className="absolute top-full left-full mt-[3px] lg:mt-0 -translate-x-full lg:translate-x-0 lg:left-[-3px] text-black w-screen lg:w-[calc(100%+3px)] bg-neutral-100 h-fit overflow-y-scroll border-b border-l-0 lg:border-l border-black border-t border-r-0 no-scrollbar"
         >
           <div className="filter_item_box lg:hidden">
             {turnOnMap && (
