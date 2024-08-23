@@ -162,6 +162,11 @@ const Wrapper = ({
       name: "start",
     });
   };
+  useEffect(() => {
+    if(ready){
+      setSetViewAtom({ pos: [51.1657, 10.4515], name: "start" });
+    }
+  },[ready])
 
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-screen bg-white overflow-hidden relative">

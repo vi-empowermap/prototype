@@ -579,7 +579,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           
           
           <div className="sticky bottom-0 flex items-center border-b last:border-b-0 border-black z-[2000]">
-            <div onClick={onSearch} className={`cursor-pointer hover:bg-[rgb(4,104,191)] bg-black py-2 text-white transition-all flex-1 flex items-center justify-center border-t border-black`}>
+            <div onClick={onSearch} className={`cursor-pointer hover:bg-black bg-[rgb(93,90,191)] py-2 text-white transition-all flex-1 flex items-center justify-center border-t border-black`}>
             {panelTexts.fsearch}
             </div>
             {/* <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
