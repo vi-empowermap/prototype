@@ -39,18 +39,18 @@ const IntroCotainer = ({pushIntroToAbout, webtitle, introbtn, introtext, ready, 
     totalCountAnimation();
   }, [mapLoaded]);
   return (
-    <div id="anitext" className={`fixed top-0 left-0 font-normal w-screen h-[100dvh] lg:h-screen max-h-screen min-h-screen overflow-y-scroll z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
+    <div id="anitext" className={`fixed top-0 left-0 font-normal w-screen h-[100svh] lg:h-screen max-h-[100svh] min-h-[100svh] lg:max-h-screen lg:min-h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
       <IntroLoadingPage mapLoaded={mapLoaded} />
       <IntroBackgroundMap mapLoaded={mapLoaded} setMapLoaded={setMapLoaded} />
       {mapLoaded && (
         <>
-          <div className="w-screen h-screen max-h-screen min-h-screen flex flex-col lg:flex-row items-center lg:items-start justify-center px-4 py-4 lg:px-16 gap-4 overflow-hidden z-[1803]">
+          <div className="w-screen h-[100svh] max-h-[100svh] min-h-[100svh] lg:h-screen lg:max-h-screen lg:min-h-screen flex flex-col lg:flex-row items-center lg:items-start justify-center px-4 py-4 lg:px-16 gap-4 overflow-hidden z-[1803]">
             <div className="w-full h-full flex flex-col justify-center gap-4">
               <IntroLogo webtitle={webtitle} />
               <IntroText introtext={introtext} />
               <ButtonWrapper pushIntroToAbout={pushIntroToAbout} zurKarteBtnRef={zurKarteBtnRef} onClickReady={onClickReady} ready={ready} introbtn={introbtn} />
             </div>
-            <div className="w-full h-full flex justify-center items-center font-jetBrainsMono">
+            <div className="flex-1 w-full flex justify-center items-center font-jetBrainsMono">
               <TotalCountWrapper onClickReady={onClickReady} totalCountOfInstitution={totalCountOfInstitution} introbtn={introbtn} />
             </div>
           </div>
@@ -113,7 +113,7 @@ const ButtonWrapper = ({pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, i
 };
 
 const IntroText = ({ introtext }) => {
-  return <div className="lg:w-4/5 text-black bg-white bg-opacity-80 text-lg md:text-xl lg:text-2xl p-2 rounded-lg font-jetBrainsMono">{introtext}</div>;
+  return <div className="lg:w-4/5 text-black bg-white bg-opacity-80 text-base md:text-xl lg:text-2xl p-2 rounded-lg font-jetBrainsMono">{introtext}</div>;
 };
 
 const IntroLogo = ({ webtitle }) => {
