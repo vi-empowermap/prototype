@@ -105,7 +105,8 @@ const MapController = ({ setViewAtomValue }) => {
       // center reset
       
         const successCallback = (position) => {
-          map.setView([position.coords.latitude, position.coords.longitude], 7);
+       
+          map.setView([position.coords.latitude, position.coords.longitude], 10);
         };
 
         const errorCallback = (error) => {
