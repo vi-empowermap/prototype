@@ -103,21 +103,22 @@ const MapController = ({ setViewAtomValue }) => {
       }
     } else {
       // center reset
-      
+
+      // check if a User clicked the geolocation button or not
+        // if clicked
         const successCallback = (position) => {
-       
           map.setView([position.coords.latitude, position.coords.longitude], 10);
         };
-
         const errorCallback = (error) => {
           map.setView([51.1657, 10.4515], 7);
         };
-
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
         } else {
           alert("Geolocation is not supported by this browser.");
         }
+        
+        // if not
       
     }
   }, [setViewAtomValue]);
