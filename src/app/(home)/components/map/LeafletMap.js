@@ -112,7 +112,6 @@ const MapController = ({ setViewAtomValue }) => {
         // if clicked
         if (geoPermission.answer) {
           const successCallback = (position) => {
-            console.log("work")
             setGeoLocationPermissionError(false);
             map.setView([position.coords.latitude, position.coords.longitude], 10);
           };

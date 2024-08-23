@@ -8,7 +8,8 @@ import OpenIcon from "/public/assets/icons/open.svg"
 import FilterIcon from "/public/assets/icons/filter.svg"
 import { ICON_SIZE, ICON_SIZE_2, ICON_STROKE_SIZE, ICON_STROKE_SIZE_3 } from "../constant/iconSize";
 import { RANDOMCOLOR_LIST, RANDOMCOLOR_LIST_TAILWIND } from "../constant/colors";
-const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext, panelTexts }) => {
+import GeolocationAlert from "./geoLocationPermissionWrapper";
+const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, categories, placeholdertext, panelTexts }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
   const [fHeight, setFHeight] = useState(0);
@@ -407,8 +408,8 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
           </div>
         )}
         {getOrgaFilter && (
-          <button onClick={resetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l border-black`}>
-            reset
+          <button onClick={resetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black text-white bg-[rgb(140,11,35)] transition-all border-l border-black`}>
+            {resetText}
           </button>
         )}
       </div>
@@ -430,8 +431,9 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             {turnOnMap && (
               <div className="filter_sub_item_box_wrapper">
                 <div className="filter_item_box_title border-t-0 border-b px-2 h-10">Mini Map</div>
-                <div id="leaflet_minimap_container2" className="h-[calc(3vw+310px)] w-full flex justify-center">
+                <div id="leaflet_minimap_container2" className="h-[calc(3vw+440px)] w-full flex justify-center relative">
                   <DynamicMiniMap setOpenFilter={setOpenFilter} />
+                  <GeolocationAlert ready={ready} />
                 </div>
               </div>
             )}
@@ -588,7 +590,7 @@ const Filtern = ({ onTurOnMap, turnOnMap, getData, setData, categories, placehol
             {/* <div onClick={onSelectAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
               Select All
             </div> */}
-            <div onClick={resetFilter} className="lg:hidden cursor-pointer border-t border-l border-black py-2 hover:bg-black hover:text-white transition-all flex-1 flex justify-center items-center bg-white">
+            <div onClick={resetFilter} className="lg:hidden cursor-pointer border-t border-l bg-[rgb(140,11,35)] border-black py-2 hover:bg-black text-white transition-all flex-1 flex justify-center items-center">
             {panelTexts.freset}
             </div>
           </div>
