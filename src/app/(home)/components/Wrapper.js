@@ -248,6 +248,7 @@ const Wrapper = ({
 const GeolocationAlert = ({ ready }) => {
   const { register, setValue, getValues } = useForm();
   const setSetViewAtom = useSetRecoilState(setViewAtom);
+  
   const getGeoLocationPermissionError = useRecoilValue(geoLocationPermissionError);
   useEffect(() => {
     // init geo
@@ -270,8 +271,8 @@ const GeolocationAlert = ({ ready }) => {
   return (
     <>
       <div className="flex flex-col gap-1 absolute bottom-12 left-4 text-sm">
-        <div onClick={onClickPermission} className="w-fit flex gap-2 cursor-pointer">
-          <input onClick={onClickPermission} {...register("standortbestimmung")} defaultChecked={false} type="checkbox" />
+        <div onClick={onClickPermission} className="w-fit flex gap-2 cursor-pointer items-center">
+          <input onChange={onClickPermission} {...register("standortbestimmung")} defaultChecked={false} type="checkbox" />
           <div>Standortbestimmung erlauben</div>
         </div>
         {getGeoLocationPermissionError && <div className="text-orange-400">Durch Nutzer verweigert</div>}
