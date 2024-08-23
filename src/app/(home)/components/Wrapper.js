@@ -133,9 +133,6 @@ const Wrapper = ({
 
   const pushIntroToAbout = () => {
     router.push("/about");
-    setTimeout(() => {
-      setReady(true);
-    }, 300);
   };
 
   /* Switch Orga types */
