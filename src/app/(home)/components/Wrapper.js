@@ -184,8 +184,13 @@ const Wrapper = ({
                 <div className="absolute bottom-6 left-4 flex items-end select-none">
                   <div id="leaflet_minimap_container" className={`relative ${openMiniMap ? "pt-0" : "pt-10"} hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden`}>
                     {openMiniMap && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.minimaptitle}</div>}
-                    {getCurrentBundesLand !== "" && (
-                      <div className="absolute flex justify-center items-center w-10 h-10 rounded-full top-4 right-3 z-[1000] text-2xl leading-5 font-semibold bg-black text-white">{Boolean(totalCountOfBundesland[getCurrentBundesLand]) ? totalCountOfBundesland[getCurrentBundesLand] : 0}</div>
+                    {getCurrentBundesLand !== "" ? (
+                      <div className="absolute flex justify-center items-center min-w-10 h-10 px-2 rounded-full top-4 right-3 z-[1000] text-2xl font-semibold bg-black text-white">{Boolean(totalCountOfBundesland[getCurrentBundesLand]) ? totalCountOfBundesland[getCurrentBundesLand] : 0}</div>
+                    ) : (
+                      <div className="absolute flex justify-center items-center min-w-10 h-10 px-2 rounded-full top-4 right-3 z-[1000] text-2xl font-semibold bg-black text-white">
+                        {kqlDataResult.length + kqlDataResultNoLocation.length}
+                     
+                      </div>
                     )}
                     {openMiniMap && <DynamicMiniMap />}
                     <ControllerBtn open={openMiniMap} setOpen={setOpenMiniMap} text={panelDatas.minimaptitle} />
@@ -238,51 +243,53 @@ const Wrapper = ({
 };
 
 const GeolocationAlert = ({ ready }) => {
-  const [showAlert, setShowAlert] = useState(false)
-  
-  const [getGeoLocationPermission, setGeoLocationPermission] = useRecoilState(geoLocationPermission)
+  const [showAlert, setShowAlert] = useState(false);
+
+  const [getGeoLocationPermission, setGeoLocationPermission] = useRecoilState(geoLocationPermission);
   useEffect(() => {
-    if(ready){
+    if (ready) {
       const geoPermission = localStorage.getItem("padlas_geo_asked");
-      if(!geoPermission){
-        localStorage.setItem("padlas_geo_asked", JSON.stringify({asked: false, answer: false}))
-        setShowAlert(true)
-      }else{
-        const getPermission = JSON.parse(geoPermission)
-        if(!getPermission.asked){
-          setShowAlert(true)
+      if (!geoPermission) {
+        localStorage.setItem("padlas_geo_asked", JSON.stringify({ asked: false, answer: false }));
+        setShowAlert(true);
+      } else {
+        const getPermission = JSON.parse(geoPermission);
+        if (!getPermission.asked) {
+          setShowAlert(true);
         }
       }
     }
-   
-  },[ready])
+  }, [ready]);
 
   const onAllow = () => {
-    localStorage.setItem("padlas_geo_asked", JSON.stringify({asked: true, answer: true}))
+    localStorage.setItem("padlas_geo_asked", JSON.stringify({ asked: true, answer: true }));
     setGeoLocationPermission({
       asked: true,
-      answer: true
-    })
-    setShowAlert(false)
-  }
+      answer: true,
+    });
+    setShowAlert(false);
+  };
   const onDeny = () => {
-    localStorage.setItem("padlas_geo_asked", JSON.stringify({asked: true, answer: false}))
+    localStorage.setItem("padlas_geo_asked", JSON.stringify({ asked: true, answer: false }));
     setGeoLocationPermission({
       asked: true,
-      answer: false
-    })
-    setShowAlert(false)
-  }
+      answer: false,
+    });
+    setShowAlert(false);
+  };
   return (
     <>
-      {(ready && showAlert) && (
+      {ready && showAlert && (
         <div className="fixed bottom-0 left-0 z-[25000] w-screen h-fit flex flex-col p-4 pb-8 bg-neutral-400 border-t border-black text-white">
-            <div> We Recommend Allowing Location Access To enhance your experience and improve the performance of this website, we recommend enabling location services. Allowing access to your current location will help us provide more accurate and personalized content</div>
-            <div className="w-full flex gap-4 mt-8">
-              <div onClick={onAllow} className="flex-1 text-center cursor-pointer py-3 bg-red-400 rounded-xl">Ja</div>
-              <div onClick={onDeny} className="flex-1 text-center cursor-pointer py-3 bg-red-400 rounded-xl">Nein</div>
+          <div> We Recommend Allowing Location Access To enhance your experience and improve the performance of this website, we recommend enabling location services. Allowing access to your current location will help us provide more accurate and personalized content</div>
+          <div className="w-full flex gap-4 mt-8">
+            <div onClick={onAllow} className="flex-1 text-center cursor-pointer py-3 bg-red-400 rounded-xl">
+              Ja
             </div>
-         
+            <div onClick={onDeny} className="flex-1 text-center cursor-pointer py-3 bg-red-400 rounded-xl">
+              Nein
+            </div>
+          </div>
         </div>
       )}
     </>
