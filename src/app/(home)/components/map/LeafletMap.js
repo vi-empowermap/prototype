@@ -112,13 +112,14 @@ const MapController = ({ setViewAtomValue }) => {
         // if clicked
         if (geoPermission.answer) {
           const successCallback = (position) => {
+            console.log("work")
             setGeoLocationPermissionError(false);
             map.setView([position.coords.latitude, position.coords.longitude], 10);
           };
           const errorCallback = (error) => {
             setGeoLocationPermissionError(true);
             // error handling if bestimmung is on but you turn off the geolocation permission
-            map.setView([51.1657, 10.4515], 7);
+            map.setView([51.1657, 10.4515], 6);
           };
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -127,7 +128,7 @@ const MapController = ({ setViewAtomValue }) => {
           }
         } else {
           setGeoLocationPermissionError(false);
-          map.setView([51.1657, 10.4515], 7);
+          map.setView([51.1657, 10.4515], 6);
         }
       }
 
@@ -149,7 +150,7 @@ const LeafletMap = ({ doubleScreenTouched, data, setData, getDataForMarker }) =>
 
   return (
     <>
-      <MapContainer attributionControl={false} className="w-full h-full" center={setViewAtomValue.pos} zoom={7} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
+      <MapContainer attributionControl={false} className="w-full h-full" center={setViewAtomValue.pos} zoom={6} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={`${MAPTILELAYER.ex01}`} />
         {geoJSONData && <SetMaxBounds geoJSONData={geoJSONData} />}
         <LocationFinderDummy doubleScreenTouched={doubleScreenTouched} />
