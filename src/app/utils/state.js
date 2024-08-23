@@ -2,12 +2,9 @@
 import { atom } from "recoil";
 
 
-export const geoLocationPermission = atom({
+export const geoLocationPermissionError = atom({
   key: "geoLocationPermission",
-  default: {
-    answer: false,
-    asked: false
-  }
+  default: false
 })
 export const nameState = atom({
     key: 'nameState', // unique ID (with respect to other atoms/selectors)

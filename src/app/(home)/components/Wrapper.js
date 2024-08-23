@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import LeafletMap from "./map";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { clickedItemsListAtom, clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, currentBundesLand, geoLocationPermission, readyAniAtom, setViewAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, currentBundesLand, geoLocationPermissionError, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import DynamicMiniMap from "./minimap";
 import ListContainer from "./ListContainer";
 import Search from "./Search";
@@ -21,6 +21,7 @@ import MapSubContainer from "./MapSubContainer";
 import ControllerBtn from "./buttons/ControllerBtn";
 import { ICON_SIZE, ICON_STROKE_SIZE } from "../constant/iconSize";
 import CenterIcon from "/public/assets/icons/center.svg";
+import { useForm } from "react-hook-form";
 const Wrapper = ({
   // data,
   // dataN,
@@ -178,26 +179,23 @@ const Wrapper = ({
         <MapSubContainer search={search} turnOnMap={turnOnMap} orgaMapSize={orgaMapSize} ready={ready}>
           {/* Orga who has location info */}
           {turnOnMap && (
-            <div 
-            onDoubleClick={onDoubleTouch} 
-            onTouchEnd={handleDoubleTap} 
-            className="w-full h-full lg:h-full flex justify-start border-b border-black">
+            <div onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b border-black">
               <LeafletMap doubleScreenTouched={doubleScreenTouched} data={getData} getDataForMarker={getDataForMarker} setData={setData} />
               {!Boolean(search) && (
                 <div className="absolute bottom-6 left-4 flex items-end select-none pointer-events-none">
                   <div id="leaflet_minimap_container" className={`relative ${openMiniMap ? "pt-10" : "pt-10"} hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "h-[calc(3vw+440px)]" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden pointer-events-auto`}>
                     {openMiniMap && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.minimaptitle}</div>}
-                    {openMiniMap && <>
-                    {getCurrentBundesLand !== "" ? (
-                      <div className="absolute flex justify-center items-center min-w-10 h-10 px-2 rounded-full top-4 right-3 z-[1000] text-2xl font-semibold bg-black text-white">{Boolean(totalCountOfBundesland[getCurrentBundesLand]) ? totalCountOfBundesland[getCurrentBundesLand] : 0}</div>
-                    ) : (
-                      <div className="absolute flex justify-center items-center min-w-10 h-10 px-2 rounded-full top-4 right-3 z-[1000] text-2xl font-semibold bg-black text-white">
-                        {kqlDataResult.length + kqlDataResultNoLocation.length}
-                     
-                      </div>
+                    {openMiniMap && (
+                      <>
+                        {getCurrentBundesLand !== "" ? (
+                          <div className="absolute flex justify-center items-center min-w-10 h-10 px-2 rounded-full top-4 right-3 z-[1000] text-2xl font-semibold bg-black text-white">{Boolean(totalCountOfBundesland[getCurrentBundesLand]) ? totalCountOfBundesland[getCurrentBundesLand] : 0}</div>
+                        ) : (
+                          <div className="absolute flex justify-center items-center min-w-10 h-10 px-2 rounded-full top-4 right-3 z-[1000] text-2xl font-semibold bg-black text-white">{kqlDataResult.length + kqlDataResultNoLocation.length}</div>
+                        )}
+                      </>
                     )}
-                    </>}
                     {openMiniMap && <DynamicMiniMap />}
+                    {openMiniMap && <GeolocationAlert />}
                     <ControllerBtn open={openMiniMap} setOpen={setOpenMiniMap} text={panelDatas.minimaptitle} />
                   </div>
                   <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-10 pointer-events-auto`}>
@@ -248,55 +246,37 @@ const Wrapper = ({
 };
 
 const GeolocationAlert = ({ ready }) => {
-  const [showAlert, setShowAlert] = useState(false);
-
-  const [getGeoLocationPermission, setGeoLocationPermission] = useRecoilState(geoLocationPermission);
+  const { register, setValue, getValues } = useForm();
+  const setSetViewAtom = useSetRecoilState(setViewAtom);
+  const getGeoLocationPermissionError = useRecoilValue(geoLocationPermissionError);
   useEffect(() => {
-    if (ready) {
-      const geoPermission = localStorage.getItem("padlas_geo_asked");
-      if (!geoPermission) {
-        localStorage.setItem("padlas_geo_asked", JSON.stringify({ asked: false, answer: false }));
-        setShowAlert(true);
-      } else {
-        const getPermission = JSON.parse(geoPermission);
-        if (!getPermission.asked) {
-          setShowAlert(true);
-        }
-      }
+    // init geo
+    const geoPermission = localStorage.getItem("padlas_standortbestimmung");
+    if (!geoPermission) {
+      localStorage.setItem("padlas_standortbestimmung", JSON.stringify({ answer: false }));
+    } else {
+      const getPermisson = JSON.parse(geoPermission);
+      setValue("standortbestimmung", getPermisson.answer);
     }
   }, [ready]);
 
-  const onAllow = () => {
-    localStorage.setItem("padlas_geo_asked", JSON.stringify({ asked: true, answer: true }));
-    setGeoLocationPermission({
-      asked: true,
-      answer: true,
-    });
-    setShowAlert(false);
+  const onClickPermission = () => {
+    const checked = getValues("standortbestimmung");
+    setValue("standortbestimmung", !checked);
+    localStorage.setItem("padlas_standortbestimmung", JSON.stringify({ answer: !checked }));
+    setSetViewAtom({ pos: [51.1657, 10.4515], name: "start" });
   };
-  const onDeny = () => {
-    localStorage.setItem("padlas_geo_asked", JSON.stringify({ asked: true, answer: false }));
-    setGeoLocationPermission({
-      asked: true,
-      answer: false,
-    });
-    setShowAlert(false);
-  };
+
   return (
     <>
-      {ready && showAlert && (
-        <div className="fixed bottom-0 left-0 z-[25000] w-screen h-fit flex flex-col p-4 pb-8 bg-neutral-400 border-t border-black text-white">
-          <div> We Recommend Allowing Location Access To enhance your experience and improve the performance of this website, we recommend enabling location services. Allowing access to your current location will help us provide more accurate and personalized content</div>
-          <div className="w-full flex gap-4 mt-8">
-            <div onClick={onAllow} className="flex-1 text-center cursor-pointer py-3 bg-red-400 rounded-xl">
-              Ja
-            </div>
-            <div onClick={onDeny} className="flex-1 text-center cursor-pointer py-3 bg-red-400 rounded-xl">
-              Nein
-            </div>
-          </div>
+      <div className="flex flex-col gap-1 absolute bottom-12 left-4 text-sm">
+        <div onClick={onClickPermission} className="w-fit flex gap-2 cursor-pointer">
+          <input onClick={onClickPermission} {...register("standortbestimmung")} defaultChecked={false} type="checkbox" />
+          <div>Standortbestimmung erlauben</div>
         </div>
-      )}
+        {getGeoLocationPermissionError && <div className="text-orange-400">Durch Nutzer verweigert</div>}
+      </div>
+
     </>
   );
 };
