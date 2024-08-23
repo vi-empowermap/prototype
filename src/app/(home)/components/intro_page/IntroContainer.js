@@ -39,7 +39,7 @@ const IntroCotainer = ({pushIntroToAbout, webtitle, introbtn, introtext, ready, 
     totalCountAnimation();
   }, [mapLoaded]);
   return (
-    <div id="anitext" className={`fixed top-0 left-0 font-semibold w-screen h-screen max-h-screen min-h-screen overflow-y-scroll z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
+    <div id="anitext" className={`fixed top-0 left-0 font-normal w-screen h-screen max-h-screen min-h-screen overflow-y-scroll z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
       <IntroLoadingPage mapLoaded={mapLoaded} />
       <IntroBackgroundMap mapLoaded={mapLoaded} setMapLoaded={setMapLoaded} />
       {mapLoaded && (
@@ -91,7 +91,7 @@ const ButtonWrapper = ({pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, i
         ref={zurKarteBtnRef}
         id="anibtn"
         onClick={onClickReady}
-        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative font-bold cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
+        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
           ready ? "opacity-0 pointer-events-none" : "opacity-100"
         } transition-all duration-300 bg-opacity-80`}
       >
@@ -102,7 +102,7 @@ const ButtonWrapper = ({pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, i
       </div>
       <div
         onClick={pushIntroToAbout}
-        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative font-bold cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
+        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
           ready ? "opacity-0 pointer-events-none" : "opacity-100"
         } transition-all duration-300 bg-opacity-80`}
       >
