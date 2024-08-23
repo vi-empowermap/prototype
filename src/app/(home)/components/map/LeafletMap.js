@@ -3,10 +3,11 @@ import "leaflet/dist/leaflet.css";
 import CustomMarker from "../CustomMarker";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, setViewAtom } from "@/app/utils/state";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MAPTILELAYER } from "../../constant/mapInfo";
 import { useSearchParams } from "next/navigation";
-
+import germanyGeoJson from "../../../utils/json/germany.json"
+import L from 'leaflet';
 /* Event: if cancel selection of marker */
 const LocationFinderDummy = ({ doubleScreenTouched }) => {
   const searchParams = useSearchParams();
@@ -71,8 +72,26 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
 
   return null;
 };
+
+function SetMaxBounds({ geoJSONData }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (geoJSONData) {
+      const geojsonLayer = L.geoJSON(geoJSONData);
+      const bounds = geojsonLayer.getBounds();
+      map.setMaxBounds(bounds);
+      map.fitBounds(bounds); // Optionally, fit the map to the bounds
+    }
+  }, [geoJSONData, map]);
+
+  return null;
+}
+
 const MapController = ({ setViewAtomValue }) => {
   const map = useMap();
+
+  
 
   useEffect(() => {
     if (setViewAtomValue.name !== "start") {
@@ -106,6 +125,11 @@ const MapController = ({ setViewAtomValue }) => {
 };
 
 const LeafletMap = ({ doubleScreenTouched, data, setData, getDataForMarker }) => {
+  const [geoJSONData, setGeoJSONData] = useState(null);
+
+  useEffect(() => {
+    setGeoJSONData(germanyGeoJson)
+  },[])
   const setViewAtomValue = useRecoilValue(setViewAtom);
   // const getGeoLocationPermission = useRecoilValue(geoLocationPermission);
 
@@ -113,6 +137,7 @@ const LeafletMap = ({ doubleScreenTouched, data, setData, getDataForMarker }) =>
     <>
       <MapContainer attributionControl={false} className="w-full h-full" center={setViewAtomValue.pos} zoom={7} minZoom={5} scrollWheelZoom={true} dragging={true} zoomControl={false} doubleClickZoom={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={`${MAPTILELAYER.ex01}`} />
+        {geoJSONData && <SetMaxBounds geoJSONData={geoJSONData} />}
         <LocationFinderDummy doubleScreenTouched={doubleScreenTouched} />
         <MapController setViewAtomValue={setViewAtomValue} />
         {getDataForMarker.map((value, index) => {

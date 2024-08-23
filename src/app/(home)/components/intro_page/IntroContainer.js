@@ -101,16 +101,11 @@ const ButtonWrapper = ({pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, i
         <div>{introbtn}</div>
       </div>
       <div
-        ref={zurKarteBtnRef}
-        id="anibtn"
         onClick={pushIntroToAbout}
         className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative font-bold cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
           ready ? "opacity-0 pointer-events-none" : "opacity-100"
         } transition-all duration-300 bg-opacity-80`}
       >
-        {/* <div>
-          <Karte style={{ strokeWidth: "30px", width: "40px", height: "40px" }} />
-        </div> */}
         <div>Mehr über das Projekt</div>
       </div>
     </div>
