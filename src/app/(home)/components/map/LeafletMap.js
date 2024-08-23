@@ -2,7 +2,7 @@ import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import CustomMarker from "../CustomMarker";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, geoLocationPermissionError, setViewAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, geoLocationPermissionAsked, geoLocationPermissionError, setViewAtom } from "@/app/utils/state";
 import { useEffect, useState } from "react";
 import { MAPTILELAYER } from "../../constant/mapInfo";
 import { useSearchParams } from "next/navigation";
@@ -91,7 +91,7 @@ function SetMaxBounds({ geoJSONData }) {
 const MapController = ({ setViewAtomValue }) => {
   const map = useMap();
   const setGeoLocationPermissionError = useSetRecoilState(geoLocationPermissionError);
-
+  const getGeoLocationPermissionAsked = useRecoilValue(geoLocationPermissionAsked)
   useEffect(() => {
     if (setViewAtomValue.name !== "start") {
       if (setViewAtomValue.type === "mini") {
@@ -104,13 +104,9 @@ const MapController = ({ setViewAtomValue }) => {
       // center reset
 
       // check if a User clicked the geolocation button or not
-      const geoPermissionCheck = localStorage.getItem("padlas_standortbestimmung");
-
-      if (geoPermissionCheck) {
-        const geoPermission = JSON.parse(geoPermissionCheck);
-
+ 
         // if clicked
-        if (geoPermission.answer) {
+        if (getGeoLocationPermissionAsked) {
           const successCallback = (position) => {
             setGeoLocationPermissionError(false);
             map.setView([position.coords.latitude, position.coords.longitude], 10);
@@ -125,11 +121,35 @@ const MapController = ({ setViewAtomValue }) => {
           } else {
             alert("Geolocation is not supported by this browser.");
           }
-        } else {
-          setGeoLocationPermissionError(false);
+        }else{
           map.setView([51.1657, 10.4515], 6);
         }
-      }
+      
+      // const geoPermissionCheck = localStorage.getItem("padlas_standortbestimmung");
+
+      // if (geoPermissionCheck) {
+      //   const geoPermission = JSON.parse(geoPermissionCheck);
+      //   // if clicked
+      //   if (geoPermission.answer) {
+      //     const successCallback = (position) => {
+      //       setGeoLocationPermissionError(false);
+      //       map.setView([position.coords.latitude, position.coords.longitude], 10);
+      //     };
+      //     const errorCallback = (error) => {
+      //       setGeoLocationPermissionError(true);
+      //       // error handling if bestimmung is on but you turn off the geolocation permission
+      //       map.setView([51.1657, 10.4515], 6);
+      //     };
+      //     if (navigator.geolocation) {
+      //       navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      //     } else {
+      //       alert("Geolocation is not supported by this browser.");
+      //     }
+      //   } else {
+      //     setGeoLocationPermissionError(false);
+      //     map.setView([51.1657, 10.4515], 6);
+      //   }
+    
 
       // if not
     }

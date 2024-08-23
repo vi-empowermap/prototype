@@ -1,28 +1,31 @@
-import { geoLocationPermissionError, setViewAtom } from "@/app/utils/state";
+import { geoLocationPermissionAsked, geoLocationPermissionError, setViewAtom } from "@/app/utils/state";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 const GeolocationAlert = ({ ready }) => {
     const { register, setValue, getValues } = useForm();
     const setSetViewAtom = useSetRecoilState(setViewAtom);
-    
+    const [getGeoLocationPermissionAsked, setGeoLocationPermissionAsked] = useRecoilState(geoLocationPermissionAsked)
     const getGeoLocationPermissionError = useRecoilValue(geoLocationPermissionError);
     useEffect(() => {
       // init geo
-      const geoPermission = localStorage.getItem("padlas_standortbestimmung");
-      if (!geoPermission) {
-        localStorage.setItem("padlas_standortbestimmung", JSON.stringify({ answer: false }));
-      } else {
-        const getPermisson = JSON.parse(geoPermission);
-        setValue("standortbestimmung", getPermisson.answer);
-      }
+        setValue("standortbestimmung", getGeoLocationPermissionAsked);
+      
+    //   const geoPermission = localStorage.getItem("padlas_standortbestimmung");
+    //   if (!geoPermission) {
+    //     localStorage.setItem("padlas_standortbestimmung", JSON.stringify({ answer: false }));
+    //   } else {
+    //     const getPermisson = JSON.parse(geoPermission);
+    //     setValue("standortbestimmung", getPermisson.answer);
+    //   }
     }, [ready]);
   
     const onClickPermission = () => {
       const checked = getValues("standortbestimmung");
       setValue("standortbestimmung", !checked);
-      localStorage.setItem("padlas_standortbestimmung", JSON.stringify({ answer: !checked }));
+      setGeoLocationPermissionAsked(!getGeoLocationPermissionAsked)
+    //   localStorage.setItem("padlas_standortbestimmung", JSON.stringify({ answer: !checked }));
       setSetViewAtom({ pos: [51.1657, 10.4515], name: "start" });
     };
   

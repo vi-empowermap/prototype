@@ -1,6 +1,10 @@
 /* Recoil */
 import { atom } from "recoil";
 
+export const geoLocationPermissionAsked = atom({
+  key: "geoLocationPermissionAsked",
+  default: false
+})
 
 export const geoLocationPermissionError = atom({
   key: "geoLocationPermission",
