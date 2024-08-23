@@ -23,7 +23,7 @@ const LeafletMap = ({setOpenFilter}) => {
 
   return (
     <>
-      <MapContainer className="w-full h-full bg-red-400" center={[51.1657, 10.4515]} zoom={5} doubleClickZoom={false} scrollWheelZoom={false} dragging={false} zoomControl={false}>
+      <MapContainer className="w-full aspect-square bg-red-400" center={[51.1657, 10.4515]} zoom={5} doubleClickZoom={false} scrollWheelZoom={false} dragging={false} zoomControl={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={MAPTILELAYER.exMini02} />
         <GeoJSON
           attribution="&copy; credits due..."
