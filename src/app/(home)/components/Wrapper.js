@@ -22,6 +22,7 @@ import ControllerBtn from "./buttons/ControllerBtn";
 import { ICON_SIZE, ICON_STROKE_SIZE } from "../constant/iconSize";
 import CenterIcon from "/public/assets/icons/center.svg";
 import { useForm } from "react-hook-form";
+import GeolocationAlert from "./geoLocationPermissionWrapper";
 const Wrapper = ({
   // data,
   // dataN,
@@ -133,9 +134,6 @@ const Wrapper = ({
 
   const pushIntroToAbout = () => {
     router.push("/about");
-    setTimeout(() => {
-      setReady(true);
-    }, 300);
   };
 
   /* Switch Orga types */
@@ -178,7 +176,7 @@ const Wrapper = ({
         <NavContainer webtitle={panelDatas.webtitle} ready={ready}>
           <div className={`flex lg:flex-col text-2xl font-semibold bg-white w-fit flex-grow-0 lg:flex-grow border-l border-black `}>
             <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} resetText={panelDatas.freset} />
-            <Filtern onTurOnMap={onTurOnMap} turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} panelTexts={panelDatas} />
+            <Filtern ready={ready} onTurOnMap={onTurOnMap} turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} panelTexts={panelDatas} resetText={panelDatas.freset} />
           </div>
         </NavContainer>
         <MapSubContainer search={search} turnOnMap={turnOnMap} orgaMapSize={orgaMapSize} ready={ready}>
@@ -200,7 +198,7 @@ const Wrapper = ({
                       </>
                     )}
                     {openMiniMap && <DynamicMiniMap />}
-                    {openMiniMap && <GeolocationAlert />}
+                    {openMiniMap && <GeolocationAlert ready={ready} />}
                     <ControllerBtn open={openMiniMap} setOpen={setOpenMiniMap} text={panelDatas.minimaptitle} />
                   </div>
                   <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-10 pointer-events-auto`}>
@@ -250,40 +248,4 @@ const Wrapper = ({
   );
 };
 
-const GeolocationAlert = ({ ready }) => {
-  const { register, setValue, getValues } = useForm();
-  const setSetViewAtom = useSetRecoilState(setViewAtom);
-  
-  const getGeoLocationPermissionError = useRecoilValue(geoLocationPermissionError);
-  useEffect(() => {
-    // init geo
-    const geoPermission = localStorage.getItem("padlas_standortbestimmung");
-    if (!geoPermission) {
-      localStorage.setItem("padlas_standortbestimmung", JSON.stringify({ answer: false }));
-    } else {
-      const getPermisson = JSON.parse(geoPermission);
-      setValue("standortbestimmung", getPermisson.answer);
-    }
-  }, [ready]);
-
-  const onClickPermission = () => {
-    const checked = getValues("standortbestimmung");
-    setValue("standortbestimmung", !checked);
-    localStorage.setItem("padlas_standortbestimmung", JSON.stringify({ answer: !checked }));
-    setSetViewAtom({ pos: [51.1657, 10.4515], name: "start" });
-  };
-
-  return (
-    <>
-      <div className="flex flex-col gap-1 absolute bottom-12 left-4 text-sm">
-        <div onClick={onClickPermission} className="w-fit flex gap-2 cursor-pointer items-center">
-          <input onChange={onClickPermission} {...register("standortbestimmung")} defaultChecked={false} type="checkbox" />
-          <div>Standortbestimmung erlauben</div>
-        </div>
-        {getGeoLocationPermissionError && <div className="text-orange-400">Durch Nutzer verweigert</div>}
-      </div>
-
-    </>
-  );
-};
 export default Wrapper;

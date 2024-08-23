@@ -126,7 +126,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
           </div>
         )}
         {getOnSearchFilter && (
-          <button onClick={onResetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black hover:text-white transition-all border-l border-black`}>
+          <button onClick={onResetFilter} className={`cursor-pointer px-10 h-full flex items-center hover:bg-black text-white  bg-[rgb(140,11,35)] transition-all border-l border-black`}>
             {resetText}
           </button>
         )}
@@ -136,7 +136,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
         {onSearchMobileOpen && (
           <div style={{ left: `-${leftSize}px` }} className="absolute top-full w-screen border-y border-black bg-white text-black">
             <div className="py-4 px-4 flex">
-              <div onClick={onResetFilter} className="cursor-pointer border border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
+              <div onClick={onResetFilter} className="cursor-pointer border border-black px-2 py-1 hover:bg-black text-white bg-[rgb(140,11,35)] transition-all">
                 {resetText}
               </div>
             </div>
