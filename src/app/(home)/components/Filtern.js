@@ -232,7 +232,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
 
     let count = 0;
     const data = [...getData];
-    console.log(data)
+  
     for (let i = 0; i < data.length; i++) {
       data[i].filterVisible = true;
     }
@@ -288,7 +288,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
         }
       });
 
-      console.log(selectBundeslandRef.current.length )
+    
       // if (activeFilter["okThemen"] ? okThemen : false) {
       if (
         (selectBundeslandRef.current.length > 0 ? okBundes : true) &&
