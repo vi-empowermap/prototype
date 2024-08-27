@@ -49,7 +49,6 @@ const IntroMap = ({ data, getDataForMarker, setMapLoaded}) => {
           if (value.filterVisible) {
             return (
               <CustomMarkerIntro
-             
                 key={index}
                 imageUrl={value.orgaimage}
                 title={value.organame}

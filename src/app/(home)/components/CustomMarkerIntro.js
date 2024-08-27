@@ -3,13 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
 
 const CustomMarkerIntro = ({ id, title, imageUrl, font, color, getData, setData, artderorganisation, position, activeColor, archivoraktiv }) => {
-
   const markerRef = useRef(null);
- 
 
-  
   const acurrentIcon = useMarkerIcon({ id: id, archivoraktiv: archivoraktiv, activeColor: activeColor, artderorganisation: artderorganisation, selection: true });
-
 
   const customIcon2 = L.divIcon({
     className: "marker",
@@ -19,22 +15,9 @@ const CustomMarkerIntro = ({ id, title, imageUrl, font, color, getData, setData,
     popupAnchor: [0, -45],
   });
 
- 
-
-
- 
-
   return (
     <>
-      <Marker
-        ref={markerRef}
-        icon={customIcon2}
-        position={position}
-        autoPan={false}
-       
-      >
-       
-      </Marker>
+      <Marker ref={markerRef} icon={customIcon2} position={position} autoPan={false}></Marker>
     </>
   );
 };
