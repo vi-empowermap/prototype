@@ -136,9 +136,12 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
       <div ref={mobileDiv} className="flex-1  flex h-full lg:hidden justify-center items-center z-[1800]">
         {onSearchMobileOpen && (
           <div style={{ left: `-${leftSize}px` }} className="absolute top-full w-screen border-y border-black bg-white text-black">
-            <div className="py-4 px-4 flex">
+            <div className="py-4 px-4 flex justify-between">
               <div onClick={onResetFilter} className="cursor-pointer border border-black px-2 py-1 hover:bg-black text-white bg-[rgb(140,11,35)] transition-all">
                 {resetText}
+              </div>
+              <div onClick={onSubmit} className="cursor-pointer border border-black px-2 py-1 hover:bg-black text-white bg-[rgb(93,90,191)] transition-all">
+                Submit
               </div>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex items-center py-4 border-t border-black px-4">
