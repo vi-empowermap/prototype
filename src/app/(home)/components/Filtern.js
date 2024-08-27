@@ -69,6 +69,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
   */
   /* Click Filter Item */
   const onClickFilterItem = ({ category, value }) => {
+    
     if (category === "bundes") {
       const exist = selectBundesland.findIndex((v) => v === value);
       if (exist >= 0) {
@@ -231,6 +232,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
 
     let count = 0;
     const data = [...getData];
+    console.log(data)
     for (let i = 0; i < data.length; i++) {
       data[i].filterVisible = true;
     }
@@ -286,22 +288,38 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
         }
       });
 
+      console.log(selectBundeslandRef.current.length )
       // if (activeFilter["okThemen"] ? okThemen : false) {
       if (
-        (activeFilterRef.current["okBundes"] ? okBundes : true) &&
-        (activeFilterRef.current["okThemen"] ? okThemen : true) &&
-        (activeFilterRef.current["okTags"] ? okTags : true) &&
-        (activeFilterRef.current["okZiel"] ? okZiel : true) &&
-        (activeFilterRef.current["okAngebote"] ? okAngebote : true) &&
-        (activeFilterRef.current["okSprache"] ? okSprache : true) &&
-        (activeFilterRef.current["okArt"] ? okArt : true) &&
-        (activeFilterRef.current["okZeige"] ? okZeige : true)
+        (selectBundeslandRef.current.length > 0 ? okBundes : true) &&
+        (selectThemenRef.current.length > 0 ? okThemen : true) &&
+        (selectTagsRef.current.length > 0 ? okTags : true) &&
+        (selectZielGroupRef.current.length > 0 ? okZiel : true) &&
+        (selectAngeboteRef.current.length > 0 ? okAngebote : true) &&
+        (selectSpracheRef.current.length > 0 ? okSprache : true) &&
+        (selectArtRef.current.length > 0 ? okArt : true) &&
+        (selectZeigeRef.current.length > 0 ? okZeige : true)
       ) {
         data[i].filterVisible = true;
         count += 1;
       } else {
         data[i].filterVisible = false;
       }
+      // if (
+      //   (activeFilterRef.current["okBundes"] ? okBundes : true) &&
+      //   (activeFilterRef.current["okThemen"] ? okThemen : true) &&
+      //   (activeFilterRef.current["okTags"] ? okTags : true) &&
+      //   (activeFilterRef.current["okZiel"] ? okZiel : true) &&
+      //   (activeFilterRef.current["okAngebote"] ? okAngebote : true) &&
+      //   (activeFilterRef.current["okSprache"] ? okSprache : true) &&
+      //   (activeFilterRef.current["okArt"] ? okArt : true) &&
+      //   (activeFilterRef.current["okZeige"] ? okZeige : true)
+      // ) {
+      //   data[i].filterVisible = true;
+      //   count += 1;
+      // } else {
+      //   data[i].filterVisible = false;
+      // }
     }
     setFoundList(count);
     setData(data);

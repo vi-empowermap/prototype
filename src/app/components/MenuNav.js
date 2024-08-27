@@ -10,7 +10,7 @@ const MenuNav = ({kirbyPanelHomeData: {result: {content: data}}}) => {
     router.push(path);
   };
   return (
-    <nav className="flex justify-center items-center w-screen h-fit relative">
+    <nav className="flex justify-center items-center w-screen h-[44px] relative overflow-hidden">
       <div className="absolute top-0 left-0 h-full px-2 flex justify-center items-center cursor-pointer hover:bg-black hover:text-white transition-all z-[1300] group">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
           <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -25,7 +25,7 @@ const MenuNav = ({kirbyPanelHomeData: {result: {content: data}}}) => {
           {pathname !== "/faq" && <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">FAQ</div>}
         </div>
       </div>
-      <h1 onClick={() => onClick("/")} className="w-fit bg-white text-2xl md:text-4xl lg:text-6xl font-bold flex items-center px-4 py-4 lg:py-0 cursor-pointer hover:bg-black hover:text-white transition-all">
+      <h1 onClick={() => onClick("/")} className="`w-fit bg-white text-xl md:text-4xl px-4 font-bold flex h-full items-center cursor-pointer hover:bg-black hover:text-white transition-all">
         <span className="font-bespokeStencil">{String(data.webtitle).toUpperCase().slice(0, 3)}</span>
         <span className="font-britney">{String(data.webtitle).toUpperCase().slice(3)}</span>
       </h1>
