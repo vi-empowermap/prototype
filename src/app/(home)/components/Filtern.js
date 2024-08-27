@@ -394,7 +394,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
     setRef.current = [];
   };
   return (
-    <div ref={filterContainer} className="lg:flex-1 lg:aspect-auto h-full w-full flex items-center border-l border-black border-b lg:border-b-0 lg:border-l-0 relative transition-all z-[1900] lg:z-[1300] select-none font-jetBrainsMono font-medium">
+    <div ref={filterContainer} className="lg:flex-1 lg:aspect-auto h-full w-full flex items-center border-l border-black border-b lg:border-b-0 lg:border-l-0 relative transition-all z-[1900] lg:z-[1300] select-none font-jetBrainsMonoLight">
       <div className="hidden lg:flex gap-2 w-full h-full items-center">
         <div onClick={onClick} className="lg:flex gap-2 cursor-pointer w-full h-full items-center stroke-black hover:stroke-white hover:bg-black hover:text-white px-4">
           <span className="font-jetBrainsMono font-medium">{placeholdertext}</span>
