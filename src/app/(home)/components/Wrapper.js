@@ -173,7 +173,7 @@ const Wrapper = ({
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-[100svh] lg:h-screen bg-white overflow-hidden relative">
       {/* Intro Page */}
-      <IntroCotainer pushIntroToAbout={pushIntroToAbout} webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} totalCountOfInstitution={kqlDataResult.length + kqlDataResultNoLocation.length} />
+      <IntroCotainer getData={getData} getDataForMarker={getDataForMarker} pushIntroToAbout={pushIntroToAbout} webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} totalCountOfInstitution={kqlDataResult.length + kqlDataResultNoLocation.length} />
       {/* <GeolocationAlert ready={ready} /> */}
       <MapContainerHome>
         {/* Navigation BAR */}

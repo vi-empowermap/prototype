@@ -3,7 +3,7 @@ import IntroMap from "../intromap";
 import gsap from "gsap";
 import Karte from "/public/assets/icons/zurkarte.svg";
 
-const IntroCotainer = ({pushIntroToAbout, webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
+const IntroCotainer = ({getData, getDataForMarker, pushIntroToAbout, webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const zurKarteBtnRef = useRef();
   useEffect(() => {
@@ -41,7 +41,7 @@ const IntroCotainer = ({pushIntroToAbout, webtitle, introbtn, introtext, ready, 
   return (
     <div id="anitext" className={`fixed top-0 left-0 font-normal w-[100svw] h-[100svh] lg:h-screen max-h-[100svh] min-h-[100svh] lg:max-h-screen lg:min-h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
       <IntroLoadingPage mapLoaded={mapLoaded} />
-      <IntroBackgroundMap mapLoaded={mapLoaded} setMapLoaded={setMapLoaded} />
+      <IntroBackgroundMap getData={getData} getDataForMarker={getDataForMarker} mapLoaded={mapLoaded} setMapLoaded={setMapLoaded} />
       {mapLoaded && (
         <>
           <div className="w-screen h-[100svh] max-h-[100svh] min-h-[100svh] lg:h-screen lg:max-h-screen lg:min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 py-4 lg:px-16 gap-4 overflow-hidden z-[1803]">
@@ -137,12 +137,13 @@ const IntroLoadingPage = ({ mapLoaded }) => {
   );
 };
 
-const IntroBackgroundMap = ({ mapLoaded, setMapLoaded }) => {
+const IntroBackgroundMap = ({getData, getDataForMarker, mapLoaded, setMapLoaded }) => {
+
   return (
     <>
       {mapLoaded && <div className="fixed top-0 left-0 w-screen h-screen max-h-screen min-h-screen bg-black bg-opacity-40 z-[1802] select-none pointer-events-none"></div>}
       <div className="fixed top-0 left-0 w-screen h-screen max-h-screen min-h-screen z-[1801] select-none pointer-events-none">
-        <IntroMap setMapLoaded={setMapLoaded} />
+        <IntroMap data={getData} getDataForMarker={getDataForMarker} setMapLoaded={setMapLoaded} />
       </div>
     </>
   );

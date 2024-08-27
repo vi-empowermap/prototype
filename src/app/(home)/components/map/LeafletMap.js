@@ -114,7 +114,7 @@ const MapController = ({ setViewAtomValue }) => {
           const errorCallback = (error) => {
             setGeoLocationPermissionError(true);
             // error handling if bestimmung is on but you turn off the geolocation permission
-            map.setView([51.1657, 10.4515], 6);
+            map.setView([51.1657, 10.4515], 5);
           };
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -122,7 +122,7 @@ const MapController = ({ setViewAtomValue }) => {
             alert("Geolocation is not supported by this browser.");
           }
         }else{
-          map.setView([51.1657, 10.4515], 6);
+          map.setView([51.1657, 10.4515], 5);
         }
       
       // const geoPermissionCheck = localStorage.getItem("padlas_standortbestimmung");
