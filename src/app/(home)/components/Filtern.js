@@ -424,7 +424,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
 
       {openFilter && (
         <div
-          style={{ maxHeight: `calc(100vh - ${fHeight}px)` }}
+          style={{ maxHeight: `calc(100svh - ${fHeight}px)` }}
           className="absolute top-full left-full mt-[3px] lg:mt-0 -translate-x-full lg:translate-x-0 lg:left-[-3px] text-black w-screen lg:w-[calc(100%+3px)] bg-neutral-100 h-fit overflow-y-scroll border-b border-l-0 lg:border-l border-black border-t border-r-0 no-scrollbar"
         >
           <div className="filter_item_box lg:hidden">

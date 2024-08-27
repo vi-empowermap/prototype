@@ -39,18 +39,18 @@ const IntroCotainer = ({pushIntroToAbout, webtitle, introbtn, introtext, ready, 
     totalCountAnimation();
   }, [mapLoaded]);
   return (
-    <div id="anitext" className={`fixed top-0 left-0 font-normal w-screen h-[100svh] lg:h-screen max-h-[100svh] min-h-[100svh] lg:max-h-screen lg:min-h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
+    <div id="anitext" className={`fixed top-0 left-0 font-normal w-[100svw] h-[100svh] lg:h-screen max-h-[100svh] min-h-[100svh] lg:max-h-screen lg:min-h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
       <IntroLoadingPage mapLoaded={mapLoaded} />
       <IntroBackgroundMap mapLoaded={mapLoaded} setMapLoaded={setMapLoaded} />
       {mapLoaded && (
         <>
-          <div className="w-screen h-[100svh] max-h-[100svh] min-h-[100svh] lg:h-screen lg:max-h-screen lg:min-h-screen flex flex-col lg:flex-row items-center lg:items-start justify-center px-4 py-4 lg:px-16 gap-4 overflow-hidden z-[1803]">
+          <div className="w-screen h-[100svh] max-h-[100svh] min-h-[100svh] lg:h-screen lg:max-h-screen lg:min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 py-4 lg:px-16 gap-4 overflow-hidden z-[1803]">
             <div className="w-full h-full flex flex-col justify-center gap-4">
               <IntroLogo webtitle={webtitle} />
               <IntroText introtext={introtext} />
               <ButtonWrapper pushIntroToAbout={pushIntroToAbout} zurKarteBtnRef={zurKarteBtnRef} onClickReady={onClickReady} ready={ready} introbtn={introbtn} />
             </div>
-            <div className="flex-1 w-full flex justify-center items-center font-jetBrainsMono">
+            <div className=" w-full h-full flex justify-center items-center font-jetBrainsMono">
               <TotalCountWrapper onClickReady={onClickReady} totalCountOfInstitution={totalCountOfInstitution} introbtn={introbtn} />
             </div>
           </div>
@@ -68,14 +68,14 @@ const TotalCountWrapper = ({ onClickReady, totalCountOfInstitution, introbtn }) 
 
   },[])
   return (
-    <div onClick={onClickReady} className="group w-1/2 max-w-full cursor-pointer hover:w-2/3 transition-all duration-500 rounded-full bg-opacity-80 aspect-square overflow-hidden flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
+    <div onClick={onClickReady} className="group w-1/2 max-w-full cursor-pointer lg:hover:w-2/3 transition-all duration-500 rounded-full bg-opacity-80 aspect-square overflow-hidden flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
       <div className="w-full h-full rounded-full overflow-hidden relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:left-full transition-all duration-500 flex flex-col justify-center items-center">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:group-hover:translate-x-0 lg:group-hover:left-full transition-all duration-500 flex flex-col justify-center items-center">
           <span className="totalCount text-3xl md:text-5xl lg:text-8xl">{totalCountOfInstitution}</span>
           <span className="text-center text-xs md:text-sm lg:text-base">Gesamtzahl der Institutionen</span>
           <span className="text-center text-xs mt-2">Stand: {getCurrentDate}</span>
         </div>
-        <div className="absolute top-1/2 -left-full translate-x-0 -translate-y-1/2 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all duration-500 flex flex-col justify-center items-center gap-2">
+        <div className="absolute top-1/2 -left-full translate-x-0 -translate-y-1/2 lg:group-hover:left-1/2 lg:group-hover:-translate-x-1/2 transition-all duration-500 flex flex-col justify-center items-center gap-2">
           <Karte style={{ strokeWidth: "30px", stroke: "#000", width: "100px", height: "100px" }} />
           <span className="text-center text-xs md:text-sm lg:text-base">{introbtn}</span>
         </div>
@@ -91,7 +91,7 @@ const ButtonWrapper = ({pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, i
         ref={zurKarteBtnRef}
         id="anibtn"
         onClick={onClickReady}
-        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
+        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative cursor-pointer w-full lg:w-fit bg-white text-black active:bg-black active:text-white lg:hover:bg-black lg:hover:text-white select-none p-2 ${
           ready ? "opacity-0 pointer-events-none" : "opacity-100"
         } transition-all duration-300 bg-opacity-80`}
       >
@@ -102,7 +102,7 @@ const ButtonWrapper = ({pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, i
       </div>
       <div
         onClick={pushIntroToAbout}
-        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative cursor-pointer w-full lg:w-fit bg-white text-black hover:bg-black hover:text-white select-none p-2 ${
+        className={`stroke-black hover:stroke-white flex flex-col justify-center items-center gap-2 font-jetBrainsMono rounded-lg relative cursor-pointer w-full lg:w-fit bg-white text-black active:bg-black active:text-white lg:hover:bg-black lg:hover:text-white select-none p-2 ${
           ready ? "opacity-0 pointer-events-none" : "opacity-100"
         } transition-all duration-300 bg-opacity-80`}
       >
