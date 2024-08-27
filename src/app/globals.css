@@ -105,7 +105,7 @@ input[type="checkbox"] {
         @apply lg:pr-0
     }
     .filter_sub_item_box {
-        @apply text-sm flex gap-2 flex-wrap mt-0 px-2 py-2 bg-neutral-200 pb-4 lg:pr-8
+        @apply text-sm flex gap-2 flex-wrap mt-0 px-2 py-2 bg-neutral-200 pb-4 lg:pr-8 break-words overflow-hidden
     }
     .filter_sub_item_box_wrapper {
         @apply mb-0

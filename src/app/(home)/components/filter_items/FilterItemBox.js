@@ -36,7 +36,7 @@ const FilterItemBox = ({
             {[...arrayData.sort()].map((value, idx) => {
               const ok = selectList.some((v) => v === value);
               return (
-                <div key={idx} onClick={() => onClickFilterItem({ category: categoryName, value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"}`}>
+                <div key={idx} onClick={() => onClickFilterItem({ category: categoryName, value: value })} className={`filter_item ${ok ? "bg-black text-white" : "bg-white text-black"} break-all`}>
                   {value}
                 </div>
               );
