@@ -59,6 +59,10 @@ const Wrapper = ({
   /* Double touch map for Mobile */
   const [lastTap, setLastTap] = useState(null);
   const doubleTapDelay = 300; // milliseconds
+
+  const changeMapSizeMobile = () => {
+    setDoubleScreenTouched((pre) => !pre)
+  }
   // Double Tap Event
   const handleDoubleTap = (event) => {
     if (window.innerWidth < 1024 && findMobile) {
@@ -182,9 +186,13 @@ const Wrapper = ({
           </div>
         </NavContainer>
         <MapSubContainer search={search} turnOnMap={turnOnMap} orgaMapSize={orgaMapSize} ready={ready}>
+          {turnOnMap && <div onClick={changeMapSizeMobile} className="absolute z-[1804] bottom-2 left-2 lg:hidden cursor-pointer bg-white rounded-lg border border-black text-sm px-2 py-1">{!doubleScreenTouched ? "Show Larger Map" : "Minimize Map"}</div>}
           {/* Orga who has location info */}
           {turnOnMap && (
-            <div onDoubleClick={onDoubleTouch} onTouchEnd={handleDoubleTap} className="w-full h-full lg:h-full flex justify-start border-b border-black">
+            <div 
+              // onDoubleClick={onDoubleTouch} 
+              // onTouchEnd={handleDoubleTap} 
+              className="w-full h-full lg:h-full flex justify-start border-b border-black">
               <LeafletMap doubleScreenTouched={doubleScreenTouched} data={getData} getDataForMarker={getDataForMarker} setData={setData} />
               {!Boolean(search) && (
                 <div className="absolute bottom-6 left-4 flex items-end select-none pointer-events-none">
