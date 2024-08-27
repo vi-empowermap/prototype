@@ -36,21 +36,20 @@ const MapController = () => {
 
   return null;
 };
-const IntroMap = ({data, getDataForMarker, setMapLoaded}) => {
+const IntroMap = ({ data, getDataForMarker, setMapLoaded}) => {
 
-  useEffect(() => {
-    console.log(getDataForMarker)
-  },[])
+
 
   return (
     <>
       <MapContainer className="w-full h-full" center={getRandomCoordinatesInGermany()} zoom={14} doubleClickZoom={false} scrollWheelZoom={false} dragging={false} zoomControl={false} whenReady={(map) => { setMapLoaded(true) }} attributionControl={false} >
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url={MAPTILELAYER.ex01} />
         <MapController />
-        {getDataForMarker.map((value, index) => {
+        { getDataForMarker.map((value, index) => {
           if (value.filterVisible) {
             return (
               <CustomMarkerIntro
+             
                 key={index}
                 imageUrl={value.orgaimage}
                 title={value.organame}

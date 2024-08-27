@@ -3,7 +3,7 @@ import IntroMap from "../intromap";
 import gsap from "gsap";
 import Karte from "/public/assets/icons/zurkarte.svg";
 
-const IntroCotainer = ({getData, getDataForMarker, pushIntroToAbout, webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
+const IntroCotainer = ({turnOnMap, getData, getDataForMarker, pushIntroToAbout, webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const zurKarteBtnRef = useRef();
   useEffect(() => {
@@ -41,7 +41,7 @@ const IntroCotainer = ({getData, getDataForMarker, pushIntroToAbout, webtitle, i
   return (
     <div id="anitext" className={`fixed top-0 left-0 font-normal w-[100svw] h-[100svh] lg:h-screen max-h-[100svh] min-h-[100svh] lg:max-h-screen lg:min-h-screen z-[1800] ${ready ? "opacity-0 pointer-events-none" : "opacity-100"} flex flex-col bg-white`}>
       <IntroLoadingPage mapLoaded={mapLoaded} />
-      <IntroBackgroundMap getData={getData} getDataForMarker={getDataForMarker} mapLoaded={mapLoaded} setMapLoaded={setMapLoaded} />
+      {turnOnMap && <IntroBackgroundMap getData={getData} getDataForMarker={getDataForMarker} mapLoaded={mapLoaded} setMapLoaded={setMapLoaded} />}
       {mapLoaded && (
         <>
           <div className="w-screen h-[100svh] max-h-[100svh] min-h-[100svh] lg:h-screen lg:max-h-screen lg:min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 py-4 lg:px-16 gap-4 overflow-hidden z-[1803]">
@@ -137,7 +137,7 @@ const IntroLoadingPage = ({ mapLoaded }) => {
   );
 };
 
-const IntroBackgroundMap = ({getData, getDataForMarker, mapLoaded, setMapLoaded }) => {
+const IntroBackgroundMap = ({ getData, getDataForMarker, mapLoaded, setMapLoaded }) => {
 
   return (
     <>

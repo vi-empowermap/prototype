@@ -173,7 +173,7 @@ const Wrapper = ({
   return (
     <main ref={container} className="flex flex-col lg:flex-row w-screen h-[100svh] lg:h-screen bg-white overflow-hidden relative">
       {/* Intro Page */}
-      <IntroCotainer getData={getData} getDataForMarker={getDataForMarker} pushIntroToAbout={pushIntroToAbout} webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} totalCountOfInstitution={kqlDataResult.length + kqlDataResultNoLocation.length} />
+      <IntroCotainer turnOnMap={turnOnMap} getData={getData} getDataForMarker={getDataForMarker} pushIntroToAbout={pushIntroToAbout} webtitle={panelDatas.webtitle} introbtn={panelDatas.introbtn} introtext={panelDatas.introtext} ready={ready} onClickReady={onClickReady} totalCountOfInstitution={kqlDataResult.length + kqlDataResultNoLocation.length} />
       {/* <GeolocationAlert ready={ready} /> */}
       <MapContainerHome>
         {/* Navigation BAR */}
@@ -186,7 +186,7 @@ const Wrapper = ({
           </div>
         </NavContainer>
         <MapSubContainer search={search} turnOnMap={turnOnMap} orgaMapSize={orgaMapSize} ready={ready}>
-          {turnOnMap && <div onClick={changeMapSizeMobile} className="absolute z-[1804] bottom-2 left-2 lg:hidden cursor-pointer bg-white rounded-lg border border-black text-sm px-2 py-1">{!doubleScreenTouched ? "Show Larger Map" : "Minimize Map"}</div>}
+          {turnOnMap && <div onClick={changeMapSizeMobile} className="absolute z-[1804] bottom-2 left-2 lg:hidden cursor-pointer bg-white rounded-lg border border-black text-xs px-2 py-1">{!doubleScreenTouched ? "Show Larger Map" : "Minimize Map"}</div>}
           {/* Orga who has location info */}
           {turnOnMap && (
             <div 
