@@ -203,7 +203,7 @@ const Wrapper = ({
                         {getCurrentBundesLand !== "" ? (
                           <div className="absolute flex justify-center items-center min-w-10 h-10 px-2 rounded-full top-4 right-3 z-[1000] text-2xl font-semibold bg-black text-white">{Boolean(totalCountOfBundesland[getCurrentBundesLand]) ? totalCountOfBundesland[getCurrentBundesLand] : 0}</div>
                         ) : (
-                          <div className="absolute flex justify-center items-center min-w-10 h-10 px-2 rounded-full top-4 right-3 z-[1000] text-2xl font-semibold bg-black text-white">{kqlDataResult.length + kqlDataResultNoLocation.length}</div>
+                          <div className="absolute flex justify-center items-center min-w-10 h-10 px-2 rounded-full top-4 right-3 z-[1000] text-2xl font-semibold bg-black text-white">{kqlDataResult.length}</div>
                         )}
                       </>
                     )}
