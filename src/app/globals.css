@@ -105,19 +105,19 @@ input[type="checkbox"] {
         @apply lg:pr-0
     }
     .filter_sub_item_box {
-        @apply text-sm flex gap-2 flex-wrap mt-0 px-2 py-2 bg-neutral-200 pb-4 lg:pr-8 break-words overflow-hidden
+        @apply text-sm flex gap-2 flex-wrap mt-0 px-2 py-2 bg-neutral-200 pb-4 lg:pr-8 break-words overflow-hidden 
     }
     .filter_sub_item_box_wrapper {
         @apply mb-0
     }
     .filter_item_box_title {
-        @apply text-xl flex items-center justify-start border-t border-black
+        @apply text-lg flex items-center justify-start border-t border-black min-h-[43px]
     }
     .filter_box_title {
         @apply pl-2 cursor-pointer
     }
     .filter_item {
-        @apply border-0 text-[16px] rounded-lg border-black px-2 py-1 transition-all cursor-pointer
+        @apply border-0 text-[16px] rounded-lg border-black px-2 py-1 transition-all cursor-pointer 
     }
     .filter_btn_wrapper {
         @apply flex text-xs

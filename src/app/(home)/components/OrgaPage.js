@@ -22,6 +22,14 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   const [getOrgaFilterActivateAtom, setOrgaFilterActivateAtom] = useRecoilState(onOrgaFilterActivateAtom);
   const emailRef = useRef(null);
   const leftContainer = useRef(null);
+  const scrollWrapper = useRef(null)
+  useEffect(() => {
+    if(scrollWrapper){
+      scrollWrapper.current.scrollTo(0,0)
+    }
+ 
+  },[getData])
+
   useEffect(() => {
     if (Boolean(search)) {
       setOrgaFilterActivateAtom({
@@ -133,7 +141,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
       <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-[100svh] lg:h-full lg:border-x lg:border-t border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
         <OrgaNav color={orgaInfo.bgColor} onClose={onClose} />
 
-        <div className="px-4 flex flex-grow flex-col overflow-y-auto">
+        <div ref={scrollWrapper} className="px-4 flex flex-grow flex-col overflow-y-auto">
           <OrgaHeader bgColor={orgaInfo.bgColor} font={orgaInfo.font} organame={orgaInfo.organame} />
           <OrgaIconWrapper themenschwerpunkt={orgaInfo.themenschwerpunkt} />
 
