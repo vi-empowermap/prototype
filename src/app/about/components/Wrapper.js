@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import MenuNav from "@/app/components/MenuNav";
 import { useEffect } from "react";
-
+import yaml from "js-yaml";
 const Wrapper = ({
   kirbyPanelData: {
     result: { content: data },
@@ -10,18 +10,27 @@ const Wrapper = ({
   kirbyPanelHomeData,
 }) => {
   useEffect(() => {
-    console.log(data)
-  },[])
+    console.log(data);
+  }, []);
   return (
     <div className="w-screen min-h-[100svh] lg:min-h-screen h-full bg-white relative pt-[44px]">
       <MenuNav kirbyPanelHomeData={kirbyPanelHomeData} />
-      <div className="w-full h-fit px-4 lg:px-6 py-10 flex flex-col gap-10">
+      <div className="w-full h-fit px-4 lg:px-6 py-10 flex flex-col gap-10 lg:gap-20">
         <div className="w-full h-fit">
           <div className="text-2xl font-medium mb-4">{data.about_title}</div>
           <p className="lg:columns-2 gap-10 font-jetBrainsMonoLight">{data.about_text}</p>
         </div>
         <div className="w-full h-fit">
-          <div className="text-2xl font-medium mb-4">{data.about_title}</div>
+          <div className="text-2xl font-medium mb-4">{data.contributors_title}</div>
+          <div className="flex w-full flex-wrap gap-14">
+            {data["contributors"].map((v) => {
+              {/* return <div key={v} style={{ backgroundImage: `url(${process.env.KB_FOR_FILE}/@/file/${String(yaml.load(v))})` }} className="w-32 aspect-square bg-cover bg-center bg-no-repeat bg-emerald-400"></div> */}
+              return <img key={v} src={`${process.env.KB_FOR_FILE}/@/file/${String(yaml.load(v))}`}  className="w-auto h-40 bg-emerald-400"></img>
+            })}
+          </div>
+        </div>
+        <div className="w-full h-fit">
+          <div className="text-2xl font-medium mb-4">{"Contact"}</div>
           <p className="lg:columns-2 gap-10 font-jetBrainsMonoLight">{data.about_text}</p>
         </div>
       </div>
