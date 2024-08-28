@@ -3,7 +3,7 @@ import IntroMap from "../intromap";
 import gsap from "gsap";
 import Karte from "/public/assets/icons/zurkarte.svg";
 
-const IntroCotainer = ({turnOnMap, getData, getDataForMarker, pushIntroToAbout, webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
+const IntroCotainer = ({ turnOnMap, getData, getDataForMarker, pushIntroToAbout, webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const zurKarteBtnRef = useRef();
   useEffect(() => {
@@ -61,12 +61,11 @@ const IntroCotainer = ({turnOnMap, getData, getDataForMarker, pushIntroToAbout, 
 };
 
 const TotalCountWrapper = ({ onClickReady, totalCountOfInstitution, introbtn }) => {
-  const [getCurrentDate, setCurrentDate] = useState("")
+  const [getCurrentDate, setCurrentDate] = useState("");
   useEffect(() => {
     const currentDate = new Date();
-    setCurrentDate(String(currentDate.toLocaleDateString()))
-
-  },[])
+    setCurrentDate(String(currentDate.toLocaleDateString()));
+  }, []);
   return (
     <div onClick={onClickReady} className="group w-1/2 max-w-full cursor-pointer lg:hover:w-2/3 transition-all duration-500 rounded-full bg-opacity-80 aspect-square overflow-hidden flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
       <div className="w-full h-full rounded-full overflow-hidden relative">
@@ -84,7 +83,7 @@ const TotalCountWrapper = ({ onClickReady, totalCountOfInstitution, introbtn }) 
   );
 };
 
-const ButtonWrapper = ({pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, introbtn }) => {
+const ButtonWrapper = ({ pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, introbtn }) => {
   return (
     <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
       <div
@@ -129,8 +128,12 @@ const IntroLoadingPage = ({ mapLoaded }) => {
   return (
     <>
       {!mapLoaded && (
-        <div className="fixed top-0 left-0 font-normal w-screen h-screen max-h-screen min-h-screen flex justify-center items-center bg-white">
-          <div>Loading...</div>
+        <div className="fixed top-0 left-0 font-normal w-screen h-screen max-h-screen min-h-screen flex flex-col justify-center items-center bg-white">
+          <div className="min-w-fit max-w-fit w-auto flex justify-start items-center text-black bg-white bg-opacity-80 rounded-lg mb-0 lg:mb-8">
+            <span className="text-5xl font-bespokeStencil">PAD</span>
+            <span className="text-5xl font-britney pr-4 lg:pr-8">LAS</span>
+          </div>
+          <div>Setting the scene... Just a bit more patience.</div>
         </div>
       )}
     </>
@@ -138,7 +141,6 @@ const IntroLoadingPage = ({ mapLoaded }) => {
 };
 
 const IntroBackgroundMap = ({ getData, getDataForMarker, mapLoaded, setMapLoaded }) => {
-
   return (
     <>
       {mapLoaded && <div className="fixed top-0 left-0 w-screen h-screen max-h-screen min-h-screen bg-black bg-opacity-40 z-[1802] select-none pointer-events-none"></div>}
