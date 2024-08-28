@@ -239,9 +239,9 @@ const Wrapper = ({
                 {!Boolean(search) && (
                   <div className="fixed bottom-6 left-4 flex items-end">
                     <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden`}>
-                      {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
+                      {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.mitverortungbtntext}</div>}
                       {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border border-black"></div>}
-                      <ControllerBtn open={openVerotung} setOpen={setOpenVerortung} text={panelDatas.verortungbtntext} />
+                      <ControllerBtn open={openVerotung} setOpen={setOpenVerortung} text={panelDatas.mitverortungbtntext} />
                     </div>
                   </div>
                 )}

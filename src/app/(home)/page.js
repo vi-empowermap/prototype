@@ -28,6 +28,7 @@ const getKirbyPanelData = async () => {
           // minimap navigation info
           minimaptitle: true,
           verortungbtntext: true,
+          mitverortungbtntext: true,
           centerbtntext: true,
           // orga page
           languagesupporttext: true,

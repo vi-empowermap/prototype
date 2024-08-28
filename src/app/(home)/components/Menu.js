@@ -23,9 +23,9 @@ const Menu = () => {
             Information
           </div>
           <div onClick={() => onPush("/faq")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">FAQ</div>
-          <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+          {/* <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
             <Translator />
-          </div>
+          </div> */}
         </div>
       </div>
       <div onClick={toggleMenu} className="h-full px-2 flex lg:hidden justify-center items-center cursor-pointer lg:hover:bg-black lg:hover:text-white active:bg-black active:text-white transition-all relative z-[1300] group select-none font-jetBrainsMono font-medium border-none border-black stroke-black active:stroke-white lg:hover:stroke-white">
@@ -36,9 +36,9 @@ const Menu = () => {
               Information
             </div>
             <div onClick={() => onPush("/faq")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">FAQ</div>
-            <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+            {/* <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
               <Translator />
-            </div>
+            </div> */}
           </div>
         )}
       </div>
