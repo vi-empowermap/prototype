@@ -14,7 +14,7 @@ const Translator = () => {
   //     if (window.google && window.google.translate) {
   //       new window.google.translate.TranslateElement(
   //         {
-  //           pageLanguage: "de",
+  //           pageLanguage: "en",
   //           includedLanguages: "en,de,fr,ko", 
   //           autoDisplay: true
   //         },
@@ -68,9 +68,9 @@ const Translator = () => {
 
   return (
     <div>
-      <div id="google_translate_element">
+      {/* <div id="google_translate_element">
         Languages
-      </div>
+      </div> */}
       {/* <button onClick={closeTranslator}>Close Translator</button> */}
     </div>
   );

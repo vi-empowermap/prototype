@@ -123,7 +123,7 @@ const Search = ({ turnOnMap, getData, setData, setDataForMarker, placeholdertext
         </form>
         {getOnSearchFilter && (
           <div className="px-8">
-            <div className="bg-black text-white w-fit min-w-10 aspect-square flex items-center justify-center rounded-full">{getFoundIdList}</div>
+            <div className="bg-black text-white w-fit min-w-8 aspect-square flex items-center justify-center rounded-full">{parseInt(getFoundIdList)}</div>
           </div>
         )}
         {getOnSearchFilter && (

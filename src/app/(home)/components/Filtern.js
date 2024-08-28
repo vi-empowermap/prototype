@@ -422,7 +422,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
         </div>
         {getOrgaFilter && (
           <div className="px-8">
-            <div className="bg-black text-white w-fit min-w-10 aspect-square flex items-center justify-center rounded-full">{foundList}</div>
+            <div className="bg-black text-white w-fit min-w-8 aspect-square flex items-center justify-center rounded-full">{foundList}</div>
           </div>
         )}
         {getOrgaFilter && (
