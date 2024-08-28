@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { MAPTILELAYER } from "../../constant/mapInfo";
 import { useSearchParams } from "next/navigation";
 import germanyGeoJson from "../../../utils/json/germany.json";
-import L from "leaflet";
+import {geoJSON} from "leaflet";
 /* Event: if cancel selection of marker */
 const LocationFinderDummy = ({ doubleScreenTouched }) => {
   const searchParams = useSearchParams();
@@ -78,7 +78,7 @@ function SetMaxBounds({ geoJSONData }) {
 
   useEffect(() => {
     if (geoJSONData) {
-      const geojsonLayer = L.geoJSON(geoJSONData);
+      const geojsonLayer = geoJSON(geoJSONData);
       const bounds = geojsonLayer.getBounds();
       map.setMaxBounds(bounds);
       map.fitBounds(bounds); // Optionally, fit the map to the bounds
