@@ -196,15 +196,15 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
     setOnFilterMobileOpen(false);
     setOrgaFilter(false);
   };
-  const onSelectAll = () => {
-    setSelectThmen([...Object.values(themenschwerpunktBP)]);
-    setSelectTags([...categories.sort()]);
-    setSelectZielGroup([...Object.values(zielgruppeBP)]);
-    setSelectAngebote([...Object.values(angeboteBP)]);
-    setSelectSprache([...Object.values(sprachunterstutzungBP)]);
-    setSelectArt([...Object.values(artderorganisationBP)]);
-    setSelectZeige([...["archiv", "aktive"]]);
-  };
+  // const onSelectAll = () => {
+  //   setSelectThmen([...Object.values(themenschwerpunktBP)]);
+  //   setSelectTags([...categories.sort()]);
+  //   setSelectZielGroup([...Object.values(zielgruppeBP)]);
+  //   setSelectAngebote([...Object.values(angeboteBP)]);
+  //   setSelectSprache([...Object.values(sprachunterstutzungBP)]);
+  //   setSelectArt([...Object.values(artderorganisationBP)]);
+  //   setSelectZeige([...["archiv", "aktive"]]);
+  // };
   const onResetAll = () => {
     setSelectBundesland([]);
     setSelectThmen([]);
@@ -289,7 +289,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
       });
 
     
-      // if (activeFilter["okThemen"] ? okThemen : false) {
+   
       if (
         (selectBundeslandRef.current.length > 0 ? okBundes : true) &&
         (selectThemenRef.current.length > 0 ? okThemen : true) &&

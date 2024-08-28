@@ -28,7 +28,7 @@ const FilterItemBox = ({
             <SectionResetBtn activeFilter={activeFilter} onResetSection={onResetSection} setSection={setSection} setRef={setRef} keyName={keyName} />
           </div>
           <div onClick={() => onActiveFilter(keyName)} className="filter_box_title w-full flex items-center gap-3">
-            <div className={`${selectList.length > 0 ? "text-black" : "text-neutral-500"}`}>{titleName}</div>{selectList.length > 0 && <div className="min-w-[20px] max-w-[40px] overflow-hidden aspect-square bg-black text-white text-sm flex justify-center items-center rounded-full">{selectList.length > 10 ? "n" : selectList.length}</div>}
+            <div className={`${selectList.length > 0 ? "text-black" : "text-neutral-500"}`}>{titleName}</div>{selectList.length > 0 && <div className="min-w-[20px] max-w-[40px] overflow-hidden aspect-square bg-black text-white text-sm flex justify-center items-center rounded-full">{selectList.length > 9 ? "9+" : selectList.length}</div>}
           </div>
         </div>
         {activeFilter[keyName] && (
