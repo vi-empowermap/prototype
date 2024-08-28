@@ -6,14 +6,14 @@ import Karte from "/public/assets/icons/zurkarte.svg";
 const IntroCotainer = ({ turnOnMap, getData, getDataForMarker, pushIntroToAbout, webtitle, introbtn, introtext, ready, onClickReady, totalCountOfInstitution }) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const zurKarteBtnRef = useRef();
-  useEffect(() => {
-    if (zurKarteBtnRef.current && !ready) {
-      // after 1 minute the zur karte button will be clicked automatically
-      setTimeout(() => {
-        zurKarteBtnRef.current.click();
-      }, 60000);
-    }
-  }, [mapLoaded]);
+  // useEffect(() => {
+  //   if (zurKarteBtnRef.current && !ready) {
+  //     // after 1 minute the zur karte button will be clicked automatically
+  //     setTimeout(() => {
+  //       zurKarteBtnRef.current.click();
+  //     }, 60000);
+  //   }
+  // }, [mapLoaded]);
 
   useEffect(() => {
     function numberWithCommas(x) {
