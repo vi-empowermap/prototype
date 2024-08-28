@@ -36,7 +36,8 @@ const getKirbyPanelData = async () => {
           select: {
             about_title:true,
             about_text: true,
-            contributors: true
+            contributors: true,
+            contributors_title: true
           }
         }
       },
@@ -45,9 +46,9 @@ const getKirbyPanelData = async () => {
   
     const kirbyApiDraft = `${kirbyOriginAPI}`;
     const data = await fetchDataOriginAPI({ url: kirbyApiDraft, userInfo: { authEmail, authPassword }, method: "POST", bodyData });
-
-    data.result.content["contributors"] = data.result.content["contributors"].split(",").map((v) => v.trim())
-
+    data["result"]["content"]["contributors"] = yaml.load( data["result"]["content"]["contributors"])
+    
+ 
     return data
   };
 
@@ -99,13 +100,8 @@ const Page = async () => {
     const kirbyPanelHomeData = await getKirbyPanelHomeData();
     const kirbyUsersList = await getKirbyUsersData()
 
-    kirbyPanelData.result.content["contributors_info"] = []
-    for(let i = 0; i < kirbyPanelData.result.content["contributors"].length; i++){
-      console.log(kirbyPanelData.result.content["contributors"][i])
-      const foundUser = kirbyUsersList.result.find((v) => v.id === kirbyPanelData.result.content["contributors"][i]);
-      kirbyPanelData.result.content["contributors_info"].push(foundUser)
-    }
-    console.log(kirbyPanelData.result.content["contributors_info"])
+ 
+    
     
     return (
         <Wrapper kirbyPanelData={kirbyPanelData} kirbyPanelHomeData={kirbyPanelHomeData} />
