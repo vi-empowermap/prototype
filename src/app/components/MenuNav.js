@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import Translator from "../(home)/components/menu/Translator";
 
 const MenuNav = ({kirbyPanelHomeData: {result: {content: data}}}) => {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -33,7 +34,9 @@ const MenuNav = ({kirbyPanelHomeData: {result: {content: data}}}) => {
             </div>
           )}
           {pathname !== "/faq" && <div onClick={() => onClick("/faq")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">FAQ</div>}
-          { <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">Language</div>}
+          <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+            <Translator />
+          </div>
         </div>
       </div>
       <div onClick={toggleMenu} className="absolute top-0 left-0 h-full px-2 flex lg:hidden justify-center items-center cursor-pointer active:bg-black active:text-white transition-all z-[1300]">
@@ -52,7 +55,9 @@ const MenuNav = ({kirbyPanelHomeData: {result: {content: data}}}) => {
             </div>
           )}
           {pathname !== "/faq" && <div onClick={() => onClick("/faq")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">FAQ</div>}
-          {<div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">Language</div>}
+          <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+            <Translator />
+          </div>
         </div>}
       </div>
       <h1 onClick={() => onClick("/")} className="`w-fit bg-white text-xl md:text-4xl px-4 font-bold flex h-full items-center cursor-pointer hover:bg-black hover:text-white transition-all">
