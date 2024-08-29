@@ -137,7 +137,7 @@ const Wrapper = ({
   });
 
   const pushIntroToAbout = () => {
-    router.push("/about");
+    router.push("/information");
   };
 
   /* Switch Orga types */
