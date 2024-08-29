@@ -1,6 +1,6 @@
 "use client";
 import MenuNav from "@/app/components/MenuNav";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import OpenIcon from "/public/assets/icons/open.svg"
 const Wrapper = ({
   kirbyPanelData: {
@@ -9,9 +9,7 @@ const Wrapper = ({
   kirbyPanelHomeData,
 }) => {
   const [openedQuestionIdx, setOpenedQuestionIdx] = useState(-1);
-  useEffect(() => {
-    console.log(data);
-  }, []);
+
   return (
     <div className="w-screen min-h-[100svh] lg:min-h-screen h-full bg-white relative pt-[44px] lg:pt-[86px] font-jetBrainsMonoLight">
       <MenuNav kirbyPanelHomeData={kirbyPanelHomeData} />

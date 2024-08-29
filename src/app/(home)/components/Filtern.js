@@ -166,7 +166,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
     }
   };
   const resetFilter = () => {
-    console.log("Reset")
+
     setOrgaFilterActivateAtom({
       ready: false
     })
@@ -230,7 +230,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
 
   /* Search */
   const onSearch = () => {
-    console.log("search")
+   
     setOpenFilter(false);
     setOnFilterMobileOpen(false);
     setOrgaFilter(true);

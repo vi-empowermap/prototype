@@ -112,7 +112,7 @@ const ButtonWrapper = ({ pushIntroToAbout, zurKarteBtnRef, onClickReady, ready, 
 };
 
 const IntroText = ({ introtext }) => {
-  return <div className="lg:w-4/5 text-black bg-white bg-opacity-80 text-base md:text-xl lg:text-2xl p-2 rounded-lg font-jetBrainsMono">{introtext}</div>;
+  return <div className="lg:w-4/5 text-black bg-white bg-opacity-80 text-base md:text-xl lg:text-xl p-2 rounded-lg font-jetBrainsMono">{introtext.slice(0,500)}</div>;
 };
 
 const IntroLogo = ({ webtitle }) => {

@@ -44,7 +44,7 @@ const getKirbyPanelData = async () => {
     const kirbyApiDraft = `${kirbyOriginAPI}`;
     const data = await fetchDataOriginAPI({ url: kirbyApiDraft, userInfo: { authEmail, authPassword }, method: "POST", bodyData });
     data.result.content.faq_list = yaml.load(data.result.content.faq_list)
-    console.log(data)
+
     return data;
   };
 const Page = async () => {

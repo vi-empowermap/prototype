@@ -20,16 +20,14 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   const setReady = useSetRecoilState(readyAniAtom);
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   const [getOrgaFilterActivateAtom, setOrgaFilterActivateAtom] = useRecoilState(onOrgaFilterActivateAtom);
-  const setOrgaFilterMapCenter = useSetRecoilState(orgaFilterMapCenter)
-  const emailRef = useRef(null);
+  const setOrgaFilterMapCenter = useSetRecoilState(orgaFilterMapCenter);
   const leftContainer = useRef(null);
-  const scrollWrapper = useRef(null)
+  const scrollWrapper = useRef(null);
   useEffect(() => {
-    if(scrollWrapper){
-      scrollWrapper.current.scrollTo(0,0)
+    if (scrollWrapper) {
+      scrollWrapper.current.scrollTo(0, 0);
     }
- 
-  },[getData])
+  }, [getData]);
 
   useEffect(() => {
     if (Boolean(search)) {
@@ -93,7 +91,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
       bundes: bundeslandBP[orgaInfo.bundesland],
     });
     onClose();
-    setOrgaFilterMapCenter(true)
+    setOrgaFilterMapCenter(true);
   };
   const onFilterAll = () => {
     setOrgaFilterActivateAtom({
@@ -118,27 +116,18 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
       zeige: orgaInfo.archivoraktiv,
     });
     onClose();
-    setOrgaFilterMapCenter(true)
+    setOrgaFilterMapCenter(true);
   };
 
-  useEffect(() => {
-    if (leftContainer.current && orgaInfo) {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${leftContainer.current.clientWidth}" height="25">
-       <text x="0" y="18" fill="${orgaInfo.bgColor}" font-family="JetBrainsMono">${String(orgaInfo.email)}</text>
-      </svg>`;
-      const blob = new Blob([svg], { type: "image/svg+xml" });
-      const url = URL.createObjectURL(blob);
-      if (emailRef.current) {
-        emailRef.current.src = url;
-      }
-    }
-  }, [orgaInfo]);
 
-  const clickEmail = () => {
-    if (orgaInfo) {
-      router.push(`mailto:${String(orgaInfo.email)}`);
-    }
-  };
+
+
+  function obfuscateEmail(email) {
+    return email.replace(/(.+)@(.+)/, function(match, localPart, domainPart) {
+        return `<span>${localPart}</span>&#64;<span>${domainPart}</span>`;
+    });
+}
+
   return (
     <div className={`fixed top-0 right-0 bg-white w-full lg:w-2/3 h-[100svh] lg:h-screen z-[2400] lg:px-6 lg:pt-6 lg:border-l border-black ${open ? "translate-x-0" : "translate-x-full"} transition-all duration-500 font-jetBrainsMono font-medium`}>
       <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="w-full h-[100svh] lg:h-full lg:border-x lg:border-t border-black lg:rounded-tl-3xl lg:rounded-tr-3xl flex flex-col">
@@ -205,8 +194,8 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
               </div>
               <div className="mb-4">
                 <div className="orga_sub_title">{useKirbyText({ text: panelDatas.kontakttext })}</div>
-                {/* <a >{String(orgaInfo.email)}</a> */}
-                <img style={{ width: "100%", height: "100%" }} alt="email" className="cursor-pointer" onClick={clickEmail} ref={emailRef} />
+                <a style={{ color: `${orgaInfo.bgColor}` }} target="_black" href={`mailto:${orgaInfo.email}`} dangerouslySetInnerHTML={{ __html: obfuscateEmail(String(orgaInfo.email)) }}></a>
+                
                 <div>{String(orgaInfo.contactnummber)}</div>
                 <a target="_blank" href={String(orgaInfo.website)} style={{ color: `${orgaInfo.bgColor}` }} className="mt-4">
                   {String(orgaInfo.website)}
@@ -227,11 +216,12 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                     })}
                 </div>
               </div>
-              {orgaInfo.orgaimage && <div className="mb-4">
-                <div className="orga_sub_title">Logo</div>
-                <div style={{ backgroundImage: `url(${process.env.KB_FOR_FILE}/@/file/${String(orgaInfo.orgaimage).slice(7)})` }} className="w-8 aspect-square bg-cover bg-center"></div>
-                
-              </div>}
+              {orgaInfo.orgaimage && (
+                <div className="mb-4">
+                  <div className="orga_sub_title">Logo</div>
+                  <div style={{ backgroundImage: `url(${process.env.KB_FOR_FILE}/@/file/${String(orgaInfo.orgaimage).slice(7)})` }} className="w-8 aspect-square bg-cover bg-center"></div>
+                </div>
+              )}
             </div>
           </div>
           <div className="w-full lg:h-28 justify-between flex flex-col lg:flex-row mt-8 gap-4 mb-4 lg:gap-0 lg:mb-0">
@@ -240,7 +230,10 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border lg:border-b-0 p-6 text-lg lg:text-xl cursor-pointer select-none">
-                  Zeige alle Initiativen <span style={{color: `${orgaInfo.bgColor}`}} className="font-semibold">in dem selben Bundesland</span>
+                  Zeige alle Initiativen{" "}
+                  <span style={{ color: `${orgaInfo.bgColor}` }} className="font-semibold">
+                    in dem selben Bundesland
+                  </span>
                 </div>
               </div>
             </div>
@@ -249,7 +242,10 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-10 group-hover:-left-6 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute hidden lg:block group-hover:top-4 group-hover:-left-3 top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl border border-b-0 transition-all duration-500"></div>
                 <div style={{ borderColor: `${orgaInfo.bgColor}` }} className="absolute top-0 left-0 w-full h-full bg-white rounded-tl-2xl rounded-tr-2xl rounded-b-2xl lg:rounded-b-none border lg:border-b-0 p-6 text-lg lg:text-xl cursor-pointer select-none">
-                  Zeige alle Initiativen <span style={{color: `${orgaInfo.bgColor}`}} className="font-semibold">mit den gleichen Kategorien</span>
+                  Zeige alle Initiativen{" "}
+                  <span style={{ color: `${orgaInfo.bgColor}` }} className="font-semibold">
+                    mit den gleichen Kategorien
+                  </span>
                 </div>
               </div>
             </div>

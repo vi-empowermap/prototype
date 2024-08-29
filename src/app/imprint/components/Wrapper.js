@@ -1,17 +1,13 @@
 "use client";
 
 import MenuNav from "@/app/components/MenuNav";
-import { useEffect } from "react";
-import yaml from "js-yaml";
 const Wrapper = ({
   kirbyPanelData: {
     result: { content: data },
   },
   kirbyPanelHomeData,
 }) => {
-  useEffect(() => {
-    console.log(data);
-  }, []);
+ 
   return (
     <div className="w-screen min-h-[100svh] lg:min-h-screen h-full bg-white relative pt-[44px] lg:pt-[86px] font-jetBrainsMonoLight">
       <MenuNav kirbyPanelHomeData={kirbyPanelHomeData} />
