@@ -272,7 +272,7 @@ const MapErrorMessage = () => {
   },[getMapErrorMessage])
 
   return (
-    <div className={`absolute top-2 ${!getMapErrorMessage ? "-translate-x-full  left-0" : "translate-x-0 left-2"} z-[1804] text-white bg-[rgb(93,90,191)] transition-all duration-300 py-1 px-2 rounded-md select-none bg-opacity-70 text-sm`}>Map is out of bounds, resetting view</div>
+    <div className={`absolute top-2 ${!getMapErrorMessage ? "-translate-x-full  left-0" : "translate-x-0 left-2"} z-[1804] text-white bg-[rgb(93,90,191)] transition-all duration-300 py-1 px-2 rounded-md select-none bg-opacity-90 text-sm`}>Map is out of bounds, resetting view</div>
   )
 }
 
