@@ -44,8 +44,7 @@ const getKirbyPanelData = async () => {
             contact_street: true,
             contact_zip: true,
             contact_city: true,
-            imprint_title: true,
-            imprint_text: true,    
+             
           }
         }
       },

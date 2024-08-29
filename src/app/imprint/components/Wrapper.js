@@ -13,7 +13,7 @@ const Wrapper = ({
     console.log(data);
   }, []);
   return (
-    <div className="w-screen min-h-[100svh] lg:min-h-screen h-full bg-white relative pt-[44px] font-jetBrainsMonoLight">
+    <div className="w-screen min-h-[100svh] lg:min-h-screen h-full bg-white relative pt-[44px] lg:pt-[86px] font-jetBrainsMonoLight">
       <MenuNav kirbyPanelHomeData={kirbyPanelHomeData} />
       <div className="flex justify-center max-w-screen-2xl m-auto">
         <div className="w-full h-fit px-4 lg:px-6 py-10 flex flex-col gap-10 lg:gap-20">
