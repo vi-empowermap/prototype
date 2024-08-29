@@ -1,6 +1,12 @@
 /* Recoil */
 import { atom } from "recoil";
 
+
+export const orgaFilterMapCenter = atom({
+  key: "orgaFilterMapCenter",
+  default: false
+})
+
 export const geoLocationPermissionAsked = atom({
   key: "geoLocationPermissionAsked",
   default: false
