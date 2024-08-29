@@ -14,7 +14,7 @@ const OrgaNav = ({ onClose, color }) => {
     },800)
   };
   return (
-    <nav className="flex gap-4 justify-end items-center p-4 lg:mb-2">
+    <nav className="flex gap-4 justify-end items-center p-4 lg:mb-2 max-h-[66px] lg:max-h-[86px] lg:h-fit">
       {!copied && (
         <div onClick={onCopyText} className="cursor-pointer">
           <Copy style={{ strokeWidth: ICON_STROKE_SIZE, stroke: "#000", width: ICON_SIZE, height: ICON_SIZE }} />
