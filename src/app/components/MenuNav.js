@@ -28,9 +28,14 @@ const MenuNav = ({kirbyPanelHomeData: {result: {content: data}}}) => {
               Home
             </div>
           )}
-          {pathname !== "/about" && (
-            <div onClick={() => onClick("/about")} className="font-medium text-xl border-b border-black px-2 py-2 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+          {pathname !== "/information" && (
+            <div onClick={() => onClick("/information")} className="font-medium text-xl border-b border-black px-2 py-2 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
               Information
+            </div>
+          )}
+          {pathname !== "/imprint" && (
+            <div onClick={() => onClick("/imprint")} className="font-medium text-xl border-b border-black px-2 py-2 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+              Imprint
             </div>
           )}
           {pathname !== "/faq" && <div onClick={() => onClick("/faq")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">FAQ</div>}
@@ -49,9 +54,14 @@ const MenuNav = ({kirbyPanelHomeData: {result: {content: data}}}) => {
               Home
             </div>
           )}
-          {pathname !== "/about" && (
-            <div onClick={() => onClick("/about")} className="font-medium text-xl border-b border-black px-2 py-2 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+          {pathname !== "/information" && (
+            <div onClick={() => onClick("/information")} className="font-medium text-xl border-b border-black px-2 py-2 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
               Information
+            </div>
+          )}
+          {pathname !== "/imprint" && (
+            <div onClick={() => onClick("/imprint")} className="font-medium text-xl border-b border-black px-2 py-2 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+              Imprint
             </div>
           )}
           {pathname !== "/faq" && <div onClick={() => onClick("/faq")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">FAQ</div>}

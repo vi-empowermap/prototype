@@ -34,10 +34,8 @@ const getKirbyPanelData = async () => {
       select: {
         content:{
           select: {
-            about_title:true,
-            about_text: true,
-            contributors: true,
-            contributors_title: true
+            imprint_title: true,
+            imprint_text: true,    
           }
         }
       },
