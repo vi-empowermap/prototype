@@ -3,7 +3,7 @@ import Wrapper from "./components/Wrapper";
 const authEmail = process.env.KB_USER;
 const authPassword = process.env.KB_PASS;
 const kirbyOriginAPI = process.env.KB_API_ORIGIN;
-
+import yaml from "js-yaml"
 const getKirbyPanelHomeData = async () => {
   /* KQL Selection BODY */
   const bodyData = {
@@ -29,11 +29,12 @@ const getKirbyPanelHomeData = async () => {
 const getKirbyPanelData = async () => {
     /* KQL Selection BODY */
     const bodyData = {
-      query: "page('menupage')",
+      query: "page('faq')",
       select: {
         content:{
           select: {
-            about_title:true
+            faq_title:true,
+            faq_list:true
           }
         }
       },
@@ -42,7 +43,8 @@ const getKirbyPanelData = async () => {
   
     const kirbyApiDraft = `${kirbyOriginAPI}`;
     const data = await fetchDataOriginAPI({ url: kirbyApiDraft, userInfo: { authEmail, authPassword }, method: "POST", bodyData });
-  
+    data.result.content.faq_list = yaml.load(data.result.content.faq_list)
+    console.log(data)
     return data;
   };
 const Page = async () => {
