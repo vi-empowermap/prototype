@@ -38,7 +38,7 @@ const MenuNav = ({
  
   }
   return (
-    <nav className="fixed top-0 left-0 flex justify-start items-center w-screen h-[44px] lg:h-[86px] border-b border-black bg-white">
+    <nav className="fixed top-0 left-0 flex justify-start items-center w-screen h-[44px] lg:h-[86px] border-b border-black bg-white z-[1800]">
       <div className="h-full px-2 hidden lg:flex justify-center items-center cursor-pointer hover:bg-black hover:text-white transition-all z-[1300] group  stroke-black active:stroke-white lg:hover:stroke-white">
         <MenuIcon style={{ strokeWidth: ICON_STROKE_SIZE, width: ICON_SIZE, height: ICON_SIZE }} />
         <div className="hidden group-hover:flex flex-col absolute top-full left-0 h-fit bg-white border-y lg:border border-black text-black w-screen lg:w-fit">

@@ -421,7 +421,7 @@ const Filtern = ({ready, resetText, onTurOnMap, turnOnMap, getData, setData, cat
       <div className="hidden lg:flex gap-2 w-full h-full items-center">
         <div onClick={onClick} className="lg:flex gap-2 cursor-pointer w-full h-full items-center stroke-black hover:stroke-white hover:bg-black hover:text-white px-4">
           <span className="font-jetBrainsMono font-medium">{placeholdertext}</span>
-          <span className={`${!openFilter ? "rotate-0" : "rotate-180"} transition-transform duration-500`}>
+          <span className={`${openFilter ? "rotate-0" : "rotate-180"}`}>
             <OpenIcon style={{strokeWidth: ICON_STROKE_SIZE,width: ICON_SIZE, height: ICON_SIZE}} />
           </span>
         </div>
