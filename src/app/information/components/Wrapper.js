@@ -52,10 +52,7 @@ const Wrapper = ({
               </div>
             </div>
           </div>
-          <div className="w-full h-fit">
-            <div className="text-2xl font-medium mb-4">{data.imprint_title}</div>
-            <p className="lg:columns-2 gap-10 font-jetBrainsMonoLight">{data.imprint_text}</p>
-          </div>
+         
         </div>
       </div>
     </div>
