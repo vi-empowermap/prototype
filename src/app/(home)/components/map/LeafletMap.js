@@ -2,7 +2,7 @@ import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import CustomMarker from "../CustomMarker";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, geoLocationPermissionAsked, geoLocationPermissionError, orgaFilterMapCenter, setViewAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, geoLocationPermissionAsked, geoLocationPermissionError, mapErrorMessage, orgaFilterMapCenter, setViewAtom } from "@/app/utils/state";
 import { useEffect, useState } from "react";
 import { MAPTILELAYER } from "../../constant/mapInfo";
 import { useSearchParams } from "next/navigation";
@@ -75,14 +75,37 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
 
 function SetMaxBounds({ geoJSONData }) {
   const map = useMap();
+  const [getMapErrorMessage, setMapErrorMessage] = useRecoilState(mapErrorMessage)
 
   useEffect(() => {
     if (geoJSONData) {
       const geojsonLayer = geoJSON(geoJSONData);
       const bounds = geojsonLayer.getBounds();
       map.setMaxBounds(bounds);
+    
       map.fitBounds(bounds); // Optionally, fit the map to the bounds
+
+
+
+      // Add an event listener to detect when the map moves
+      const onMoveEnd = () => {
+        if (!bounds.contains(map.getCenter())) {
+          if(!getMapErrorMessage){
+            setMapErrorMessage(true)
+          }
+         
+        }
+      };
+
+      map.on('moveend', onMoveEnd);
+
+      // Clean up the event listener when the component is unmounted or geoJSONData changes
+      return () => {
+        map.off('moveend', onMoveEnd);
+      };
     }
+
+    
   }, [geoJSONData, map]);
 
   return null;

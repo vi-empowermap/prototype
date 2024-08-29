@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import LeafletMap from "./map";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { clickedItemsListAtom, clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, currentBundesLand, geoLocationPermissionError, readyAniAtom, setViewAtom } from "@/app/utils/state";
+import { clickedItemsListAtom, clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, currentBundesLand, geoLocationPermissionError, mapErrorMessage, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import DynamicMiniMap from "./minimap";
 import ListContainer from "./ListContainer";
 import Search from "./Search";
@@ -186,6 +186,7 @@ const Wrapper = ({
           </div>
         </NavContainer>
         <MapSubContainer search={search} turnOnMap={turnOnMap} orgaMapSize={orgaMapSize} ready={ready}>
+          {turnOnMap && <MapErrorMessage />}
           {turnOnMap && <div onClick={changeMapSizeMobile} className="absolute z-[1804] bottom-2 left-2 lg:hidden cursor-pointer bg-white rounded-lg border border-black text-xs px-2 py-1">{!doubleScreenTouched ? "Show Larger Map" : "Minimize Map"}</div>}
           {/* Orga who has location info */}
           {turnOnMap && (
@@ -257,5 +258,22 @@ const Wrapper = ({
     </main>
   );
 };
+
+
+const MapErrorMessage = () => {
+  const [getMapErrorMessage, setMapErrorMessage] = useRecoilState(mapErrorMessage)
+
+  useEffect(() => {
+    if(getMapErrorMessage){
+      setTimeout(() => {
+        setMapErrorMessage(false)
+      },1500)
+    }
+  },[getMapErrorMessage])
+
+  return (
+    <div className={`absolute top-2 ${!getMapErrorMessage ? "-translate-x-full  left-0" : "translate-x-0 left-2"} z-[1804] text-white bg-[rgb(93,90,191)] transition-all duration-300 py-1 px-2 rounded-md select-none bg-opacity-70 text-sm`}>Map is out of bounds, resetting view</div>
+  )
+}
 
 export default Wrapper;
