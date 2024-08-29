@@ -1,8 +1,8 @@
 import { TileLayer, MapContainer, useMap, useMapEvent } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import CustomMarker from "../CustomMarker";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, geoLocationPermissionAsked, geoLocationPermissionError, setViewAtom } from "@/app/utils/state";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { clickedItemsListAtom, clikedMarkerAtom, closeOrgaAtom, geoLocationPermission, geoLocationPermissionAsked, geoLocationPermissionError, mapErrorMessage, orgaFilterMapCenter, setViewAtom } from "@/app/utils/state";
 import { useEffect, useState } from "react";
 import { MAPTILELAYER } from "../../constant/mapInfo";
 import { useSearchParams } from "next/navigation";
@@ -15,7 +15,7 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
   const getCloseOrgaAtom = useRecoilValue(closeOrgaAtom);
   const setClickedMarkerAtom = useSetRecoilState(clikedMarkerAtom);
   const setClickedItemsList = useSetRecoilState(clickedItemsListAtom);
-
+  
   const map = useMapEvent({
     click() {
       setClickedMarkerAtom(-1);
@@ -75,14 +75,37 @@ const LocationFinderDummy = ({ doubleScreenTouched }) => {
 
 function SetMaxBounds({ geoJSONData }) {
   const map = useMap();
+  const [getMapErrorMessage, setMapErrorMessage] = useRecoilState(mapErrorMessage)
 
   useEffect(() => {
     if (geoJSONData) {
       const geojsonLayer = geoJSON(geoJSONData);
       const bounds = geojsonLayer.getBounds();
       map.setMaxBounds(bounds);
+    
       map.fitBounds(bounds); // Optionally, fit the map to the bounds
+
+
+
+      // Add an event listener to detect when the map moves
+      const onMoveEnd = () => {
+        if (!bounds.contains(map.getCenter())) {
+          if(!getMapErrorMessage){
+            setMapErrorMessage(true)
+          }
+         
+        }
+      };
+
+      map.on('moveend', onMoveEnd);
+
+      // Clean up the event listener when the component is unmounted or geoJSONData changes
+      return () => {
+        map.off('moveend', onMoveEnd);
+      };
     }
+
+    
   }, [geoJSONData, map]);
 
   return null;
@@ -92,6 +115,7 @@ const MapController = ({ setViewAtomValue }) => {
   const map = useMap();
   const setGeoLocationPermissionError = useSetRecoilState(geoLocationPermissionError);
   const getGeoLocationPermissionAsked = useRecoilValue(geoLocationPermissionAsked)
+  const [getOrgaFilterMapCenter, setOrgaFilterMapCenter] = useRecoilState(orgaFilterMapCenter)
   useEffect(() => {
     if (setViewAtomValue.name !== "start") {
       if (setViewAtomValue.type === "mini") {
@@ -154,6 +178,14 @@ const MapController = ({ setViewAtomValue }) => {
       // if not
     }
   }, [setViewAtomValue]);
+
+  useEffect(() => {
+    if(getOrgaFilterMapCenter){
+      map.setView([51.1657, 10.4515], 5);
+    setOrgaFilterMapCenter(false)
+    } 
+    
+  },[getOrgaFilterMapCenter])
 
   return null;
 };

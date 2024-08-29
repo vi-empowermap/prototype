@@ -1,7 +1,7 @@
-import { clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, onOrgaFilterActivateAtom, readyAniAtom, setViewAtom } from "@/app/utils/state";
+import { clikedGoogleAtom, clikedMarkerAtom, closeOrgaAtom, onOrgaFilterActivateAtom, orgaFilterMapCenter, readyAniAtom, setViewAtom } from "@/app/utils/state";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { angeboteBP, artderorganisationBP, bundeslandBP, socialMediaBP, sprachunterstutzungBP, themenschwerpunktBP, zielgruppeBP } from "../constant/blueprintOptionData";
 import useKirbyText from "@/app/utils/hooks/useKirbyText";
 import OrgaNav from "./openpage/OrgaNav";
@@ -20,6 +20,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
   const setReady = useSetRecoilState(readyAniAtom);
   const [getClickedMarkerAtom, setClickedMarkerAtom] = useRecoilState(clikedMarkerAtom);
   const [getOrgaFilterActivateAtom, setOrgaFilterActivateAtom] = useRecoilState(onOrgaFilterActivateAtom);
+  const setOrgaFilterMapCenter = useSetRecoilState(orgaFilterMapCenter)
   const emailRef = useRef(null);
   const leftContainer = useRef(null);
   const scrollWrapper = useRef(null)
@@ -92,6 +93,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
       bundes: bundeslandBP[orgaInfo.bundesland],
     });
     onClose();
+    setOrgaFilterMapCenter(true)
   };
   const onFilterAll = () => {
     setOrgaFilterActivateAtom({
@@ -116,6 +118,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
       zeige: orgaInfo.archivoraktiv,
     });
     onClose();
+    setOrgaFilterMapCenter(true)
   };
 
   useEffect(() => {
