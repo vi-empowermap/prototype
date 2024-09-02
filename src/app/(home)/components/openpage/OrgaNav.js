@@ -13,6 +13,7 @@ const OrgaNav = ({ onClose, color }) => {
       setCopied(false)
     },800)
   };
+  
   return (
     <nav className="flex gap-4 justify-end items-center p-4 lg:mb-2 max-h-[66px] lg:max-h-[86px] lg:h-fit">
       {!copied && (
