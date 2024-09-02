@@ -1,4 +1,4 @@
-# Empowermap Frontend t
+# Empowermap Frontend
 
 ## TODOS
 
