@@ -702,12 +702,6 @@ const Filtern = ({
             )}
           </div>
           <div className="sticky bottom-0 flex items-center border-b last:border-b-0 border-black z-[2000]">
-            {/* <div onClick={onResetAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
-              Clear All
-            </div> */}
-            {/* <div onClick={onSelectAll} className="cursor-pointer border-2 border-black px-2 py-1 hover:bg-black hover:text-white transition-all">
-              Select All
-            </div> */}
             <div
               onClick={resetFilter}
               className="lg:hidden cursor-pointer border-t border-r bg-[rgb(140,11,35)] border-black py-2 hover:bg-black text-white transition-all flex-1 flex justify-center items-center"
