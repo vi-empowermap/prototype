@@ -50,7 +50,7 @@ const IntroCotainer = ({ turnOnMap, getData, getDataForMarker, pushIntroToAbout,
               <IntroText introtext={introtext} />
               <ButtonWrapper pushIntroToAbout={pushIntroToAbout} zurKarteBtnRef={zurKarteBtnRef} onClickReady={onClickReady} ready={ready} introbtn={introbtn} />
             </div>
-            <div className=" w-full h-full flex justify-center items-center font-jetBrainsMono">
+            <div className="flex-grow w-full h-full flex justify-center items-center font-jetBrainsMono">
               <TotalCountWrapper onClickReady={onClickReady} totalCountOfInstitution={totalCountOfInstitution} introbtn={introbtn} />
             </div>
           </div>
@@ -67,7 +67,7 @@ const TotalCountWrapper = ({ onClickReady, totalCountOfInstitution, introbtn }) 
     setCurrentDate(String(currentDate.toLocaleDateString()));
   }, []);
   return (
-    <div onClick={onClickReady} className="group w-1/2 max-w-full cursor-pointer lg:hover:w-2/3 transition-all duration-500 rounded-full bg-opacity-80 aspect-square overflow-hidden flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
+    <div onClick={onClickReady} className="group w-full h-full lg:h-auto cursor-pointer lg:hover:w-2/3 transition-all duration-500 rounded-full bg-opacity-80 aspect-auto lg:aspect-square overflow-hidden flex flex-col justify-center items-center text-sm text-black bg-white z-[1805] p-1">
       <div className="w-full h-full rounded-full overflow-hidden relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:group-hover:translate-x-0 lg:group-hover:left-full transition-all duration-500 flex flex-col justify-center items-center">
           <span className="totalCount text-3xl md:text-5xl lg:text-8xl">{totalCountOfInstitution}</span>
