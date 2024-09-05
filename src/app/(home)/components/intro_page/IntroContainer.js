@@ -14,7 +14,7 @@ const IntroCotainer = ({ turnOnMap, getData, getDataForMarker, pushIntroToAbout,
   //     }, 60000);
   //   }
   // }, [mapLoaded]);
-
+ 
   useEffect(() => {
     function numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -50,7 +50,7 @@ const IntroCotainer = ({ turnOnMap, getData, getDataForMarker, pushIntroToAbout,
               <IntroText introtext={introtext} />
               <ButtonWrapper pushIntroToAbout={pushIntroToAbout} zurKarteBtnRef={zurKarteBtnRef} onClickReady={onClickReady} ready={ready} introbtn={introbtn} />
             </div>
-            <div className="flex-grow w-full h-full flex justify-center items-center font-jetBrainsMono">
+            <div className="flex-grow w-full h-full hidden lg:flex justify-center items-center font-jetBrainsMono">
               <TotalCountWrapper onClickReady={onClickReady} totalCountOfInstitution={totalCountOfInstitution} introbtn={introbtn} />
             </div>
           </div>
