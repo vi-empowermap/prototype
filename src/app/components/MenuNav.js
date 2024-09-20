@@ -62,9 +62,9 @@ const MenuNav = ({
               FAQ
             </div>
           )}
-          {pathname !== "/einfacher-sprache" && (
-            <div onClick={() => onClick("/einfacher-sprache")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
-              Einfacher Sprache
+          {pathname !== "/einfache-sprache" && (
+            <div onClick={() => onClick("/einfache-sprache")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+              Einfache Sprache
             </div>
           )}
           {/* <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
@@ -94,6 +94,11 @@ const MenuNav = ({
             {pathname !== "/faq" && (
               <div onClick={() => onClick("/faq")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
                 FAQ
+              </div>
+            )}
+            {pathname !== "/einfache-sprache" && (
+              <div onClick={() => onClick("/einfache-sprache")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+                Einfache Sprache
               </div>
             )}
             {/* <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
