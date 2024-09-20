@@ -187,7 +187,7 @@ const OrgaPage = ({ getData, noLGetData, setTurnOnMap, turnOnMap, panelDatas }) 
                 <div className="flex flex-wrap mt-4">
                   <div>
                     {String(orgaInfo.street).slice(0, 1).toUpperCase()}
-                    {String(orgaInfo.street).trim().slice(1).toLocaleLowerCase()},
+                    {String(orgaInfo.street).trim().slice(1).toLocaleLowerCase()}
                   </div>
                   <div className="ml-1">{String(orgaInfo.zip)}</div>
                 </div>

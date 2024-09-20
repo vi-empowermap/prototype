@@ -15,7 +15,7 @@ const LeafletMap = ({setOpenFilter}) => {
       weight: 2,
       fillColor: getCurrentBundesLand === properties.name.toLowerCase() ? RANDOMCOLOR_LIST[2] :"white",
       opacity: 1,
-      color: "black",
+      color: getCurrentBundesLand === properties.name.toLowerCase() ? "rgb(0, 0, 0)" : "rgb(200, 200, 200)",
       fillOpacity: 1
       // dashArray: "0",
     };
