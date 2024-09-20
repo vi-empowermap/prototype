@@ -8,6 +8,10 @@ import { MAPTILELAYER } from "../../constant/mapInfo";
 import { useSearchParams } from "next/navigation";
 import germanyGeoJson from "../../../utils/json/germany.json";
 import {geoJSON} from "leaflet";
+
+
+const MAP_DEFAULT_ZOOM_VALUE = 6
+
 /* Event: if cancel selection of marker */
 const LocationFinderDummy = ({ doubleScreenTouched }) => {
   const searchParams = useSearchParams();
@@ -138,7 +142,7 @@ const MapController = ({ setViewAtomValue }) => {
           const errorCallback = (error) => {
             setGeoLocationPermissionError(true);
             // error handling if bestimmung is on but you turn off the geolocation permission
-            map.setView([51.1657, 10.4515], 5);
+            map.setView([51.1657, 10.4515], MAP_DEFAULT_ZOOM_VALUE);
           };
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -146,7 +150,7 @@ const MapController = ({ setViewAtomValue }) => {
             alert("Geolocation is not supported by this browser.");
           }
         }else{
-          map.setView([51.1657, 10.4515], 5);
+          map.setView([51.1657, 10.4515], MAP_DEFAULT_ZOOM_VALUE);
         }
       
       // const geoPermissionCheck = localStorage.getItem("padlas_standortbestimmung");
@@ -181,7 +185,7 @@ const MapController = ({ setViewAtomValue }) => {
 
   useEffect(() => {
     if(getOrgaFilterMapCenter){
-      map.setView([51.1657, 10.4515], 5);
+      map.setView([51.1657, 10.4515], MAP_DEFAULT_ZOOM_VALUE);
     setOrgaFilterMapCenter(false)
     } 
     

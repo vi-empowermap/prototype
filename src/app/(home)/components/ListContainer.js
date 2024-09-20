@@ -3,7 +3,7 @@ import ListBox from "./ListBox";
 import { clikedMarkerAtom, readyAniAtom } from "@/app/utils/state";
 import { useEffect, useRef } from "react";
 
-const ListContainer = ({onTurOnMap, turnOnMap, doubleScreenTouched, getData, bundeslandtext, stadtText, noLGetData }) => {
+const ListContainer = ({onTurOnMap, turnOnMap, doubleScreenTouched, getData, bundeslandtext, stadtText, noLGetData, listBtnText }) => {
   const ready = useRecoilValue(readyAniAtom)
   const listContainerRef = useRef(null)
   const getClikedMarkerAtom = useRecoilValue(clikedMarkerAtom);
@@ -19,7 +19,7 @@ const ListContainer = ({onTurOnMap, turnOnMap, doubleScreenTouched, getData, bun
         {getData.map((value, index) => {
           return <ListBox key={index} index={index} value={value} bundeslandtext={bundeslandtext} stadtText={stadtText} />;
         })}
-        <div onClick={onTurOnMap} className="mt-4 w-full py-4 px-2 text-lg font-jetBrainsMono bg-white border round border-black rounded-lg select-none cursor-pointer active:bg-black lg:hover:bg-black active:text-white lg:hover:text-white transition-all">Zeige Organisationen ohne Verortung</div>
+        <div onClick={onTurOnMap} className="mt-4 w-full py-4 px-2 text-lg font-jetBrainsMono bg-white border round border-black rounded-lg select-none cursor-pointer active:bg-black lg:hover:bg-black active:text-white lg:hover:text-white transition-all">{listBtnText}</div>
       </div>
     </div>
   );

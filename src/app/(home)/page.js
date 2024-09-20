@@ -25,8 +25,10 @@ const getKirbyPanelData = async () => {
           // list info
           bundeslandinfo: true,
           stadtinfo: true,
+          list_button_text: true,
           // minimap navigation info
           minimaptitle: true,
+          minimap_geolocation_button: true,
           verortungbtntext: true,
           mitverortungbtntext: true,
           centerbtntext: true,
@@ -51,7 +53,8 @@ const getKirbyPanelData = async () => {
           // filter Btn Text
           fsearch: true,
           freset: true,
-         
+          // Error Message
+          notfound_location: true,
 
         }
       }
