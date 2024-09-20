@@ -197,7 +197,7 @@ const Wrapper = ({
               <LeafletMap doubleScreenTouched={doubleScreenTouched} data={getData} getDataForMarker={getDataForMarker} setData={setData} />
               {!Boolean(search) && (
                 <div className="absolute bottom-6 left-4 flex items-end select-none pointer-events-none">
-                  <div id="leaflet_minimap_container" className={`relative ${openMiniMap ? "pt-10" : "pt-10"} hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "h-[calc(3vw+440px)]" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden pointer-events-auto`}>
+                  <div id="leaflet_minimap_container" className={`relative ${openMiniMap ? "pt-10" : "pt-10"} hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "h-[calc(3vw+410px)]" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden pointer-events-auto`}>
                     {openMiniMap && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.minimaptitle}</div>}
                     {openMiniMap && (
                       <>
