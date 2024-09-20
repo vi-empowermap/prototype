@@ -63,14 +63,14 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
     <div onClick={() => onClick(value)} className={`listbox w-full relative z-[${index}] group flex items-start group justify-start ${ready ? "translate-y-0 opacity-100 " : "translate-y-[150%] opacity-0"} font-jetBrainsMono font-medium cursor-pointer`}>
       {value.visible && value.filterVisible && (
         <>
-          <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }} className="w-fit h-fit flex flex-col gap-4 justify-center items-center border border-r-0 p-1 -mt-14 lg:group-hover:-translate-y-6 transition-all duration-300">
+          <div style={{ backgroundColor: `${getClikedMarkerAtom === value.id ? value.bgColor : "white"}`, borderColor: `${value.bgColor}` }} className="w-fit h-fit flex flex-col gap-4 justify-center items-center border border-r-0 p-1 -mt-14 lg:group-hover:-translate-y-6 transition-all duration-300 rounded-tl-xl rounded-bl-xl">
             {/* {value.themenschwerpunkt &&
               value.themenschwerpunkt.slice(0, 1).map((val2, idx) => {
                 return <ListBoxIcon key={idx} thema={val2} />;
               })} */}
             {value.themenschwerpunkt && <ListBoxIcon thema={value.themenschwerpunkt[value.themenschwerpunkt_list_icon]} color={getClikedMarkerAtom === value.id ? "white" : value.bgColor} />}
           </div>
-          <div style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }} className={`flex-1 min-h-44 max-h-44 lg:min-h-64 lg:max-h-64 overflow-hidden border cursor-pointer p-2 rounded-r-3xl rounded-b-3xl -mt-14 relative lg:group-hover:-translate-y-6 transition-all group duration-300 bg-white`}>
+          <div style={{ color: `${value.bgColor}`, borderColor: `${value.bgColor}` }} className={`flex-1 min-h-44 max-h-44 lg:min-h-52 lg:max-h-52 overflow-hidden border cursor-pointer p-2 rounded-r-3xl rounded-b-3xl -mt-14 relative lg:group-hover:-translate-y-6 transition-all group duration-300 bg-white`}>
             <div
               style={{
                 background: `linear-gradient(0deg, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.7) 0%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.4) 10%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.1) 20%, rgba(${value.bgColor.slice(
@@ -78,9 +78,9 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
                   value.bgColor.length - 1
                 )},0.05) 25%, rgba(${value.bgColor.slice(4, value.bgColor.length - 1)},0.01) 28%, rgba(255,255,255,0) 30%)`,
               }}
-              className="absolute top-0 left-0 pointer-events-none select-none bg-black w-full h-full translate-y-1/4 opacity-0 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-500 "
+              className="absolute top-0 left-0 pointer-events-none select-none bg-black w-full h-full translate-y-1/4 opacity-0 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-500"
             ></div>
-            <div style={{ fontSize: `${RANDOM_FONT_LIST_SIZE[value.font]}px` }} className={`mb-4 ${value.font} flex items-center h-16`}>
+            <div style={{ fontSize: `${RANDOM_FONT_LIST_SIZE[value.font]}px` }} className={`mb-3 ${value.font} flex items-center h-12`}>
               <div className="leading-none">
                 {String(value.organameshortform).slice(0, 6)}
                 {String(value.organameshortform).length > 6 && "..."}
