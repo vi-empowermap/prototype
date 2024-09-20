@@ -40,6 +40,8 @@ const Filtern = ({
   categories,
   placeholdertext,
   panelTexts,
+  geoLocationtext,
+  geoLocationErrorMessage
 }) => {
   const [openFilter, setOpenFilter] = useState(false);
   const filterContainer = useRef(null);
@@ -696,7 +698,7 @@ const Filtern = ({
                   className="h-[calc(3vw+440px)] w-full flex justify-center relative"
                 >
                   <DynamicMiniMap setOpenFilter={setOpenFilter} />
-                  <GeolocationAlert ready={ready} />
+                  <GeolocationAlert ready={ready} text={geoLocationtext} errorMessage={geoLocationErrorMessage} />
                 </div>
               </div>
             )}

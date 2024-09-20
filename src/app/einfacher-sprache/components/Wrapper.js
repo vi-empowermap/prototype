@@ -24,9 +24,6 @@ const Wrapper = ({
             <div className="text-2xl font-medium mb-4">{data["einfacher_title"]}</div>
             <div dangerouslySetInnerHTML={{__html: `${marked.parse(parseKirbyTags(data["einfacher_text"]))}`}} className="markdown_text lg:columns-2 gap-10 font-jetBrainsMonoLight whitespace-break-spaces"></div>
           </div>
-          
-          
-         
         </div>
       </div>
     </div>

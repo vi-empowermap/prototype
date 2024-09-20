@@ -97,7 +97,7 @@ const getKirbyData = async () => {
       themenschwerpunkt: true,
       artderorganisation: true,
       zielgruppe: true,
-      onlineresourcen: true,
+      // onlineresourcen: true,
       sprachunterstutzung: true,
       angebote:true,
       archivoraktiv: true,

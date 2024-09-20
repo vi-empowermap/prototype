@@ -182,7 +182,7 @@ const Wrapper = ({
             {/* <div className="w-[44px] h-[44px] border">t</div>
             <div className="w-[44px] h-[44px] border">t</div> */}
             <Search turnOnMap={turnOnMap} getData={getData} setData={setData} setDataForMarker={setDataForMarker} placeholdertext={panelDatas.placeholdersearch} resetText={panelDatas.freset} />
-            <Filtern ready={ready} onTurOnMap={onTurOnMap} turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} panelTexts={panelDatas} resetText={panelDatas.freset} />
+            <Filtern ready={ready} onTurOnMap={onTurOnMap} turnOnMap={turnOnMap} getData={getData} setData={setData} categories={categories} placeholdertext={panelDatas.placeholderfilter} panelTexts={panelDatas} resetText={panelDatas.freset} geoLocationtext={panelDatas["minimap_geolocation_button"]} geoLocationErrorMessage={panelDatas["notfound_location"]} />
           </div>
         </NavContainer>
         <MapSubContainer search={search} turnOnMap={turnOnMap} orgaMapSize={orgaMapSize} ready={ready}>
