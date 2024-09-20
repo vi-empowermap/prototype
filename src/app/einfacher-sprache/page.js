@@ -34,16 +34,8 @@ const getKirbyPanelData = async () => {
       select: {
         content:{
           select: {
-            about_title:true,
-            about_text: true,
-            contributors: true,
-            contributors_title: true,
-            contact_title: true,
-            contact_email: true,
-            contact_phone: true,
-            contact_street: true,
-            contact_zip: true,
-            contact_city: true,
+            einfacher_title: true,
+            einfacher_text: true,
              
           }
         }
@@ -58,6 +50,7 @@ const getKirbyPanelData = async () => {
  
     return data
   };
+
 
 const Page = async () => {
     const kirbyPanelData = await getKirbyPanelData();

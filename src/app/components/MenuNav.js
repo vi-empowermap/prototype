@@ -62,6 +62,11 @@ const MenuNav = ({
               FAQ
             </div>
           )}
+          {pathname !== "/einfacher-sprache" && (
+            <div onClick={() => onClick("/einfacher-sprache")} className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
+              Einfacher Sprache
+            </div>
+          )}
           {/* <div className="font-medium text-xl border-b border-black px-2 py-2 last:border-b-0 hover:bg-black hover:text-white transition-all whitespace-nowrap text-center lg:text-start">
             <Translator />
           </div> */}
