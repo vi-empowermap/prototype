@@ -91,6 +91,10 @@ input[type="checkbox"] {
     * {
         @apply selection:bg-emerald-300
     }
+
+    .markdown_text a {
+        @apply text-[rgb(166,106,33)]
+    }
 }
 
 @layer components{
