@@ -32,7 +32,7 @@ const Wrapper = ({
                 {
                   /* return <div key={v} style={{ backgroundImage: `url(${process.env.KB_FOR_FILE}/@/file/${String(yaml.load(v))})` }} className="w-32 aspect-square bg-cover bg-center bg-no-repeat bg-emerald-400"></div> */
                 }
-                return <img key={v} src={`${process.env.KB_FOR_FILE}/@/file/${String(yaml.load(v))}`} className="w-auto h-40 bg-emerald-400"></img>;
+                return <img key={v} src={`${process.env.KB_FOR_FILE}/@/file/${String(yaml.load(v))}`} className="w-auto max-w-full h-40 object-contain bg-white"></img>;
               })}
             </div>
           </div>
