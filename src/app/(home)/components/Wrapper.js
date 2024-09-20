@@ -209,7 +209,7 @@ const Wrapper = ({
                       </>
                     )}
                     {openMiniMap && <DynamicMiniMap />}
-                    {openMiniMap && <GeolocationAlert ready={ready} />}
+                    {openMiniMap && <GeolocationAlert ready={ready} text={panelDatas["minimap_geolocation_button"]} errorMessage={panelDatas["notfound_location"]} />}
                     <ControllerBtn open={openMiniMap} setOpen={setOpenMiniMap} text={panelDatas.minimaptitle} />
                   </div>
                   <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-10 pointer-events-auto`}>
@@ -251,7 +251,7 @@ const Wrapper = ({
           )}
         </MapSubContainer>
       </MapContainerHome>
-      <ListContainer onTurOnMap={onTurOnMap} stadtText={panelDatas.stadtinfo} bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} noLGetData={[...kqlDataResultNoLocation]} />
+      <ListContainer onTurOnMap={onTurOnMap} listBtnText={panelDatas["list_button_text"]} stadtText={panelDatas.stadtinfo} bundeslandtext={panelDatas.bundeslandinfo} turnOnMap={turnOnMap} doubleScreenTouched={doubleScreenTouched} getData={getData} clickedItemsList={clickedItemsList} noLGetData={[...kqlDataResultNoLocation]} />
       {/* Orga page */}
       <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} />
       {/* <OrgaPage getData={getData} noLGetData={[...kqlDataResultNoLocation, ...dataN]} turnOnMap={turnOnMap} setTurnOnMap={setTurnOnMap} panelDatas={panelDatas} /> */}
