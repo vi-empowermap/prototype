@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning={true}>
       <head>
       <link rel="icon" href="/images/favicon.ico" sizes="any" />
-      <meta name="title" content={"We want them Back! makes information about Ancestral Remains of ancestors from colonial contexts accessible and visible."} />
+     
       </head>
       <body suppressHydrationWarning={true} className={inter.className}>
         <RecoilContextProvider>{children}</RecoilContextProvider>

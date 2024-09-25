@@ -91,7 +91,7 @@ const ListBox = ({ index, value, bundeslandtext, stadtText }) => {
               <div className="text-stone-950 font-medium text-sm">
                 {/* {String(bundeslandtext).slice(0, 1).toUpperCase()}
                 {String(bundeslandtext).slice(1).toLocaleLowerCase()}:  */}
-                {String(bundeslandBP[value.bundesland]).slice(0, 1).toUpperCase() + String(bundeslandBP[value.bundesland]).slice(1).toLocaleLowerCase()},
+                {String(bundeslandBP[value.bundesland]).slice(0, 1).toUpperCase() + String(bundeslandBP[value.bundesland]).slice(1)},
               </div>
             )}
             {!getOnSearchFilter && (
