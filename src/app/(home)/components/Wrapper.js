@@ -198,7 +198,7 @@ const Wrapper = ({
               {!Boolean(search) && (
                 <div className="absolute bottom-6 left-4 flex items-end select-none pointer-events-none">
                   <div id="leaflet_minimap_container" className={`relative ${openMiniMap ? "pt-10" : "pt-10"} hidden lg:block w-[calc(3vw+310px)] ${openMiniMap ? "h-[calc(3vw+410px)]" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden pointer-events-auto`}>
-                    {openMiniMap && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.minimaptitle}</div>}
+                    {openMiniMap && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-lg leading-5 font-semibold">{panelDatas.minimaptitle}</div>}
                     {openMiniMap && (
                       <>
                         {getCurrentBundesLand !== "" ? (
@@ -213,12 +213,12 @@ const Wrapper = ({
                     <ControllerBtn open={openMiniMap} setOpen={setOpenMiniMap} text={panelDatas.minimaptitle} />
                   </div>
                   <div className={`relative justify-center items-center hidden pt-10 lg:flex w-[calc(3vw+130px)] ${openVerotung ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-10 pointer-events-auto`}>
-                    {openVerotung && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
+                    {openVerotung && <div className="absolute w-24 top-0 left-0 py-2 px-3 z-[1000] text-lg leading-5 font-semibold">{panelDatas.verortungbtntext}</div>}
                     {openVerotung && <div onClick={onTurOnMap} className="cursor-pointer w-1/2 aspect-square bg-white hover:bg-black rounded-full border border-black"></div>}
                     <ControllerBtn open={openVerotung} setOpen={setOpenVerortung} text={panelDatas.verortungbtntext} />
                   </div>
                   <div className={`relative justify-center items-center hidden pt-7 pb-3 lg:flex w-[calc(3vw+70px)] ${openCenter ? "aspect-square" : "h-fit"} bg-white rounded-2xl border border-black z-[1000] overflow-hidden -ml-6 pointer-events-auto`}>
-                    {openCenter && <div className="absolute w-24 top-0 left-0 py-4 px-3 z-[1000] text-xl leading-5 font-semibold">{panelDatas.centerbtntext}</div>}
+                    {openCenter && <div className="absolute w-24 top-0 left-0 py-2 px-3 z-[1000] text-lg leading-5 font-semibold">{panelDatas.centerbtntext}</div>}
                     {openCenter && (
                       <div onClick={() => setSetViewAtom({ pos: [51.1657, 10.4515], name: "start" })} className="cursor-pointer w-1/3 aspect-square flex justify-center items-center stroke-black">
                         <CenterIcon style={{ strokeWidth: ICON_STROKE_SIZE, width: ICON_SIZE, height: ICON_SIZE }} />
