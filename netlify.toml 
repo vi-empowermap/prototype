@@ -1,14 +1,14 @@
 [[redirects]]
-  from = "/api/*"
-  to = "https://cms.padlas.de/api/:splat"
+  from = "/signup"
+  to = "https://cms.padlas.de/api/site"
   status = 200
   force = true
 
 [[headers]]
-  for = "/*"
+  for = "/signup" # signup 경로에 대한 헤더 설정
   [headers.values]
-    Access-Control-Allow-Origin = "https://padlas.de"
+    Access-Control-Allow-Origin = "https://padlas.de"  # 정확한 도메인
     Access-Control-Allow-Methods = "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Headers = "Content-Type, Authorization, X-CSRF"
     Access-Control-Allow-Credentials = "true"
     Referrer-Policy = "strict-origin-when-cross-origin"
