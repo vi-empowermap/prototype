@@ -1,5 +1,8 @@
 # Empowermap Frontend Deployment update
 
+
+
+
 ## TODOS
 
 - [ ] Update Marker Icon
@@ -37,3 +40,10 @@ https://www.google.com/maps/search/?api=1&query=<lat>,<lng>
 First, you’ll want to double-check your DNS settings.
 
 If you’re using external DNS 994, your A Record for your bare domain should point to 75.2.60.5, while the CNAME record for your subdomain www should have the value [sitename].netlify.app within the configuration at either your registrar or other DNS provider.
+
+
+
+
+### Netlify CORS issue client side fetch
+
+- [ref1](https://answers.netlify.com/t/client-side-fetch-cors-issue/43202/3)

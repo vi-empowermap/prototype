@@ -1,5 +1,4 @@
-[[redirects]]
-  force = true
-  from = "/scripts/x.js"
-  status = 200
-  to = "https://www.padlas.de/scripts/x.js"
+[[headers]]
+ for = "/*"
+ [headers.value]
+   Referrer-Policy = "strict-origin-when-cross-origin"
