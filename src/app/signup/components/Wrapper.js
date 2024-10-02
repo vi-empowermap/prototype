@@ -3,14 +3,17 @@
 import { useEffect } from "react";
 
 
-const Wrapper = ({errorMessageList :errorMessageListP, pageTextList}) => {
+const Wrapper = ({errorMessageList :errorMessageListP, pageTextList, test}) => {
   const authEmail = process.env.KB_USER;
   const authPassword = process.env.KB_PASS;
   const kirbyAPI = process.env.KB_API_API;
 
-
+useEffect(() => {
+  console.log(test)
+},[])
 
 useEffect(() => {
+
  (async () => {
  /* ---- You need to use Fetch to handle KIRBY API ---- */
   /* Fetch Header Info */
