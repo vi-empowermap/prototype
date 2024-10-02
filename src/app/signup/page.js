@@ -100,7 +100,7 @@ const Page = async () => {
       
     return (
       
-        <Wrapper errorMessageList={errorMessageList} pageTextList={pageTextList} />
+        <Wrapper errorMessageList={errorMessageList} pageTextList={pageTextList} test={data} />
 
      
     )
