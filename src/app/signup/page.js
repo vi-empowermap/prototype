@@ -76,7 +76,27 @@ const Page = async () => {
         resetbtn: kirbydata.result.content.resetbtn,
       }
 
-      
+
+      const userInfo = {
+        authEmail: authEmail,
+        authPassword:authPassword
+    }
+  
+    /* Buffer is for NODEJS so PHP have to use btoa to handle Binary data */
+    const encodedAuthString = Buffer.from(`${userInfo.authEmail}:${userInfo.authPassword}`).toString("base64");
+    const headerAuthString = `Basic ${encodedAuthString}`;
+      const res = await fetch(`${kirbyAPI}/api/site`, {
+        method: "GET",
+        headers: {
+          "Authorization": headerAuthString,
+          "Content-Type": "application/json",
+
+        },
+        cache: "no-store",
+     
+      })
+      const data = await res.json()
+      console.log(data)
       
     return (
       
