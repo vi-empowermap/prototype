@@ -85,22 +85,33 @@ const Page = async () => {
     /* Buffer is for NODEJS so PHP have to use btoa to handle Binary data */
     const encodedAuthString = Buffer.from(`${userInfo.authEmail}:${userInfo.authPassword}`).toString("base64");
     const headerAuthString = `Basic ${encodedAuthString}`;
-      const res = await fetch(`${kirbyAPI}/api/site`, {
-        method: "GET",
-        headers: {
-          "Authorization": headerAuthString,
-          "Content-Type": "application/json",
+    const bodyData2 = {
+      email: "org2@gmail.com",
+      password: "123123123",
+      role: "Orga",
+      language: "en",
+      content: {
+        secret_key: "4ms0bnZzkL"
+      }
 
-        },
-        cache: "no-store",
-     
-      })
-      const data = await res.json()
-      console.log(data)
+    }
+    const res = await fetch(`${kirbyAPI}/api/users`, {
+      method: "POST",
+      headers: {
+        "Authorization": headerAuthString,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bodyData2),
+      cache: "no-store",
+
+    })
+
+    const jsonData = await res.json()
+      console.log(jsonData)
       
     return (
       
-        <Wrapper errorMessageList={errorMessageList} pageTextList={pageTextList} test={data} />
+        <Wrapper errorMessageList={errorMessageList} pageTextList={pageTextList} test={jsonData} />
 
      
     )
