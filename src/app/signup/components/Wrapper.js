@@ -2,10 +2,11 @@
 
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const Wrapper = ({pageTextList, errorMessageList, kirbyAPI, userList, data}) => {
   const {register, setValue, getValues, handleSubmit} = useForm()
-  
+  const router = useRouter();
   useEffect(() => {
     console.log(errorMessageList)
   },[])
@@ -16,17 +17,31 @@ const Wrapper = ({pageTextList, errorMessageList, kirbyAPI, userList, data}) => 
     console.log(userList)
     console.log(data)
 
+    const checkKey = data["data"]["content"]["randomcode"] !== inputData["key"]
+    const passwordConfirmation = (inputData["password"] !== inputData["password2"])
     const emailCheck = userList.data.some((v) => v.email === inputData["email"])
 
-    if(inputData["password"] !== inputData["password2"]){
+    // check secret key 
+    if(checkKey){
+      console.log("wrong key")
+    }
+
+    if(passwordConfirmation){
       // show error message confirmation
         console.log("wrong password")
-
     }
     if(emailCheck){
       // show error message email
       console.log("wrong email")
     }
+
+    const checkKeyOk = data["data"]["content"]["randomcode"] === inputData["key"]
+    const passwordConfirmationOk = (inputData["password"] === inputData["password2"])
+    const emailCheckOk = userList.data.some((v) => v.email !== inputData["email"])
+      if(checkKeyOk && passwordConfirmationOk && emailCheckOk){
+        router.push(`/signup/create?email=${inputData["email"]}&password=${inputData["password"]}`)
+      }
+    
   }
 
   return (

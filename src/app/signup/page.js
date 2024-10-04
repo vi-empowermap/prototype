@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { fetchDataOriginAPI } from "../utils/hooks/useFetchData";
 import "./assets/style.css"
 import Wrapper from "./components/Wrapper";
@@ -8,6 +9,7 @@ const kirbyAPI = process.env.KB_API_API;
 
 
 const Page = async () => {
+  // redirect(`${kirbyAPI}/panel`)
     const bodyData = {
         query: "page('user')",
         select: {
