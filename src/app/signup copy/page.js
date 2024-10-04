@@ -1,4 +1,5 @@
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import { fetchDataApi } from "../utils/hooks/useFetchApi";
 import { fetchDataOriginAPI } from "../utils/hooks/useFetchData";
 import "./assets/style.css"
 import Wrapper from "./components/Wrapper";
@@ -9,7 +10,8 @@ const kirbyAPI = process.env.KB_API_API;
 
 
 const Page = async () => {
-  // redirect(`${kirbyAPI}/panel`)
+ 
+   
     const bodyData = {
         query: "page('user')",
         select: {
@@ -66,11 +68,14 @@ const Page = async () => {
         forgetpasswordbtn: kirbydata.result.content.forgetpasswordbtn,
         forgetpagename: kirbydata.result.content.forgetpagename,
         forgetpasswordbtn3: kirbydata.result.content.forgetpasswordbtn3,
+        createuserbtn: kirbydata.result.content.createuserbtn,
         forgetpagename: kirbydata.result.content.forgetpagename,
         forgetpasswordbtn3: kirbydata.result.content.forgetpasswordbtn3,
+        createuserbtn: kirbydata.result.content.createuserbtn,
         resetpagename: kirbydata.result.content.resetpagename,
         resetbtn: kirbydata.result.content.resetbtn,
       }
+
 
       const userInfo = {
         authEmail: authEmail,
@@ -80,55 +85,33 @@ const Page = async () => {
     /* Buffer is for NODEJS so PHP have to use btoa to handle Binary data */
     const encodedAuthString = Buffer.from(`${userInfo.authEmail}:${userInfo.authPassword}`).toString("base64");
     const headerAuthString = `Basic ${encodedAuthString}`;
+    const bodyData2 = {
+      email: "org2@gmail.com",
+      password: "123123123",
+      role: "Orga",
+      language: "en",
+      content: {
+        secret_key: "4ms0bnZzkL"
+      }
 
-// Site Data
-    const res2 = await fetch(`${kirbyAPI}/api/site`, {
-      method: "GET",
-      headers: {
-        "Authorization": headerAuthString,
-        "Content-Type": "application/json",
-
-      },
-      cache: "no-store",
-   
-    })
-
-    const data = await res2.json()
-
-    /* Get userList */
+    }
     const res = await fetch(`${kirbyAPI}/api/users`, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Authorization": headerAuthString,
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(bodyData2),
       cache: "no-store",
+
     })
-    const userList = await res.json()
 
-    const resUsers = await fetch(`${kirbyAPI}/api/users?select=content,role`, {
-      method: "GET",
-      headers: {
-        "Authorization": headerAuthString,
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    })
-    const usersList = await resUsers.json()
-    
-    const currentOgaCounts = usersList.data.filter((v) => v.role.name === "orga")
-  
-    const currentKeyOraCounts = currentOgaCounts.filter((v) => v.content.secret_key ===
-      data.data.content.randomcode)
-
-    
-   
-
-    
-
+    const jsonData = await res.json()
+      console.log(jsonData)
+      
     return (
       
-       <Wrapper pageTextList={pageTextList} errorMessageList={errorMessageList} kirbyAPI={kirbyAPI} userList={userList} data={data} currentKeyOraCounts={currentKeyOraCounts.length} />
+        <Wrapper errorMessageList={errorMessageList} pageTextList={pageTextList} test={jsonData} />
 
      
     )

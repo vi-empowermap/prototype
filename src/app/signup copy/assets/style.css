@@ -1,0 +1,122 @@
+* { margin: 0; padding: 0; box-sizing: border-box;}
+body {background-color: "#ececec";}
+
+.disabled_message{
+  text-align: center;
+  color: rgb(220, 33, 33);
+  font-weight: 500;
+  font-size: 16px;
+  display: none;
+}
+
+button:disabled{
+  color: #cbcbcb;
+  background-color: #efefef;
+}
+
+.user_container{
+  width: 100vw;
+  height: 100vh;
+  background-color: #ececec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* ------ Wrapper ------ */
+
+.default_wrapper{
+  width: 600px;
+  height: fit-content;
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.user_wrapper {}
+
+/* Forget Password */
+.password_wrapper{display: none;}
+.password_wrapper2{display: none;}
+/* Reset page */
+.reset_wrapper{display: none;}
+
+
+
+
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.user_form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 15px;
+}
+
+.user_input {
+  width: 100%;
+  padding: 30px 20px;
+  height: 40px;
+  border-radius: 10px;
+  border: 0px;
+  font-size: 16px;
+}
+
+.user_text {
+  background: white;
+  border: 2px solid #ececec;
+}
+
+.user_text:focus{
+  outline-color: #24a0ed;
+}
+
+.user_btn {
+  color: #24a0ed;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.user_createuser_btn {
+  background-color: #24a0ed;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.user_login{
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+  gap: 10px;
+  font-size: 16px;
+  color: #555;
+}
+.user_login a {
+  color: #24a0ed;
+  text-decoration: underline;
+}
+.user_password{
+  color: #24a0ed;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.error_message{
+  font-size: 13px;
+  color: red;
+  padding: 0 10px;
+  display: none;
+}
+
+
+

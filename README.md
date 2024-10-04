@@ -47,3 +47,4 @@ If you’re using external DNS 994, your A Record for your bare domain should po
 ### Netlify CORS issue client side fetch
 
 - [ref1](https://answers.netlify.com/t/client-side-fetch-cors-issue/43202/3)
+Solution1 : When using SSR (Server-Side Rendering), server-to-server requests don’t trigger CORS issues because they don’t involve the browser. Instead, the server directly communicates with external APIs or services, allowing you to bypass CORS restrictions.
