@@ -83,7 +83,7 @@ const CreatePage = async (props) => {
             redirect(redirecting)
           }
     }else{
-        console.log("Something wrong")
+      
         return <div>Wfff</div>
     }
 
