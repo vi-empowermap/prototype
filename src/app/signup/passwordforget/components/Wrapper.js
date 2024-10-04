@@ -17,7 +17,6 @@ const WrapperForget = ({pageTextList, userList, errorMessageList}) => {
                 message: errorMessageList["notFoundEmail"]
             })
         }else{
-            console.log(checkEmailOk)
             router.push(`/signup/passwordforget/answer?userid=${checkEmailOk["id"]}`)
         }
     }
