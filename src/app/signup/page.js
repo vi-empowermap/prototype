@@ -66,10 +66,8 @@ const Page = async () => {
         forgetpasswordbtn: kirbydata.result.content.forgetpasswordbtn,
         forgetpagename: kirbydata.result.content.forgetpagename,
         forgetpasswordbtn3: kirbydata.result.content.forgetpasswordbtn3,
-        createuserbtn: kirbydata.result.content.createuserbtn,
         forgetpagename: kirbydata.result.content.forgetpagename,
         forgetpasswordbtn3: kirbydata.result.content.forgetpasswordbtn3,
-        createuserbtn: kirbydata.result.content.createuserbtn,
         resetpagename: kirbydata.result.content.resetpagename,
         resetbtn: kirbydata.result.content.resetbtn,
       }
@@ -107,11 +105,30 @@ const Page = async () => {
       cache: "no-store",
     })
     const userList = await res.json()
+
+    const resUsers = await fetch(`${kirbyAPI}/api/users?select=content,role`, {
+      method: "GET",
+      headers: {
+        "Authorization": headerAuthString,
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    })
+    const usersList = await resUsers.json()
+    
+    const currentOgaCounts = usersList.data.filter((v) => v.role.name === "orga")
+  
+    const currentKeyOraCounts = currentOgaCounts.filter((v) => v.content.secret_key ===
+      data.data.content.randomcode)
+
+    
+   
+
     
 
     return (
       
-       <Wrapper pageTextList={pageTextList} errorMessageList={errorMessageList} kirbyAPI={kirbyAPI} userList={userList} data={data} />
+       <Wrapper pageTextList={pageTextList} errorMessageList={errorMessageList} kirbyAPI={kirbyAPI} userList={userList} data={data} currentKeyOraCounts={currentKeyOraCounts.length} />
 
      
     )

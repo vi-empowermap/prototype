@@ -4,18 +4,13 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-const Wrapper = ({pageTextList, errorMessageList, kirbyAPI, userList, data}) => {
-  const {register, setValue, getValues, handleSubmit} = useForm()
+const Wrapper = ({pageTextList, errorMessageList, kirbyAPI, userList, data, currentKeyOraCounts}) => {
+  const {register, setValue, getValues, handleSubmit, setError, formState: { errors }} = useForm()
   const router = useRouter();
-  useEffect(() => {
-    console.log(errorMessageList)
-  },[])
-
+  
   const onSubmit = () => {
     const inputData = getValues()
-    console.log(inputData)
-    console.log(userList)
-    console.log(data)
+  
 
     const checkKey = data["data"]["content"]["randomcode"] !== inputData["key"]
     const passwordConfirmation = (inputData["password"] !== inputData["password2"])
@@ -23,56 +18,67 @@ const Wrapper = ({pageTextList, errorMessageList, kirbyAPI, userList, data}) => 
 
     // check secret key 
     if(checkKey){
-      console.log("wrong key")
+      setError("key",{
+        type: "manual",
+        message: errorMessageList["wrongkey"]
+      })
+      
     }
 
     if(passwordConfirmation){
       // show error message confirmation
-        console.log("wrong password")
+        setError("password",{
+          type: "manual",
+          message: errorMessageList["passwordConfirmation"]
+        })
     }
+
     if(emailCheck){
       // show error message email
-      console.log("wrong email")
+      setError("email",{
+        type: "manual",
+        message: errorMessageList["existEmail"]
+      })
     }
 
     const checkKeyOk = data["data"]["content"]["randomcode"] === inputData["key"]
     const passwordConfirmationOk = (inputData["password"] === inputData["password2"])
     const emailCheckOk = userList.data.some((v) => v.email !== inputData["email"])
       if(checkKeyOk && passwordConfirmationOk && emailCheckOk){
-        router.push(`/signup/create?email=${inputData["email"]}&password=${inputData["password"]}`)
+        router.push(`/signup/create?email=${inputData["email"]}&password=${inputData["password"]}&key=${inputData["key"]}`)
       }
-    
   }
 
   return (
     <div className="user_container">
       {!data.data["content"]["signupon"] && <div className="p-4 bg-white rounded-lg">{errorMessageList["signupservice"]}</div> }
-      {data.data["content"]["signupon"] && <div className="user_wrapper default_wrapper">
+      {data.data["content"]["signupon"] && data.data["content"]["limitcount"] <= currentKeyOraCounts ? <div className="p-4 bg-white rounded-lg">{errorMessageList["fullcapacity"]}</div>  :
+        <div className="user_wrapper default_wrapper">
         <div className="title">{pageTextList.titlename}</div>
         <div id="disabled_message" className="disabled_message"></div>
         <div>
           <form onSubmit={handleSubmit(onSubmit)} className="user_form">
             <div>
               <input
-                {...register("key")}
+                {...register("key", {required: true})}
                 className="user_input user_text"
                 type="text"
                 placeholder="Secret Key"
               />
-              <div id="secretKeyErrorM" className="error_message"></div>
+              <div className="text-red-500 text-sm">{errors.key && errors.key.message}</div>
             </div>
             <div>
               <input
-                {...register("email")}
+                {...register("email", {required: true})}
                 className="user_input user_text"
                 type="email"
                 placeholder="Email"
               />
-              <div id="userEmailErrorM" className="error_message"></div>
+              <div className="text-red-500 text-sm">{errors.email && errors.email.message}</div>
             </div>
             <div>
               <input
-                {...register("password")}
+                {...register("password", {required: true})}
                 className="user_input user_text"
                 minLength="8"
                 type="password"
@@ -81,16 +87,16 @@ const Wrapper = ({pageTextList, errorMessageList, kirbyAPI, userList, data}) => 
             </div>
             <div>
               <input
-                {...register("password2")}
+                {...register("password2", {required: true})}
                 className="user_input user_text"
                 minLength="8"
                 type="password"
                 placeholder="Confirm Password"
               />
-              <div id="passwordErrorM" className="error_message"></div>
+              <div className="text-red-500 text-sm">{errors.password && errors.password.message}</div>
             </div>
             <button id="signPBtn" className="user_input user_createuser_btn">
-              Sign Up
+              {pageTextList["createuserbtn"]}
             </button>
           </form>
           <div className="user_login">
@@ -104,7 +110,9 @@ const Wrapper = ({pageTextList, errorMessageList, kirbyAPI, userList, data}) => 
             </div>
           </div>
         </div>
-      </div>}
+      </div>
+      
+      }
     </div>
   );
 };
