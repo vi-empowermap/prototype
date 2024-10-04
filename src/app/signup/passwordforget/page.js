@@ -1,15 +1,12 @@
-import { redirect } from "next/navigation";
-import { fetchDataOriginAPI } from "../utils/hooks/useFetchData";
-import "./assets/style.css"
-import Wrapper from "./components/Wrapper";
+import WrapperForget from "./components/Wrapper"
+
+import "../assets/style.css"
+import { fetchDataOriginAPI } from "@/app/utils/hooks/useFetchData";
 const authEmail = process.env.KB_USER;
 const authPassword = process.env.KB_PASS;
 const kirbyOriginAPI = process.env.KB_API_ORIGIN;
 const kirbyAPI = process.env.KB_API_API;
-
-
-const Page = async () => {
-  // redirect(`${kirbyAPI}/panel`)
+const PasswordForget = async () => {
     const bodyData = {
         query: "page('user')",
         select: {
@@ -81,71 +78,19 @@ const Page = async () => {
     const encodedAuthString = Buffer.from(`${userInfo.authEmail}:${userInfo.authPassword}`).toString("base64");
     const headerAuthString = `Basic ${encodedAuthString}`;
 
-// Site Data
-    const res2 = await fetch(`${kirbyAPI}/api/site`, {
-      method: "GET",
-      headers: {
-        "Authorization": headerAuthString,
-        "Content-Type": "application/json",
-
-      },
-      cache: "no-store",
-   
-    })
-
-    const data = await res2.json()
-
-    /* Get userList */
-    const res = await fetch(`${kirbyAPI}/api/users`, {
-      method: "GET",
-      headers: {
-        "Authorization": headerAuthString,
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    })
-    const userList = await res.json()
-
-    const resUsers = await fetch(`${kirbyAPI}/api/users?select=content,role`, {
-      method: "GET",
-      headers: {
-        "Authorization": headerAuthString,
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    })
-    const usersList = await resUsers.json()
-    
-    const currentOgaCounts = usersList.data.filter((v) => v.role.name === "orga")
-  
-    const currentKeyOraCounts = currentOgaCounts.filter((v) => v.content.secret_key ===
-      data.data.content.randomcode)
-
-    
-
-    // update current length 
-     const bodyData2 = {
-      infototalcount: currentKeyOraCounts.length,
-    }
-    const updateSite = await fetch(`${kirbyAPI}/api/site`, {
-      method: "PATCH",
-      headers: {
-        "Authorization": headerAuthString,
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-      body: JSON.stringify(bodyData2)
-    })
-   
-
-    
-
+     /* Get userList */
+     const res = await fetch(`${kirbyAPI}/api/users`, {
+        method: "GET",
+        headers: {
+          "Authorization": headerAuthString,
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      })
+      const userList = await res.json()
     return (
-      
-       <Wrapper pageTextList={pageTextList} errorMessageList={errorMessageList} kirbyAPI={kirbyAPI} userList={userList} data={data} currentKeyOraCounts={currentKeyOraCounts.length} />
-
-     
+        <WrapperForget userList={userList} pageTextList={pageTextList} errorMessageList={errorMessageList} />
     )
 }
 
-export default Page;
+export default PasswordForget

@@ -103,8 +103,7 @@ const Wrapper = ({pageTextList, errorMessageList, kirbyAPI, userList, data, curr
             <div>{pageTextList.loginbtn2}</div>
             <a href={`${kirbyAPI}/panel`}>{pageTextList.loginbtn}</a>
           </div>
-          <div id="forgetPasswordBtn" className="user_login">
-            <div>{pageTextList.forgetpasswordbtn2}</div>
+          <div onClick={() => router.push(`/signup/passwordforget`)} className="user_login">
             <div className="user_password">
               {pageTextList.forgetpasswordbtn}
             </div>
