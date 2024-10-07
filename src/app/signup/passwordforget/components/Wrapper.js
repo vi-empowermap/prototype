@@ -35,7 +35,7 @@ const WrapperForget = ({pageTextList, userList, errorMessageList}) => {
               <button className="user_input user_createuser_btn">{pageTextList.forgetpasswordbtn3}</button>
             </form>
             <div className="user_login">
-              <div id="createUserBtn" className="createUserBtn_c user_btn">&larr; {pageTextList.createuserbtn}</div>
+              <div onClick={() => router.back()} id="createUserBtn" className="createUserBtn_c user_btn">&larr; {pageTextList.createuserbtn}</div>
             </div>
           </div>
         </div>
