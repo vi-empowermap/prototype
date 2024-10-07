@@ -86,7 +86,7 @@ const CustomMarker = ({ id, title, imageUrl, font, color, getData, setData, artd
         }}
       >
         <Popup closeButton={true} autoPan={false}>
-          <div className="flex flex-col w-fit font-jetBrainsMono font-medium">
+          <div className="flex flex-col w-fit min-w-[150px] max-w-[300px] font-jetBrainsMono font-medium break-all">
             <div style={{ color: color }} className={`flex flex-1 w-fit font-semibold text-sm p-2 pt-4 ${String(imageUrl) === "" && "pt-6"}`}>
               {title}
             </div>
