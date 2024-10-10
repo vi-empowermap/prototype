@@ -1,5 +1,19 @@
 # Empowermap Frontend Deployment update
 
+[[redirects]]
+  from = "/api/*"
+  to = "https://cms.padlas.de/api/:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/api/*" # API 요청 경로에 대해 헤더 적용
+  [headers.values]
+    Access-Control-Allow-Origin = "https://padlas.de"  # 정확한 도메인 설정
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    Access-Control-Allow-Headers = "Content-Type, Authorization, X-CSRF"
+    Access-Control-Allow-Credentials = "true"
+    Referrer-Policy = "strict-origin-when-cross-origin"
 
 
 

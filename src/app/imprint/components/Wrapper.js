@@ -6,39 +6,39 @@ import useSWR from "swr";
 import { useEffect } from "react"
 import { fetchDataOriginAPI } from "@/app/utils/hooks/useFetchData";
 
-// // Explore & Theme Page
-// export const TestData = () => {
-// const authEmail = process.env.KB_USER;
-// const authPassword = process.env.KB_PASS;
-// const kirbyOriginAPI = process.env.KB_API_ORIGIN;
-//   const bodyData = {
-//     query: "page('home')",
-//     select: {
-//       content:{
-//         select: {
-//           webtitle: true,
+// Explore & Theme Page
+export const TestData = () => {
+const authEmail = process.env.KB_USER;
+const authPassword = process.env.KB_PASS;
+const kirbyOriginAPI = process.env.KB_API_ORIGIN;
+  const bodyData = {
+    query: "page('home')",
+    select: {
+      content:{
+        select: {
+          webtitle: true,
          
          
 
-//         }
-//       }
-//     },
+        }
+      }
+    },
    
-//  }
-//   const { data, error, isLoading } = useSWR(
-//     // The key array will be passed to the fetcher as the argument
-//     { url: kirbyOriginAPI, userInfo: { authEmail:authEmail, authPassword:authPassword }, method: "POST", bodyData:bodyData},  // This will be passed as the first argument to the fetcher
-//     fetchDataOriginAPI   // The fetcher function
-//   );
+ }
+  const { data, error, isLoading } = useSWR(
+    // The key array will be passed to the fetcher as the argument
+    { url: kirbyOriginAPI, userInfo: { authEmail:authEmail, authPassword:authPassword }, method: "POST", bodyData:bodyData},  // This will be passed as the first argument to the fetcher
+    fetchDataOriginAPI   // The fetcher function
+  );
 
-//   return {
-//     data,
-//     error,
-//     isLoading
-//   }
+  return {
+    data,
+    error,
+    isLoading
+  }
 
 
-// }
+}
 
 
 const Wrapper = ({
@@ -48,12 +48,12 @@ const Wrapper = ({
   kirbyPanelHomeData,
 }) => {
 
-  // const {isLoading, data:dataSWR} = TestData()
-  // useEffect(() => {
-  //   if(!isLoading){
-  //     console.log(dataSWR)
-  //   }
-  // },[dataSWR])
+  const {isLoading, data:dataSWR} = TestData()
+  useEffect(() => {
+    if(!isLoading){
+      console.log(dataSWR)
+    }
+  },[dataSWR])
  
   return (
     <div className="w-screen min-h-[100svh] lg:min-h-screen h-full bg-white relative pt-[44px] lg:pt-[86px] font-jetBrainsMonoLight">
