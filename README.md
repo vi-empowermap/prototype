@@ -62,3 +62,34 @@ If you’re using external DNS 994, your A Record for your bare domain should po
 
 - [ref1](https://answers.netlify.com/t/client-side-fetch-cors-issue/43202/3)
 Solution1 : When using SSR (Server-Side Rendering), server-to-server requests don’t trigger CORS issues because they don’t involve the browser. Instead, the server directly communicates with external APIs or services, allowing you to bypass CORS restrictions.
+
+
+
+
+### Note
+
+```
+www.padlas.de ist der Internetauftritt der Online-Karte PADlas - Projekte und Initiativen gegen Anti-Schwarzen Rassismus und für die Empowerment Schwarzer Menschen in Deutschland. Die Karte wurde erstellt im Rahmen des Kompetenznetzwerks Anti-Schwarzer Rassismus (KomPAD) bestehend aus dem Each One Teach One e. V. und der Initiative Schwarze Menschen in Deutschland Bund e.V.
+
+Der Internetauftritt von PADlas wird durch Each One Teach One e. V.  gemäß § 5 TMG angeboten:
+Each One Teach One e. V. 
+Togostr. 76
+13351 Berlin
+Vereinsregister: VR 31576B
+Registergericht: Amtsgericht Charlottenburg
+Vertreten durch:
+
+Vorstand von Each One Teach One e. V.
+Kontakt
+Telefon: +49 (0) 30 51304163 
+E-Mail: info@kompad.de / info@eoto-archiv.de
+
+Haftung für Inhalte
+Obwohl wir uns um Aktualität, Vollständigkeit und Richtigkeit der Inhalte unserer Seiten bemühen, können wir hierfür keine Garantie übernehmen. Nach § 7 Absatz 1 TDG sind wir als Diensteanbieter für eigene Inhalte auf unseren Seiten nach den allgemeinen Gesetzen verantwortlich. Eine Verpflichtung zur Überwachung übermittelter oder gespeicherter fremder Informationen besteht jedoch nicht (§§ 8-10 TDG). Sobald uns Rechtsverstöße bekannt werden, werden wir die entsprechenden Inhalte umgehend entfernen. Eine dahingehende Haftung wird jedoch erst ab dem Zeitpunkt der Kenntnis konkreter Rechtsverletzungen übernommen.
+Haftung für Links
+Unsere Seiten enthalten Links auf externe Webseiten Dritter. Auf die Inhalte dieser verlinkten Webseiten haben wir keinen Einfluss. Für die Richtigkeit der Inhalte ist immer der jeweilige Anbieter oder Betreiber verantwortlich, weshalb wir diesbezüglich keinerlei Gewähr übernehmen. Die fremden Webseiten haben wir zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Zum Zeitpunkt der Verlinkung waren keinerlei Rechtsverletzungen erkennbar. Eine ständige Überprüfung sämtlicher Inhalte der von uns verlinkten Seiten ohne tatsächliche Anhaltspunkte für einen Rechtsverstoß können wir nicht leisten. Falls uns Rechtsverletzungen bekannt werden, werden wir die entsprechenden Links sofort entfernen
+
+Gestaltung & Umsetzung:
+(link: https://visual-intelligence.org text: Visual Intelligence )
+
+```
