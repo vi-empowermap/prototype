@@ -12,12 +12,23 @@ const Wrapper = ({
   },
   kirbyPanelHomeData,
 }) => {
-  useEffect(() => {
-    
-   
-  },[])
+ 
+  const onExternalLink = ({path}) => {
+    if(path){
+      if(path !== ""){
+        const aTag = document.createElement("a")
+        aTag.href = `${path}`
+        aTag.target = "_blank"
+        document.body.appendChild(aTag)
+        aTag.click()
+
+        document.body.removeChild(aTag)
+      }
+    }
+  }
   return (
     <div className="w-screen min-h-[100svh] lg:min-h-screen h-full bg-white relative pt-[44px] lg:pt-[86px] font-jetBrainsMonoLight">
+      <a target="_blank"></a>
       <MenuNav kirbyPanelHomeData={kirbyPanelHomeData} />
       <div className="flex justify-center max-w-screen-2xl m-auto">
         <div className="w-full h-fit px-4 lg:px-6 py-10 flex flex-col gap-10 lg:gap-20">
@@ -28,11 +39,11 @@ const Wrapper = ({
           <div className="w-full h-fit">
             <div className="text-2xl font-medium mb-4">{data.contributors_title}</div>
             <div className="flex w-full flex-wrap gap-14">
-              {data["contributors"].map((v) => {
+              {data["contributors"].map((v, idx) => {
                 {
                   /* return <div key={v} style={{ backgroundImage: `url(${process.env.KB_FOR_FILE}/@/file/${String(yaml.load(v))})` }} className="w-32 aspect-square bg-cover bg-center bg-no-repeat bg-emerald-400"></div> */
                 }
-                return <img key={v} src={`${process.env.KB_FOR_FILE}/@/file/${String(yaml.load(v))}`} className="w-auto max-w-full h-40 object-contain bg-white"></img>;
+                return <img key={idx} onClick={() => onExternalLink({path:v["c_link"]})} src={`${process.env.KB_FOR_FILE}/@/file/${String(yaml.load(v.c_logo[0]))}`} className={`${(v["c_link"] !== "" && Boolean(v["c_link"])) ? "cursor-pointer" : "cursor-auto"} w-auto max-w-full h-40 object-contain bg-white`}></img>;
               })}
             </div>
           </div>
@@ -44,10 +55,10 @@ const Wrapper = ({
                   <span>Email:</span>
                   <span>{data.contact_email}</span>
                 </div>
-                <div className="flex gap-3">
+                {/* <div className="flex gap-3">
                   <span>Phone:</span>
                   <span>{data.contact_phone}</span>
-                </div>
+                </div> */}
               </div>
               <div className="flex flex-wrap gap-3">
                 <span>{data.contact_street},</span>
